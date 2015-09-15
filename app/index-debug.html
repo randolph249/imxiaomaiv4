@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>小麦商城V4</title>
+<!-- <link href="/css/master.css" rel="stylesheet"> -->
+  </head>
+  <body>
+    <div id="app">
+      <a v-link="{ path: '/foo' }">root link</a>
+      <a v-link="{path:'/foo/baz?id=300'}">待Query参数的链接</a>
+      <a v-link="{name:'userid',params:{userid:100},query:{id:200}}">child link:foo/100</a>
+      <router-view></router-view>
+    </div>
+    <script type="text/javascript" src="../assets/lib/zepto.min.js"></script>
+    <script type="text/javascript" src="../assets/lib/angular.min.js"></script>
+    <script type="text/javascript" src="../assets/lib/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="../assets/lib/oclazyload.min.js"></script>
+  </body>
+</html>
