@@ -1,0 +1,29 @@
+{
+  "data": [{
+    "kind": "all",
+    "text": "精彩活动"
+  }, {
+    "kind": "recommend",
+    "text": "推荐"
+  }, {
+    "kind": "active",
+    "text": "9月重阳节",
+    "mark": "hot",
+    "cat": 1
+  }, {
+    "kind": "active",
+    "text": "七月鲜花节",
+    "mark": "new",
+    "cat": 2
+  }, {
+    "kind": "normal",
+    "text": "母导航",
+    "children": [{
+      "text": "奶饮酒水",
+      "cat": 1
+    }, {
+      "text": "方便素食",
+      "cat": 2
+    }]
+  }]
+}

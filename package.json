@@ -1,0 +1,27 @@
+{
+  "name": "imxiaomai_v4",
+  "version": "1.0.0",
+  "description": "小麦商城V4前端代码重构",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.0.1",
+    "gulp-sass": "^2.0.4"
+  },
+  "devDependencies": {
+    "gulp-notify": "^2.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/randolph249/imxiaomaiv4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/randolph249/imxiaomaiv4/issues"
+  },
+  "homepage": "https://github.com/randolph249/imxiaomaiv4#readme"
+}
