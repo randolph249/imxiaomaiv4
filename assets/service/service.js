@@ -86,6 +86,8 @@ angular.module('xiaomaiApp').factory('urlInterceptor', ['env', function(env) {
     if (env !== 'develop') {
       return url;
     }
+
+    return url.replace(/wap/, 'api') + '.json';
     return url + '.json';
 
   };
@@ -96,8 +98,34 @@ angular.module('xiaomaiApp').factory('urlInterceptor', ['env', function(env) {
 //接口列表管理
 angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
   var urls = {
+      //导航
       'categoryNav': {
-        url: '/api/categoryNav',
+        url: '/wap/category/nav',
+        type: 'GET'
+      },
+      //根据定位获取定位学校结果
+      'locate': {
+        url: '/wap/college/locate',
+        type: 'GET'
+      },
+      //获取所有的城市列表
+      'citylist': {
+        url: '/wap/geography/cities',
+        type: 'GET'
+      },
+      //获取城市下所有的学校列表
+      'collegelist': {
+        url: '/wap/college/colleges',
+        type: 'GET'
+      },
+      //获取用户的学校信息
+      'getSchool': {
+        url: '/wap/college/school',
+        type: 'GET'
+      },
+      //获取活动列表
+      'activities': {
+        url: '/wap/college/activities',
         type: 'GET'
       }
     },
@@ -182,7 +210,7 @@ angular.module('xiaomaiApp').factory('xiaomaiCacheManager', [
 
         var $index = -1;
 
-        $.each(caches, function(i, item) {
+        angular.forEach(caches, function(item, i) {
           if (item.name === cachename) {
             $index = i;
             return false;
@@ -220,6 +248,15 @@ angular.module('xiaomaiApp').factory('xiaomaiCacheManager', [
   }
 ]);
 
+//校验数据类型
+angular.module('xiaomaiApp').factory('getDataType', [function() {
+  return function(val) {
+    var type = Object.prototype.toString.call(val),
+      reg = /\s(\w+)/;
+    return type.match(reg)[1].toLowerCase()
+  }
+}])
+
 /**
  *提供ajax服务
  **/
@@ -229,12 +266,14 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
   'xiaomaimodelManage',
   '$http',
   'xiaomaiCacheManager',
+  'getDataType',
   function(
     $q,
     urlInterceptor,
     xiaomaimodelManage,
     $http,
-    xiaomaiCacheManager
+    xiaomaiCacheManager,
+    getDataType
   ) {
 
     //验证接口是否存在
@@ -243,8 +282,18 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
         return url;
       },
       //处理返回结果
-      handlerResult = function(deferred, res) {
-
+      handlerResult = function(res) {
+        //如果返回码错误 或者返回data不存在
+        if (res.code != 0 || !res.data) {
+          return false;
+        }
+        if (getDataType(res.data) == 'number' && !res.data.length) {
+          return false;
+        }
+        if (getDataType(res.data) == 'object' && !Object.keys(res.data).length) {
+          return false;
+        }
+        return res.data;
       },
       //生成Promise实例
       createPromise = function() {
@@ -265,13 +314,13 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           isCached = false,
           url;
 
-        if ($.type(args[1]) == 'object') {
+        if (getDataType(args[1]) == 'object') {
           params = args[1];
-        } else if ($.type(args[1] == 'boolean')) {
+        } else if (getDataType(args[1] == 'boolean')) {
           isCached = args[1];
         }
 
-        if ($.type(args[2]) == 'boolean') {
+        if (getDataType(args[2]) == 'boolean') {
           isCached = args[2]
         }
 
@@ -280,10 +329,7 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
         //如果当前开发环境是线下环境 将接口转成本地文件地址
         url = urlInterceptor(url);
         if (!url) {
-          deferred.reject({
-            type: 'notFound',
-            msg: '接口错误或接口请求方式错误'
-          });
+          deferred.reject('接口错误或接口请求方式错误');
           return deferred.promise;
         }
 
@@ -298,14 +344,17 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
             method: 'GET',
             params: params
           }).success(function(res) {
-            //写入缓存
-            isCached && xiaomaiCacheManager.writeCache(name, res);
-            deferred.resolve(res);
+            //如果返回结果有异常 reject
+            if (handlerResult(res) === false) {
+              deferred.reject(res.msg);
+            } else {
+              //写入缓存
+              isCached && xiaomaiCacheManager.writeCache(name, res.data);
+              deferred.resolve(res.data);
+            }
+
           }).error(function(res) {
-            deferred.reject({
-              type: 'error',
-              msg: '接口请求错误'
-            });
+            deferred.reject('接口请求错误');
           });
         }
         return deferred.promise;
@@ -331,10 +380,7 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
         //如果当前开发环境是线下环境 将接口转成本地文件地址
         url = urlInterceptor(url);
         if (!url) {
-          deferred.reject({
-            type: 'notFound',
-            msg: '接口错误或接口请求方式错误'
-          });
+          deferred.reject('接口错误或接口请求方式错误');
           return deferred.promise;
         }
 
@@ -345,10 +391,7 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
         }).success(function(res) {
           deferred.resolve(res);
         }).error(function() {
-          deferred.reject({
-            type: 'error',
-            msg: '接口请求错误'
-          });
+          deferred.reject('接口请求错误');
         });
         return deferred.promise;
       };
@@ -361,10 +404,3 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
     };
   }
 ]);
-
-/**
- *cookie信息管理
- **/
-angular.module('xiaomaiApp').factory('cookieManager', [function() {
-
-}]);

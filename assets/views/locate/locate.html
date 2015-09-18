@@ -1,0 +1,26 @@
+<div class="pub-header">
+  <div class="iconfont icon-back"></div>
+  <div class="location-info">选择学校</div>
+  <div class="iconfont icon-locate-right"></div>
+</div>
+<div class="colleges_content">
+  <p class="title">定位学校</p>
+  <p class="isLocating locatingAnimation" ng-if="isLocating===true">
+    正在定位....
+  </p>
+  <p class="locateCollege" ng-if="locationResult===false">小麦麦迷路了,手动选择一下吧</p>
+  <p class="locateCollege" ng-class="{holiday:item.isOpen!=1}" ng-click="checkCollege(item)" ng-repeat="item in locationResult">{{item.collegeName}}</p>
+  <p class="title">手动选择</p>
+  <div class="allSchools">
+    <ul class="citylist">
+        <li ng-class="{checked:item.cityId==cityid}" ng-repeat="item in citylist" ng-click="setCurcity(item);">{{item.cityName}}</li>
+    </ul>
+    <ul class="countrylist" ng-if="cityid">
+        <li ng-if="!countrylist.length">该城市还没有相关学校</li>
+        <li ng-repeat="country in countrylist">
+            <p class="countryname">{{country.cityName}}</p>
+            <div class="" ng-repeat="college in country.colleges" ng-click="checkCollege(college)">{{college.collegeName}}</div>
+        </li>
+    </ul>
+  </div>
+</div>

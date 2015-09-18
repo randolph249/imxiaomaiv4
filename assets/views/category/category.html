@@ -1,0 +1,20 @@
+<div class="pub-header" ng-controller="category.headCtrl">
+
+  <div class="iconfont icon-feedback"></div>
+  <div class="location-info">{{schoolname}}</div>
+  <div class="iconfont icon-user"></div>
+
+</div>
+<div class="list-main main-both">
+  <div class="list-category" ng-controller="category.listCtrl">
+    <ul>
+      <li ng-click="goto(supnav);" ng-class="{'nav-checked':supnav.kind==curpath}" class="nav iconfont nav-super nav-{{supnav.kind}} nav-{{supnav.mark||'normal'}}" ng-repeat="supnav in navs">
+        {{supnav.text}}
+        <ul ng-if="supnav.children">
+          <li ng-click="goto(supnav);" class="nav-sub" ng-repeat="subnav in supnav.children">{{subnav.text}}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="list-product" ui-view></div>
+</div>

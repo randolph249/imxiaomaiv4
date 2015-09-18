@@ -1,0 +1,47 @@
+{
+	"msg": "success",
+	"code": 0,
+	"data": {
+		"colleges": [{
+			"collegeId": 3270,
+			"collegeName": "小麦学院(颐和园校区)",
+			"cityId": 1,
+			"areaId": 2,
+			"ldcStorageId": 32,
+			"rdcStorageId": 0,
+			"weight": 0,
+			"isDel": 0,
+			"isShow": 1,
+			"isOpen": 0,
+			"longitude": 116.279833,
+			"latitude": 39.980096,
+			"ldcDeliveryType": 2,
+			"ldcSelfPickUpAddress": "小麦公社总部办公区水吧",
+			"rdcDeliveryType": 3,
+			"rdcSelfPickUpAddress": "",
+			"storeId": 1019,
+			"notValid": false
+		}, {
+			"collegeId": 2828,
+			"collegeName": "北京大学",
+			"cityId": 1,
+			"areaId": 2,
+			"ldcStorageId": 0,
+			"rdcStorageId": 1,
+			"weight": 0,
+			"isDel": 0,
+			"isShow": 1,
+			"isOpen": 1,
+			"longitude": 116.3095983,
+			"latitude": 39.9918268,
+			"ldcDeliveryType": 1,
+			"ldcSelfPickUpAddress": "",
+			"rdcDeliveryType": 0,
+			"rdcSelfPickUpAddress": "小麦公社北大博实超市营业厅",
+			"storeId": 627,
+			"notValid": false
+		}],
+		"indexUrl": "http://h5.imxiaomai.com/collegeTip"
+	},
+	"serverTime": "2015-09-17 14:01:08"
+}

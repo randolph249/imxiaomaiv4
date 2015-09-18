@@ -1,11 +1,23 @@
 var gulp = require('gulp');
 var autoprefix = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
+//错误通知
+var notify = require('gulp-notify');
+var handlerError = function() {
+  var args = Array.prototype.slice.call(arguments);
+
+  notify.onError({
+    title: 'compile error',
+    message: '<%=error.message %>'
+  }).apply(this, args); //替换为当前对象
+
+  this.emit(); //提交
+}
 
 //将sass文件转移成
 gulp.task('transfersass', function() {
   return gulp.src(['assets/**/*.scss'])
-    .pipe(sass())
+    .pipe(sass().on('error', handlerError))
     .pipe(gulp.dest('assets/'))
 
 });

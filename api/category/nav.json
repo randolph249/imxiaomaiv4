@@ -1,0 +1,49 @@
+{
+  "code": 0,
+  "data": {
+    "nav": [{
+      "kind": "all",
+      "text": "精彩活动"
+    }, {
+      "kind": "system",
+      "text": "推荐"
+    }, {
+      "kind": "active",
+      "text": "9月重阳节",
+      "mark": "hot",
+      "cat": 1
+    }, {
+      "kind": "active",
+      "text": "七月鲜花节",
+      "mark": "new",
+      "cat": 2
+    }, {
+      "kind": "active",
+      "text": "8月建军节",
+      "mark": "recommend",
+      "cat": 3
+    }, {
+      "kind": "parent",
+      "text": "母导航",
+      "children": [{
+        "text": "奶饮酒水",
+        "cat": 4
+      }, {
+        "text": "方便素食",
+        "cat": 5
+      }, {
+        "text": "休闲零食",
+        "cat": 6
+      }, {
+        "text": "缤纷糖果",
+        "cat": 7
+      }, {
+        "text": "饼干糕点",
+        "cat": 8
+      }, {
+        "text": "日用百货",
+        "cat": 9
+      }]
+    }]
+  }
+}
