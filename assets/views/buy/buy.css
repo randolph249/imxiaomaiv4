@@ -1,7 +1,7 @@
 .list-main {
   width: 100%;
-  padding: 45px 0;
-  display: flex; }
+  display: flex;
+  padding: 45px 0; }
 
 .pub-footer {
   position: fixed;
