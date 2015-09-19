@@ -1,0 +1,7 @@
+.category-active-list li {
+  background-size: cover;
+  margin-bottom: 10px;
+  border: #dddddd solid 1px;
+  height: 110px;
+  background-position: center center;
+  background-color: #fff; }

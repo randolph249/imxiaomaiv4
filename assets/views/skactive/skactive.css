@@ -1,0 +1,111 @@
+.skactiveGoodList {
+  margin-top: 45px;
+  min-height: 1px; }
+
+.skactiveGoodList {
+  margin-bottom: 45px; }
+  .skactiveGoodList li {
+    padding: 5px 10px;
+    background: #fff; }
+    .skactiveGoodList li > .goodItem {
+      border-bottom: #ddd solid 1px;
+      display: flex; }
+      .skactiveGoodList li > .goodItem .imgCont {
+        width: 120px;
+        height: 120px;
+        background-size: auto 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative; }
+        .skactiveGoodList li > .goodItem .imgCont .countdown {
+          background: #ffeae2;
+          color: #fc541f;
+          font-size: 14px;
+          width: 100%;
+          text-align: center;
+          height: 24px;
+          line-height: 24px;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 5px; }
+      .skactiveGoodList li > .goodItem .details {
+        position: relative;
+        padding: 5px 10px;
+        flex-grow: 1; }
+        .skactiveGoodList li > .goodItem .details .sk-icon {
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+          font-size: 18px;
+          line-height: 32px;
+          border: solid 2px #fc541f;
+          border-radius: 18px;
+          width: 32px;
+          color: #fc541f;
+          text-align: center; }
+          .skactiveGoodList li > .goodItem .details .sk-icon.disabled {
+            color: #cccccc;
+            border-color: #cccccc; }
+        .skactiveGoodList li > .goodItem .details .sk-end, .skactiveGoodList li > .goodItem .details .sold-out, .skactiveGoodList li > .goodItem .details .sold-geted {
+          border-radius: 3px;
+          border: 1px solid #ccc;
+          -webkit-transform: rotate(30deg);
+          -webkit-transform-origin: 30px 15px;
+          text-align: center;
+          color: #ccc;
+          right: 10px;
+          position: absolute;
+          bottom: 10px;
+          line-height: 20px;
+          height: 20px;
+          font-size: 12px;
+          /* padding: 0 5px; */
+          bottom: 18px;
+          width: 50px;
+          text-align: center; }
+        .skactiveGoodList li > .goodItem .details .sold-geted {
+          color: #fc541f;
+          border-color: #fc541f; }
+        .skactiveGoodList li > .goodItem .details .label {
+          display: inline-block;
+          padding: 0 5px;
+          height: 16px;
+          line-height: 16px;
+          font-size: 12px;
+          border: #ccc solid 1px; }
+          .skactiveGoodList li > .goodItem .details .label.ldc {
+            border-color: #26adf0;
+            color: #26adf0; }
+          .skactiveGoodList li > .goodItem .details .label.rdc {
+            border-color: #2cdb46;
+            color: #2cdb46; }
+        .skactiveGoodList li > .goodItem .details p.goodname {
+          padding: 3px 0;
+          line-height: 18px;
+          height: 42px;
+          overflow: hidden;
+          font-size: 14px;
+          color: #333;
+          overflow: hidden; }
+        .skactiveGoodList li > .goodItem .details .priceCont {
+          height: 32px;
+          line-height: 32px;
+          clear: both; }
+          .skactiveGoodList li > .goodItem .details .priceCont .new-price, .skactiveGoodList li > .goodItem .details .priceCont .aggregate-price {
+            color: #fc541f;
+            font-size: 14px;
+            padding-right: 5px;
+            float: left; }
+            .skactiveGoodList li > .goodItem .details .priceCont .new-price i, .skactiveGoodList li > .goodItem .details .priceCont .aggregate-price i {
+              font-size: 24px;
+              font-style: normal;
+              padding: 0 5px; }
+          .skactiveGoodList li > .goodItem .details .priceCont .old-price {
+            float: left;
+            color: #aaa;
+            font-size: 14px;
+            line-height: 40px;
+            text-decoration: line-through; }
+          .skactiveGoodList li > .goodItem .details .priceCont .aggregate-price {
+            font-size: 18px; }

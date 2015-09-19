@@ -64,7 +64,7 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
 
     $scope.checkCollege = function(college) {
       schoolManager.set(college);
-      $state.go('root.buy.category');
+      $state.go('root.buy.nav.all');
     }
   }
 ]);

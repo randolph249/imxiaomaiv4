@@ -1,0 +1,16 @@
+$borderColor:#dddddd;
+$checkedColor:#ff5300;
+$supBg:#f5f5f5;
+$subBg:#fff;
+$fontColor:#3a404b;
+
+.category-active-list{
+  li{
+    background-size: cover;
+    margin-bottom: 10px;
+    border:$borderColor solid 1px;
+    height:110px;
+    background-position: center center;
+    background-color: #fff;
+  }
+}

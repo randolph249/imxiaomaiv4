@@ -48,7 +48,9 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 '../assets/views/buy/buy.js',
-                '../assets/views/buy/buy.css'
+                '../assets/views/buy/buy.css',
+                '../assets/views/buy/detail.js',
+                '../assets/views/buy/detail.css'
               ]
             })
           }],
@@ -59,19 +61,27 @@ angular.module('xiaomaiApp').config([
                 '../assets/service/shopcart.js'
               ]
             })
+          }],
+          loadFilter: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/filters/price.js'
+              ]
+            })
           }]
         }
       })
-      .state('root.buy.category', {
-        url: 'category/?collegeid',
-        templateUrl: '../assets/views/category/category.html',
+      .state('root.buy.nav', {
+        url: 'nav/?collegeid',
+        templateUrl: '../assets/views/nav/nav.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                '../assets/views/category/category.js',
-                '../assets/views/category/category.css'
+                '../assets/views/nav/nav.js',
+                '../assets/views/nav/nav.css'
               ]
             })
           }],
@@ -85,17 +95,102 @@ angular.module('xiaomaiApp').config([
           }]
         }
       })
-      //所有活动homepage
-      .state('root.buy.category.all', {
+      //导航栏精彩活动 所有活动入口
+      .state('root.buy.nav.all', {
         url: 'all/',
-        templateUrl: '../assets/views/category.all/all.html',
-        controller: 'category.allCtrl',
+        templateUrl: '../assets/views/all/all.html',
+        controller: 'nav.allCtrl',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                '../assets/views/category.all/all.js'
+                '../assets/views/all/all.js',
+                '../assets/views/all/all.css'
+              ]
+            })
+          }]
+        }
+      })
+      // 推荐列表页
+      .state('root.buy.nav.recommend', {
+        url: 'recommend/',
+        controller: 'nav.recommendCtrl',
+        templateUrl: '../assets/views/recommend/recommend.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/views/recommend/recommend.js',
+                '../assets/views/recommend/recommend.css'
+              ]
+            })
+          }]
+        }
+      })
+      //普通活动
+      .state('root.buy.active', {
+        url: 'active/?collegeId&activityId&activeName',
+        controller: 'buy.activeCtrl',
+        templateUrl: '../assets/views/active/active.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/views/active/active.js',
+                '../assets/views/active/active.css'
+              ]
+            })
+          }],
+          loadService: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/components/scroll/scroll.js'
+              ]
+            })
+          }]
+        }
+      })
+      //抢购活动
+      .state('root.buy.skactive', {
+        url: 'skactive/?collegeId&activityId&activeName',
+        controller: 'buy.skactiveCtrl',
+        templateUrl: '../assets/views/skactive/skactive.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/views/skactive/skactive.js',
+                '../assets/views/skactive/skactive.css'
+              ]
+            })
+          }],
+          loadComponents: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/components/countdown/countdown.js'
+              ]
+            })
+          }]
+        }
+      })
+      //类目列表页
+      .state('root.buy.nav.category', {
+        url: 'category/?collegeId&categoryId',
+        controller: 'nav.categoryCtrl',
+        templateUrl: '../assets/views/category/category.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/views/category/category.js',
+                '../assets/views/category/category.css'
               ]
             })
           }]
@@ -134,8 +229,6 @@ angular.module('xiaomaiApp').config([
 ]);
 
 angular.module('xiaomaiApp').run(['$state', function($state) {
-
-  // debugger;
   $state.go('root.locate');
   // debugger;
 }]);

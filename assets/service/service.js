@@ -99,8 +99,8 @@ angular.module('xiaomaiApp').factory('urlInterceptor', ['env', function(env) {
 angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
   var urls = {
       //导航
-      'categoryNav': {
-        url: '/wap/category/nav',
+      'navgatorlist': {
+        url: '/wap/navigate/index',
         type: 'GET'
       },
       //根据定位获取定位学校结果
@@ -126,6 +126,30 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       //获取活动列表
       'activities': {
         url: '/wap/college/activities',
+        type: 'GET'
+      },
+      //普通活动下的商品列表
+      'activeGoods': {
+        url: '/wap/activity/goods',
+        type: 'GET'
+      },
+      'skactiveGoods': {
+        url: '/wap/activity/goods1',
+        type: 'GET',
+      },
+      //活动页面的Banner
+      'activeBanner': {
+        url: '/wap/activity/banners',
+        type: 'GET'
+      },
+      //热门榜产品
+      'categoryGoods': {
+        url: '/wap/index/categoryGoods',
+        type: 'GET'
+      },
+      //普通类目下产品
+      'goods': {
+        url: '/wap/category/goods',
         type: 'GET'
       }
     },

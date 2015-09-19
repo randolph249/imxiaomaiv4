@@ -1,107 +1,84 @@
-$borderColor:#dddddd;
-$checkedColor:#ff5300;
-$supBg:#f5f5f5;
-$subBg:#fff;
-$fontColor:#3a404b;
+$nowPriceColor: #fc541f;
 
-/* 头部导航 */
-.pub-header {
-  font-size:1rem;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 44px;
-  background: #fff;
-  z-index: 2;
-  border-bottom: solid 1px #d5d5d5;
-  display: flex;
-  justify-content: space-around;
-  background:#f5f5f5;
-  color:#524648;
-  .icon-feedback {
-    width: 45px;
-    text-align: center;
-    &:before{
-      font-size:24px;
-      line-height: 44px;
+
+.GoodsCont{
+  .GoodCont{
+    position:relative;
+    border-bottom: solid 1px #ddd;
+    padding:5px 0;
+    &:last-child{
+      border-bottom-width: 0px;
     }
   }
-  .icon-user{
-    @extend .icon-feedback;
+  .imgCont {
+    width: 100px;
+    height: 100px;
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
   }
-  .location-info{
-    text-align: center;
-    flex-grow:1;
-    line-height: 44px;
-  }
-}
-.list-main {
-
-  .list-category {
-    width: 28%;
-    background: #f5f5f5;
-    border-right:$borderColor solid 1px;
-    .nav-super {
-      height: 49px;
-      line-height: 49px;
+  .details{
+    position: absolute;
+    left:110px;
+    right:0;
+    bottom:0;
+    top:0;
+    .buy-icon {
+      position: absolute;
+      right: 0px;
+      bottom: 10px;
+      font-size: 36px;
+      line-height: 1;
+      color: $nowPriceColor;
+    }
+    .sold-out {
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      -webkit-transform: rotate(30deg);
+      -webkit-transform-origin: 30px 15px;
+      text-align: center;
+      color: #ccc;
+      right: 10px;
+      position: absolute;
+      bottom: 10px;
+      line-height: 20px;
+      height: 20px;
+      font-size: 12px;
+      /* padding: 0 5px; */
+      bottom: 18px;
+      width: 50px;
+      text-align: center;
+    }
+    .label {
+      display: inline-block;
+      padding: 0 5px;
+      height: 16px;
+      line-height: 16px;
+      font-size: 12px;
+      border: #ccc solid 1px;
+      &.ldc {
+        border-color: #26adf0;
+        color: #26adf0;
+      }
+      &.rdc {
+        border-color: #2cdb46;
+        color: #2cdb46;
+      }
+    }
+    p.goodname {
+      line-height: 18px;
+      height: 36px;
+      overflow: hidden;
       font-size: 14px;
-      color: $fontColor;
-      border-bottom: solid 1px $borderColor;
-      text-align: center;
-      &:last-child {
-        border-bottom-width:0;
-      }
-      &.nav-checked{
-          color:$checkedColor;
-          font-size:16px;
-          border-bottom:$checkedColor solid 3px;
-          background:#fff;
-      }
+      color: #333;
+      overflow: hidden;
+      padding:3px 0;
     }
-    .nav-hot {
-      position: relative;
-      &:after {
-      }
+    .priceCont {
+      height: 50px;
+      line-height: 50px;
+      clear: both;
     }
-    .nav-new {
-      @extend .nav-hot;
-
-    }
-    .nav-recommend {
-      @extend .nav-hot;
-
-    }
-    .nav-parent {
-      position: relative;
-      &:after {
-        position: absolute;
-        content: '';
-        width: 0;
-        height: 0;
-        border-width: 8px 6px 0 6px;
-        border-style: solid;
-        border-color: $fontColor $supBg $supBg $supBg;
-        right: 10px;
-        top: 20px;
-      }
-    }
-    .nav-arrow-up {
-      &:after {
-        transform: rotate(180deg);
-      }
-    }
-    .nav-sub {
-      height: 45px;
-      line-height: 45px;
-      text-align: center;
-      color: #555;
-      background: $subBg;
-    }
-  }
-  .list-product {
-    flex-grow: 1;
-    padding: 10px;
-    background: #fff;
   }
 }

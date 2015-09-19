@@ -33,7 +33,6 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
       }
       //跳转到对应的活动页面
       $state.go(tostate, {
-
         //编译活动名会不会导致活动名过长
         activeName: encodeURIComponent(active.activityShowName),
         collegeId: collegeId,
