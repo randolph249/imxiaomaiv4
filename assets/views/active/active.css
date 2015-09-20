@@ -6,7 +6,8 @@
   margin-bottom: 45px;
   border-left: #ddd solid 1px;
   display: flex;
-  flex-flow: row wrap; }
+  flex-flow: row wrap;
+  background: #eee; }
   .activeGoodList li {
     width: 50%;
     padding-bottom: 10px; }

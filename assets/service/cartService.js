@@ -105,10 +105,9 @@ angular.module('xiaomaiApp').factory('cartManager', [
   '$q',
   'xiaomaiService',
   function($q, xiaomaiService) {
-    var handlerStamp;
     //监听最后操作时间
     var updateQueryResult = function(res) {
-      queryPromise && queryPromise.resolve(res);
+      queryCallback && queryCallback(res.data);
     };
     //创建Promise实例
     var createPromise = function() {
@@ -140,16 +139,16 @@ angular.module('xiaomaiApp').factory('cartManager', [
       return deferred.promise;
     };
     //生成一个query的Promise实例 允许其他POST操作触发resolve
-    var queryPromise;
-    var query = function() {
-      queryPromise = createPromise();
+    var queryCallback;
+    var query = function(call) {
+      queryCallback = call;
       //默认执行一次自查询
       xiaomaiService.fetchOne('queryCart').then(function(res) {
-        queryPromise.resolve(res);
+        // debugger;
+        queryCallback(res);
       }, function(msg) {
-        queryPromise.reject(msg);
-      })
-      return queryPromise;
+        queryCallback('error');
+      });
     };
     var clear = function() {
 

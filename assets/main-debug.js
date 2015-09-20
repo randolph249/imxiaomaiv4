@@ -50,7 +50,7 @@ angular.module('xiaomaiApp').config([
                 '../assets/views/buy/buy.js',
                 '../assets/views/buy/buy.css',
                 '../assets/views/buy/detail.js',
-                '../assets/views/buy/detail.css'
+                '../assets/views/buy/shopcart.js'
               ]
             })
           }],
@@ -58,7 +58,7 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                '../assets/service/cart.js',
+                '../assets/service/cartService.js',
                 '../assets/service/detailService.js'
               ]
             })
@@ -218,6 +218,21 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 '../assets/service/locateservice.js'
+              ]
+            })
+          }]
+        }
+      })
+      .state('root.buy.coupon', {
+        url: 'coupon/',
+        controller: 'buy.couponCtrl',
+        templateUrl: '../assets/views/coupon/coupon.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/views/coupon/coupon.js'
               ]
             })
           }]

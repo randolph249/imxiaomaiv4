@@ -169,7 +169,11 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       },
       //查询购物车
       'queryCart': {
-        'url': '/wap/cart/sync',
+        url: '/wap/cart/sync',
+        type: 'GET'
+      },
+      'queryCartDetail': {
+        url: '/wap/cart/get',
         type: 'GET'
       },
       //查看我的优惠劵

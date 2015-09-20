@@ -10,8 +10,8 @@ $nowPriceColor: #fc541f;
   right: 0;
   bottom: 0;
   height: 45px;
-  z-index: 2;
   background: #f8f8f8;
+  z-index: 9;
 }
 .goodDetail {
   position: fixed;
@@ -84,8 +84,8 @@ $nowPriceColor: #fc541f;
       background: #dcdcdc;
       bottom: 8px;
       right: 10px;
-      &.disabled{
-        color:#ccc;
+      &.disabled {
+        color: #ccc;
       }
     }
     .buy-result {
@@ -106,8 +106,8 @@ $nowPriceColor: #fc541f;
       font-size: 30px;
       color: $nowPriceColor;
       line-height: 1;
-      &.disabled{
-        color:#ccc;
+      &.disabled {
+        color: #ccc;
       }
     }
 
@@ -142,30 +142,201 @@ $nowPriceColor: #fc541f;
       color: #666;
     }
   }
-  .complex-property{
+  .complex-property {
     border-bottom: solid 1px #ddd;
-    .complex-property-name{
+    .complex-property-name {
       line-height: 40px;
-      color:#333;
-
+      color: #333;
     }
-    .complex-property-values{
+    .complex-property-values {
       display: flex;
       flex-flow: row wrap;
-      span{
-        width:60px;
-        height:30px;
+      span {
+        width: 60px;
+        height: 30px;
         line-height: 30px;
         font-size: 14px;
         text-align: center;
-        border:#ccc solid 1px;
-        margin:0 10px 10px 0;
-        &.checked{
-          background:$nowPriceColor;
-          color:#fff;
-          border-color:$nowPriceColor;
+        border: #ccc solid 1px;
+        margin: 0 10px 10px 0;
+        &.checked {
+          background: $nowPriceColor;
+          color: #fff;
+          border-color: $nowPriceColor;
         }
       }
+    }
+  }
+}
+.cartThumb {
+  height: 45px;
+  position: relative;
+  .icon-cart {
+    position: absolute;
+    font-size: 32px;
+    left: 10px;
+    bottom: 5px;
+    width: 72px;
+    height: 72px;
+    border-radius: 36px;
+    background-color: #ffa000;
+    font-size: 48px;
+    line-height: 72px;
+    text-align: center;
+    color: #fff;
+  }
+  .totalCount {
+    width: 20px;
+    height: 20px;
+    color: #ffa000;
+    background: #f9f9f9;
+    left: 60px;
+    top: -34px;
+    border-radius: 10px;
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+    line-height: 20px;
+  }
+  .gotoPay {
+    background: #fc541f;
+    width: 100px;
+    height: 45px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 45px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+  }
+  .totalPrice {
+    line-height: 45px;
+    padding-left: 90px;
+    font-size: 16px;
+    color: #333;
+    em {
+      color: #fc541f;
+      font-style: normal;
+      padding-left: 5px;
+    }
+    span {
+      color: #fc541f;
+      font-size: 24px;
+    }
+  }
+  .emptyTip {
+    line-height: 45px;
+    padding-left: 90px;
+    font-size: 16px;
+    color: #333;
+  }
+}
+.cartDetail {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 0;
+  overflow: hidden;
+  bottom: 45px;
+  z-index: 3;
+  background: #fff;
+  border-top: solid 1px #ddd;
+  transition: all 0.5s ease;
+  display: none;
+  padding: 30px 10px 10px;
+  &.cartDetail-show {
+    height: auto;
+    max-height: 60%;
+    overflow-y: scroll;
+    display: block;
+  }
+  .goback {
+    position: absolute;
+    font-size: 14px;
+    line-height: 45px;
+    color: #333;
+    right: 0;
+    top: 0;
+    padding-right: 40px;
+    &:before {
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      border-radius: 12px;
+      background-color: #ff5300;
+      color: #fff;
+      display: inline-block;
+      position: absolute;
+      right: 10px;
+      top: 8px;
+      transform: rotate(-90deg);
+    }
+  }
+  .title-ldc {
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    border-bottom: solid 2px #66bd00;
+  }
+  .title-rdc {
+    @extend .title-ldc;
+    color: #009bf5;
+    border-bottom-color: #009bf5;
+  }
+  .good-info {
+    height: 44px;
+    color: #333;
+    font-size: 14px;
+    padding-right: 120px;
+    border-bottom: solid 1px #ddd;
+    position: relative;
+    p.good-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 44px;
+      font-size: 14px;
+    }
+    p.good-price {
+      position: absolute;
+      top: 0;
+      color: #ff5300;
+      line-height: 44px;
+      font-size: 16px;
+      right: 94px;
+    }
+    .icon-plus {
+      position: absolute;
+      top: 0;
+      color: #ff5300;
+      right: 0;
+      line-height: 45px;
+      font-size: 27px;
+    }
+    .icon-minus {
+      @extend .icon-plus;
+      right: 64px;
+      font-size: 23px;
+    }
+    .good-count {
+      position: absolute;
+      line-height: 45px;
+      font-size: 14px;
+      width: 40px;
+      right: 25px;
+      color: #333;
+      top: 0;
+      text-align: center;
+    }
+    .cartDetail-tip{
+        height:30px;
+        font-size:14px;
+        line-height: 30px;
+        color:#999;
+        .cartDetail-tip-coupon{
+          float:right;
+        }
     }
   }
 }
