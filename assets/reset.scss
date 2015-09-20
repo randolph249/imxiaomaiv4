@@ -1,5 +1,7 @@
 $bgcolor: #fff;
 $nowPriceColor: #fc541f;
+$disabledColor:#cccccc;
+
 body,
 button,
 dd,
@@ -81,9 +83,7 @@ input[type=submit] {
   -moz-appearance: button;
 }
 input:focus:-moz-placeholder,
-input:focus::-webkit-input-placeholder {
-  color: transparent;
-}
+
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   padding: 0;
@@ -168,7 +168,7 @@ html {
 }
 body,
 html {
-  background: #222;
+  background: #fff;
   height: 100%;
   font: 16px/1.5 '微软雅黑',Helvetica,Tahoma,Arial,sans-serif;
 }
@@ -189,22 +189,27 @@ body {
   right: 0;
 }
 .priceCont {
-  height: 50px;
-  line-height: 50px;
+  height: 36px;
+  line-height: 36px;
   clear: both;
   .new-price {
     color: $nowPriceColor;
-    font-size: 24px;
+    font-size: 18px;
     padding-right: 5px;
     float: left;
-    font-family: Avenir;
+    font-family: Helvetica;
+    i {
+      font-style: normal;
+      font-size: 24px;
+    }
   }
   .old-price {
     float: left;
     color: #aaa;
     font-size: 14px;
     text-decoration: line-through;
-    padding-top: 2px;
+    font-family: Helvetica;
+    padding-top: 3px;
   }
   .aggregate-price {
     @extend .new-price;
@@ -227,40 +232,84 @@ body {
     color: #2cdb46;
   }
 }
+  .iconfont.buy-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    background-color: #fff;
+    font-size: 36px;
+    line-height: 1;
+    color: $nowPriceColor;
+  }
+  .sold-out {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    -webkit-transform: rotate(30deg);
+    -webkit-transform-origin: 30px 15px;
+    text-align: center;
+    color: #ccc;
+    right: 10px;
+    position: absolute;
+    bottom: 0;
+    background:#fff;
+    line-height: 20px;
+    height: 20px;
+    font-size: 12px;
+    /* padding: 0 5px; */
+    bottom: 18px;
+    width: 50px;
+    text-align: center;
+  }
+  p.goodname {
+    line-height: 18px;
+    height: 36px;
+    overflow: hidden;
+    font-size: 13px;
+    color: #333;
+    overflow: hidden;
+    padding: 3px 0;
+  }
 
-.buy-icon {
-  position: absolute;
-  right: 0px;
-  bottom: 10px;
-  font-size: 36px;
-  line-height: 1;
-  color: $nowPriceColor;
-}
-.sold-out {
-  border-radius: 3px;
-  border: 1px solid #ccc;
-  -webkit-transform: rotate(30deg);
-  -webkit-transform-origin: 30px 15px;
-  text-align: center;
-  color: #ccc;
-  right: 10px;
-  position: absolute;
-  bottom: 10px;
-  line-height: 20px;
-  height: 20px;
-  font-size: 12px;
-  /* padding: 0 5px; */
-  bottom: 18px;
-  width: 50px;
-  text-align: center;
-}
+  .sk-icon{
+    position: absolute;
+    right:10px;
+    bottom:10px;
+    font-size:18px;
+    line-height: 32px;
+    border:solid 2px $nowPriceColor;
+    border-radius:18px;
+    width:32px;
+    color:$nowPriceColor;
+    text-align: center;
+    &.disabled{
+      color:$disabledColor;
+      border-color:$disabledColor;
+    }
+  }
 
-p.goodname {
-  line-height: 18px;
-  height: 36px;
-  overflow: hidden;
-  font-size: 14px;
-  color: #333;
-  overflow: hidden;
-  padding:3px 0;
-}
+  .sk-end{
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    -webkit-transform: rotate(30deg);
+    -webkit-transform-origin: 30px 15px;
+    text-align: center;
+    color: #ccc;
+    right: 10px;
+    position: absolute;
+    bottom: 10px;
+    line-height: 20px;
+    height: 20px;
+    font-size: 12px;
+    /* padding: 0 5px; */
+    bottom: 18px;
+    width: 50px;
+    text-align: center;
+  }
+  .sold-out {
+    @extend .sk-end;
+  }
+  .sold-geted{
+    @extend .sk-end;
+    color:$nowPriceColor;
+    border-color:$nowPriceColor;
+  }

@@ -12,8 +12,6 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
       });
     }).then(function(res) {
       $scope.categorys = res;
-
-      console.log(res);
     });
 
     //更多跳转

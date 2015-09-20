@@ -1,14 +1,14 @@
 <div class="GoodsCont">
   <div class="GoodCont" ng-repeat="good in goods">
-    <div class="imgCont" ng-click="" ng-style='{"background-image":"url("+good.imageUrl+")"}'></div>
+    <div class="imgCont" ng-click="goto(good);" ng-style='{"background-image":"url("+good.imageUrl+")"}'></div>
     <div class="details">
-      <p class="goodname">{{good.bgGoodsName}}</p>
+      <p class="goodname" ng-click="goto(good);">{{good.bgGoodsName}}</p>
 <!-- 输出标签29分钟达/次日达 -->
       <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
       <p class="priceCont">
 <!-- 单品或者组合最高价-->
         <span class="new-price" ng-if="good.goodsType==1||good.goodsType==2">
-          &yen;{{good.skuList[0].wapPrice|xiaomaiprice}}
+          &yen;<i>{{good.skuList[0].wapPrice|xiaomaiprice}}</i>
         </span>
         <span class="old-price" ng-if="good.goodsType==1||good.goodsType==2">
           &yen;{{good.skuList[0].originPrice|xiaomaiprice}}</span>

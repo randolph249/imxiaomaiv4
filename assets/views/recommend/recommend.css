@@ -22,7 +22,7 @@
     .recommendCategoryCont .recommendCateColumn .recommendCateGood {
       position: relative;
       border-bottom: solid 1px #ddd;
-      padding: 5px 0; }
+      padding: 10px 0; }
       .recommendCategoryCont .recommendCateColumn .recommendCateGood:last-child {
         border-bottom-width: 0px; }
     .recommendCategoryCont .recommendCateColumn .imgCont {
@@ -36,5 +36,5 @@
       position: absolute;
       left: 110px;
       right: 0;
-      bottom: 0;
-      top: 0; }
+      bottom: 10px;
+      top: 10px; }

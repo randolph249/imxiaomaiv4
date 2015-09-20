@@ -37,66 +37,6 @@ $disabledColor:#cccccc;
         position: relative;
         padding: 5px 10px;
         flex-grow: 1;
-
-        .sk-icon{
-          position: absolute;
-          right:10px;
-          bottom:10px;
-          font-size:18px;
-          line-height: 32px;
-          border:solid 2px $nowPriceColor;
-          border-radius:18px;
-          width:32px;
-          color:$nowPriceColor;
-          text-align: center;
-          &.disabled{
-            color:$disabledColor;
-            border-color:$disabledColor;
-          }
-        }
-
-        .sk-end{
-          border-radius: 3px;
-          border: 1px solid #ccc;
-          -webkit-transform: rotate(30deg);
-          -webkit-transform-origin: 30px 15px;
-          text-align: center;
-          color: #ccc;
-          right: 10px;
-          position: absolute;
-          bottom: 10px;
-          line-height: 20px;
-          height: 20px;
-          font-size: 12px;
-          /* padding: 0 5px; */
-          bottom: 18px;
-          width: 50px;
-          text-align: center;
-        }
-        .sold-out {
-          @extend .sk-end;
-        }
-        .sold-geted{
-          @extend .sk-end;
-          color:$nowPriceColor;
-          border-color:$nowPriceColor;
-        }
-        .label {
-          display: inline-block;
-          padding: 0 5px;
-          height: 16px;
-          line-height: 16px;
-          font-size: 12px;
-          border: #ccc solid 1px;
-          &.ldc {
-            border-color: #26adf0;
-            color: #26adf0;
-          }
-          &.rdc {
-            border-color: #2cdb46;
-            color: #2cdb46;
-          }
-        }
         p.goodname {
           padding: 3px 0;
           line-height: 18px;

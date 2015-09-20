@@ -26,16 +26,49 @@
     line-height: 44px; }
 
 .list-main .list-category {
-  width: 28%;
+  width: 26%;
   background: #f5f5f5;
   border-right: #ddd solid 1px;
-  /**
+  /* *
     *hot-1 new-2 recommend-3
-    **/ }
+    **
+    .nav-mark-1 {
+      position: relative;
+      &:after {
+        content: 'e611';
+        position: absolute;
+        left: -2px;
+        top: -2px;
+        font-size: 28px;
+        line-height: 1;
+        color: #ff5300;
+        transform-origin: 15px 15px;
+        transform: rotate(-90deg);
+        transform-origin: 15px 15px;
+      }
+    }
+    .nav-mark-2 {
+      @extend .nav-mark-1;
+      &:before {
+        content: 'N';
+      }
+    }
+    .nav-mark-3 {
+      position: relative;
+      &:after {
+        content:'e610';
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 24px;
+        line-height: 1;
+        color: #ff5300;
+      }
+    } */ }
   .list-main .list-category .nav-super {
     overflow: hidden;
-    line-height: 49px;
-    font-size: 14px;
+    line-height: 45px;
+    font-size: 13px;
     color: #3a404b;
     border-bottom: solid 1px #ddd;
     text-align: center; }
@@ -43,7 +76,7 @@
       border-bottom-width: 0; }
     .list-main .list-category .nav-super.nav-checked {
       color: #ff5300;
-      font-size: 16px;
+      font-size: 15px;
       border-bottom: #ff5300 solid 3px;
       background: #fff; }
     .list-main .list-category .nav-super p.arrow-down {
@@ -60,32 +93,6 @@
         top: 20px; }
       .list-main .list-category .nav-super p.arrow-down.arrow-up:after {
         transform: rotate(180deg); }
-  .list-main .list-category .nav-mark-1, .list-main .list-category .nav-mark-2, .list-main .list-category .nav-mark-3 {
-    position: relative; }
-    .list-main .list-category .nav-mark-1:after, .list-main .list-category .nav-mark-2:after, .list-main .list-category .nav-mark-3:after {
-      width: 40px;
-      height: 40px;
-      background: #ff5300;
-      left: -20px;
-      top: -20px;
-      content: '';
-      position: absolute;
-      color: #ff5300;
-      transform: rotate(45deg);
-      /* transform-origin: 15px 15px; */ }
-    .list-main .list-category .nav-mark-1:before, .list-main .list-category .nav-mark-2:before, .list-main .list-category .nav-mark-3:before {
-      content: 'H';
-      font-size: 12px;
-      line-height: 12px;
-      color: #fff;
-      position: absolute;
-      left: 3px;
-      top: 3px;
-      z-index: 1; }
-  .list-main .list-category .nav-mark-2:before {
-    content: 'N'; }
-  .list-main .list-category .nav-mark-3:before {
-    content: 'R'; }
   .list-main .list-category .nav-sub {
     height: 45px;
     line-height: 45px;

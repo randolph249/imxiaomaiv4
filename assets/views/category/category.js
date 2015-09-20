@@ -2,7 +2,8 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
   '$state',
   'xiaomaiService',
   '$scope',
-  function($state, xiaomaiService, $scope) {
+  'detailManager',
+  function($state, xiaomaiService, $scope, detailManager) {
     var collegeId, categoryId;
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
       collegeId = toParam.collegeId;
@@ -11,6 +12,7 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
       loadGoodList();
     });
 
+    //下载商品列表
     var loadGoodList = function() {
       xiaomaiService.fetchOne('goods', {
         collegeId: collegeId,
@@ -18,6 +20,14 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
       }).then(function(res) {
         console.log(res.goods);
         $scope.goods = res.goods;
+      })
+    }
+
+    //打开详情页面
+    $scope.goto = function(good) {
+      detailManager.gotoDetail({
+        goodId: good.bgGoodsId,
+        sourceType: good.sourceType
       })
     }
   }

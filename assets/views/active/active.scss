@@ -73,33 +73,7 @@ $nowPriceColor: #fc541f;
           color: #333;
           overflow: hidden;
         }
-        .priceCont {
-          height: 32px;
-          line-height: 32px;
-          clear: both;
-          .new-price {
-            color: $nowPriceColor;
-            font-size: 14px;
-            padding-right: 5px;
-            float: left;
-            i {
-              font-size: 24px;
-              font-style: normal;
-              padding: 0 5px;
-            }
-          }
-          .old-price {
-            float: left;
-            color: #aaa;
-            font-size: 14px;
-            line-height: 40px;
-            text-decoration: line-through;
-          }
-          .aggregate-price {
-            @extend .new-price;
-            font-size:18px;
-          }
-        }
+        
       }
     }
     &:nth-child(even) {

@@ -27,7 +27,7 @@ $nowPriceColor: #fc541f;
     .recommendCateGood{
       position: relative;
       border-bottom: solid 1px #ddd;
-      padding:5px 0;
+      padding:10px 0;
       &:last-child{
         border-bottom-width: 0px;
       }
@@ -44,8 +44,8 @@ $nowPriceColor: #fc541f;
       position: absolute;
       left:110px;
       right:0;
-      bottom:0;
-      top:0;
+      bottom:10px;
+      top:10px;
     }
   }
 }

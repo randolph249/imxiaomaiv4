@@ -58,7 +58,8 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                '../assets/service/shopcart.js'
+                '../assets/service/cart.js',
+                '../assets/service/detailService.js'
               ]
             })
           }],
@@ -67,6 +68,14 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 '../assets/filters/price.js'
+              ]
+            })
+          }],
+          loadComponents: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/components/countdown/countdown.js'
               ]
             })
           }]
@@ -168,15 +177,8 @@ angular.module('xiaomaiApp').config([
                 '../assets/views/skactive/skactive.css'
               ]
             })
-          }],
-          loadComponents: ['$ocLazyLoad', function($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'xiaomaiApp',
-              files: [
-                '../assets/components/countdown/countdown.js'
-              ]
-            })
           }]
+
         }
       })
       //类目列表页

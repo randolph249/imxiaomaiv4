@@ -24,61 +24,6 @@ $nowPriceColor: #fc541f;
     right:0;
     bottom:0;
     top:0;
-    .buy-icon {
-      position: absolute;
-      right: 0px;
-      bottom: 10px;
-      font-size: 36px;
-      line-height: 1;
-      color: $nowPriceColor;
-    }
-    .sold-out {
-      border-radius: 3px;
-      border: 1px solid #ccc;
-      -webkit-transform: rotate(30deg);
-      -webkit-transform-origin: 30px 15px;
-      text-align: center;
-      color: #ccc;
-      right: 10px;
-      position: absolute;
-      bottom: 10px;
-      line-height: 20px;
-      height: 20px;
-      font-size: 12px;
-      /* padding: 0 5px; */
-      bottom: 18px;
-      width: 50px;
-      text-align: center;
-    }
-    .label {
-      display: inline-block;
-      padding: 0 5px;
-      height: 16px;
-      line-height: 16px;
-      font-size: 12px;
-      border: #ccc solid 1px;
-      &.ldc {
-        border-color: #26adf0;
-        color: #26adf0;
-      }
-      &.rdc {
-        border-color: #2cdb46;
-        color: #2cdb46;
-      }
-    }
-    p.goodname {
-      line-height: 18px;
-      height: 36px;
-      overflow: hidden;
-      font-size: 14px;
-      color: #333;
-      overflow: hidden;
-      padding:3px 0;
-    }
-    .priceCont {
-      height: 50px;
-      line-height: 50px;
-      clear: both;
-    }
+    
   }
 }

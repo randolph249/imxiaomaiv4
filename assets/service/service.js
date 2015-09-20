@@ -151,6 +151,31 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       'goods': {
         url: '/wap/category/goods',
         type: 'GET'
+      },
+      //产品详情
+      'goodDetail': {
+        url: '/wap/goods/detail',
+        type: 'GET'
+      },
+      //删除购物车
+      'removeCart': {
+        url: '/wap/cart/remove',
+        type: 'POST'
+      },
+      //添加到购物车
+      'addCart': {
+        url: '/wap/cart/add',
+        type: 'POST'
+      },
+      //查询购物车
+      'queryCart': {
+        'url': '/wap/cart/sync',
+        type: 'GET'
+      },
+      //查看我的优惠劵
+      'mycoupon': {
+        url: '/wap/couponwap/myCouponList',
+        type: 'GET'
       }
     },
     getModel = function() {
@@ -285,6 +310,7 @@ angular.module('xiaomaiApp').factory('getDataType', [function() {
  *提供ajax服务
  **/
 angular.module('xiaomaiApp').factory('xiaomaiService', [
+  'env',
   '$q',
   'urlInterceptor',
   'xiaomaimodelManage',
@@ -292,6 +318,7 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
   'xiaomaiCacheManager',
   'getDataType',
   function(
+    env,
     $q,
     urlInterceptor,
     xiaomaimodelManage,
@@ -366,7 +393,9 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           $http({
             url: url,
             method: 'GET',
-            params: params
+            params: angular.extend({
+              v: Math.random().toString().replace(/\./, '')
+            }, params)
           }).success(function(res) {
             //如果返回结果有异常 reject
             if (handlerResult(res) === false) {
@@ -400,7 +429,7 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
         var deferred = createPromise();
 
         //判断接口是否已经在modelManager中定义
-        url = getUrl(name, 'GET');
+        url = getUrl(name, 'POST');
         //如果当前开发环境是线下环境 将接口转成本地文件地址
         url = urlInterceptor(url);
         if (!url) {
@@ -408,11 +437,19 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           return deferred.promise;
         }
 
-        $http({
-          url: url,
+
+        var defaulOptions = env == 'develop' ? {
+          method: 'GET',
+          params: params
+        } : {
           method: 'POST',
           data: params
-        }).success(function(res) {
+        };
+
+
+        $http(angular.extend(defaulOptions, {
+          url: url
+        })).success(function(res) {
           deferred.resolve(res);
         }).error(function() {
           deferred.reject('接口请求错误');
