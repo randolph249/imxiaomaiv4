@@ -1,0 +1,26 @@
+<div class="GoodsCont">
+  <div class="GoodCont" ng-repeat="good in goods">
+    <div class="imgCont" ng-click="goto(good);" ng-style='{"background-image":"url("+good.imageUrl+")"}'></div>
+    <div class="details">
+      <p class="goodname" ng-click="goto(good);">{{good.bgGoodsName}}</p>
+<!-- 输出标签29分钟达/次日达 -->
+      <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
+      <p class="priceCont">
+<!-- 单品或者组合最高价-->
+        <span class="new-price" ng-if="good.goodsType==1||good.goodsType==2">
+          &yen;<i>{{good.skuList[0].wapPrice|xiaomaiprice}}</i>
+        </span>
+        <span class="old-price" ng-if="good.goodsType==1||good.goodsType==2">
+          &yen;{{good.skuList[0].originPrice|xiaomaiprice}}</span>
+<!-- 聚合 -->
+        <span class="aggregate-price" ng-if="good.goodsType==3 && good.skuList[0].minWapPrice==good.skuList[0].maxWapPrice">
+          &yen;{{good.skuList[0].minWapPrice|xiaomaiprice}}</span>
+        <span class="aggregate-price" ng-if="good.goodsType==3 && good.skuList[0].minWapPrice!=good.skuList[0].maxWapPrice">
+          &yen;{{good.skuList[0].minWapPrice|xiaomaiprice}} ~ &yen;{{good.skuList[0].maxWapPrice|xiaomaiprice}}
+        </span>
+      </p>
+      <p class="buy-icon iconfont icon-plus" ng-if="good.goodsStatusDisplay!=3"></p>
+      <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
+    </div>
+  </div>
+</div>
