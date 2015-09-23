@@ -3,8 +3,9 @@
   <div class="location-info">{{activeName}}</div>
   <div class="iconfont icon-locate-right"></div>
 </div>
+
 <div class="activeWrap">
-  <div class="myslides">
+  <div class="banner">
     <ks-swiper-container on-ready="onReadySwiper(swiper)" swiper="swiper">
       <ks-swiper-slide class="swiper-slide" ng-repeat="banner in banners">
         <div class="activeGoodBanner" ng-style="{'background-image':'url('+banner.imageUrl+')'}"></div>
@@ -15,7 +16,7 @@
     <li class="errortip" ng-if="haserror">
       错误提示....
     </li>
-    <li class="" ng-if="isloading">
+    <li class="loading" ng-if="isloading">
       loading....
     </li>
     <li ng-repeat="good in goodsList">
@@ -46,81 +47,4 @@
     </li>
   </ul>
 </div>
-<style media="screen">
-  .activeGoodBanner {
-    width: 100%;
-    height: 160px;
-    background: #eee;
-    padding-bottom: 10px;
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-  .swiper-container {
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-  }
 
-  .swiper-slide {
-    width: 100%;
-    height: 160px;
-  }
-
-  .swiper-container-android .swiper-slide,
-  .swiper-wrapper {
-    -webkit-transform: translate3d(0,0,0);
-    -moz-transform: translate3d(0,0,0);
-    -o-transform: translate(0,0);
-    -ms-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-  }
-
-  .swiper-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    -ms-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-transition-property: -webkit-transform;
-    -moz-transition-property: -moz-transform;
-    -o-transition-property: -o-transform;
-    -ms-transition-property: -ms-transform;
-    transition-property: transform;
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-  }
-
-  .swiper-slide {
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    -ms-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-flex-shrink: 0;
-    -ms-flex: 0 0 auto;
-    flex-shrink: 0;
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-  .myslides {
-    background: #eee;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    color: #000;
-    margin: 0;
-    padding: 0;
-    height: 100px;
-    border-bottom: 1px solid gray;
-  }
-</style>

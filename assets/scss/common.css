@@ -2,7 +2,7 @@
 .localColleges {
   height: 102px; }
 
-.locating {
+ .locating {
   position: relative; }
   .locating:after {
     position: absolute;
@@ -12,4 +12,5 @@
     color: #333;
     font-size: 14px;
     width: 100%;
-    text-align: center; }
+    text-align: center; } 
+
