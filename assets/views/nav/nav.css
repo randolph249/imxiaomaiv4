@@ -78,8 +78,11 @@
     line-height: 4.5rem;
     font-size: 1.5rem;
     color: #3a404b;
-    border-bottom: solid 1px #ddd;
     text-align: center;
+    border-bottom: solid 1px #ddd;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
 }
 
 .list-main .list-category .nav-super:last-child {
@@ -119,6 +122,10 @@
     text-align: center;
     color: #555;
     background: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
 }
 
 .list-main .list-category .nav-sub.nav-checked {

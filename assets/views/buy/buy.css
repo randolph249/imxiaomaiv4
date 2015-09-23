@@ -18,23 +18,22 @@
     z-index: 9;
 }
 
-.goodDetail {
-    position: fixed;
-    left: 0;
-    right: 0;
-    height: 0;
-    overflow: hidden;
-    bottom: 0;
-    z-index: 3;
-    transition: height 0.5s ease;
-    background: #fff;
-    border-top: solid 1px #ddd;
+/* .goodDetail {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 0;
+  bottom: 4.5rem;
+  overflow: hidden;
+  z-index: 3;
+  transition: height 0.5s ease;
+  background: #fff;
 }
 
-.goodDetail.goodDetail-show {
-    height: 75%;
-    overflow-y: scroll;
-}
+.goodDetailWrap.goodDetail-show {
+    height: 40%;
+    padding: 3rem 1.5rem 0;
+} */
 
 .mask {
     position: fixed;
@@ -49,9 +48,6 @@
 }
 
 .detailCont {
-    position: relative;
-    top: 0px;
-    margin-bottom: 62px;
 }
 
 .detailCont .complex-properties,
@@ -65,18 +61,19 @@
 
 .detailCont .icon-share {
     position: absolute;
-    left: 0.5rem;
-    top: 0.5rem;
-    font-size: 2.4rem;
-    color: #555;
+   left: 1rem;
+   right: 1rem;
+   top: 0.5rem;
+   font-size: 2.4rem;
+   color: #555; 
 }
 
 .detailCont .icon-ok {
-    right: 0.5rem;
+     right: 0.5rem;
     position: absolute;
     top: 0.5rem;
     font-size: 2.4rem;
-    color: #fc541f;
+    color: #fc541f; 
 }
 
 .detailCont .imgCont {
@@ -286,7 +283,7 @@
     color: #333;
 }
 
-.cartDetail {
+.cartDetail,.goodDetail  {
     position: fixed;
     left: 0;
     right: 0;
@@ -298,15 +295,28 @@
     background: #fff;
 }
 
-.cartDetail.cartDetail-show {
-    height: 75%;
+.goodDetail{
+    bottom: 0rem;
+}
+.cartDetail.cartDetail-show ,
+.goodDetail.goodDetail-show {
+    height: 40%;
     padding: 3rem 1.5rem 0;
-
 }
 
-.cartDetail .cartDetailWrap{
-    height: 92%;
+.cartDetail .cartDetailWrap,
+.goodDetail .goodDetailWrap{
+    position: absolute;
+    top: 4.5rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: 4.5rem;
     overflow: auto;
+}
+.goodDetail .goodDetailWrap{
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 .cartDetail .goback {
     position: absolute;
@@ -408,9 +418,13 @@
 }
 
 .cartDetail .cartDetail-tip {
-    height: 3.0rem;
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 4.5rem;
     font-size: 1.3rem;
-    line-height: 3.0rem;
+    line-height: 4.5rem;
     color: #91959d;
 }
 .cartDetail .cartDetail-tip .cartDetail-tip-freight{
