@@ -67,6 +67,9 @@
     color: #666;
 }
 
+.colleges_content .locateCollege{
+    color: red;
+}
 .colleges_content .allSchools {
     display: flex;
 }

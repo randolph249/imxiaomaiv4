@@ -22,7 +22,7 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
     }, function() {
       $scope.haserror = true;
     }).finally(function(res) {
-      //$scope.isloading = false;
+      $scope.isloading = false;
     });
 
     //更多跳转

@@ -10,16 +10,18 @@
     </div>
     <div class="cartDetail" ng-controller="buy.cartDetailCtrl" cart-detail-gui active-class="cartDetail-show">
         <span class="goback iconfont icon-arrow" ng-click="continueShop();">继续购物</span>
-        <div ng-repeat="good in goods" class="good-info">
-            <div class="goodWrap">
-                <p class="good-title">{{good.bgGoodsName}}</p>
-                <p class="good-price">&yen;{{good.minWapPrice|xiaomaiprice}}</p>
-                <lable class="label" ng-class="{ldc:$index==0,rdc:$index==1}" ng-repeat="distribute in good.distributeTypeDisplay" ng-show="distribute.length">{{distribute}}</lable>
-            </div>
-            <div class="iconWrap">
-                <i class="iconfont icon-minus" ng-click="buyHandler('minus',$index);"></i>
-                <span class="good-count">{{good.skuList[0].numInCart}}</span>
-                <i class="iconfont icon-plus" ng-click="buyHandler('plus',$index);"></i>
+        <div class="cartDetailWrap">
+            <div ng-repeat="good in goods" class="good-info">
+                <div class="goodWrap">
+                    <p class="good-title">{{good.bgGoodsName}}</p>
+                    <p class="good-price">&yen;{{good.minWapPrice|xiaomaiprice}}</p>
+                    <lable class="label" ng-class="{ldc:$index==0,rdc:$index==1}" ng-repeat="distribute in good.distributeTypeDisplay" ng-show="distribute.length">{{distribute}}</lable>
+                </div>
+                <div class="iconWrap">
+                    <i class="iconfont icon-minus" ng-click="buyHandler('minus',$index);"></i>
+                    <span class="good-count">{{good.skuList[0].numInCart}}</span>
+                    <i class="iconfont icon-plus" ng-click="buyHandler('plus',$index);"></i>
+                </div>
             </div>
         </div>
         <div class="cartDetail-tip">

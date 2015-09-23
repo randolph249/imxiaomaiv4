@@ -227,36 +227,14 @@ body {
     }
 }
 
-.loading{
+.loading,.errortip{
     position: absolute;
     top: 40%;
-    left: 50%;
-    margin-left: -14px;
-    background-image: url(./img/i_load@2x.png);
-    width: 28px;
-    height: 28px;
-    background-size: 28px;
-    -webkit-animation: loadPay 1.4s infinite linear;
+    width: 100%;
+    text-align: center;
+    font-size: 1.6rem;
+    color: #ff5300;
 }
-
-@-webkit-keyframes loadPay {
-    from {
-        -webkit-transform: rotate(0deg) translateZ(0);
-    }
-    to {
-        -webkit-transform: rotate(360deg) translateZ(0);
-    }
-}
-
-}
-
-
-
-
-
-
-
-
 .mod-wrap {
     position: absolute;
     top: 0;
