@@ -86,29 +86,3 @@
 .colleges_content .allSchools .citylist .checked {
     background: #fff;
 }
-
-.colleges_content .allSchools .countrylist {
-    width: 64%;
-}
-
-.colleges_content .allSchools .countrylist li {
-    line-height: 42px;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 0 15px;
-    color: #666;
-}
-
-.colleges_content .allSchools .countrylist li p {
-    border-bottom: #eee solid 1px;
-    color: #444;
-    font-size: 16px;
-    padding: 0 10px;
-}
-
-.colleges_content .allSchools .countrylist li div {
-    line-height: 36px;
-    padding: 0 10px;
-    word-break: nowrap;
-    text-overflow: ellipsis;
-}

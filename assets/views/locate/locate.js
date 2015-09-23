@@ -49,7 +49,7 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
 
     //选择当前城市
     $scope.showCollegeList = function(city) {
-      $state.go('root.locate.colleges', {
+      $state.go('root.colleges', {
         cityid: city.cityId
       });
     };

@@ -1,6 +1,9 @@
+
+<ul class="countrylist">
 <li class="loading" ng-if="isloading">学校信息正在加载....</li>
 <li ng-if="haserror" class="errorip">该城市还没有相关学校</li>
 <li ng-repeat="country in countrylist">
     <p class="countryname">{{country.cityName}}</p>
-    <div class="" ng-repeat="college in country.colleges" ng-click="checkCollege(college)">{{college.collegeName}}</div>
+    <div ng-click="checkCollege(college);" class="" ng-repeat="college in country.colleges" ng-click="checkCollege(college)">{{college.collegeName}}</div>
 </li>
+</ul>

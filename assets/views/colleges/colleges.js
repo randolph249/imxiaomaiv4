@@ -2,7 +2,8 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
   '$state',
   '$scope',
   'xiaomaiService',
-  function($state, $scope, xiaomaiService) {
+  'schoolManager',
+  function($state, $scope, xiaomaiService, schoolManager) {
     //根据cityid获取学校列表
     $scope.countrylist = [];
 
@@ -26,5 +27,12 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
         $scope.isloading = false;
       });
     };
+
+    //选择学校
+    $scope.checkCollege = function(college) {
+      schoolManager.set(college).then(function() {
+        $state.go('root.buy.nav.all');
+      });
+    }
   }
 ])

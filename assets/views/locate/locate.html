@@ -15,7 +15,6 @@
     <ul class="citylist">
       <li ng-class="{checked:item.cityId==curcityid}" ng-click="showCollegeList(item);" ng-repeat="item in citylist">{{item.cityName}}</li>
     </ul>
-    <ul class="countrylist" ng-if="curcityid" ui-view=""></ul>
   </div>
 </div>
 <style>

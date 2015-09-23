@@ -201,7 +201,7 @@ angular.module('xiaomaiApp').config([
         }
       })
       //选择学校
-      .state('root.locate.colleges', {
+      .state('root.colleges', {
         url: 'colleges/?cityid',
         controller: 'collegesCtrl',
         templateUrl: '../assets/views/colleges/colleges.html',
@@ -210,7 +210,9 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                '../assets/views/colleges/colleges.js'
+                '../assets/views/colleges/colleges.js',
+                '../assets/views/colleges/colleges.css'
+
               ]
             })
           }]
