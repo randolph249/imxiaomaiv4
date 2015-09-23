@@ -12,12 +12,10 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
 
     //抓取Banner信息
     var loadBanner = function() {
-      xiaomaiService.fetchOne('activeBanner', {
+      return xiaomaiService.fetchOne('activeBanner', {
         collegeId: collegeId,
         activityId: activityId
-      }).then(function(res) {
-        // debugger;
-      })
+      });
     }
 
     //获取活动商品列表数据
@@ -45,6 +43,25 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
       $scope.haserror = true;
     }).finally(function() {
       $scope.isloading = false;
+    });
+
+
+    loadBanner().then(function(res) {
+      $scope.banners = res.banners;
+      return res;
+    }).then(function() {
+
+      $scope.onReadySwiper = function(swiper) {
+
+        swiper.on('slideChangeStart', function() {
+
+          console.log('slideChangeStart');
+        });
+      };
+
+      xiaomaiCacheManager.writeCache('activeBanner', {
+        banners: $scope.banners
+      });
     });
 
 
