@@ -1,0 +1,9 @@
+.category-active-list li {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../../img/skuDefault.png');
+  margin-bottom: 10px;
+  border: #dddddd solid 1px;
+  height: 110px;
+  background-position: center center;
+  background-color: #fff; }

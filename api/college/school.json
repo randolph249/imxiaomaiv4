@@ -1,0 +1,24 @@
+{
+	"msg": "success",
+	"code": 0,
+	"data": {
+		"collegeId": 3270,
+		"collegeName": "小麦学院(颐和园校区)",
+		"cityId": 1,
+		"areaId": 2,
+		"ldcStorageId": 32,
+		"rdcStorageId": 0,
+		"weight": 0,
+		"isDel": 0,
+		"isShow": 1,
+		"isOpen": 0,
+		"longitude": 116.279833,
+		"latitude": 39.980096,
+		"ldcDeliveryType": 2,
+		"ldcSelfPickUpAddress": "小麦公社总部办公区水吧",
+		"rdcDeliveryType": 3,
+		"rdcSelfPickUpAddress": "",
+		"storeId": 1019,
+		"notValid": false
+	}
+}

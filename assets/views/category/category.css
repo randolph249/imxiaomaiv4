@@ -1,0 +1,48 @@
+.GoodsCont .GoodCont {
+    position: relative;
+    border-bottom: solid 1px #ddd;
+    padding: 10px 0;
+}
+
+.GoodsCont .GoodCont:last-child {
+    border-bottom-width: 0px;
+}
+
+.GoodsCont .imgCont {
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../../img/skuDefault.png');
+    position: relative;
+}
+
+.GoodsCont .details {
+    position: absolute;
+    left: 11rem;
+    right: 0;
+    bottom: 10px;
+    top: 10px;
+}
+
+
+/* 小屏兼容 */
+
+@media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
+    .GoodsCont .imgCont {
+        width: 80px;
+        height: 80px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+    }
+    .GoodsCont .details {
+        position: absolute;
+        left: 90px;
+        right: 0;
+        bottom: 10px;
+        top: 10px;
+    }
+}

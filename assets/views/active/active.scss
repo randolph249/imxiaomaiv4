@@ -1,0 +1,91 @@
+$nowPriceColor: #fc541f;
+.activeGoodBanner {
+  margin-top: 45px;
+  min-height: 1px;
+}
+.activeGoodList {
+  margin-bottom: 45px;
+  border-left: #ddd solid 1px;
+  display: flex;
+  flex-flow: row wrap;
+  background:#eee;
+  li {
+    width: 50%;
+    padding-bottom: 10px;
+    >.goodItem {
+      background: #fff;
+      .imgCont {
+        background-size: auto 100%;
+        height: 160px;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .details {
+        position: relative;
+        padding: 5px 10px;
+        .buy-icon {
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+          font-size: 32px;
+          line-height: 1;
+          color: $nowPriceColor;
+        }
+        .sold-out {
+          border-radius: 3px;
+          border: 1px solid #ccc;
+          -webkit-transform: rotate(30deg);
+          -webkit-transform-origin: 30px 15px;
+          text-align: center;
+          color: #ccc;
+          right: 10px;
+          position: absolute;
+          bottom: 10px;
+          line-height: 20px;
+          height: 20px;
+          font-size: 12px;
+          /* padding: 0 5px; */
+          bottom: 18px;
+          width: 50px;
+          text-align: center;
+        }
+        .label {
+          display: inline-block;
+          padding: 0 5px;
+          height: 16px;
+          line-height: 16px;
+          font-size: 12px;
+          border: #ccc solid 1px;
+          &.ldc {
+            border-color: #26adf0;
+            color: #26adf0;
+          }
+          &.rdc {
+            border-color: #2cdb46;
+            color: #2cdb46;
+          }
+        }
+        p.goodname {
+          padding: 3px 0;
+          line-height: 18px;
+          height: 42px;
+          overflow: hidden;
+          font-size: 14px;
+          color: #333;
+          overflow: hidden;
+        }
+
+      }
+    }
+    &:nth-child(even) {
+      >.goodItem {
+        margin-left: 5px;
+      }
+    }
+    &:nth-child(odd) {
+      >.goodItem {
+        margin-right: 5px;
+      }
+    }
+  }
+}

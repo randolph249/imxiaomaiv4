@@ -1,0 +1,342 @@
+$nowPriceColor: #fc541f;
+.list-main {
+  width: 100%;
+  display: flex;
+  padding: 45px 0;
+}
+.pub-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45px;
+  background: #f8f8f8;
+  z-index: 9;
+}
+.goodDetail {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 0;
+  overflow: hidden;
+  bottom: 0;
+  z-index: 3;
+  transition: height 0.5s ease;
+  background: #fff;
+  border-top: solid 1px #ddd;
+  &.goodDetail-show {
+    height: 75%;
+    overflow-y: scroll;
+  }
+}
+.mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: #222;
+  z-index: 2;
+  opacity: 0.8;
+  display: none;
+}
+.detailCont {
+  position: relative;
+  padding: 0 10px;
+  .icon-share {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 24px;
+    color: #555;
+  }
+  .icon-ok {
+    right: 5px;
+    position: absolute;
+    top: 5px;
+    font-size: 24px;
+    color: $nowPriceColor;
+  }
+  .imgCont {
+    width: 100%;
+    height: 200px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .good-normal-info {
+    background: #dcdcdc;
+    height: 90px;
+    border-top: solid 1px #ddd;
+    margin: 0 -10px;
+    padding: 0 10px;
+    position: relative;
+    .title {
+      line-height: 18px;
+      height: 36px;
+      overflow: hidden;
+      font-size: 14px;
+      color: #333;
+      overflow: hidden;
+      padding: 3px 0;
+    }
+    .buy-icon {
+      background: #dcdcdc;
+      bottom: 8px;
+      right: 10px;
+      &.disabled {
+        color: #ccc;
+      }
+    }
+    .buy-result {
+      color: #333;
+      font-size: 18px;
+      line-height: 30px;
+      position: absolute;
+      width: 40px;
+      right: 46px;
+      bottom: 10px;
+      text-align: center;
+    }
+    .icon-minus {
+      position: absolute;
+      right: 90px;
+      bottom: 10px;
+      background-color: #dcdcdc;
+      font-size: 30px;
+      color: $nowPriceColor;
+      line-height: 1;
+      &.disabled {
+        color: #ccc;
+      }
+    }
+
+    /**倒计时**/
+    .countdown {
+      position: absolute;
+      color: #333;
+      background: #ffd801;
+      height: 24px;
+      font-size: 14px;
+      width: 140px;
+      border-radius: 12px;
+      text-align: center;
+      top: -27px;
+      left: 50%;
+      margin-left: -70px;
+      line-height: 24px;
+    }
+  }
+  .detail-desc {
+    display: flex;
+    .detail-desc-key {
+      width: 24%;
+      font-size: 14px;
+      color: #333;
+      line-height: 28px;
+    }
+    .detail-desc-main {
+      flex-grow: 1;
+      font-size: 14px;
+      line-height: 28px;
+      color: #666;
+    }
+  }
+  .complex-property {
+    border-bottom: solid 1px #ddd;
+    .complex-property-name {
+      line-height: 40px;
+      color: #333;
+    }
+    .complex-property-values {
+      display: flex;
+      flex-flow: row wrap;
+      span {
+        width: 60px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 14px;
+        text-align: center;
+        border: #ccc solid 1px;
+        margin: 0 10px 10px 0;
+        &.checked {
+          background: $nowPriceColor;
+          color: #fff;
+          border-color: $nowPriceColor;
+        }
+      }
+    }
+  }
+}
+.cartThumb {
+  height: 45px;
+  position: relative;
+  .icon-cart {
+    position: absolute;
+    font-size: 32px;
+    left: 10px;
+    bottom: 5px;
+    width: 72px;
+    height: 72px;
+    border-radius: 36px;
+    background-color: #ffa000;
+    font-size: 48px;
+    line-height: 72px;
+    text-align: center;
+    color: #fff;
+  }
+  .totalCount {
+    width: 20px;
+    height: 20px;
+    color: #ffa000;
+    background: #f9f9f9;
+    left: 60px;
+    top: -34px;
+    border-radius: 10px;
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+    line-height: 20px;
+  }
+  .gotoPay {
+    background: #fc541f;
+    width: 100px;
+    height: 45px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 45px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+  }
+  .totalPrice {
+    line-height: 45px;
+    padding-left: 90px;
+    font-size: 16px;
+    color: #333;
+    em {
+      color: #fc541f;
+      font-style: normal;
+      padding-left: 5px;
+    }
+    span {
+      color: #fc541f;
+      font-size: 24px;
+    }
+  }
+  .emptyTip {
+    line-height: 45px;
+    padding-left: 90px;
+    font-size: 16px;
+    color: #333;
+  }
+}
+.cartDetail {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 0;
+  overflow: hidden;
+  bottom: 45px;
+  z-index: 3;
+  background: #fff;
+  border-top: solid 1px #ddd;
+  transition: all 0.5s ease;
+  display: none;
+  padding: 30px 10px 10px;
+  &.cartDetail-show {
+    height: auto;
+    max-height: 60%;
+    overflow-y: scroll;
+    display: block;
+  }
+  .goback {
+    position: absolute;
+    font-size: 14px;
+    line-height: 45px;
+    color: #333;
+    right: 0;
+    top: 0;
+    padding-right: 40px;
+    &:before {
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      border-radius: 12px;
+      background-color: #ff5300;
+      color: #fff;
+      display: inline-block;
+      position: absolute;
+      right: 10px;
+      top: 8px;
+      transform: rotate(-90deg);
+    }
+  }
+  .title-ldc {
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    border-bottom: solid 2px #66bd00;
+  }
+  .title-rdc {
+    @extend .title-ldc;
+    color: #009bf5;
+    border-bottom-color: #009bf5;
+  }
+  .good-info {
+    height: 44px;
+    color: #333;
+    font-size: 14px;
+    padding-right: 120px;
+    border-bottom: solid 1px #ddd;
+    position: relative;
+    p.good-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 44px;
+      font-size: 14px;
+    }
+    p.good-price {
+      position: absolute;
+      top: 0;
+      color: #ff5300;
+      line-height: 44px;
+      font-size: 16px;
+      right: 94px;
+    }
+    .icon-plus {
+      position: absolute;
+      top: 0;
+      color: #ff5300;
+      right: 0;
+      line-height: 45px;
+      font-size: 27px;
+    }
+    .icon-minus {
+      @extend .icon-plus;
+      right: 64px;
+      font-size: 23px;
+    }
+    .good-count {
+      position: absolute;
+      line-height: 45px;
+      font-size: 14px;
+      width: 40px;
+      right: 25px;
+      color: #333;
+      top: 0;
+      text-align: center;
+    }
+    .cartDetail-tip{
+        height:30px;
+        font-size:14px;
+        line-height: 30px;
+        color:#999;
+        .cartDetail-tip-coupon{
+          float:right;
+        }
+    }
+  }
+}

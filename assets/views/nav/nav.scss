@@ -1,0 +1,134 @@
+$borderColor: #ddd;
+$checkedColor: #ff5300;
+$supBg: #f5f5f5;
+$subBg: #fff;
+$fontColor: #3a404b;
+
+/* 头部导航 */
+.pub-header {
+  font-size: 1rem;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 44px;
+  background: #fff;
+  z-index: 2;
+  border-bottom: solid 1px #d5d5d5;
+  display: flex;
+  justify-content: space-around;
+  background: #f5f5f5;
+  color: #524648;
+  .icon-feedback {
+    width: 45px;
+    text-align: center;
+    &:before {
+      font-size: 24px;
+      line-height: 44px;
+    }
+  }
+  .icon-user {
+    @extend .icon-feedback;
+  }
+  .location-info {
+    text-align: center;
+    flex-grow: 1;
+    line-height: 44px;
+  }
+}
+.list-main {
+  .list-category {
+    width: 26%;
+    background: #f5f5f5;
+    border-right: $borderColor solid 1px;
+    .nav-super {
+      overflow: hidden;
+      line-height: 45px;
+      font-size: 13px;
+      color: $fontColor;
+      border-bottom: solid 1px $borderColor;
+      text-align: center;
+      &:last-child {
+        border-bottom-width: 0;
+      }
+      &.nav-checked {
+        color: $checkedColor;
+        font-size: 15px;
+        border-bottom: $checkedColor solid 3px;
+        background: #fff;
+      }
+      p.arrow-down {
+        position: relative;
+        &:after {
+          position: absolute;
+          content: '';
+          width: 0;
+          height: 0;
+          border-width: 8px 6px 0 6px;
+          border-style: solid;
+          border-color: $fontColor $supBg $supBg $supBg;
+          right: 10px;
+          top: 20px;
+        }
+        &.arrow-up {
+          &:after {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+    /* *
+    *hot-1 new-2 recommend-3
+    **
+    .nav-mark-1 {
+      position: relative;
+      &:after {
+        content: 'e611';
+        position: absolute;
+        left: -2px;
+        top: -2px;
+        font-size: 28px;
+        line-height: 1;
+        color: #ff5300;
+        transform-origin: 15px 15px;
+        transform: rotate(-90deg);
+        transform-origin: 15px 15px;
+      }
+    }
+    .nav-mark-2 {
+      @extend .nav-mark-1;
+      &:before {
+        content: 'N';
+      }
+    }
+    .nav-mark-3 {
+      position: relative;
+      &:after {
+        content:'e610';
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 24px;
+        line-height: 1;
+        color: #ff5300;
+      }
+    } */
+    .nav-sub {
+      height: 45px;
+      line-height: 45px;
+      text-align: center;
+      color: #555;
+      background: $subBg;
+      &.nav-checked {
+        color: $checkedColor;
+        border-bottom: $checkedColor solid 2px;
+        background: #fff;
+      }
+    }
+  }
+  .list-product {
+    flex-grow: 1;
+    padding: 10px;
+    background: #fff;
+  }
+}

@@ -1,0 +1,56 @@
+{
+	"msg": "success",
+	"code": 0,
+	"data": {
+		"activities": [{
+			"activityId": 11,
+			"activityName": "全国-麦爆品",
+			"activityShowName": "麦爆品",
+			"activityType": 1,
+			"platFormType": 0,
+			"openType": 0,
+			"isOpen": 1,
+			"weight": 5,
+			"imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=162300",
+			"isShow": 1,
+			"isDel": 0,
+			"operator": 34,
+			"createTime": 1440565078000,
+			"updateTime": 1442388754000,
+			"activityTimeList": null
+		}, {
+			"activityId": 16,
+			"activityName": "北京天津-麦新品",
+			"activityShowName": "新品来试试",
+			"activityType": 2,
+			"platFormType": 0,
+			"openType": 0,
+			"isOpen": 1,
+			"weight": 2,
+			"imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=161541",
+			"isShow": 1,
+			"isDel": 0,
+			"operator": 34,
+			"createTime": 1440579158000,
+			"updateTime": 1442199257000,
+			"activityTimeList": null
+		}, {
+			"activityId": 62,
+			"activityName": "北京天津-爱吃货",
+			"activityShowName": "爱吃货",
+			"activityType": 1,
+			"platFormType": 0,
+			"openType": 0,
+			"isOpen": 1,
+			"weight": 1,
+			"imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=157179",
+			"isShow": 1,
+			"isDel": 0,
+			"operator": 33,
+			"createTime": 1440666003000,
+			"updateTime": 1440829966000,
+			"activityTimeList": null
+		}]
+	},
+	"serverTime": "2015-09-18 11:45:22"
+}
