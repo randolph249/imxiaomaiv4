@@ -60,10 +60,16 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
       //获取当前城市学校列表
     });
 
+    //返回首页
     $scope.checkCollege = function(college) {
       schoolManager.set(college).then(function() {
         $state.go('root.buy.nav.all');
       });
+    };
+
+    //返回首页
+    $scope.goback = function() {
+      $state.go('root.buy.nav.all');
     }
   }
 ]);

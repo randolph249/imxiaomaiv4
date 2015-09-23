@@ -55,6 +55,7 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
       if (toParam.showCart == 'true') {
         loadDetail().then(function(res) {
           $scope.goods = res['goods'];
+          $scope.ldcFreight = res['ldcFreight'];
           return loadCouponCount();
         }).then(function(coupons) {
           $scope.coupons = coupons.couponInfo;
