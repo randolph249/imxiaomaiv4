@@ -227,6 +227,14 @@ body {
     }
 }
 
+.loading,.errortip{
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    font-size: 1.6rem;
+    color: #ff5300;
+}
 .mod-wrap {
     position: absolute;
     top: 0;

@@ -1,10 +1,13 @@
 @charset "UTF-8";
 .localColleges {
-  height: 102px; }
+    height: 102px;
+}
 
 .locating {
-  position: relative; }
-  .locating:after {
+    position: relative;
+}
+
+.locating:after {
     position: absolute;
     content: '学校位置搜索中...';
     top: 0;
@@ -12,4 +15,7 @@
     color: #333;
     font-size: 14px;
     width: 100%;
-    text-align: center; }
+    text-align: center;
+}
+
+

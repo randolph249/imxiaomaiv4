@@ -42,8 +42,8 @@
     line-height: 4.4rem;
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
+    left: 44px;
+    right: 44px;
 }
 
 .list-main .list-category {
