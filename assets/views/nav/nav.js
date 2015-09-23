@@ -58,6 +58,7 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
     $scope.paths = {
       '0': 'root.buy.nav.all',
       '1': 'root.buy.nav.recommend',
+      '2': 'root.buy.nav.active',
       '3': 'root.buy.nav.category'
     };
 
@@ -110,15 +111,8 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
           activityType = routerInfo.activityType,
           path;
 
-        //如果不是活动导航
-        if (displayType != 2) {
-          path = $scope.paths[displayType];
-        } else {
-          //0代表秒杀 1代表普通
-          path = activityType == 0 ? 'root.buy.skactive' :
-            'root.buy.active';
-        }
 
+        path = $scope.paths[displayType];
         //跳转到对应的链接上
         $state.go(path, {
           categoryId: routerInfo.categoryId,

@@ -61,20 +61,44 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     //页面跳转之后销毁活动列表页面的数据(这个数据不需要缓存)
     $scope.$on('$destory', function() {
       xiaomaiCacheManager.clean('skactiveGoods');
+      xiaomaiCacheManager.clean('activeBackRouter');
+
     });
 
 
 
     loadBanner();
 
-    $scope.$on('$stateChangeSuccess', function(e, tostate, toparam) {
+    $scope.$on('$stateChangeSuccess', function(e, tostate, toparam,
+      fromState, fromParam) {
       if (toparam.page && toparam.page != page) {
         loadSku.then(function(res) {
           $scope.goodsList = $scope.goodsList.concat(res.goods);
 
         });
       }
+
+
+      //保存条转过来的链接
+      if (fromState.name.indexOf('root.buy.nav') != -1) {
+        xiaomaiCacheManager.writeCache('activeBackRouter', {
+          state: fromState.name,
+          param: fromParam
+        });
+      }
     });
+
+
+    //回退
+    $scope.goback = function() {
+      var backCache = xiaomaiCacheManager.readCache('activeBackRouter');
+
+      if (backCache) {
+        $state.go(backCache.state, backCache.param);
+      } else {
+        $state.go('root.buy.nav.all');
+      }
+    }
 
 
 

@@ -11,6 +11,14 @@
       "activityType": null,
       "labelType": null
     }, {
+      "navigateName": "推荐活动",
+      "activityId": null,
+      "categoryId": null,
+      "sourceType": 0,
+      "displayType": 1,
+      "activityType": null,
+      "labelType": null
+    }, {
       "navigateName": "老李活动",
       "activityId": 21136,
       "categoryId": null,

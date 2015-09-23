@@ -17,6 +17,14 @@ angular.module('xiaomaiApp').controller('buyCtrl', [
       });
     });
 
+    //点击遮罩关闭所有图层
+    $scope.closeMask = function() {
+      $state.go($state.current.name, {
+        showDetail: false,
+        showCart: false
+      });
+    }
+
 
   }
 ]);

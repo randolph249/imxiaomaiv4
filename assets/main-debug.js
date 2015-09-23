@@ -131,7 +131,24 @@ angular.module('xiaomaiApp').config([
           }]
         }
       })
-      //普通活动
+      //普通活动 入口是导航页面 左侧有导航
+      .state('root.buy.nav.active', {
+        url: 'active/?collegeId&activityId',
+        controller: 'nav.activeCtrl',
+        templateUrl: '../assets/views/active/nav.active.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/views/active/active.js',
+                '../assets/views/active/active.css'
+              ]
+            })
+          }]
+        }
+      })
+      //普通活动 从首页进入一个新连接
       .state('root.buy.active', {
         url: 'active/?collegeId&activityId',
         controller: 'buy.activeCtrl',
