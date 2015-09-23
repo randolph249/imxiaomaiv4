@@ -91,6 +91,10 @@ angular.module('xiaomaiApp').factory('networkType', ['$q', function($q) {
   wx.getNetworkType({
     fail: function(error) {
       deferred.reject()
+<<<<<<< HEAD
+=======
+      debugger;
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
     },
     success: function(res) {
       // 返回网络类型2g，3g，4g，wifi

@@ -6,6 +6,10 @@ angular.module('xiaomaiApp').controller('navCtrl', ['$scope', '$state',
 
   }
 ]);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
 /**
  *头部
  **/
@@ -18,6 +22,7 @@ angular.module('xiaomaiApp').controller('nav.headCtrl', [
     $scope.schoolname = '未选择所在学校';
     schoolManager.get().then(function(res) {
       $scope.schoolname = res.collegeName;
+<<<<<<< HEAD
     });
 
     //跳转到选择学校页面
@@ -29,17 +34,25 @@ angular.module('xiaomaiApp').controller('nav.headCtrl', [
     $scope.gotoFeedback = function() {
       $state.go('root.feedback');
     };
+=======
+    })
+
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
 
   }
 ]);
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
 angular.module('xiaomaiApp').controller('nav.listCtrl', [
   '$scope',
   '$state',
   'xiaomaiService',
   'schoolManager',
+<<<<<<< HEAD
   'xiaomaiCacheManager',
   function($scope, $state, xiaomaiService, schoolManager,
     xiaomaiCacheManager) {
@@ -53,11 +66,20 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
     }).then(function(res) {
       $scope.navs = res.navigateItems;
       xiaomaiCacheManager.writeCache('navgatorlist', res);
+=======
+  function($scope, $state, xiaomaiService, schoolManager) {
+
+    $scope.navs = [];
+    //获取导航栏
+    xiaomaiService.fetchOne('navgatorlist', true).then(function(res) {
+      $scope.navs = res.navigateItems;
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
     });
 
     $scope.paths = {
       '0': 'root.buy.nav.all',
       '1': 'root.buy.nav.recommend',
+<<<<<<< HEAD
       '3': 'root.buy.nav.category'
     };
 
@@ -84,6 +106,11 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
           break;
       }
       return flag;
+=======
+      '2': 'root.buy.active',
+      '3': 'root.buy.skactive',
+      '4': 'root.buy.nav.category'
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
     };
 
     //监听当前路径变化
@@ -105,6 +132,7 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
 
     $scope.goto = function(routerInfo) {
       schoolManager.get().then(function(res) {
+<<<<<<< HEAD
         var collegeId = res.collegeId,
           displayType = routerInfo.displayType,
           activityType = routerInfo.activityType,
@@ -126,6 +154,20 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
           collegeId: collegeId
         });
       });
+=======
+        var collegeId = res.collegeId;
+
+        //跳转到对应的链接上
+        $state.go($scope.paths[routerInfo.displayType], {
+          categoryId: routerInfo.categoryId,
+          activityId: routerInfo.activityId,
+          collegeId: collegeId,
+          activeName: encodeURIComponent(routerInfo.navigateName)
+        });
+      });
+
+
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
     }
 
   }

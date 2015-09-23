@@ -1,4 +1,5 @@
 .recommendCategoryCont {
+<<<<<<< HEAD
     margin: -10px;
     background: #fff;
 }
@@ -6,12 +7,19 @@
 .recommendCategoryCont .recommendCateTitle {
     /* display: flex; */
     position: relative;
+=======
+  margin: -10px;
+  background: #fff; }
+  .recommendCategoryCont .recommendCateTitle {
+    display: flex;
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
     height: 24px;
     line-height: 24px;
     background: #efefef;
     font-size: 12px;
     color: #333;
     padding: 0 10px;
+<<<<<<< HEAD
     justify-content: space-between;
 }
 
@@ -71,3 +79,34 @@
       left: 90px;
    }
 }
+=======
+    justify-content: space-between; }
+    .recommendCategoryCont .recommendCateTitle h3 {
+      font-weight: normal; }
+    .recommendCategoryCont .recommendCateTitle span {
+      color: #bbb;
+      transform: rotate(-90deg);
+      font-size: 12px;
+      background: #efefef; }
+  .recommendCategoryCont .recommendCateColumn {
+    padding: 0 10px; }
+    .recommendCategoryCont .recommendCateColumn .recommendCateGood {
+      position: relative;
+      border-bottom: solid 1px #ddd;
+      padding: 10px 0; }
+      .recommendCategoryCont .recommendCateColumn .recommendCateGood:last-child {
+        border-bottom-width: 0px; }
+    .recommendCategoryCont .recommendCateColumn .imgCont {
+      width: 100px;
+      height: 100px;
+      background-size: auto 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative; }
+    .recommendCategoryCont .recommendCateColumn .details {
+      position: absolute;
+      left: 110px;
+      right: 0;
+      bottom: 10px;
+      top: 10px; }
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3

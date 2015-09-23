@@ -3,6 +3,7 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
   '$state',
   'xiaomaiService',
   'schoolManager',
+<<<<<<< HEAD
   'xiaomaiCacheManager',
   function($scope, $state, xiaomaiService, schoolManager,
     xiaomaiCacheManager) {
@@ -10,6 +11,10 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
 
     $scope.isloading = true;
     //获取学校ID 根据学校ID 获取推荐类目
+=======
+  function($scope, $state, xiaomaiService, schoolManager) {
+    var collegeId;
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
     schoolManager.get().then(function(schoolInfo) {
       collegeId = schoolInfo.collegeId;
       return xiaomaiService.fetchOne('categoryGoods', {
@@ -17,12 +22,15 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
       });
     }).then(function(res) {
       $scope.categorys = res;
+<<<<<<< HEAD
       xiaomaiCacheManager.writeCache('categoryGoods', res);
       $scope.haserror = false;
     }, function() {
       $scope.haserror = true;
     }).finally(function(res) {
       $scope.isloading = false;
+=======
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
     });
 
     //更多跳转
@@ -31,6 +39,7 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
         collegeId: collegeId,
         categoryId: item.category.categoryId
       })
+<<<<<<< HEAD
     };
 
     //打开详情页面
@@ -68,5 +77,8 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
         alert(msg);
       });
     };
+=======
+    }
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
   }
 ])

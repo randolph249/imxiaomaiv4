@@ -32,6 +32,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 '../assets/views/root/font.css',
+<<<<<<< HEAD
                 '../assets/scss/common.css',
                 '../assets/service/commonService.js',
                 '../assets/service/ajaxService.js',
@@ -59,13 +60,20 @@ angular.module('xiaomaiApp').config([
               files: [
                 '../assets/components/countdown/countdown.js',
                 '../assets/components/back/back.js'
+=======
+                '../assets/service/service.js'
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
               ]
             })
           }]
         }
       })
       .state('root.buy', {
+<<<<<<< HEAD
         url: 'buy/?showDetail&goodId&sourceType&showCart&r',
+=======
+        url: 'buy/',
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
         controller: 'buyCtrl',
         templateUrl: '../assets/views/buy/buy.html',
         resolve: {
@@ -79,11 +87,43 @@ angular.module('xiaomaiApp').config([
                 '../assets/views/buy/shopcart.js'
               ]
             })
+<<<<<<< HEAD
+=======
+          }],
+          loadService: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/service/cartService.js',
+                '../assets/service/detailService.js'
+              ]
+            })
+          }],
+          loadFilter: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/filters/price.js'
+              ]
+            })
+          }],
+          loadComponents: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/components/countdown/countdown.js'
+              ]
+            })
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
           }]
         }
       })
       .state('root.buy.nav', {
+<<<<<<< HEAD
         url: 'nav/',
+=======
+        url: 'nav/?collegeid',
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
         templateUrl: '../assets/views/nav/nav.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -94,6 +134,17 @@ angular.module('xiaomaiApp').config([
                 '../assets/views/nav/nav.css'
               ]
             })
+<<<<<<< HEAD
+=======
+          }],
+          loadService: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/service/locateservice.js'
+              ]
+            })
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
           }]
         }
       })
@@ -133,7 +184,11 @@ angular.module('xiaomaiApp').config([
       })
       //普通活动
       .state('root.buy.active', {
+<<<<<<< HEAD
         url: 'active/?collegeId&activityId',
+=======
+        url: 'active/?collegeId&activityId&activeName',
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
         controller: 'buy.activeCtrl',
         templateUrl: '../assets/views/active/active.html',
         resolve: {
@@ -145,12 +200,27 @@ angular.module('xiaomaiApp').config([
                 '../assets/views/active/active.css'
               ]
             })
+<<<<<<< HEAD
+=======
+          }],
+          loadService: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/components/scroll/scroll.js'
+              ]
+            })
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
           }]
         }
       })
       //抢购活动
       .state('root.buy.skactive', {
+<<<<<<< HEAD
         url: 'skactive/?collegeId&activityId',
+=======
+        url: 'skactive/?collegeId&activityId&activeName',
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
         controller: 'buy.skactiveCtrl',
         templateUrl: '../assets/views/skactive/skactive.html',
         resolve: {
@@ -185,7 +255,11 @@ angular.module('xiaomaiApp').config([
       })
       //进行定位
       .state('root.locate', {
+<<<<<<< HEAD
         url: 'locate/',
+=======
+        url: 'locate/?cityid',
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
         controller: 'positionCtrl',
         templateUrl: '../assets/views/locate/locate.html',
         resolve: {
@@ -197,6 +271,7 @@ angular.module('xiaomaiApp').config([
                 '../assets/views/locate/locate.css'
               ]
             })
+<<<<<<< HEAD
           }]
         }
       })
@@ -211,6 +286,14 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 '../assets/views/colleges/colleges.js'
+=======
+          }],
+          loadService: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                '../assets/service/locateservice.js'
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
               ]
             })
           }]
@@ -227,6 +310,7 @@ angular.module('xiaomaiApp').config([
               files: [
                 '../assets/views/coupon/coupon.js'
               ]
+<<<<<<< HEAD
             });
           }]
         }
@@ -245,6 +329,9 @@ angular.module('xiaomaiApp').config([
 
               ]
             });
+=======
+            })
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
           }]
         }
       })
@@ -257,4 +344,8 @@ angular.module('xiaomaiApp').config([
 
 angular.module('xiaomaiApp').run(['$state', function($state) {
   $state.go('root.locate');
+<<<<<<< HEAD
+=======
+  // debugger;
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
 }]);

@@ -2,6 +2,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
   '$scope',
   '$state',
   'xiaomaiService',
+<<<<<<< HEAD
   'detailManager',
   'buyProcessManager',
   'xiaomaiCacheManager',
@@ -12,6 +13,26 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
 
     //抓取Banner信息
     var loadBanner = function() {
+=======
+  function($scope, $state, xiaomaiService) {
+    var collegeId, activityId, page, bannerhasFresh = false;
+    //监听路由参数变化
+    $scope.$on('$stateChangeSuccess', function(e, tostate, toparam) {
+      collegeId = toparam.collegeId;
+      activityId = toparam.activityId;
+      page = toparam.page || 1;
+      $scope.activeName = decodeURIComponent(toparam.activeName);
+
+      loadSku();
+
+
+      !bannerhasFresh && loadBanner();
+    });
+
+
+    //抓取Banner信息
+    function loadBanner() {
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
       xiaomaiService.fetchOne('activeBanner', {
         collegeId: collegeId,
         activityId: activityId
@@ -20,6 +41,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
       })
     }
 
+<<<<<<< HEAD
     //获取活动商品列表数据
     var loadSku = function() {
       return xiaomaiService.fetchOne('activeGoods', {
@@ -110,5 +132,26 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
 
     //翻页
     $scope.pagination = function(page) {}
+=======
+    $scope.goodsList = [];
+    //获取活动商品列表数据
+    var loadSku = function() {
+      xiaomaiService.fetchOne('activeGoods', {
+        collegeId: collegeId,
+        activityId: activityId,
+        currentPage: page,
+        recordPerPage: 20,
+        v: (+new Date)
+      }).then(function(res) {
+        console.log(res);
+        $scope.goodsList = $scope.goodsList.concat(res.goods);
+      });
+    }
+
+    //翻页
+    $scope.pagination = function(page) {
+      debugger;
+    }
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
   }
 ]);

@@ -2,6 +2,7 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
   '$state',
   'xiaomaiService',
   '$scope',
+<<<<<<< HEAD
   'xiaomaiCacheManager',
   'buyProcessManager',
   function($state, xiaomaiService, $scope,
@@ -9,12 +10,19 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
     var collegeId, categoryId;
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
 
+=======
+  'detailManager',
+  function($state, xiaomaiService, $scope, detailManager) {
+    var collegeId, categoryId;
+    $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
       collegeId = toParam.collegeId;
       categoryId = toParam.categoryId;
 
       loadGoodList();
     });
 
+<<<<<<< HEAD
 
     //在页面跳转之前 如果发现所有和列表页相关的参数都没有变化 说明我我不需要重新请求数据
     //那么就把数据放到缓存中
@@ -43,11 +51,15 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
 
     //下载商品列表
     $scope.isloading = true;
+=======
+    //下载商品列表
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
     var loadGoodList = function() {
       xiaomaiService.fetchOne('goods', {
         collegeId: collegeId,
         categoryId: categoryId
       }).then(function(res) {
+<<<<<<< HEAD
         $scope.goods = res.goods;
         $scope.haserror = false;
 
@@ -90,6 +102,19 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         alert(msg);
       });
 
+=======
+        console.log(res.goods);
+        $scope.goods = res.goods;
+      })
+    }
+
+    //打开详情页面
+    $scope.goto = function(good) {
+      detailManager.gotoDetail({
+        goodId: good.bgGoodsId,
+        sourceType: good.sourceType
+      })
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
     }
   }
 ]);

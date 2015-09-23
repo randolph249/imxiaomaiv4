@@ -1,4 +1,5 @@
 <div class="pub-header">
+<<<<<<< HEAD
   <div back-icon class="iconfont icon-back"></div>
   <div class="location-info">{{activeName}}</div>
   <div class="iconfont icon-locate-right"></div>
@@ -59,3 +60,58 @@
     </li>
   </ul>
 </div>
+=======
+  <div class="iconfont icon-back"></div>
+  <div class="location-info">{{activeName}}</div>
+  <div class="iconfont icon-locate-right"></div>
+</div>
+<div class="skactiveGoodBanner"></div>
+<ul class="skactiveGoodList">
+  <li ng-repeat="good in goodsList">
+    <div class="goodItem">
+      <div class="imgCont" ng-style='{"background-image":"url("+good.imageUrl+")"}'>
+          <!--如果活动未开始-->
+          <p class="countdown" ng-if="good.killStarted==0">
+            距开始
+            <span countdown timeid="{{good.activityBgGoodsId}}" count-dead-call="timecountdown(timeid);" counttime="{{good.timeBeforeStart}}"></span>
+          </p>
+          <!-- 活动已开始-->
+          <p class="countdown"  ng-if="good.killStarted==1">
+            距结束
+            <span countdown timeid="{{good.activityBgGoodsId}}" count-dead-call="timecountdown(timeid);" counttime="{{good.buyLeftTime}}"></span>
+          </p>
+      </div>
+      <div class="details">
+        <p class="goodname">{{good.activityGoodsName}}</p>
+        <!-- 输出标签29分钟达/次日达 -->
+        <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
+        <p class="priceCont">
+          <!-- 单品或者组合最高价-->
+          <span class="new-price" ng-if="good.goodsType==1||good.goodsType==2">
+            &yen;<i>{{good.skuList[0].activityPrice|xiaomaiprice}}</i>
+          </span>
+          <span class="old-price" ng-if="good.goodsType==1||good.goodsType==2">
+            &yen;{{good.skuList[0].originPrice|xiaomaiprice}}</span>
+          <!-- 聚合 -->
+          <span class="aggregate-price" ng-if="good.goodsType==3 && good.skuList[0].minWapPrice==good.skuList[0].maxWapPrice">
+            &yen;{{good.skuList[0].minWapPrice|xiaomaiprice}}</span>
+          <span class="aggregate-price" ng-if="good.goodsType==3 && good.skuList[0].minWapPrice!=good.skuList[0].maxWapPrice">
+            &yen;{{good.skuList[0].minWapPrice|xiaomaiprice}} ~ &yen;{{good.skuList[0].maxWapPrice|xiaomaiprice}}
+          </span>
+        </p>
+
+        <!-- 未开始-->
+        <p ng-if="good.killStarted==0" class="sk-icon disabled">抢</p>
+        <!-- 已结束-->
+        <p ng-if="good.killStarted==2" class="sk-end">已结束</p>
+        <!-- 已经售空-->
+        <p ng-if="good.killStarted==1 && good.goodsStatusDisplay==3" class="sold-out">已售空</p>
+        <!-- 已经抢过了 -->
+        <p ng-if="good.killStarted==1 && good.killed" class="sold-geted">已抢购</p>
+        <!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
+        <p ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2" class="sk-icon">抢</p>
+      </div>
+    </div>
+  </li>
+</ul>
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3

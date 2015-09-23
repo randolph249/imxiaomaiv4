@@ -1,3 +1,81 @@
+<<<<<<< HEAD
+=======
+//校验是否可以购买/删除购买
+//总共有三条校验规则
+//第一条购买数量！=0
+//第二条购买数量超过最大库存
+//第三条是聚合类产品是否存在
+angular.module('xiaomaiApp').factory('shopValidate', ['getSkuInfo', function(
+  getSkuInfo) {
+
+  /**
+   *@param {String} type 购买操作类型 {plus | minus}
+   *@param {Number} curgoodCount 当前购买的数量
+   *@param {Number} 最大可购买数量
+   **/
+  var validMethods = {
+    minCountVali: function(count) {
+      if (count <= 0) {
+        alert('数量不能为0');
+        return false;
+      }
+      return true;
+    },
+    maxCountVali: function(count, maxNum) {
+      if (count >= maxNum) {
+        alert('超出库存');
+        return false;
+      }
+      return true;;
+    },
+    /**
+     *@param {Object} checkedProperty 当前选中的属性
+     *example:
+     *{'1001':'2002','1002','2003'}
+     *@param {Object} skuObject sku集合
+     *example:
+     *{'1001=2002&1002=2003&1003=2004':{.....}}
+     **/
+    skuIsExistVali: function(checkedProperty, skuObject) {
+      if (!getSkuInfo(checkedProperty, skuObject)) {
+        alert('请选择商品');
+        return false;
+      }
+      return true;
+    }
+  };
+  return function(validlist) {
+
+    var flag = true;
+    angular.forEach(validlist, function(args, key) {
+
+      //先检查校验规则是否存在 如果不存在直接返回false
+      if (!validMethods.hasOwnProperty(key)) {
+        flag = false;
+        return false;
+      }
+
+      //没有传参 直接返回false
+      if (!angular.isArray(args) || !args.length) {
+        flag = false;
+        return false;
+      }
+
+      var method = validMethods[key];
+
+      if (!method.apply({}, args)) {
+        flag = false;
+        return false;
+      }
+
+    });
+
+    return flag;
+  }
+}]);
+
+
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
 /**
 *将skuList转换成
 {
@@ -29,8 +107,12 @@ angular.module('xiaomaiApp').factory('skuListToObject', function() {
 angular.module('xiaomaiApp').factory('cartManager', [
   '$q',
   'xiaomaiService',
+<<<<<<< HEAD
   'xiaomaiCacheManager',
   function($q, xiaomaiService, xiaomaiCacheManager) {
+=======
+  function($q, xiaomaiService) {
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
     //监听最后操作时间
     var updateQueryResult = function(res) {
       queryCallback && queryCallback(res.data);
@@ -70,11 +152,16 @@ angular.module('xiaomaiApp').factory('cartManager', [
       queryCallback = call;
       //默认执行一次自查询
       xiaomaiService.fetchOne('queryCart').then(function(res) {
+<<<<<<< HEAD
+=======
+        // debugger;
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
         queryCallback(res);
       }, function(msg) {
         queryCallback('error');
       });
     };
+<<<<<<< HEAD
     //保存购物车信息到本地
     var store = function(results) {
       if (results && angular.isObject(results)) {
@@ -83,6 +170,8 @@ angular.module('xiaomaiApp').factory('cartManager', [
         xiaomaiCacheManager.clean('queryCart');
       }
     };
+=======
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
     var clear = function() {
 
     };
@@ -90,6 +179,7 @@ angular.module('xiaomaiApp').factory('cartManager', [
       add: add,
       remove: remove,
       query: query,
+<<<<<<< HEAD
       clear: clear,
       store: store
     }
@@ -250,3 +340,9 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
 
   }
 ]);
+=======
+      clear: clear
+    }
+  }
+])
+>>>>>>> 3500292a18e69e97540c436ba4422bc703c8d0a3
