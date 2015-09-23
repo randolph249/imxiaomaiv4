@@ -7,9 +7,9 @@
   <ul class="countrylist">
     <li class="loading" ng-if="isloading">学校信息正在加载....</li>
     <li class="errorip" ng-if="haserror">该城市还没有相关学校</li>
-    <li ng-repeat="country in countrylist">
+    <li ng-repeat="country in countrylist" >
       <p class="countryname">{{country.cityName}}</p>
-      <div class="" ng-click="checkCollege(college)" ng-click="checkCollege(college);" ng-repeat="college in country.colleges">{{college.collegeName}}</div>
+      <div ng-class="{holiday:college.isOpen!=1}" class="" ng-click="checkCollege(college)" ng-click="checkCollege(college);" ng-repeat="college in country.colleges">{{college.collegeName}}</div>
     </li>
   </ul>
 </div>
