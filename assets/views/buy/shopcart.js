@@ -19,7 +19,8 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
 
     //打开详情页面
     $scope.gotoDetail = function() {
-      if (!$scope.totalCount || $scope.totalCount == 0) {
+      if (!$scope.totalCount || $scope.totalCount == 0 || $state.params.showCart ==
+        'true') {
         return false;
       }
 

@@ -1,3 +1,34 @@
+angular.module('xiaomaiApp').controller('Controller', function($scope) {
+  $scope.$parent.myScrollOptions = {
+    'testWrap2': {
+      snap: false,
+      onScrollEnd: function() {
+        alert('finshed scrolling wrapper2');
+      }
+    },
+    'wrapper3': {
+      snap: false,
+      onScrollEnd: function() {
+        alert('finshed scrolling wrapper3');
+      }
+    }
+  };
+
+
+  $scope.refreshiScroll3 = function() {
+    $scope.$parent.myScroll['wrapper3'].refresh();
+    alert('wrapper3 refreshed');
+  };
+
+
+  $scope.refreshiScroll2 = function() {
+    $scope.$parent.myScroll['testWrap2'].refresh();
+    alert('testWrap2 refreshed');
+  };
+});
+
+
+
 angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
   '$state',
   'xiaomaiService',
@@ -7,6 +38,7 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
   function($state, xiaomaiService, $scope,
     xiaomaiCacheManager, buyProcessManager) {
     var collegeId, categoryId;
+
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
 
       collegeId = toParam.collegeId;
@@ -14,8 +46,6 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
 
       loadGoodList();
     });
-
-
     //在页面跳转之前 如果发现所有和列表页相关的参数都没有变化 说明我我不需要重新请求数据
     //那么就把数据放到缓存中
     //反之就请清空所有的缓存 避免不能获取到新数据
