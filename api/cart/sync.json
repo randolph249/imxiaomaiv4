@@ -1,0 +1,9 @@
+{
+  "msg": "success",
+  "code": 0,
+  "data": {
+    "totalPrice": 2850,
+    "totalCount": 3
+  },
+  "serverTime": "2015-09-20 19:08:34"
+}

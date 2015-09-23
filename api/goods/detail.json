@@ -1,0 +1,150 @@
+{
+  "msg": "success",
+  "code": 0,
+  "data": {
+    "buyLeftTime": 9000,
+    "buyLeftTimeShow": "<i>-385</i>时<i>-37</i>分<i>-37</i>秒",
+    "timeBeforeStart": 2000,
+    "timeBeforeStartShow": "<i>-437</i>时<i>-42</i>分<i>-37</i>秒",
+    "buyEndTimeShow": "<i>52</i>时<i>5</i>分<i>0</i>秒",
+    "killStarted": 0,
+    "isSeckill": 0,
+    "weight": 0,
+    "bgGoodsId": 1875,
+    "collegeId": 9,
+    "remark": "",
+    "unit": "份",
+    "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=160841&imageView2/0/w/300/h/300",
+    "detailImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=160841&imageView2/0/w/450/h/450",
+    "iconImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=160841&imageView2/0/w/150/h/150",
+    "maxNum": 1,
+    "saleSpec": "2个",
+    "originPlace": "见包装",
+    "goodsType": 3,
+    "goodsStatus": 2,
+    "goodsStatusDisplay": 2,
+    "isDel": 0,
+    "sourceType": 1,
+    "distributeTypeDisplay": ["29分钟达", ""],
+    "minWapPrice": 690,
+    "maxWapPrice": 690,
+    "minAppPrice": 690,
+    "maxAppPrice": 690,
+    "goodsPropertyList": [],
+    "tagChange": 0,
+    "priceChange": 0,
+    "available": 0,
+    "goodsId": 134650,
+    "bgGoodsName": "“买一赠一” 优选丰水梨 2个/份 （一米鲜）",
+    "bgGoodsSubname": null,
+    "goodsDesc": "我来自河北，在最适合梨生长的红土地上，已有数十年的种植历史。我的特点是鲜嫩多汁，酸甜适口，俗称”天然矿泉水“哦！",
+    "categoryId": 9,
+    "skuGoodsPropertyList": [{
+      "propertyNameId": 1001,
+      "propertyName": "颜色",
+      "showOrder": "3",
+      "propertyValues": [{
+        "propertyValueId": 2001,
+        "propertyValue": "红",
+        "showOrder": "3",
+        "imageUrl": "www.baidu.com"
+      }, {
+        "propertyValueId": 2002,
+        "propertyValue": "蓝",
+        "showOrder": "2",
+        "imageUrl": "www.baidu.com"
+      }]
+    }, {
+      "propertyNameId": 1002,
+      "propertyName": "尺寸",
+      "showOrder": "2",
+      "propertyValues": [{
+        "propertyValueId": 3001,
+        "propertyValue": "36码",
+        "showOrder": "3"
+      }, {
+        "propertyValueId": 3002,
+        "propertyValue": "37码",
+        "showOrder": "2"
+      }]
+    }],
+    "skuList": [{
+      "skuId": "301",
+      "bgSkuId": "401",
+      "originPrice": "100",
+      "appPrice": "80",
+      "wapPrice": "190",
+      "stock": "90",
+      "skuType": "1",
+      "skuStatus": "1",
+      "distributeType": "0",
+      "numInCart": 2,
+      "imageUrl": "http://www.baidu.com",
+      "skuPropertyList": [{
+        "propertyNameId": 1001,
+        "propertyValueId": 2001
+      }, {
+        "propertyNameId": 1002,
+        "propertyValueId": 3001
+      }]
+    }, {
+      "skuId": "301",
+      "bgSkuId": "401",
+      "originPrice": "100",
+      "appPrice": "80",
+      "wapPrice": "200",
+      "stock": "90",
+      "skuType": "1",
+      "skuStatus": "1",
+      "distributeType": "1",
+      "numInCart": 3,
+      "imageUrl": "http://www.baidu.com",
+      "skuPropertyList": [{
+        "propertyNameId": 1001,
+        "propertyValueId": 2001
+      }, {
+        "propertyNameId": 1002,
+        "propertyValueId": 3002
+      }]
+    }, {
+      "skuId": "302",
+      "bgSkuId": "402",
+      "originPrice": "100",
+      "appPrice": "80",
+      "wapPrice": "390",
+      "stock": "90",
+      "skuType": "1",
+      "skuStatus": "1",
+      "distributeType": "0",
+      "numInCart": 0,
+      "imageUrl": "http://www.baidu.com",
+      "skuPropertyList": [{
+        "propertyNameId": 1001,
+        "propertyValueId": 2002
+      }, {
+        "propertyNameId": 1002,
+        "propertyValueId": 3001
+      }]
+    }, {
+      "skuId": "303",
+      "bgSkuId": "403",
+      "originPrice": "100",
+      "appPrice": "80",
+      "wapPrice": "490",
+      "stock": "90",
+      "skuType": "1",
+      "skuStatus": "1",
+      "distributeType": "0",
+      "numInCart": 0,
+      "imageUrl": "http://www.baidu.com",
+      "skuPropertyList": [{
+        "propertyNameId": 1001,
+        "propertyValueId": 2002
+      }, {
+        "propertyNameId": 1002,
+        "propertyValueId": 3002
+      }]
+    }]
+  },
+  "serverTime": "2015-09-20 20:46:52"
+}

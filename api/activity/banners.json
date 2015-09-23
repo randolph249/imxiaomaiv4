@@ -1,0 +1,31 @@
+{
+  "data": {
+    "banners": [{
+      "id": 838,
+      "bannerId": 838,
+      "collegeId": 9,
+      "weight": 333,
+      "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=134084",
+      "hrefUrl": "http://h5.mall.test.imxiaomai.com/activity?collegeId=9&activityId=35",
+      "activityId": 0
+    }, {
+      "id": 863,
+      "bannerId": 863,
+      "collegeId": 9,
+      "weight": 323,
+      "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=134093",
+      "hrefUrl": "",
+      "activityId": 1
+    }, {
+      "id": 813,
+      "bannerId": 813,
+      "collegeId": 9,
+      "weight": 321,
+      "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=134084",
+      "hrefUrl": "http://h5.mall.test.imxiaomai.com/activity?collegeId=9&activityId=37",
+      "activityId": 2
+    }]
+  },
+  "code": 0,
+  "msg": ""
+}

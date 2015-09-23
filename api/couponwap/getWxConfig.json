@@ -1,0 +1,6 @@
+{
+  "appId":123456,
+  "timestamp":20150921,
+  "nonceStr":"guochaotest",
+  "signature":"thisissignature"
+}

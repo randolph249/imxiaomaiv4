@@ -1,0 +1,433 @@
+@charset "UTF-8";
+.list-main {
+    width: 100%;
+    display: flex;
+    padding: 4.5rem 0;
+}
+
+.pub-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4.5rem;
+    background: #f8f8f8;
+    z-index: 9;
+}
+
+.goodDetail {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 0;
+    overflow: hidden;
+    bottom: 0;
+    z-index: 3;
+    transition: height 0.5s ease;
+    background: #fff;
+    border-top: solid 1px #ddd;
+}
+
+.goodDetail.goodDetail-show {
+    height: 75%;
+    overflow-y: scroll;
+}
+
+.mask {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: #222;
+    z-index: 2;
+    opacity: 0.8;
+    display: none;
+}
+
+.detailCont {
+    position: relative;
+    top: 0px;
+    margin-bottom: 62px;
+}
+.detailCont .complex-properties,
+.detailCont .detail-desc
+{
+  padding: 0 1rem;
+}
+.detailCont .label{
+  margin-left: 1rem;
+}
+.detailCont .icon-share {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    font-size: 2.4rem;
+    color: #555;
+}
+
+.detailCont .icon-ok {
+    right: 0.5rem;
+    position: absolute;
+    top: 0.5rem;
+    font-size: 2.4rem;
+    color: #fc541f;
+}
+
+.detailCont .imgCont {
+    width: 100%;
+    height: 20rem;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.detailCont .good-normal-info {
+    background: #eee;
+    height: 9rem;
+    padding: 0 1rem;
+    position: relative;
+    /**倒计时**/
+}
+
+.detailCont .good-normal-info .title {
+    line-height: 1.8rem;
+    height: 3.6rem;
+    overflow: hidden;
+    font-size: 1.4rem;
+    color: #333;
+    overflow: hidden;
+    padding: 0.3rem 0;
+}
+
+.detailCont .good-normal-info .buy-icon {
+    background: #eee;
+    bottom: 0.8rem;
+    right: 1rem;
+}
+
+.detailCont .good-normal-info .buy-icon.disabled {
+    color: #ccc;
+}
+
+.detailCont .good-normal-info .buy-result {
+    color: #333;
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+    position: absolute;
+    width: 4rem;
+    right: 4.6rem;
+    bottom: 1rem;
+    text-align: center;
+}
+
+.detailCont .good-normal-info .icon-minus {
+    position: absolute;
+    right: 9rem;
+    bottom: 1rem;
+    font-size: 3.0rem;
+    color: #fc541f;
+    line-height: 1;
+}
+
+.detailCont .good-normal-info .icon-minus.disabled {
+    color: #ccc;
+}
+
+.detailCont .good-normal-info .countdown {
+    position: absolute;
+    color: #333;
+    background: #ffd801;
+    height: 2.4rem;
+    font-size: 1.4rem;
+    width: 14rem;
+    border-radius: 1.2rem;
+    text-align: center;
+    top: -2.7rem;
+    left: 50%;
+    margin-left: -7rem;
+    line-height: 2.4rem;
+}
+
+.detailCont .detail-desc {
+    /* display: flex; */
+    overflow: hidden;
+}
+
+.detailCont .detail-desc .detail-desc-key {
+    width: 24%;
+    font-size: 1.4rem;
+    color: #333;
+    line-height: 2.8rem;
+    float: left;
+}
+
+.detailCont .detail-desc .detail-desc-main {
+    width: 74%;
+    /* flex-grow: 1; */
+    float: right;
+    font-size: 1.4rem;
+    line-height: 2.8rem;
+    color: #666;
+}
+
+.detailCont .complex-property {
+    border-bottom: solid 1px #ddd;
+}
+
+.detailCont .complex-property .complex-property-name {
+    line-height: 4.0rem;
+    color: #333;
+}
+
+.detailCont .complex-property .complex-property-values {
+   /*  display: flex;
+   flex-flow: row wrap; */
+}
+
+.detailCont .complex-property .complex-property-values span {
+    display: inline-block;
+    width:60px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 1.4rem;
+    text-align: center;
+    border: #ccc solid 1px;
+    margin: 0 10px 10px 0;
+}
+
+.detailCont .complex-property .complex-property-values span.checked {
+    background: #fc541f;
+    color: #fff;
+    border-color: #fc541f;
+}
+
+.cartThumb {
+    height: 4.5rem;
+    position: relative;
+}
+
+.icon-cart {
+    position: absolute;
+    left: 10px;
+    bottom: 5px;
+    width: 55px;
+    height: 55px;
+    border-radius: 55px;
+    background-color: #ffa000;
+    font-size: 3rem;
+    line-height: 55px;
+    text-align: center;
+    color: #fff;
+}
+
+.totalCount {
+    width: 2.0rem;
+    height: 2.0rem;
+    color: #ffa000;
+    font-size: 1.2rem;
+    background: #f9f9f9;
+    left: 48px;
+    top: -16px;
+    border-radius: 1rem;
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+    line-height: 2rem;
+    border: 1px solid #ffa000;
+    border-radius: 2.0rem;
+}
+.totalCount.big{
+  -webkit-transform: scale(1.2,1.2);
+  transform: scale(1.2,1.2);
+}
+.cartThumb .gotoPay {
+    background: #Ff5201;
+    width: 10rem;
+    height: 4.5rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 4.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.cartThumb .totalPrice {
+    line-height: 4.5rem;
+    padding-left: 9rem;
+    font-size: 1.3rem;
+    color: #3a404b;
+}
+
+.cartThumb .totalPrice em {
+    color: #fc541f;
+    font-style: normal;
+    padding-left: 5px;
+}
+
+.cartThumb .totalPrice span {
+    color: #ff5300;
+    font-size: 1.8rem;
+}
+
+.cartThumb .emptyTip {
+    line-height: 4.5rem;
+    padding-left: 9rem;
+    font-size: 1.6rem;
+    color: #333;
+}
+
+.cartDetail {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 0;
+    overflow: hidden;
+    bottom: 4.5rem;
+    z-index: 3;
+    background: #fff;
+    border-top: solid 1px #ddd;
+    transition: all 0.5s ease;
+    display: none;
+    padding: 3rem 1.5rem 0;
+}
+
+.cartDetail.cartDetail-show {
+    height: auto;
+    max-height: 78%;
+    min-height: 42%;
+    overflow-y: scroll;
+    display: block;
+}
+
+.cartDetail .goback {
+    position: absolute;
+    font-size: 1.4rem;
+    line-height: 4.5rem;
+    color: #333;
+    right: 0;
+    top: 0;
+    padding-right: 4rem;
+}
+
+.cartDetail .goback:before {
+    width: 2.4rem;
+    height: 2.4rem;
+    line-height: 2.4rem;
+    text-align: center;
+    border-radius: 12px;
+    background-color: #ff5300;
+    color: #fff;
+    display: inline-block;
+    position: absolute;
+    right: 1rem;
+    top: 0.8rem;
+    transform: rotate(-90deg);
+}
+
+.cartDetail .title-ldc,
+.cartDetail .title-rdc {
+    font-size: 1.2rem;
+    height: 2.4rem;
+    line-height: 2.4rem;
+    border-bottom: solid 0.2rem #66bd00;
+}
+
+.cartDetail .title-rdc {
+    color: #009bf5;
+    border-bottom-color: #009bf5;
+}
+
+.cartDetail .good-info {
+    height: 6.5rem; 
+    color: #333;
+    font-size: 1.4rem;
+   /*  padding-right: 12rem; */
+    border-bottom: solid 1px #ddd;
+    box-sizing:border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.cartDetail .good-info .goodWrap{
+    width: 70%;
+    float: left;
+    padding: 1.2rem 0 1.3rem;
+}
+
+.cartDetail .good-info .iconWrap{
+    width: 30%;
+    float: left;
+    text-align: right;
+    line-height: 6.5rem;
+}
+
+.cartDetail .good-info p.good-title {
+    font-size: 1.4rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #3a404b;
+}
+
+.cartDetail .good-info p.good-price {
+    display: inline-block;
+    width: 6rem;
+    color: #ff5300;
+    line-height: 2.4rem;
+    font-size: 1.6rem;
+    vertical-align: middle;
+}
+
+.cartDetail .good-info .icon-plus,
+.cartDetail .good-info .icon-minus {
+    color: #ff5300;
+    line-height: 4.5rem;
+    font-size: 2.5rem;
+}
+
+.cartDetail .good-info .icon-plus{
+    font-size: 2.9rem;
+}
+
+.cartDetail .good-info .good-count {
+    display: inline-block;
+    line-height: 4.5rem;
+    font-size: 1.4rem;
+    width: 2.0rem;
+    color: #333;
+    text-align: center;
+}
+
+.cartDetail .good-info .cartDetail-tip {
+    height: 3.0rem;
+    font-size: 1.4rem;
+    line-height: 3.0rem;
+    color: #999;
+}
+
+.cartDetail .good-info .cartDetail-tip .cartDetail-tip-coupon {
+    float: right;
+}
+
+.cartDetail-tip{
+  height: 3rem;
+  line-height: 3rem;
+  color: #91959d;
+  font-size: 1.3rem;
+}
+@media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
+    .cartThumb .icon-cart {
+      width: 5rem;
+      height: 5rem;
+      line-height: 5rem;
+  }
+  
+  .cartThumb .totalCount {
+      left: 4.4rem;
+      top: -1.8rem;
+  }
+
+}
