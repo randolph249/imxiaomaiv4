@@ -33,6 +33,11 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
       schoolManager.set(college).then(function() {
         $state.go('root.buy.nav.all');
       });
-    }
+    };
+
+    //返回列表页
+    $scope.goback = function() {
+      $state.go('root.locate');
+    };
   }
 ])
