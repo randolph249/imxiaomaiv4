@@ -36,8 +36,11 @@
 <div class="mask" mask-gui></div>
 <div detail-gui active-class="goodDetail-show" class="goodDetail" ng-controller="buy.detailCtrl">
     <div class="detailCont">
-        <div class="iconfont icon-share"></div>
-        <div class="iconfont icon-ok" ng-click="closeDetail();"></div>
+        <div class="goodIconWrap">
+            <div class="iconfont icon-share"></div>
+            <div class="iconfont icon-ok" ng-click="closeDetail();"></div>
+        </div>
+        <div class="goodDetailWrap">
         <div class="imgCont" ng-style="{'background-image':'url('+good.imageUrl+')'}"></div>
         <!--到达类型-->
         <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
@@ -113,5 +116,6 @@
             <div class="detail-desc-key">产地:</div>
             <div class="detail-desc-main">{{good.originPlace}}</div>
         </div>
+    </div>
     </div>
 </div>

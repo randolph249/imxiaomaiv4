@@ -5,7 +5,7 @@
 </div>
 <div class="colleges_content">
   <ul class="countrylist">
-    <li class="" ng-if="isloading">学校信息正在加载....</li>
+    <li class="loading" ng-if="isloading">学校信息正在加载....</li>
     <li class="errorip" ng-if="haserror">该城市还没有相关学校</li>
     <li ng-repeat="country in countrylist" >
       <p class="countryname">{{country.cityName}}</p>

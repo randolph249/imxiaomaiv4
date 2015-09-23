@@ -22,6 +22,11 @@
     float: left;
 }
 
+.activeGoodList li.loading {
+    width: 100%;
+    top: 34%;
+}
+
 .activeGoodList li > .goodItem {
     background: #fff;
 }
@@ -175,7 +180,7 @@
     height: 100%;
     position: relative;
   }
- 
+
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
     .activeGoodList li > .goodItem .imgCont{
         height: 130px;
