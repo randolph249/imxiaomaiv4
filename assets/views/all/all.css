@@ -7,3 +7,9 @@
   height: 110px;
   background-position: center center;
   background-color: #fff; }
+
+  .category-active-list li.loading{
+  	background: none;
+  	height: auto;
+  	border: 0;
+  }
