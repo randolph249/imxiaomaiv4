@@ -4,9 +4,10 @@
 <div class="loading" ng-if="isloading">
   loading....
 </div>
-<div class="GoodCont" ng-repeat="good in goodsList">
+<div class="GoodsCont">
+  <div class="GoodCont" ng-repeat="good in goodsList">
   <div class="imgCont" ng-click="gotoDetail(good);" ng-style='{"background-image":"url("+good.imageUrl+")"}'></div>
-  <div class="details" style="position:relative">
+  <div class="details">
     <p class="goodname" ng-click="gotoDetail(good);">{{good.activityGoodsName}}</p>
 <!-- 输出标签29分钟达/次日达 -->
     <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
@@ -28,3 +29,5 @@
     <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
   </div>
 </div>
+</div>
+

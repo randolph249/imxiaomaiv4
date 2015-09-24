@@ -26,7 +26,7 @@
         </div>
         <div class="cartDetail-tip">
             <p class="cartDetail-tip-freight" ng-if="ldcFreight.sub && ldcFreight.sub!=0">29分钟达产品满{{ldcFreight.total|xiaomaiprice}}减{{ldcFreight.sub|xiaomaiprice}}</p>
-            <p class="cartDetail-tip-coupon" ng-if="coupons.length">{{coupons.length}}张可用优惠劵<i class="iconfont icon-arrow"></i></p>
+            <p class="cartDetail-tip-coupon" ng-if="coupons.length">{{coupons.length}}张可用优惠劵<i class="couponMore iconfont icon-arrow"></i></p>
             <p class="cartDetail-tip-coupon" ng-if="!coupons.length">暂无可用优惠劵</p>
         </div>
     </div>
@@ -38,7 +38,7 @@
     <div class="detailCont">
         <div class="goodIconWrap">
             <div class="iconfont icon-share"></div>
-            <div class="iconfont icon-ok" ng-click="closeDetail();"></div>
+            <div class="iconfont icon-arrow" ng-click="closeDetail();"></div>
         </div>
         <div class="goodDetailWrap">
         <div class="imgCont" ng-style="{'background-image':'url('+good.imageUrl+')'}"></div>
@@ -54,7 +54,7 @@
             </p>
             <p class="priceCont" ng-if="!skuInfo">
                 <span class="aggregate-price">&yen;{{good.minWapPrice|xiaomaiprice}}</span>~
-                <span>
+                <span class="f14">
           &yen;{{good.maxWapPrice|xiaomaiprice}}
         </span>
             </p>

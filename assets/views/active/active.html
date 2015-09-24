@@ -1,12 +1,12 @@
 <div class="pub-header">
-  <div back-icon class="iconfont icon-back" ng-click="goback();"></div>
+  <div back-icon class="iconfont icon-back"></div>
   <div class="location-info">{{activeName}}</div>
   <div class="iconfont icon-locate-right"></div>
 </div>
 
 <div class="activeWrap">
   <div class="banner">
-    <ks-swiper-container  swiper="swiper">
+    <ks-swiper-container on-ready="onReadySwiper(swiper)" swiper="swiper">
       <ks-swiper-slide class="swiper-slide" ng-repeat="banner in banners">
         <div ng-click="gotoActive(banner);" class="activeGoodBanner" ng-style="{'background-image':'url('+banner.imageUrl+')'}"></div>
       </ks-swiper-slide>
@@ -47,3 +47,4 @@
     </li>
   </ul>
 </div>
+
