@@ -8,7 +8,8 @@
   background-position: center center;
   background-color: #fff; }
 
-  .category-active-list li.loading{
+  .category-active-list li.loading,
+  .category-active-list li.errortip {
   	background: none;
   	height: auto;
   	border: 0;

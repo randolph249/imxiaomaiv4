@@ -56,7 +56,8 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         $scope.goods = res.goods;
         $scope.haserror = false;
 
-      }, function() {
+      }, function(msg) {
+        $scope.errorip = msg;
         $scope.haserror = true;
       }).finally(function() {
         $scope.isloading = false;
@@ -65,9 +66,8 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
 
     //打开详情页面
     $scope.gotoDetail = function(good) {
-
       $state.go($state.current.name, {
-        goodId: good.bgGoodsId,
+        goodId: good.goodsId,
         sourceType: good.sourceType,
         showDetail: true
       });
@@ -76,14 +76,13 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
 
     $scope.buyHandler = function(good) {
 
-
       if (good.goodsType == 3) {
         $scope.gotoDetail(good);
         return false;
       }
 
       buyProcessManager({
-        goodsId: good.bgGoodsId,
+        goodsId: good.goodsId,
         sourceType: good.sourceType,
         distributeType: good.skuList[0].distributeType,
         skuId: good.skuList[0].skuId,

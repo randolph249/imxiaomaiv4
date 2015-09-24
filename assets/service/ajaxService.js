@@ -18,12 +18,12 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       },
       //获取城市下所有的学校列表
       'collegelist': {
-        url: '/wap/college/colleges',
+        url: '/wap/geography/colleges',
         type: 'GET'
       },
       //获取用户的学校信息
       'getSchool': {
-        url: '/wap/college/school',
+        url: '/wap/college/detail',
         type: 'GET'
       },
       //获取活动列表
@@ -83,11 +83,11 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       },
       //查看我的优惠劵
       'mycoupon': {
-        url: '/wap/couponwap/myCouponList',
+        url: '/couponwap/myCouponList',
         type: 'GET'
       },
       "getWxConfig": {
-        url: "/wap/couponwap/getWxConfig",
+        url: "/wap/getWxConfig",
         type: "GET"
       }
     },
@@ -112,12 +112,10 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
  **/
 angular.module('xiaomaiApp').factory('urlInterceptor', ['env', function(env) {
   var interceptor = function(url) {
-
     if (env !== 'develop') {
       return url;
     }
-
-    return url.replace(/wap/, 'api') + '.json';
+    return '/api' + url + '.json';
     return url + '.json';
 
   };
@@ -192,6 +190,7 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
   '$http',
   'xiaomaiCacheManager',
   'getDataType',
+  'httpRequstParam',
   function(
     env,
     $q,
@@ -199,7 +198,8 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
     xiaomaimodelManage,
     $http,
     xiaomaiCacheManager,
-    getDataType
+    getDataType,
+    httpRequstParam
   ) {
 
     //验证接口是否存在
@@ -312,16 +312,29 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           params: params
         } : {
           method: 'POST',
-          data: params
+          data: httpRequstParam(params)
         };
 
 
         $http(angular.extend(defaulOptions, {
-          url: url
+          url: url,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          }
         })).success(function(res) {
+
+
+          //如果返回结果有异常 reject
+          if (handlerResult(res) === false) {
+            deferred.reject(res.msg);
+          } else {
+            //写入缓存
+            deferred.resolve(res.data);
+          }
           deferred.resolve(res);
         }).error(function() {
-          deferred.reject('接口请求错误');
+
+          deferred.reject('接口异常');
         });
         return deferred.promise;
       };
@@ -334,3 +347,55 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
     };
   }
 ]);
+
+//JSON转换成KV字符串
+angular.module('xiaomaiApp').factory('httpRequstParam', [function() {
+
+  var param = function(obj) {
+    var query = '';
+    var name, value, fullSubName, subName, subValue, innerObj, i;
+
+
+    for (name in obj) {
+      value = obj[name];
+
+
+      if (value instanceof Array) {
+        for (i = 0; i < value.length; ++i) {
+          subValue = value[i];
+          fullSubName = name + '[' + i + ']';
+          innerObj = {};
+          innerObj[fullSubName] = subValue;
+          query += param(innerObj) + '&';
+        }
+      } else if (value instanceof Object) {
+        for (subName in value) {
+
+
+          subValue = value[subName];
+          if (subValue != null) {
+            // fullSubName = name + '[' + subName + ']';
+            //user.userName = hmm & user.userPassword = 111
+            fullSubName = name + '.' + subName;
+            // fullSubName =  subName;
+            innerObj = {};
+            innerObj[fullSubName] = subValue;
+            query += param(innerObj) + '&';
+          }
+        }
+      } else if (value !== undefined) //&& value !== null
+      {
+        query += encodeURIComponent(name) + '=' +
+          encodeURIComponent(value) + '&';
+      }
+    }
+
+
+    return query.length ? query.substr(0, query.length - 1) :
+      query;
+  };
+
+  return param;
+
+
+}])
