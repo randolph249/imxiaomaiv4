@@ -9,12 +9,11 @@
     right: 0;
     top: 0;
     height: 4.4rem;
-    background: #fff;
     z-index: 2;
     border-bottom: solid 1px #d5d5d5;
     /* display: flex; */
     justify-content: space-around;
-    background: #f5f5f5;
+    background-color: #fff;
     color: #524648;
 }
 
@@ -24,7 +23,7 @@
     text-align: center;
 }
 
-.pub-header .icon-user{
+.pub-header .icon-user {
     position: absolute;
     top: 0;
     right: 0;
@@ -46,32 +45,37 @@
     right: 44px;
 }
 
+.pub-header .location-info .locate:after {
+    color: #ccc;
+    content: '\e613';
+    font-size: 2rem;
+}
+
+.pub-header .location-info .changeLocate {
+    position: absolute;
+    top: 1.8rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 8px 6px 0 6px;
+    border-style: solid;
+    border-color: #ccc #fff #fff #fff;
+}
+
 .list-main .list-category {
     position: absolute;
     top: 4.4rem;
-    bottom: 4.5rem;
+    bottom: 6.5rem;
     left: 0;
     overflow: auto;
     float: left;
     width: 26%;
     background: #f5f5f5;
     border-right: #ddd solid 1px;
-    /* *
-    *hot-1 new-2 recommend-3
-    ***/
 }
-.nav-mark-1 {
-    background: url('../../img/hot.png') no-repeat;
-    background-size: 2.4rem;
-}
-.nav-mark-2 {
-    background: url('../../img/new.png') no-repeat;
-    background-size: 2.4rem;
-}
-.nav-mark-3 {
-    background: url('../../img/recommend.png') no-repeat;
-    background-size: 2.4rem;
-} 
+
 
 .list-main .list-category .nav-super {
     overflow: hidden;
@@ -82,7 +86,6 @@
     border-bottom: solid 1px #ddd;
     white-space: nowrap;
     text-overflow: ellipsis;
-
 }
 
 .list-main .list-category .nav-super:last-child {
@@ -121,24 +124,24 @@
     line-height: 4.5rem;
     text-align: center;
     color: #555;
-    background: #fff;
+    background-color: #fff;
+    padding: 0 5px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-
 }
 
 .list-main .list-category .nav-sub.nav-checked {
     color: #ff5300;
     border-bottom: #ff5300 solid 2px;
-    background: #fff;
+    background-color: #fff;
 }
 
 .list-main .list-product {
-/* flex-grow: 1; */
+    /* flex-grow: 1; */
     width: 68%;
     padding: 1rem;
-    background: #fff;
+    background-color: #fff;
     border-left: 1px solid #ddd;
     float: left;
     margin-left: -1px;
@@ -149,32 +152,42 @@
     overflow: auto;
 }
 
-.list-main .list-category .recommend{
-    background: url('../../img/recommend.png') no-repeat;
-    background-size: 30px;
+/* *
+    *hot-1 new-2 recommend-3
+    ***/
+.nav-mark-1 {
+    background-image: url('../../img/hot.png');
+    background-repeat: no-repeat;
+    background-size: 2.4rem;
 }
 
-.list-main .list-category .hot{
-    
+.nav-mark-2 {
+    background-image: url('../../img/new.png');
+    background-repeat: no-repeat;
+    background-size: 2.4rem;
 }
 
-.list-main .list-category .new{
-    background: url('../../img/new.png') no-repeat;
-    background-size: 30px;
+.nav-mark-3 {
+    background-image: url('../../img/recommend.png');
+    background-repeat: no-repeat;
+    background-size: 2.4rem;
 }
 /* 重写库文件样式 */
-.iconfont{
+
+.iconfont {
     -webkit-text-stroke-width: 0px;
 }
+
+
 /* 小屏兼容 */
+
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
     .pub-header .icon-feedback,
     .pub-header .icon-user {
         width: 4.5rem;
         text-align: center;
     }
-    .list-main .list-category .nav-super p.arrow-down:after{
+    .list-main .list-category .nav-super p.arrow-down:after {
         right: 2px;
     }
-    
 }
