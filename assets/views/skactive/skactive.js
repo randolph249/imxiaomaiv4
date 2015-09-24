@@ -20,7 +20,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     $scope.goodsList = [];
     //获取活动商品列表数据
     var loadSku = function() {
-      return xiaomaiService.fetchOne('skactiveGoods', {
+      return xiaomaiService.fetchOne('activeGoods', {
         collegeId: collegeId,
         activityId: activityId,
         currentPage: page,
@@ -32,12 +32,13 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     collegeId = $state.params.collegeId;
     activityId = $state.params.activityId;
     page = $state.params.page || 1;
-    $scope.activeName = '金业Help';
 
     $scope.isloading = true;
     loadSku().then(function(res) {
+      $scope.activityShowName = res.activityShowName;
       $scope.goodsList = res.goods;
-      $scope.haserror = false;
+      $scope.paginationInfo = res.paginationInfo;
+      $scope.haserror = $scope.goodsList.length ? false : true;
     }, function() {
       $scope.haserror = true;
     }).finally(function() {
@@ -51,13 +52,22 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
 
       if (
         toParam.collegeId == fromParam.collegeId &&
-        toParam.activityId == fromParam.activityId &&
-        toParam.page == fromParam.page) {
-        xiaomaiCacheManager.writeCache('skactiveGoods', {
-          goods: $scope.goodsList
+        toParam.activityId == fromParam.activityId) {
+
+
+        xiaomaiCacheManager.writeCache('activeGoods', {
+          activityShowName: $scope.activityShowName,
+          goods: $scope.goodsList,
+          paginationInfo: $scope.paginationInfo
         });
+
+        xiaomaiCacheManager.writeCache('activeBanner', {
+          banners: $scope.banners
+        });
+
       } else {
-        xiaomaiCacheManager.clean('skactiveGoods');
+        xiaomaiCacheManager.clean('activeGoods');
+        xiaomaiCacheManager.writeCache('clean');
       }
     });
 
@@ -80,6 +90,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
 
     $scope.$on('$stateChangeSuccess', function(e, tostate, toparam,
       fromState, fromParam) {
+
       if (toparam.page && toparam.page != page) {
         loadSku.then(function(res) {
           $scope.goodsList = $scope.goodsList.concat(res.goods);
@@ -114,8 +125,10 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     //跳转到详情页
     $scope.gotoDetail = function(good) {
 
+      debugger;
+
       $state.go($state.current.name, {
-        goodId: good.bgGoodsId,
+        goodId: good.activityGoodsId,
         sourceType: good.sourceType,
         showDetail: true
       });
@@ -127,18 +140,17 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
 
 
     //执行购买
-    $scope.buyHandler = function(good) {
-      if (good.goodsType == 3) {
-        $scope.gotoDetail(good);
-        return false;
-      }
+    $scope.buyHandler = function(good, $index) {
 
       buyProcessManager({
-        goodsId: good.bgGoodsId,
-        sourceType: good.sourceType,
-        skuId: good.skuList[0].skuId,
-        price: good.skuList[0].wapPrice
+        goodsId: good.activityGoodsId,
+        sourceType: 2,
+        distributeType: good.skuList[0].distributeType,
+        skuId: good.skuList[0].activitySkuId,
+        price: good.skuList[0].activityPrice,
+        propertyIds: ''
       }, 'plus', good.skuList[0].numInCart, good.maxNum).then(function() {
+        $scope.goodsList[$index].killed = true;
 
       }, function(msg) {
         alert(msg);

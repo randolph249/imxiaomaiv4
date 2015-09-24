@@ -11,16 +11,24 @@
       "activityType": null,
       "labelType": null
     }, {
-      "navigateName": "推荐活动",
-      "activityId": null,
+      "navigateName": "老李活动",
+      "activityId": 21136,
       "categoryId": null,
       "sourceType": 0,
       "displayType": 1,
       "activityType": null,
       "labelType": null
     }, {
-      "navigateName": "老李活动",
-      "activityId": 21136,
+      "navigateName": "普通活动",
+      "activityId": 21129,
+      "categoryId": null,
+      "sourceType": 0,
+      "displayType": 2,
+      "activityType": 1,
+      "labelType": 0
+    }, {
+      "navigateName": "秒杀抢购",
+      "activityId": 21134,
       "categoryId": null,
       "sourceType": 0,
       "displayType": 2,
@@ -156,5 +164,5 @@
       "labelType": 0
     }]
   },
-  "serverTime": "2015-09-23 17:51:43"
+  "serverTime": "2015-09-24 16:32:38"
 }

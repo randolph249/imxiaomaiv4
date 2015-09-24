@@ -33,13 +33,16 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     activityId = $state.params.activityId;
     page = $state.params.page || 1;
 
-    $scope.activeName = '金业Help';
 
     //初始化数据请求
     $scope.isloading = true;
     loadSku().then(function(res) {
+      $scope.activityShowName = res.activityShowName;
+
       $scope.goodsList = res.goods;
-      $scope.haserror = false;
+
+      $scope.paginationInfo = $scope.paginationInfo;
+      $scope.haserror = $scope.goodsList.length ? false : true;
     }, function() {
       $scope.haserror = true;
     }).finally(function() {
@@ -64,7 +67,9 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
         toParam.activityId == fromParam.activityId &&
         toParam.page == fromParam.page) {
         xiaomaiCacheManager.writeCache('activeGoods', {
-          goods: $scope.goodsList
+          activityShowName: $scope.activityShowName,
+          goods: $scope.goodsList,
+          paginationInfo: $scope.paginationInfo
         });
       } else {
         xiaomaiCacheManager.clean('activeGoods');
@@ -80,8 +85,9 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
 
     //回退
     $scope.goback = function() {
-      var backCache = xiaomaiCacheManager.readCache('activeBackRouter');
+
       debugger;
+      var backCache = xiaomaiCacheManager.readCache('activeBackRouter');
       if (backCache) {
         $state.go(backCache.state, backCache.param);
       } else {
@@ -118,7 +124,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     $scope.gotoDetail = function(good) {
 
       $state.go($state.current.name, {
-        goodId: good.bgGoodsId,
+        goodId: good.activityGoodsId,
         sourceType: good.sourceType,
         showDetail: true,
         r: (+new Date)
@@ -192,8 +198,9 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
     $scope.isloading = true;
 
     loadSku().then(function(res) {
+      $scope.haserror = res.goods.length ? false : true;
+
       $scope.goodsList = res.goods;
-      $scope.haserror = false;
     }, function() {
       $scope.haserror = true;
     }).finally(function() {

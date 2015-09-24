@@ -35,10 +35,10 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
 
     //打开详情页面
     $scope.gotoDetail = function(good) {
-
+      debugger;
       $state.go($state.current.name, {
         showDetail: true,
-        goodId: good.bgGoodsId,
+        goodId: good.goodsId,
         sourceType: good.sourceType
       });
     };
