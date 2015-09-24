@@ -3,6 +3,8 @@ var autoprefix = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
 //错误通知
 var notify = require('gulp-notify');
+
+
 var handlerError = function() {
   var args = Array.prototype.slice.call(arguments);
 
@@ -13,6 +15,22 @@ var handlerError = function() {
 
   this.emit(); //提交
 }
+
+
+var templateCache = require('gulp-angular-templatecache');
+
+gulp.task('html2string', function() {
+  return gulp.src(['assets/**/*.html'])
+    .pipe(templateCache({
+      module: 'xiaomaiApp',
+      transformUrl: function(url) {
+        return '../assets/' + url;
+      }
+    }))
+    .pipe(gulp.dest('assets/template'));
+});
+
+
 
 //将sass文件转移成
 gulp.task('transfersass', function() {

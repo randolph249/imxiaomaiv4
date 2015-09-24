@@ -28,16 +28,26 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/root/font.css',
-                window.__SYS_CONF.resourceUrl+'scss/common.css',
-                window.__SYS_CONF.resourceUrl+'service/commonService.js',
-                window.__SYS_CONF.resourceUrl+'service/ajaxService.js',
-                window.__SYS_CONF.resourceUrl+'service/cacheService.js',
-                window.__SYS_CONF.resourceUrl+'service/cartService.js',
-                window.__SYS_CONF.resourceUrl+'service/detailService.js',
-                window.__SYS_CONF.resourceUrl+'service/schoolService.js',
-                window.__SYS_CONF.resourceUrl+'service/wxService.js',
-                window.__SYS_CONF.resourceUrl+'service/cookieService.js'
+                window.__SYS_CONF.resourceUrl +
+                'views/root/font.css',
+                window.__SYS_CONF.resourceUrl +
+                'scss/common.css',
+                window.__SYS_CONF.resourceUrl +
+                'service/commonService.js',
+                window.__SYS_CONF.resourceUrl +
+                'service/ajaxService.js',
+                window.__SYS_CONF.resourceUrl +
+                'service/cacheService.js',
+                window.__SYS_CONF.resourceUrl +
+                'service/cartService.js',
+                window.__SYS_CONF.resourceUrl +
+                'service/detailService.js',
+                window.__SYS_CONF.resourceUrl +
+                'service/schoolService.js',
+                window.__SYS_CONF.resourceUrl +
+                'service/wxService.js',
+                window.__SYS_CONF.resourceUrl +
+                'service/cookieService.js'
               ]
             })
           }],
@@ -46,7 +56,8 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'filters/price.js'
+                window.__SYS_CONF.resourceUrl +
+                'filters/price.js'
               ]
             })
           }],
@@ -54,8 +65,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'components/countdown/countdown.js',
-                window.__SYS_CONF.resourceUrl+'components/back/back.js'
+                window.__SYS_CONF.resourceUrl +
+                'components/countdown/countdown.js',
+                window.__SYS_CONF.resourceUrl +
+                'components/back/back.js'
               ]
             })
           }]
@@ -70,10 +83,14 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/buy/buy.js',
-                window.__SYS_CONF.resourceUrl+'views/buy/buy.css',
-                window.__SYS_CONF.resourceUrl+'views/buy/detail.js',
-                window.__SYS_CONF.resourceUrl+'views/buy/shopcart.js'
+                window.__SYS_CONF.resourceUrl +
+                'views/buy/buy.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/buy/buy.css',
+                window.__SYS_CONF.resourceUrl +
+                'views/buy/detail.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/buy/shopcart.js'
               ]
             })
           }]
@@ -87,8 +104,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/nav/nav.js',
-                window.__SYS_CONF.resourceUrl+'views/nav/nav.css'
+                window.__SYS_CONF.resourceUrl +
+                'views/nav/nav.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/nav/nav.css'
               ]
             })
           }]
@@ -104,8 +123,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/all/all.js',
-                window.__SYS_CONF.resourceUrl+'views/all/all.css'
+                window.__SYS_CONF.resourceUrl +
+                'views/all/all.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/all/all.css'
               ]
             })
           }]
@@ -121,8 +142,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/recommend/recommend.js',
-                window.__SYS_CONF.resourceUrl+'views/recommend/recommend.css'
+                window.__SYS_CONF.resourceUrl +
+                'views/recommend/recommend.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/recommend/recommend.css'
               ]
             })
           }]
@@ -138,8 +161,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/active/active.js',
-                window.__SYS_CONF.resourceUrl+'views/active/active.css'
+                window.__SYS_CONF.resourceUrl +
+                'views/active/active.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/active/active.css'
               ]
             })
           }]
@@ -155,8 +180,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/active/active.js',
-                window.__SYS_CONF.resourceUrl+'views/active/active.css'
+                window.__SYS_CONF.resourceUrl +
+                'views/active/active.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/active/active.css'
               ]
             })
           }]
@@ -172,8 +199,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/skactive/skactive.js',
-                window.__SYS_CONF.resourceUrl+'views/skactive/skactive.css'
+                window.__SYS_CONF.resourceUrl +
+                'views/skactive/skactive.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/skactive/skactive.css'
               ]
             })
           }]
@@ -190,8 +219,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/category/category.js',
-                window.__SYS_CONF.resourceUrl+'views/category/category.css'
+                window.__SYS_CONF.resourceUrl +
+                'views/category/category.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/category/category.css'
               ]
             })
           }]
@@ -207,8 +238,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/locate/locate.js',
-                window.__SYS_CONF.resourceUrl+'views/locate/locate.css'
+                window.__SYS_CONF.resourceUrl +
+                'views/locate/locate.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/locate/locate.css'
               ]
             })
           }]
@@ -224,8 +257,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/colleges/colleges.js',
-                window.__SYS_CONF.resourceUrl+'views/colleges/colleges.css'
+                window.__SYS_CONF.resourceUrl +
+                'views/colleges/colleges.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/colleges/colleges.css'
 
               ]
             })
@@ -241,7 +276,8 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/coupon/coupon.js'
+                window.__SYS_CONF.resourceUrl +
+                'views/coupon/coupon.js'
               ]
             });
           }]
@@ -256,8 +292,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl+'views/feedback/feedback.js',
-                window.__SYS_CONF.resourceUrl+'views/feedback/feedback.css'
+                window.__SYS_CONF.resourceUrl +
+                'views/feedback/feedback.js',
+                window.__SYS_CONF.resourceUrl +
+                'views/feedback/feedback.css'
 
               ]
             });

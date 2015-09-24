@@ -34,7 +34,6 @@ angular.module('xiaomaiApp').controller('nav.headCtrl', [
 ]);
 
 
-
 angular.module('xiaomaiApp').controller('nav.listCtrl', [
   '$scope',
   '$state',

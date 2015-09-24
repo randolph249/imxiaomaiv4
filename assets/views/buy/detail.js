@@ -25,8 +25,10 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
       // debugger;
       // debugger;
       if (toParam.showDetail == "true") {
+        goodId = toParam.goodId;
+        sourceType = toParam.sourceType;
 
-        loadDetail().then(function(res) {
+        loadDetail(goodId, sourceType).then(function(res) {
           $scope.good = res;
           goodId = toParam.goodId;
           sourceType = toParam.sourceType;
@@ -67,7 +69,7 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
       return xiaomaiService.fetchOne('goodDetail', {
         goodsId: goodId,
         sourceType: sourceType
-      })
+      });
     };
 
     //将Skulist转成以存在的PropertyId=PropertyVal为key的SkuObject

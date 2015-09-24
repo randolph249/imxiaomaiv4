@@ -17,6 +17,10 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
       });
     });
 
+
+    $scope.isShowCart = $state.params.showCart == 'true';
+    $scope.isShowDetail = $state.params.showDetail == 'true';
+
     //打开详情页面
     $scope.gotoDetail = function() {
       if (!$scope.totalCount || $scope.totalCount == 0 || $state.params.showCart ==
@@ -53,16 +57,17 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
 
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
 
+
       if (toParam.showCart == 'true') {
         loadDetail().then(function(res) {
           $scope.goods = res['goods'];
           $scope.ldcFreight = res['ldcFreight'];
+          cartDetailGuiMananger.pub('show');
+
           return loadCouponCount();
         }).then(function(coupons) {
           $scope.coupons = coupons.couponInfo;
           return false;
-        }).then(function() {
-          cartDetailGuiMananger.pub('show');
         });
       } else if (toParam.showCart == 'false') {
         cartDetailGuiMananger.pub('hide');

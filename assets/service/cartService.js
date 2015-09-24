@@ -33,7 +33,7 @@ angular.module('xiaomaiApp').factory('cartManager', [
   function($q, xiaomaiService, xiaomaiCacheManager) {
     //监听最后操作时间
     var updateQueryResult = function(res) {
-      queryCallback && queryCallback(res.data);
+      queryCallback && queryCallback(res);
     };
     //创建Promise实例
     var createPromise = function() {
@@ -44,7 +44,9 @@ angular.module('xiaomaiApp').factory('cartManager', [
     var add = function(param) {
       var deferred = createPromise();
       xiaomaiService.save('addCart', param).then(function(res) {
+
         updateQueryResult(res);
+
         deferred.resolve(res);
       }, function(msg) {
         deferred.reject(msg);
@@ -231,7 +233,9 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
         return deferred.promise;
       }
 
-      if (type == 'plus' && numInCart <= maxNum) {
+
+
+      if (type == 'plus' && numInCart >= maxNum) {
         deferred.reject('超出库存!');
         return deferred.promise;
       };

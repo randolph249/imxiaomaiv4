@@ -1,8 +1,6 @@
 <div class="GoodsCont">
 
-  <div class="errortip" ng-if="haserror">
-      错误提示....
-  </div>
+  <div class="errortip" ng-if="haserror">{{errorip}}</div>
   <div  ng-if="isloading" class="loading">
       loading....
   </div>
@@ -15,16 +13,15 @@
       <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
       <p class="priceCont">
 <!-- 单品或者组合最高价-->
-        <span class="new-price" ng-if="good.goodsType==1||good.goodsType==2">
+        <span class="new-price" ng-if="good.goodsType!=3">
           &yen;<i>{{good.skuList[0].wapPrice|xiaomaiprice}}</i>
         </span>
-        <span class="old-price" ng-if="good.goodsType==1||good.goodsType==2">
-          &yen;{{good.skuList[0].originPrice|xiaomaiprice}}</span>
+        <span class="old-price" ng-if="good.goodsType!=3">
+          &yen;{{good.skuList[0].originPrice|xiaomaiprice}}
+        </span>
 <!-- 聚合 -->
-        <span class="aggregate-price" ng-if="good.goodsType==3 && good.skuList[0].minWapPrice==good.skuList[0].maxWapPrice">
-          &yen;{{good.skuList[0].minWapPrice|xiaomaiprice}}</span>
-        <span class="aggregate-price" ng-if="good.goodsType==3 && good.skuList[0].minWapPrice!=good.skuList[0].maxWapPrice">
-          &yen;{{good.skuList[0].minWapPrice|xiaomaiprice}} ~ &yen;{{good.skuList[0].maxWapPrice|xiaomaiprice}}
+        <span class="aggregate-price" ng-if="good.goodsType==3">
+          &yen;{{good.minWapPrice|xiaomaiprice}} ~ &yen;{{good.maxWapPrice|xiaomaiprice}}
         </span>
       </p>
       <p ng-click="buyHandler(good);" class="buy-icon iconfont icon-plus" ng-if="good.goodsStatusDisplay!=3"></p>

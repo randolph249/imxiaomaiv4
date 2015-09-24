@@ -1,7 +1,7 @@
 <div ui-view></div>
 <!-- 购物车x-->
 <div class="pub-footer">
-    <div class="cartThumb" ng-controller="buy.cartThumbCtrl">
+    <div class="cartThumb" ng-controller="buy.cartThumbCtrl" ng-class="{showcart:isShowCart,showdetail:isShowDetail}">
         <span class="iconfont icon-cart" ng-click="gotoDetail();"></span>
         <span class="totalCount" ng-show="totalCount && totalCount!=0">{{totalCount}}</span>
         <p class="totalPrice" ng-show="totalCount && totalCount!=0">共计<em>&yen;</em><span>{{totalPrice|xiaomaiprice}}</span></p>

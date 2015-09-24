@@ -19,7 +19,7 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
       xiaomaiService.fetchOne('collegelist', {
         cityId: cityid
       }).then(function(res) {
-        $scope.haserror = false;
+        $scope.haserror = res.cities.length ? false : true;
         $scope.countrylist = res.cities;
       }, function(msg) {
         $scope.haserror = true;

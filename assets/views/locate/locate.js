@@ -27,7 +27,7 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
 
     }).then(function(res) {
       $scope.locationResult = res.colleges;
-    }, function() {
+    }, function(msg) {
       $scope.localFail = true;
     }).finally(function() {
       $scope.isLocating = false;
