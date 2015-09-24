@@ -2,14 +2,15 @@
 <!-- 购物车x-->
 <div class="pub-footer">
     <div class="cartThumb" ng-controller="buy.cartThumbCtrl" ng-class="{showcart:isShowCart,showdetail:isShowDetail}">
-        <span class="iconfont icon-cart" ng-click="gotoDetail();"></span>
-        <span class="totalCount" ng-show="totalCount && totalCount!=0">{{totalCount}}</span>
-        <p class="totalPrice" ng-show="totalCount && totalCount!=0">共计<em>&yen;</em><span>{{totalPrice|xiaomaiprice}}</span></p>
+        <span class="iconfont icon-cart" ng-click="gotoDetail();"><span class="totalCount" ng-show="totalCount && totalCount!=0">{{totalCount}}</span></span>
+        
+        <p class="totalPrice" ng-show="totalCount && totalCount!=0">共计<em>&yen;</em>
+        <span>{{totalPrice|xiaomaiprice}}</span></p>
         <div class="gotoPay" ng-show="totalCount && totalCount!=0">选好了</div>
         <p class="emptyTip" ng-show="!totalCount || totalCount==0">购物车是空的,快快选购吧~</p>
     </div>
     <div class="cartDetail" ng-controller="buy.cartDetailCtrl" cart-detail-gui active-class="cartDetail-show">
-        <span class="goback iconfont icon-arrow" ng-click="continueShop();">继续购物</span>
+        <span  class="goback" ng-click="continueShop();">继续购物<i class=" iconfont icon-arrow"></i></span>
         <div class="cartDetailWrap">
             <div ng-repeat="good in goods" class="good-info">
                 <div class="goodWrap">
@@ -41,9 +42,11 @@
             <div class="iconfont icon-arrow" ng-click="closeDetail();"></div>
         </div>
         <div class="goodDetailWrap">
-        <div class="imgCont" ng-style="{'background-image':'url('+good.imageUrl+')'}"></div>
-        <!--到达类型-->
+        <div class="imgCont" ng-style="{'background-image':'url('+good.imageUrl+')'}">
+             <!--到达类型-->
         <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
+        </div>
+       
         <div class="good-normal-info">
             <!--产品名称-->
             <p class="title">{{good.bgGoodsName}}</p>

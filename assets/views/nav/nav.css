@@ -139,7 +139,6 @@
 
 .list-main .list-product {
     /* flex-grow: 1; */
-    width: 68%;
     padding: 1rem;
     background-color: #fff;
     border-left: 1px solid #ddd;
@@ -147,6 +146,7 @@
     margin-left: -1px;
     position: absolute;
     left: 26%;
+    right: 0;
     top: 4.4rem;
     bottom: 4.5rem;
     overflow: auto;
