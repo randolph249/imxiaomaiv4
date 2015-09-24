@@ -49,11 +49,12 @@
 }
 
 .skactiveGoodList li > .goodItem .details {
-    position: relative;
+    position: absolute;
+    left: 110px;
+    right: 0px;
     padding: 5px 10px;
-    width: 58%;
+    /* width: 58%; */
     /* flex-grow: 1; */
-    float: right;
 }
 
 .skactiveGoodList li > .goodItem .details p.goodname {

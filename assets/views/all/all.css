@@ -1,16 +1,44 @@
 .category-active-list li {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-image: url('../../img/skuDefault.png');
-  margin-bottom: 10px;
-  border: #dddddd solid 1px;
-  height: 110px;
-  background-position: center center;
-  background-color: #fff; }
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-image: url('../../img/skuDefault.png');
+    margin-bottom: 10px;
+    border: #dddddd solid 1px;
+    height: 99px;
+    background-position: center center;
+    background-color: #fff;
+}
 
-  .category-active-list li.loading,
-  .category-active-list li.errortip{
-  	background: none;
-  	height: auto;
-  	border: 0;
-  }
+.category-active-list li.loading,
+.category-active-list li.errortip {
+    background: none;
+    height: auto;
+    border: 0;
+}
+
+
+/*iphone4*/
+
+@media only screen and (min-height:480px) and (-webkit-min-device-pixel-ratio:2) {
+    .category-active-list li {
+        height: 83px;
+    }
+}
+
+
+/*iphone5*/
+
+@media only screen and (min-height: 568px) and (-webkit-min-device-pixel-ratio:2) {
+    .category-active-list li {
+        height: 99px;
+    }
+}
+
+
+/*iphone6 plus*/
+
+@media only screen and (min-height: 736px) and (-webkit-min-device-pixel-ratio:2) {
+    .category-active-list li {
+        height: 110px;
+    }
+}
