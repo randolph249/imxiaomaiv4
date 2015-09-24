@@ -1,7 +1,11 @@
 <div class="pub-header" ng-controller="nav.headCtrl">
 
   <div class="iconfont icon-feedback" ng-click="gotoFeedback();"></div>
-  <div class="location-info" ng-click="gotoLocate();">{{schoolname}}</div>
+  <div class="location-info" ng-click="gotoLocate();">
+    <i class="locate iconfont"></i>
+    {{schoolname}}
+    <i class="changeLocate"></i>
+  </div>
   <div class="iconfont icon-user"></div>
 
 </div>

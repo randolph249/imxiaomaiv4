@@ -98,6 +98,12 @@ input::-moz-focus-inner {
     border: 0;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0; 
+}
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -234,6 +240,10 @@ body {
     text-align: center;
     font-size: 1.6rem;
     color: #ff5300;
+}
+
+.f14{
+    font-size: 1.4rem;
 }
 .mod-wrap {
     position: fixed;
