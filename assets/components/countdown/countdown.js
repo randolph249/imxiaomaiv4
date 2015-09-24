@@ -29,9 +29,9 @@ angular.module('xiaomaiApp').directive('countdown', [
       var crossten = function(r) {
         return r < 10 ? ('0' + r) : r;
       };
-      var hourunit = 60 * 60 * 1000,
-        minuteunit = 60 * 1000,
-        secondunit = 1000,
+      var hourunit = 60 * 60,
+        minuteunit = 60,
+        secondunit = 1,
         hour,
         minute,
         second;

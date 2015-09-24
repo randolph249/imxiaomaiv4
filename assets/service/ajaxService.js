@@ -26,6 +26,10 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/wap/college/detail',
         type: 'GET'
       },
+      'saveSchool': {
+        url: '/wap/college/detail',
+        type: 'POST'
+      },
       //获取活动列表
       'activities': {
         url: '/wap/college/activities',
@@ -35,11 +39,6 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       'activeGoods': {
         url: '/wap/activity/goods',
         type: 'GET'
-      },
-      //秒杀活动商品列表
-      'skactiveGoods': {
-        url: '/wap/activity/goods1',
-        type: 'GET',
       },
       //活动页面的Banner
       'activeBanner': {
@@ -89,6 +88,10 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       "getWxConfig": {
         url: "/wap/getWxConfig",
         type: "GET"
+      },
+      "feedback": {
+        url: "/wap/feedback/detail",
+        type: "POST"
       }
     },
     getModel = function() {
@@ -154,10 +157,6 @@ angular.module('xiaomaiApp').factory('destoryDataManager', [
         //写入缓存
         xiaomaiCacheManager.writeCache('beforeDestoryPageData',
           destoryCaches);
-
-        console.log(destoryCaches);
-
-        debugger;
 
       },
       read = function(name) {
@@ -324,14 +323,11 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
         })).success(function(res) {
 
 
-          //如果返回结果有异常 reject
-          if (handlerResult(res) === false) {
-            deferred.reject(res.msg);
-          } else {
-            //写入缓存
+          if (res.code == 0) {
             deferred.resolve(res.data);
+          } else {
+            deferred.reject(res.msg);
           }
-          deferred.resolve(res);
         }).error(function() {
 
           deferred.reject('接口异常');

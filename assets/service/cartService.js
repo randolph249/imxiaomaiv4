@@ -70,7 +70,7 @@ angular.module('xiaomaiApp').factory('cartManager', [
     var queryCallback;
     var query = function(call) {
       queryCallback = call;
-      //默认执行一次自查询
+
       xiaomaiService.fetchOne('queryCart').then(function(res) {
         queryCallback(res);
       }, function(msg) {
@@ -85,6 +85,9 @@ angular.module('xiaomaiApp').factory('cartManager', [
         xiaomaiCacheManager.clean('queryCart');
       }
     };
+    var readCartCache = function() {
+      return xiaomaiCacheManager.readCache('queryCart');
+    }
     var clear = function() {
 
     };
@@ -93,7 +96,8 @@ angular.module('xiaomaiApp').factory('cartManager', [
       remove: remove,
       query: query,
       clear: clear,
-      store: store
+      store: store,
+      readCartCache: readCartCache
     }
   }
 ])
@@ -207,13 +211,13 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
      *@param {Number} maxNum 最大可购买数量
      **/
     return function() {
+
       var deferred = $q.defer(),
         args = Array.prototype.slice.call(arguments, 0),
         param = args[0] || {},
         type = args[1],
         numInCart = args[2],
         maxNum = args[3];
-
 
       //判断当前购买流程 如果正在购买 禁止发生购买行为
       if (lock) {

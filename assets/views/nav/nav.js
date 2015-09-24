@@ -96,7 +96,6 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
       var curpaths = toState.name.match(reg);
       $scope.curcategoryId = toParam.categoryId;
       $scope.activityId = toParam.activityId;
-      // debugger;
       if (curpaths && curpaths.length) {
         $scope.curpath = curpaths[1];
       }
@@ -116,7 +115,9 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
         $state.go(path, {
           categoryId: routerInfo.categoryId,
           activityId: routerInfo.activityId,
-          collegeId: collegeId
+          collegeId: collegeId,
+          showDetail: false,
+          showCart: false
         });
       });
     }

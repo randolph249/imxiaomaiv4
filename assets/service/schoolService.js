@@ -76,10 +76,12 @@ angular.module('xiaomaiApp').factory('schoolManager', [
         return deferred.promise;
       }
 
-      xiaomaiService.fetchOne('getSchool', {
+      xiaomaiService.save('saveSchool', {
         collegeId: info.collegeId
       }).then(function(res) {
-        deferred.resolve()
+        deferred.resolve();
+        xiaomaiCacheManager.clean('getSchool')
+
       }, function(msg) {
         deferred.reject(msg)
       });

@@ -29,6 +29,8 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
         sourceType = toParam.sourceType;
 
         loadDetail(goodId, sourceType).then(function(res) {
+
+          console.log(res);
           $scope.good = res;
           goodId = toParam.goodId;
           sourceType = toParam.sourceType;
@@ -50,18 +52,6 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
         detailGuiMananger.pub('hide');
       }
     });
-
-
-
-    $scope.$on('$stateChangeStart', function(e, toState, toParam, fromState,
-      fromParam) {
-      if (toParam.showDetail != fromParam.showDetail) {
-        console.log(+new Date);
-
-        console.log('param date:' + fromParam.r);
-        console.log('new Param date:' + toParam.r)
-      }
-    })
 
     //获取详情信息
     var loadDetail = function(goodId, sourceType) {
@@ -110,16 +100,35 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
       }
 
 
+      //       goodsId:4632
+      // sourceType:2
+      // skuId:6049
+      // distributeType:1
+      // price:1
+      // propertyIds:
+
+      // debugger;
+
+
+      var options = sourceType == 2 ? {
+        goodsId: $scope.good.activityGoodsId,
+        sourceType: 2,
+        skuId: $scope.skuInfo.activitySkuId,
+        distributeType: $scope.skuInfo.distributeType,
+        price: $scope.skuInfo.activityPrice,
+        propertyIds: ''
+      } : {
+        goodsId: goodId,
+        sourceType: sourceType,
+        skuId: $scope.skuInfo.skuId,
+        distributeType: $scope.skuInfo.distributeType,
+        price: $scope.skuInfo.wapPrice,
+        propertyIds: propertyIds
+      };
+
       //执行购买
       //如果是聚合类产品 需要将选中的PropertyIdVal提交给后台
-      buyProcessManager({
-            goodsId: goodId,
-            sourceType: sourceType,
-            skuId: $scope.skuInfo.skuId,
-            distributeType: $scope.skuInfo.distributeType,
-            price: $scope.skuInfo.wapPrice,
-            propertyIds: propertyIds
-          }, type, $scope.skuInfo.numInCart,
+      buyProcessManager(options, type, $scope.skuInfo.numInCart,
           $scope.good.maxNum)
         .then(function(numIncart) {
           //更新numInCart

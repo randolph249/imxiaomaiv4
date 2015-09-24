@@ -1,13 +1,13 @@
 <div class="feedback-wrap">
   <div class="feedback-head">
-    <div back-icon class="iconfont icon-back icon-left" back-icon></div>
+    <div back-icon class="iconfont icon-back icon-left" back-icon ng-click="goBack();"></div>
     <div class="icon-middle">意见反馈</div>
   </div>
   <div class="feedback-main">
     <div class="textareaCont">
-      <textarea class="feedback-cont" placeholder="您的意见或建议是我们不断前进的巨大动力"></textarea>
+      <textarea class="feedback-cont" ng-model="feedback" placeholder="您的意见或建议是我们不断前进的巨大动力"></textarea>
     </div>
-    <input placeholder="请留下您的联系方式(可选)" type="number"/>
-    <div class="icon-right submitBtn">提交</div>
+    <input placeholder="请留下您的联系方式(可选)" type="number" ng-model="mobile"/>
+    <div ng-click="submit();" class="icon-right submitBtn">提交</div>
   </div>
 </div>
