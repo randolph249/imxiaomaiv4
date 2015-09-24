@@ -138,6 +138,9 @@
     padding-top: 4.4rem;
 }
 
+.skactiveGoodBanner .swiper-slide {
+    padding-top: 0rem;
+}
 .swiper-container-android .swiper-slide,
 .swiper-wrapper {
     -webkit-transform: translate3d(0, 0, 0);
