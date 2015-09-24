@@ -97,6 +97,9 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
     //执行购买操作
     $scope.buyHandler = function(type, $index) {
 
+
+      debugger;
+
       buyProcessManager({
         goodsId: good.bgGoodsId,
         sourceType: good.sourceType,
@@ -104,7 +107,7 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
         skuId: good.skuList[0].skuId,
         price: good.skuList[0].wapPrice,
         propertyIds: '',
-      }, 'plus', good.skuList[0].numInCart, good.maxNum).then(function(
+      }, type, good.skuList[0].numInCart, good.maxNum).then(function(
         numInCart) {
         good.skuList[0]['numInCart'] = numInCart;
         //如果这个数据的numInCart==0 删除这条数据

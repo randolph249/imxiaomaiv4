@@ -1,3 +1,4 @@
 bower_components/
 node_modules/
-app/
+app/index.html
+app/index-debug.html

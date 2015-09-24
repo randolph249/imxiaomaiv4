@@ -207,12 +207,16 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
      *@param {Number} maxNum 最大可购买数量
      **/
     return function() {
+      alert(1)
       var deferred = $q.defer(),
         args = Array.prototype.slice.call(arguments, 0),
         param = args[0] || {},
         type = args[1],
         numInCart = args[2],
         maxNum = args[3];
+
+
+      debugger;
 
 
       //判断当前购买流程 如果正在购买 禁止发生购买行为

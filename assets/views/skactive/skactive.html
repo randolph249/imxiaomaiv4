@@ -4,7 +4,14 @@
   <div class="iconfont icon-locate-right"></div>
 </div>
 <div class="skWrap">
-  <div class="skactiveGoodBanner"></div>
+
+  <div class="banner skactiveGoodBanner">
+    <ks-swiper-container  swiper="swiper">
+      <ks-swiper-slide class="swiper-slide" ng-repeat="banner in banners">
+        <div class="activeGoodBanner" ng-style="{'background-image':'url('+banner.imageUrl+')'}"></div>
+      </ks-swiper-slide>
+    </ks-swiper-container>
+  </div>
   <ul class="skactiveGoodList">
     <li class="errortip" ng-if="haserror">
       错误提示....

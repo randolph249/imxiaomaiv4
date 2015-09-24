@@ -81,13 +81,18 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     //回退
     $scope.goback = function() {
       var backCache = xiaomaiCacheManager.readCache('activeBackRouter');
-
+      debugger;
       if (backCache) {
         $state.go(backCache.state, backCache.param);
       } else {
         $state.go('root.buy.nav.all');
       }
     };
+
+    $scope.gotoActive = function(banner) {
+      debugger;
+      return false;
+    }
 
 
 

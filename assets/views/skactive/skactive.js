@@ -11,7 +11,10 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
 
     //抓取Banner信息
     var loadBanner = function() {
-
+      return xiaomaiService.fetchOne('activeBanner', {
+        collegeId: collegeId,
+        activityId: activityId
+      });
     };
 
     $scope.goodsList = [];
@@ -66,8 +69,14 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     });
 
 
-
-    loadBanner();
+    loadBanner().then(function(res) {
+      $scope.banners = res.banners;
+      return res;
+    }).then(function() {
+      xiaomaiCacheManager.writeCache('activeBanner', {
+        banners: $scope.banners
+      });
+    });
 
     $scope.$on('$stateChangeSuccess', function(e, tostate, toparam,
       fromState, fromParam) {
