@@ -4,8 +4,9 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
   'xiaomaiService',
   'schoolManager',
   'xiaomaiCacheManager',
+  'xiaomaiMessageNotify',
   function($scope, $state, xiaomaiService, schoolManager,
-    xiaomaiCacheManager) {
+    xiaomaiCacheManager, xiaomaiMessageNotify) {
     var collegeId;
 
     $scope.isloading = true;
@@ -17,13 +18,41 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
       });
     }).then(function(res) {
       $scope.categorys = res;
-      xiaomaiCacheManager.writeCache('categoryGoods', res);
       $scope.haserror = false;
     }, function() {
       $scope.haserror = true;
     }).finally(function(res) {
+
+      //通知iscroll说高度发生变化
+      xiaomaiMessageNotify.pub('navmainheightstatus', 'down', 'ready',
+        '');
+
       $scope.isloading = false;
     });
+
+    var subId = xiaomaiMessageNotify.sub('navmainscrollupdate', function(
+      arrow) {
+
+      if (arrow == 'up') {
+
+        xiaomaiMessageNotify.pub('navmainheightstatus', 'up', 'doing',
+          '将进入首页');
+
+        $state.go('root.buy.nav.all')
+      } else {
+        xiaomaiMessageNotify.pub('navmainheightstatus', 'down', 'doing',
+          '下一页是老李活动');
+      }
+    });
+
+
+
+    //数据销毁之前保存数据
+    $scope.$on('$destroy', function() {
+      xiaomaiCacheManager.writeCache('categoryGoods', $scope.categorys);
+    });
+
+
 
     //更多跳转
     $scope.gotocategory = function(item) {
@@ -35,12 +64,15 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
 
     //打开详情页面
     $scope.gotoDetail = function(good) {
-      debugger;
-      $state.go($state.current.name, {
-        showDetail: true,
-        goodId: good.goodsId,
-        sourceType: good.sourceType
-      });
+      // $state.go($state.current.name, {
+      //   showDetail: true,
+      //   goodId: good.goodsId,
+      //   sourceType: good.sourceType
+      // });
+
+      xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.goodsId,
+        good.sourceType);
+
     };
 
     //购买按钮点击处理

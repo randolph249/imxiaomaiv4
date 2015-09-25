@@ -4,8 +4,9 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
   'xiaomaiService',
   'buyProcessManager',
   'xiaomaiCacheManager',
+  'xiaomaiMessageNotify',
   function($scope, $state, xiaomaiService, buyProcessManager,
-    xiaomaiCacheManager) {
+    xiaomaiCacheManager, xiaomaiMessageNotify) {
     var collegeId, activityId, page, bannerhasFresh = false;
     //监听路由参数变化
 
@@ -33,6 +34,8 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     activityId = $state.params.activityId;
     page = $state.params.page || 1;
 
+
+
     $scope.isloading = true;
     loadSku().then(function(res) {
       $scope.activityShowName = res.activityShowName;
@@ -42,96 +45,23 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     }, function() {
       $scope.haserror = true;
     }).finally(function() {
-
       $scope.isloading = false;
     });
-
-
-    $scope.$on('$stateChangeStart', function(e, toState, toParam, fromState,
-      fromParam) {
-
-      if (
-        toParam.collegeId == fromParam.collegeId &&
-        toParam.activityId == fromParam.activityId) {
-
-
-        xiaomaiCacheManager.writeCache('activeGoods', {
-          activityShowName: $scope.activityShowName,
-          goods: $scope.goodsList,
-          paginationInfo: $scope.paginationInfo
-        });
-
-        xiaomaiCacheManager.writeCache('activeBanner', {
-          banners: $scope.banners
-        });
-
-      } else {
-        xiaomaiCacheManager.clean('activeGoods');
-        xiaomaiCacheManager.writeCache('clean');
-      }
-    });
-
-    //页面跳转之后销毁活动列表页面的数据(这个数据不需要缓存)
-    $scope.$on('$destory', function() {
-      xiaomaiCacheManager.clean('skactiveGoods');
-      xiaomaiCacheManager.clean('activeBackRouter');
-
-    });
-
 
     loadBanner().then(function(res) {
       $scope.banners = res.banners;
       return res;
-    }).then(function() {
-      xiaomaiCacheManager.writeCache('activeBanner', {
-        banners: $scope.banners
-      });
     });
-
-    $scope.$on('$stateChangeSuccess', function(e, tostate, toparam,
-      fromState, fromParam) {
-
-      if (toparam.page && toparam.page != page) {
-        loadSku.then(function(res) {
-          $scope.goodsList = $scope.goodsList.concat(res.goods);
-
-        });
-      }
-
-
-      //保存条转过来的链接
-      if (fromState.name.indexOf('root.buy.nav') != -1) {
-        xiaomaiCacheManager.writeCache('activeBackRouter', {
-          state: fromState.name,
-          param: fromParam
-        });
-      }
-    });
-
-
     //回退
     $scope.goback = function() {
-      var backCache = xiaomaiCacheManager.readCache('activeBackRouter');
-
-      if (backCache) {
-        $state.go(backCache.state, backCache.param);
-      } else {
-        $state.go('root.buy.nav.all');
-      }
+      $state.go('root.buy.nav.all');
     }
-
-
 
     //跳转到详情页
     $scope.gotoDetail = function(good) {
-
-      debugger;
-
-      $state.go($state.current.name, {
-        goodId: good.activityGoodsId,
-        sourceType: good.sourceType,
-        showDetail: true
-      });
+      xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.activityGoodsId,
+        good.sourceType);
+      return false;
     };
     //翻页
     $scope.pagination = function(page) {

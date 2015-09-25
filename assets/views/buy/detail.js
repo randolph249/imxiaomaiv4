@@ -4,40 +4,35 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
   '$state',
   'detailManager',
   'xiaomaiService',
-  'detailGuiMananger',
   'getSkuInfo',
   'skuListToObject',
   'buyProcessManager',
+  'xiaomaiMessageNotify',
   function(
     $scope,
     $state,
     detailManager,
     xiaomaiService,
-    detailGuiMananger,
     getSkuInfo,
     skuListToObject,
-    buyProcessManager
+    buyProcessManager,
+    xiaomaiMessageNotify
   ) {
     var goodId, sourceType;
 
-    //商品ID&来源
-    $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
-      // debugger;
-      // debugger;
-      if (toParam.showDetail == "true") {
-        goodId = toParam.goodId;
-        sourceType = toParam.sourceType;
+    //接受DetailPageChange变化
+    xiaomaiMessageNotify.sub('detailGuiManager', function(status, id,
+      type) {
+      if (status == 'show') {
 
+        goodId = id;
+        sourceType = type;
         loadDetail(goodId, sourceType).then(function(res) {
-
-          console.log(res);
-          $scope.good = res;
-          goodId = toParam.goodId;
-          sourceType = toParam.sourceType;
 
           //如果是聚合类产品 生成SkuObject
           //创建一个skuInfo 聚合类如果选出了一个存在的商品 就生成一个skunInfo
           //非聚合类默认有一个SkuInfo
+          $scope.good = res;
           if ($scope.good.goodsType == 3) {
             $scope.skuInfo = false;
             $scope.checkedProperties = {};
@@ -45,12 +40,17 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
           } else {
             $scope.skuInfo = $scope.good.skuList[0];
           }
-          detailGuiMananger.pub('show');
+
+          //弹出对话框
+          $scope.showdetail = true;
 
         });
-      } else if (toParam.showDetail == "false") {
-        detailGuiMananger.pub('hide');
+      } else {
+        //关闭对话框
+        $scope.showdetail = false;
       }
+      //通知遮罩做出相应的改变
+      xiaomaiMessageNotify.pub('maskManager', status);
     });
 
     //获取详情信息
@@ -160,10 +160,7 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
 
     //关闭详情页
     $scope.closeDetail = function() {
-      $state.go($state.current.name, {
-        showDetail: false,
-        r: (+new Date)
-      });
+      xiaomaiMessageNotify.pub('detailGuiManager', 'hide');
     };
 
 

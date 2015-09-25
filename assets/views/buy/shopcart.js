@@ -4,11 +4,11 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
   'xiaomaiService',
   'cartManager',
   '$timeout',
-  function($state, $scope, xiaomaiService, cartManager, $timeout) {
+  'xiaomaiMessageNotify',
+  function($state, $scope, xiaomaiService, cartManager, $timeout,
+    xiaomaiMessageNotify) {
 
     cartManager.query(function(res) {
-
-
 
       $scope.totalCount = res.totalCount;
       $scope.totalPrice = res.totalPrice;
@@ -34,23 +34,18 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
 
     });
 
-
-    $scope.isShowCart = $state.params.showCart == 'true';
-    $scope.isShowDetail = $state.params.showDetail == 'true';
+    //自己也监听购物车详情的变化
+    xiaomaiMessageNotify.sub('cartGuiManager', function(status) {
+      $scope.isShowDetail = status == 'show';
+    });
 
     //打开详情页面
     $scope.gotoDetail = function() {
-      if (!$scope.totalCount || $scope.totalCount == 0 || $state.params.showCart ==
-        'true') {
+      if (!$scope.totalCount || $scope.totalCount == 0) {
         return false;
       }
 
-
-      //购物车详情和详情页面默认只有一个可以显示
-      $state.go($state.current.name, {
-        showCart: true,
-        showDetail: false
-      });
+      xiaomaiMessageNotify.pub('cartGuiManager', 'show');
     };
 
     //页面销毁之前销毁购物车信息
@@ -66,20 +61,19 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
   '$state',
   '$scope',
   'xiaomaiService',
-  'cartDetailGuiMananger',
   'cookie_openid',
   'buyProcessManager',
-  function($state, $scope, xiaomaiService,
-    cartDetailGuiMananger, cookie_openid, buyProcessManager) {
+  'xiaomaiMessageNotify',
+  function($state, $scope, xiaomaiService, cookie_openid, buyProcessManager,
+    xiaomaiMessageNotify) {
 
-    $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
+    xiaomaiMessageNotify.sub('cartGuiManager', function(status) {
 
-      if (toParam.showCart == 'true') {
+      if (status == 'show') {
         loadDetail().then(function(res) {
           $scope.goods = res['goods'];
           $scope.ldcFreight = res['ldcFreight'];
-          cartDetailGuiMananger.pub('show'); //展开购物车
-
+          $scope.showcart = true;
           $scope.haserror = false;
 
           return loadCouponCount();
@@ -91,17 +85,16 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
 
           return false;
         });
-      } else if (toParam.showCart == 'false') {
-        cartDetailGuiMananger.pub('hide');
+      } else {
+        $scope.showcart = false;
       }
-    });
+
+      xiaomaiMessageNotify.pub('maskManager', status);
+    })
 
     //继续购物
     $scope.continueShop = function() {
-      $state.go($state.current.name, {
-        showCart: false,
-        r: (+new Date)
-      });
+      xiaomaiMessageNotify.pub('cartGuiManager', 'hide');
     };
 
 

@@ -10,8 +10,9 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
   '$scope',
   'xiaomaiCacheManager',
   'buyProcessManager',
+  'xiaomaiMessageNotify',
   function($state, xiaomaiService, $scope,
-    xiaomaiCacheManager, buyProcessManager) {
+    xiaomaiCacheManager, buyProcessManager, xiaomaiMessageNotify) {
     var collegeId, categoryId;
 
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
@@ -20,30 +21,6 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
       categoryId = toParam.categoryId;
 
       loadGoodList();
-    });
-    //在页面跳转之前 如果发现所有和列表页相关的参数都没有变化 说明我我不需要重新请求数据
-    //那么就把数据放到缓存中
-    //反之就请清空所有的缓存 避免不能获取到新数据
-    $scope.$on('$stateChangeStart', function(e, toState, toParam, fromState,
-      fromParam) {
-
-      if (
-        toParam.collegeId == fromParam.collegeId &&
-        toParam.categoryId == fromParam.categoryId &&
-        toParam.page == fromParam.page) {
-        xiaomaiCacheManager.writeCache('goods', {
-          goods: $scope.goods
-        });
-      } else {
-        xiaomaiCacheManager.clean('goods');
-      }
-    });
-
-    //页面销毁之前 缓存页面数据
-    $scope.$on('$destory', function() {
-      xiaomaiCacheManager.writeCache('goods', {
-        goods: $scope.goods
-      });
     });
 
     //下载商品列表
@@ -66,12 +43,11 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
 
     //打开详情页面
     $scope.gotoDetail = function(good) {
-      $state.go($state.current.name, {
-        goodId: good.goodsId,
-        sourceType: good.sourceType,
-        showDetail: true
-      });
 
+      xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.goodsId,
+        good.sourceType);
+
+      return false;
     };
 
     $scope.buyHandler = function(good) {

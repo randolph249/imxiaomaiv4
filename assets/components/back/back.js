@@ -1,105 +1,202 @@
 //iScroll滚动
-angular.module('xiaomaiApp').directive('xiaomaiIscroll', [function() {
+angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
+  'xiaomaiMessageNotify',
+  '$timeout',
+  '$state',
+  function(xiaomaiMessageNotify, $timeout, $state) {
+    // alert(123);
+    var link = function($scope, ele, attrs) {
 
-  var defaultOptions = {
+      return false;
 
-  };
+      //创建两个提示
+      var upTip = document.createElement('p');
+      var $t;
+      upTip.className += (' ' + $scope.upTipCls);
 
-  var currentY;
+      var downTip = document.createElement('p');
+      downTip.className += (' ' + $scope.downTipCls);
 
-  var link = function($scope, ele, attrs) {
+      var myScroll = new IScroll(ele[0], {
+        click: true,
+        tap: true,
+        probeType: 1
+      });
 
-    new iScroll(ele, {
-      vScrollbar: false,
-      hScrollbar: false,
-      setp: 30,
-      useTransition: true,
-      onRefresh: function() {},
-      onScrollEnd: function() {}
-    });
+      $scope.scrollstatus = 'ready'; //默认的状态是ready
 
-    return false;
-    var myScroll = new IScroll(ele[0], angular.extend({}, $scope.options, {
-      onRefresh: function() {
+      myScroll.on('scrollStart', function() {});
 
+
+      // $timeout(function() {
+      //   myScroll.scrollTo(0, -4800);
+      //   $scope.scrollstatus == 'ready' && xiaomaiMessageNotify.pub(
+      //     $scope.pubname,
+      //     'down');
+      // }, 1000)
+
+      myScroll.on('scroll', function() {
+
+        //如果用户下拉刷新
+        if (this.y > 30) {
+          // p.textContent = '刷新信息';
+          $scope.scrollstatus == 'ready' && xiaomaiMessageNotify.pub(
+            $scope.pubname,
+            'up');
+
+          //上拉加载
+        } else if (this.y < this.maxScrollY - 30) {
+
+
+          $scope.scrollstatus == 'ready' && xiaomaiMessageNotify(
+            $scope.pubname,
+            'down');
+          // p.textContent = '翻页';
+        }
+      });
+
+      myScroll.on('scrollEnd', function() {});
+
+      //订阅通知
+      $scope.subname && xiaomaiMessageNotify.sub($scope.subname, function(
+        arrow, status,
+        tip) {
+
+        var childnode = ele[0].children[0];
+
+        if (arrow == 'up') {
+          if (status == 'ready') {
+
+            $scope.scrollstatus = 'ready';
+
+            myScroll.refresh();
+            $t = $timeout(function() {
+              myScroll.refresh();
+            }, 100);
+            /**
+            childnode.removeChild(upTip);
+            **/
+          } else {
+            $scope.scrollstatus = 'pending';
+            upTip.textContent = tip;
+            childnode.insertBefore(upTip, childnode.firstChild);
+          }
+        } else if (arrow == 'down') {
+
+          if (status == 'ready') {
+
+            $scope.scrollstatus = 'ready';
+            //保证refresh会在渲染之后计算
+            $t = $timeout(function() {
+              myScroll && myScroll.refresh();
+            }, 200);
+            childnode.removeChild(downTip);
+          } else {
+            $scope.scrollstatus = 'pending';
+            downTip.textContent = tip;
+            childnode.appendChild(downTip);
+          }
+        }
+      });
+
+      $scope.$on('$stateChangeStart', function() {
+        myScroll && myScroll.destroy();
+        $timeout.cancel($t);
+        myScroll = null;
+        //删除订阅
+        xiaomaiMessageNotify.remove($scope.subname);
+      });
+
+
+      $scope.$on('$destory', function() {
+
+        myScroll && myScroll.destroy();
+        $timeout.cancel($t);
+
+        myScroll = null;
+
+        //删除订阅
+        xiaomaiMessageNotify.remove($scope.subname);
+
+      });
+    }
+
+    return {
+      scope: {
+        pubname: '@', //发送给所有希望能接受iscroll信息的controller/directive
+        subname: '@', //订阅希望通知
+        options: '@',
+        upTipCls: '@',
+        downTipCls: '@'
       },
-      onScrollMove: function() {
+      link: link,
+    }
+  }
+]);
 
-      },
-      onScrollEnd: function() {
 
+//不同controller/directive之间相互通信
+//一个简单的订阅发布模块
+//消息中心缓存不能根据缓存数量删除 以避免订阅以后因为内存不足而被删除
+//所以需要单独的放置一块缓存
+//所以这块的使用要谨慎
+//当不需要的时候 要执行手动删除
+angular.module('xiaomaiApp').factory('xiaomaiMessageNotify', [
+  'xiaomaiCacheManager',
+  '$window',
+  function(xiaomaiCacheManager, $window) {
+    //消息中心池子
+    var notifyPool = {};
+
+    //执行订阅
+    var sub = function(eventname, callback) {
+      //查看池子中是否已经订阅
+      var callbacks = notifyPool.hasOwnProperty(eventname) ?
+        notifyPool[
+          eventname] : {};
+
+      //给订阅者生成一个唯一ID 方便订阅者以后删除订阅
+      var subId = ('' + Math.random()).replace(/\./, '');
+      callbacks[subId] = callback;
+      //更新消息池子
+      notifyPool[eventname] = callbacks;
+      return subId;
+    };
+
+    //发布通知
+    var pub = function(eventname) {
+
+
+      //先看池子中是否有订阅事件
+      var callbacks = notifyPool[eventname];
+      //如果没有订阅或者订阅为空
+      if (!angular.isObject(callbacks) || !Object.keys(callbacks).length) {
+        return false;
       }
-    }));
+      var args = Array.prototype.slice.call(arguments, 1);
 
-
-
-    setTimeout(function() {
-      myScroll.refresh();
-    }, 1000);
+      angular.forEach(callbacks, function(callback) {
+        angular.isFunction(callback) && callback.apply($window,
+          args);
+      });
+    };
+    //从订阅列表中删除某一个订阅
+    var removeOne = function(eventname, subId) {
+      var callbacks = notifyPool[eventName];
+      if (angular.isObject(callbacks) && callbacks.hasOwnProperty(
+          subId)) {
+        delete callbacks[subId];
+      }
+    };
+    //删除所有订阅释放缓存
+    var remove = function(eventname) {
+      delete notifyPool[eventname];
+    };
+    return {
+      pub: pub,
+      sub: sub,
+      removeOne: removeOne,
+      remove: remove
+    };
   }
-
-  return {
-    scope: {
-      options: '@'
-    },
-    link: link,
-  }
-}]);
-
-//
-//
-// var myScroll,
-//   upIcon = $("#up-icon"),
-//   downIcon = $("#down-icon");
-//
-// myScroll = new IScroll('#wrapper', {
-//   probeType: 3,
-//   mouseWheel: true
-// });
-// //probeType属性，表明此插件，可以监听scroll事件
-//
-// myScroll.on("scroll", function() {
-//   //scroll事件，可以用来控制上拉和下拉之后显示的模块中，
-//   //样式和内容展示的部分的改变。
-//   var y = this.y,
-//     maxY = this.maxScrollY - y,
-//     downHasClass = downIcon.hasClass("reverse_icon"),
-//     upHasClass = upIcon.hasClass("reverse_icon");
-//
-//   if (y >= 40) {
-//     !downHasClass && downIcon.addClass("reverse_icon");
-//     return "";
-//   } else if (y < 40 && y > 0) {
-//     downHasClass && downIcon.removeClass("reverse_icon");
-//     return "";
-//   }
-//
-//   if (maxY >= 40) {
-//     !upHasClass && upIcon.addClass("reverse_icon");
-//     return "";
-//   } else if (maxY < 40 && maxY >= 0) {
-//     upHasClass && upIcon.removeClass("reverse_icon");
-//     return "";
-//   }
-// });
-//
-// myScroll.on("slideDown", function() {
-//   //当下拉，使得边界超出时，如果手指从屏幕移开，则会触发该事件
-//   if (this.y > 40) {
-//     //获取内容于屏幕拉开的距离
-//     //可以在该部分中，修改样式，并且仅限ajax或者其他的一些操作
-//     //此时只是为了能演示该功能，只添加了一个alert功能。
-//     //并且，由于alert会阻塞后续的动画效果，所以，
-//     //添加了后面的一行代码，移除之前添加上的一个样式
-//     alert("slideDown");
-//     upIcon.removeClass("reverse_icon");
-//   }
-// });
-//
-// myScroll.on("slideUp", function() {
-//   if (this.maxScrollY - this.y > 40) {
-//     //与slideDown相同的，maxScrollY表示文档区域的最大高度
-//     alert("slideUp");
-//     upIcon.removeClass("reverse_icon")
-//   }
-// });
+]);
