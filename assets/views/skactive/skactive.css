@@ -13,11 +13,10 @@
 .skactiveGoodList li {
     padding: 1rem;
     background: #fff;
+    border-bottom: #ddd solid 1px;
 }
 
 .skactiveGoodList li > .goodItem {
-    border-bottom: #ddd solid 1px;
-    /* display: flex; */
     overflow: hidden;
 }
 
@@ -52,7 +51,7 @@
     position: absolute;
     left: 110px;
     right: 0px;
-    padding: 0.5rem  0 0 1rem;
+    padding: 0.5rem  1rem 0 1rem;
     /* width: 58%; */
     /* flex-grow: 1; */
 }
@@ -63,7 +62,7 @@
     overflow: hidden;
     font-size: 1.4rem;
     color: #3a404b;
-    overflow: hidden;
+    padding-bottom:1rem; 
 }
 
 .skactiveGoodList li > .goodItem .details .priceCont {
