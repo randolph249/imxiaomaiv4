@@ -72,6 +72,8 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     //执行购买
     $scope.buyHandler = function(good, $index) {
 
+
+      $scope.isPaying = true;
       buyProcessManager({
         goodsId: good.activityGoodsId,
         sourceType: 2,
@@ -85,6 +87,8 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
       }, function(msg) {
         alert(msg);
         return false;
+      }).finally(function() {
+        $scope.isPaying = false;
       });
     };
 

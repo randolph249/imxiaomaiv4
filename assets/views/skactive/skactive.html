@@ -54,7 +54,7 @@
 <!-- 已经抢过了 -->
           <p class="sold-geted" ng-if="good.killStarted==1 && good.killed">已抢购</p>
 <!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
-          <p ng-click="buyHandler(good,$index);" class="sk-icon" ng-click="" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
+          <p  ng-class="{paying:isPaying}" ng-click="buyHandler(good,$index);" class="sk-icon" ng-click="" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
         </div>
       </div>
     </li>

@@ -36,8 +36,14 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
 
     //自己也监听购物车详情的变化
     xiaomaiMessageNotify.sub('cartGuiManager', function(status) {
-      $scope.isShowDetail = status == 'show';
+      $scope.isShowCart = status == 'show';
+
+
     });
+
+    xiaomaiMessageNotify.sub('detailGuiManager', function(status) {
+      $scope.isShowDetail = status == 'show';
+    })
 
     //打开详情页面
     $scope.gotoDetail = function() {
@@ -139,6 +145,9 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
 
       var good = $scope.goods[$index];
 
+
+      $scope.isPaying = true;
+
       buyProcessManager(options, type, good.skuList[0].numInCart, good.maxNum)
         .then(function(
           numInCart) {
@@ -149,6 +158,8 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
           }
         }, function(msg) {
           alert(msg);
+        }).then(function() {
+          $scope.isPaying = false;
         });
 
     };

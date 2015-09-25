@@ -19,6 +19,7 @@ angular.module('xiaomaiApp').factory('registerWx', [
     //注入微信配置
     //在非线上环境调用debug
     var register = function(config) {
+
       wx.config({
         debug: env == 'online' ? false : true,
         appId: config.appId,
@@ -29,6 +30,7 @@ angular.module('xiaomaiApp').factory('registerWx', [
       });
 
       wx.ready(function() {
+
         deferred.resolve();
       });
 
@@ -37,14 +39,14 @@ angular.module('xiaomaiApp').factory('registerWx', [
       });
     }
     xiaomaiService.fetchOne('getWxConfig', {
-      url: [
+      url: encodeURIComponent([
         location.protocol,
         '//',
         location.host,
         location.pathname,
         location.search
-      ].join('')
-    }).then(function() {
+      ].join(''))
+    }).then(function(config) {
       register(config)
     });
     return deferred.promise;
@@ -66,19 +68,15 @@ angular.module('xiaomaiApp').factory('locationManager', [
       //默认2S后自动失败
       var $t = $timeout(function() {
         deferred.reject('网络超时')
-      }, 2000);
+      }, 5000);
 
-
-      //如果是本地环境直接返回模拟数据
-      env == 'develop' && $timeout(function() {
-        deferred.resolve(1, 1);
-      }, 1500);
 
       //调用微信定位服务
       registerWx.then(function() {
         wx.getLocation({
           type: 'wgs84',
           success: function(res) {
+
             var lat = res.latitude,
               lng = res.longitude;
 

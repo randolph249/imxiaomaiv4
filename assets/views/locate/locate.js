@@ -7,12 +7,14 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
   '$state',
   'xiaomaiService',
   'schoolManager',
+  'xiaomaiCacheManager',
   function(
     $scope,
     locationManager,
     $state,
     xiaomaiService,
-    schoolManager
+    schoolManager,
+    xiaomaiCacheManager
   ) {
     $scope.locationResult = [];
     $scope.isLocating = true; //默认正在执行定位
@@ -26,8 +28,10 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
       })
 
     }).then(function(res) {
+      alert(JSON.stringify(res));
       $scope.locationResult = res.colleges;
     }, function(msg) {
+      alert(msg);
       $scope.localFail = true;
     }).finally(function() {
       $scope.isLocating = false;
@@ -63,6 +67,9 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
     //返回首页
     $scope.checkCollege = function(college) {
       schoolManager.set(college).then(function() {
+        xiaomaiCacheManager.clean('navgatorlist');
+        return true;
+      }).then(function() {
         $state.go('root.buy.nav.all');
       });
     };

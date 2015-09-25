@@ -209,6 +209,10 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
       //处理返回结果
       handlerResult = function(res) {
         //如果返回码错误 或者返回data不存在
+        if (!res.hasOwnProperty('code') || !res.hasOwnProperty('data')) {
+          return res;
+        }
+
         if (res.code != 0 || !res.data) {
           return false;
         }
@@ -271,9 +275,9 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
             deferred.reject(res.msg);
           } else {
             //写入缓存
-            deferred.resolve(res.data);
+            deferred.resolve(res.hasOwnProperty('data') ? res.data :
+              res);
           }
-
         }).error(function(res) {
           deferred.reject('接口请求错误');
         });
