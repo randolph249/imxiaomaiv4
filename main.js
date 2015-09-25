@@ -10,7 +10,6 @@ angular.module('xiaomaiApp').config([
   '$urlRouterProvider',
   '$ocLazyLoadProvider',
   function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
-
     /**
     *路径映射
     {
@@ -47,7 +46,10 @@ angular.module('xiaomaiApp').config([
                 window.__SYS_CONF.resourceUrl +
                 'service/wxService.js',
                 window.__SYS_CONF.resourceUrl +
-                'service/cookieService.js'
+                'service/cookieService.js',
+                window.__SYS_CONF.resourceUrl +
+                'service/notifyService.js'
+
               ]
             })
           }],
@@ -75,7 +77,7 @@ angular.module('xiaomaiApp').config([
         }
       })
       .state('root.buy', {
-        url: 'buy/?showDetail&goodId&sourceType&showCart&r',
+        url: 'buy/?goodId&sourceType',
         controller: 'buyCtrl',
         templateUrl: '../assets/views/buy/buy.html',
         resolve: {
@@ -312,3 +314,7 @@ angular.module('xiaomaiApp').config([
 angular.module('xiaomaiApp').run(['$state', function($state) {
   $state.go('root.locate');
 }]);
+
+document.querySelector('body').addEventListener('touchmove', function(e) {
+  e.preventDefault();
+}, false);

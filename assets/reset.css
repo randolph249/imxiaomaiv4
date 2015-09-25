@@ -101,7 +101,7 @@ input::-moz-focus-inner {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button{
     -webkit-appearance: none !important;
-    margin: 0; 
+    margin: 0;
 }
 
 table {

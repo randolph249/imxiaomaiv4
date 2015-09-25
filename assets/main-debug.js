@@ -40,7 +40,8 @@ angular.module('xiaomaiApp').config([
                 '../assets/service/detailService.js',
                 '../assets/service/schoolService.js',
                 '../assets/service/wxService.js',
-                '../assets/service/cookieService.js'
+                '../assets/service/cookieService.js',
+                '../assets/service/notifyService.js'
               ]
             })
           }],
@@ -277,3 +278,8 @@ angular.module('xiaomaiApp').config([
 angular.module('xiaomaiApp').run(['$state', function($state) {
   $state.go('root.locate');
 }]);
+
+
+document.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+}, false);

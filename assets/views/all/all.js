@@ -4,8 +4,9 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
   'xiaomaiService',
   'schoolManager',
   'destoryDataManager',
+  'xiaomaiMessageNotify',
   function($scope, $state, xiaomaiService, schoolManager,
-    destoryDataManager) {
+    destoryDataManager, xiaomaiMessageNotify) {
 
     $scope.activities = [];
 
@@ -27,6 +28,8 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
       $scope.haserror = true;
     }).finally(function() {
       $scope.isloading = false;
+      xiaomaiMessageNotify.pub('navmainheightstatus', 'down', 'ready',
+        '');
     });
 
     //缓存当前页面数据

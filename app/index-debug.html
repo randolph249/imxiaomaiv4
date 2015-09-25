@@ -22,7 +22,7 @@
   <script type="text/javascript" src="http://172.16.111.4:3030/assets/lib/jweixin-1.0.0.js"></script>
   <script type="text/javascript" src="http://172.16.111.4:3030/assets/lib/swiper.min.js"></script>
   <script type="text/javascript" src="http://172.16.111.4:3030/assets/lib/angular-swiper.js"></script>
-  <script type="text/javascript" src="http://172.16.111.4:3030/assets/lib/iscroll.js"></script>
+  <script type="text/javascript" src="http://172.16.111.4:3030/assets/lib/iscroll-probe.js"></script>
 
   <script>
     window.__SYS_CONF = {
@@ -33,8 +33,13 @@
     };
     var xiaomaiApp = angular.module('xiaomaiApp', window.__SYS_CONF[
       'dependent_modules']);
+    /**
+    *禁止全屏滚动
+    **/
+    // document.addEventListener('touchmove',function(e){
+    //   e.preventDefault();
+    // },false);
   </script>
-  
   <script type="text/javascript" src="http://172.16.111.4:3030/assets/template/templates.js"></script>
   <script type="text/javascript" src="http://172.16.111.4:3030/assets/main.js"></script>
 

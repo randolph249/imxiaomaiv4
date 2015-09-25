@@ -100,55 +100,6 @@ angular.module('xiaomaiApp').factory('cartManager', [
       readCartCache: readCartCache
     }
   }
-])
-
-/**
- *打开详情open/closedetail页面 open/close遮罩
- **/
-angular.module('xiaomaiApp').factory("cartDetailGuiMananger", function() {
-  var callback;
-  //接受命令
-  var sub = function(call) {
-    callback = call;
-  };
-  //发送命令
-  var pub = function(order) {
-
-    if (!/show|hide/.test(order)) {
-      console.log('只接受show和hide两个命令');
-      return false;
-    }
-    callback && angular.isFunction(callback) && callback(order);
-  };
-  //传输指令&接受指令
-  return {
-    sub: sub,
-    pub: pub,
-  }
-
-});
-
-
-angular.module('xiaomaiApp').directive("cartDetailGui", [
-  'cartDetailGuiMananger',
-  'maskManager',
-  function(cartDetailGuiMananger, maskManager) {
-    var link = function($scope, ele, attrs) {
-
-      var activeClass = attrs.activeClass;
-      //根据命令显示或者隐藏
-      cartDetailGuiMananger.sub(function(order) {
-
-        //打开或者关闭遮罩
-        maskManager.pub(order);
-        ele[order == 'show' ? 'addClass' : 'removeClass'](activeClass);
-
-      });
-    };
-    return {
-      link: link
-    }
-  }
 ]);
 
 
