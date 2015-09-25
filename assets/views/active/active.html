@@ -42,7 +42,7 @@
               &yen;{{good.skuList[0].minWapPrice|xiaomaiprice}} ~ &yen;{{good.skuList[0].maxWapPrice|xiaomaiprice}}
             </span>
           </p>
-          <p class="buy-icon iconfont icon-plus" ng-click="buyHandler(good);" ng-if="good.goodsStatusDisplay!=3"></p>
+          <p  ng-class="{paying:isPaying}" class="buy-icon iconfont icon-plus" ng-click="buyHandler(good);" ng-if="good.goodsStatusDisplay!=3"></p>
           <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
         </div>
       </div>

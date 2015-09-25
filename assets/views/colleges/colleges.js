@@ -3,7 +3,9 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
   '$scope',
   'xiaomaiService',
   'schoolManager',
-  function($state, $scope, xiaomaiService, schoolManager) {
+  'xiaomaiCacheManager',
+  function($state, $scope, xiaomaiService, schoolManager,
+    xiaomaiCacheManager) {
     //根据cityid获取学校列表
     $scope.countrylist = [];
 
@@ -31,6 +33,9 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
     //选择学校
     $scope.checkCollege = function(college) {
       schoolManager.set(college).then(function() {
+        xiaomaiCacheManager.clean('navgatorlist');
+        return true;
+      }).then(function() {
         $state.go('root.buy.nav.all');
       });
     };

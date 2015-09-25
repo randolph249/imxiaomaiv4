@@ -5,8 +5,9 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
   'schoolManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
+  'buyProcessManager',
   function($scope, $state, xiaomaiService, schoolManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify) {
+    xiaomaiCacheManager, xiaomaiMessageNotify, buyProcessManager) {
     var collegeId;
 
     $scope.isloading = true;
@@ -79,14 +80,13 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
     //如果是聚合类产品 打开购买链接
     //如果是非聚合类产品 执行购买流程
     $scope.buyHandler = function(good) {
+
       if (good.goodsType == 3) {
         $scope.gotoDetail(good);
         return false;
       }
 
-      return false;
-
-
+      $scope.isPaying = true;
       buyProcessManager({
         goodsId: good.bgGoodsId,
         sourceType: good.sourceType,
@@ -98,6 +98,8 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
 
       }, function(msg) {
         alert(msg);
+      }).finally(function() {
+        $scope.isPaying = false;
       });
     };
   }

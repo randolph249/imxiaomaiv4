@@ -51,12 +51,11 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
     };
 
     $scope.buyHandler = function(good) {
-
       if (good.goodsType == 3) {
         $scope.gotoDetail(good);
         return false;
       }
-
+      $scope.isPaying = true;
       buyProcessManager({
         goodsId: good.goodsId,
         sourceType: good.sourceType,
@@ -68,6 +67,8 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
 
       }, function(msg) {
         alert(msg);
+      }).finally(function() {
+        $scope.isPaying = false;
       });
 
     }

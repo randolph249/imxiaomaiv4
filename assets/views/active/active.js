@@ -83,6 +83,8 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
         return false;
       }
 
+      $scope.isPaying = true;
+
       buyProcessManager({
         goodsId: good.bgGoodsId,
         sourceType: good.sourceType,
@@ -93,6 +95,8 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
       }, function(msg) {
         alert(msg);
         return false;
+      }).finally(function() {
+        $scope.isPaying = false;
       });
     };
 
@@ -176,6 +180,8 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
         return false;
       }
 
+      $scope.isPaying = true;
+
       buyProcessManager({
         goodsId: good.bgGoodsId,
         sourceType: good.sourceType,
@@ -186,6 +192,8 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
       }, function(msg) {
         alert(msg);
         return false;
+      }).finally(function() {
+        $scope.isPaying = false;
       });
     };
 

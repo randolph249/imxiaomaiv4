@@ -126,6 +126,9 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
         propertyIds: propertyIds
       };
 
+
+      $scope.isPaying = true;
+
       //执行购买
       //如果是聚合类产品 需要将选中的PropertyIdVal提交给后台
       buyProcessManager(options, type, $scope.skuInfo.numInCart,
@@ -139,6 +142,8 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
         }, function(msg) {
           alert(msg);
           return false;
+        }).then(function() {
+          $scope.isPaying = false;
         });
     };
 

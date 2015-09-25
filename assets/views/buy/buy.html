@@ -1,7 +1,7 @@
 <div ui-view></div>
 <!-- 购物车x-->
-<div class="pub-footer">
-  <div class="cartThumb" ng-class="{showcart:isShowCart,showdetail:isShowDetail}" ng-controller="buy.cartThumbCtrl">
+<div  ng-controller="buy.cartThumbCtrl" class="pub-footer">
+  <div class="cartThumb" ng-class="{showcart:isShowCart,showdetail:isShowDetail}">
     <span class="iconfont icon-cart" ng-click="gotoDetail();">
       <span class="totalCount" ng-class="{big:hasChange}" ng-show="totalCount && totalCount!=0">{{totalCount}}</span>
     </span>
@@ -10,8 +10,6 @@
     <div class="gotoPay" ng-show="totalCount && totalCount!=0">选好了</div>
     <p class="emptyTip" ng-show="!totalCount || totalCount==0">购物车是空的,快快选购吧~</p>
   </div>
-
-
 
   <div ng-class="{'cartDetail-show':showcart}" class="cartDetail" ng-controller="buy.cartDetailCtrl">
     <span class="goback" ng-click="continueShop();">继续购物<i class=" iconfont icon-YF_more"></i>
@@ -25,9 +23,9 @@
           <lable class="label" ng-class="{ldc:$index==0,rdc:$index==1}" ng-repeat="distribute in good.distributeTypeDisplay" ng-show="distribute.length">{{distribute}}</lable>
         </div>
         <div class="iconWrap">
-          <i class="iconfont icon-minus" ng-click="buyHandler('minus',$index);"></i>
+          <i  ng-class="{paying:isPaying}" class="iconfont icon-minus" ng-click="buyHandler('minus',$index);"></i>
           <span class="good-count">{{good.skuList[0].numInCart}}</span>
-          <i class="iconfont icon-plus" ng-click="buyHandler('plus',$index);"></i>
+          <i  ng-class="{paying:isPaying}" class="iconfont icon-plus" ng-click="buyHandler('plus',$index);"></i>
         </div>
       </div>
     </div>
@@ -77,7 +75,7 @@
             <span class="buy-handler iconfont icon-minus" ng-class="{'disabled':!skuInfo}" ng-click="buyHandler('minus');"></span>
 <!--当前已经购买的数量 -->
             <span class="buy-result">{{!skuInfo?0:skuInfo.numInCart}}</span>
-            <span class="buy-handler iconfont icon-plus buy-icon" ng-class="{'disabled':!skuInfo}" ng-click="buyHandler('plus');"></span>
+            <span  ng-class="{paying:isPaying}" class="buy-handler iconfont icon-plus buy-icon" ng-class="{'disabled':!skuInfo}" ng-click="buyHandler('plus');"></span>
           </p>
         </div>
 <!--秒杀类产品-->
@@ -101,7 +99,7 @@
 <!-- 已经抢过了 -->
           <p class="sold-geted" ng-if="good.killStarted==1 && good.killed">已抢购</p>
 <!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
-          <p class="sk-icon" ng-click="buyHandler('plus')" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
+          <p  ng-class="{paying:isPaying}" class="sk-icon" ng-click="buyHandler('plus')" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
         </div>
       </div>
 <!--如果是聚合类产品-->
