@@ -37,7 +37,7 @@
 
 /*iphone6 plus*/
 
-@media only screen and (min-height: 736px) and (-webkit-min-device-pixel-ratio:2) {
+@media only screen and (min-height: 667px) and (-webkit-min-device-pixel-ratio:2) {
     .category-active-list li {
         height: 110px;
     }

@@ -21,10 +21,12 @@
     </li>
     <li ng-repeat="good in goodsList">
       <div class="goodItem">
-        <div class="imgCont" ng-click="gotoDetail(good);" ng-style='{"background-image":"url("+good.imageUrl+")"}'></div>
+        <div class="imgCont" ng-click="gotoDetail(good);" ng-style='{"background-image":"url("+good.imageUrl+")"}'>
+          <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
+        </div>
         <div class="details">
 <!-- 输出标签29分钟达/次日达 -->
-          <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
+          
           <p class="goodname" ng-click="gotoDetail(good);">{{good.activityGoodsName}}</p>
           <p class="priceCont">
 <!-- 单品或者组合最高价-->

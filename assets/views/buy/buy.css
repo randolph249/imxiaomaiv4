@@ -209,12 +209,12 @@
     position: absolute;
     left: 10px;
     bottom: 5px;
-    width: 55px;
-    height: 55px;
-    border-radius: 55px;
+    width: 5.5rem;
+    height: 5.5rem;
+    line-height: 5.5rem;
+    border-radius: 5.5rem;
     background-color: #ffa000;
-    font-size: 3rem;
-    line-height: 55px;
+    font-size: 3.2rem;
     text-align: center;
     color: #fff;
 }
@@ -225,8 +225,8 @@
     color: #ffa000;
     font-size: 1.2rem;
     background: #f9f9f9;
-    left: 4.6rem;
-    top: -1.6rem;
+    /* left: 4.6rem;
+    top: -1.6rem; */
     border-radius: 1rem;
     display: inline-block;
     position: absolute;
@@ -277,9 +277,9 @@
 
 .cartThumb .emptyTip {
     line-height: 4.5rem;
-    padding-left: 9rem;
-    font-size: 1.6rem;
-    color: #333;
+    padding-left: 8rem;
+    font-size: 1.3rem;
+    color: #3a404b;
 }
 
 .cartDetail,
@@ -488,11 +488,7 @@
 }
 
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
-    .cartThumb .icon-cart {
-        width: 5rem;
-        height: 5rem;
-        line-height: 5rem;
-    }
+    
     .cartThumb .totalCount {
         /* left: 4.4rem;
         top: -1.8rem; */
