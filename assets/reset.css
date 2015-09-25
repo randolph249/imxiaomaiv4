@@ -372,6 +372,9 @@ p.goodname {
     border-color: #fc541f;
 }
 
+.paying{
+    opacity: 0.3;
+}
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
     .sk-end,
     .sold-out,
