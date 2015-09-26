@@ -26,16 +26,18 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
 
       myScroll.on('scrollStart', function() {});
 
-      //
-      // $timeout(function() {
-      //   $scope.scrollstatus == 'ready' && xiaomaiMessageNotify.pub(
-      //     $scope.pubname,
-      //     'down');
-      // }, 1000)
+
+      //如果没有通知说 自定义执行300MS执行渲染
+      var refreshTimeout = setTimeout(function() {
+        var childnode = ele.children()[0];
+        maxScrollY = childnode.offsetHeight - ele[0].offsetHeight;
+        myScroll.refresh();
+      }, 1000);
 
       //scroll默认延时100MS执行
       var $scrolltimeout;
 
+      //区域高度
       var maxScrollY;
 
       myScroll.on('scroll', function() {
@@ -46,15 +48,16 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
         }
 
 
+
         if (this.y > 30) {
           $scrolltimeout && clearTimeout($scrolltimeout);
-          setTimeout(function() {
+          $scrolltimeout = setTimeout(function() {
             xiaomaiMessageNotify.pub($scope.pubname, 'up');
             $scope.scrollstatus = 'pending';
           }, 100);
-        } else if (Math.abs(this.y) > maxScrollY + 30) {
+        } else if (Math.abs(this.y) > maxScrollY + 10) {
           $scrolltimeout && clearTimeout($scrolltimeout);
-          setTimeout(function() {
+          $scrolltimeout = setTimeout(function() {
             xiaomaiMessageNotify.pub($scope.pubname, 'down');
             $scope.scrollstatus = 'pending';
           }, 100);
@@ -73,9 +76,14 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
 
             $scope.scrollstatus = 'ready';
 
+            refreshTimeout && clearTimeout(refreshTimeout);
+            refreshTimeout = null;
+
             setTimeout(function() {
               myScroll && myScroll.refresh();
               maxScrollY = childnode.offsetHeight - ele[0].offsetHeight;
+              myScroll.scrollTo(0, 0);
+
             }, 50);
             childnode.firstChild == upTip && childnode.removeChild(
               upTip);
@@ -89,11 +97,15 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
 
           if (status == 'ready') {
             $scope.scrollstatus = 'ready';
+            refreshTimeout && clearTimeout(refreshTimeout);
+            refreshTimeout = null;
 
             setTimeout(function() {
+
               myScroll && myScroll.refresh();
               maxScrollY = childnode.offsetHeight - ele[0].offsetHeight;
-            }, 50);
+
+            }, 500);
 
             childnode.lastChild == upTip && childnode.removeChild(
               upTip);

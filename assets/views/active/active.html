@@ -4,48 +4,49 @@
   <div class="iconfont icon-locate-right"></div>
 </div>
 
-<div class="activeWrap">
-  <div class="banner">
-    <ks-swiper-container on-ready="onReadySwiper(swiper)" swiper="swiper">
-      <ks-swiper-slide class="swiper-slide" ng-repeat="banner in banners">
-        <div ng-click="gotoActive(banner);" class="activeGoodBanner" ng-style="{'background-image':'url('+banner.imageUrl+')'}"></div>
-      </ks-swiper-slide>
-    </ks-swiper-container>
-  </div>
-  <ul class="activeGoodList">
-    <li class="errortip" ng-if="haserror">
-      错误提示....
-    </li>
-    <li class="loading" ng-if="isloading">
-      loading....
-    </li>
-    <li ng-repeat="good in goods">
-      <div class="goodItem">
-        <div class="imgCont" ng-click="gotoDetail(good);" ng-style='{"background-image":"url("+good.imageUrl+")"}'>
-          <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
-        </div>
-        <div class="details">
+<div class="activeWrap" down-tip-cls="{{'skactive-downtip'}}" xiaomai-iscroll subname="{{'activeheightstatus'}}" pubname="{{'activeiscrollupdate'}}">
+  <div>
+    <div class="banner">
+      <ks-swiper-container on-ready="onReadySwiper(swiper)" swiper="swiper">
+        <ks-swiper-slide class="swiper-slide" ng-repeat="banner in banners">
+          <div class="activeGoodBanner" ng-click="gotoActive(banner);" ng-style="{'background-image':'url('+banner.imageUrl+')'}"></div>
+        </ks-swiper-slide>
+      </ks-swiper-container>
+    </div>
+    <ul class="activeGoodList">
+      <li class="errortip" ng-if="haserror">
+        错误提示....
+      </li>
+      <li class="loading" ng-if="isloading">
+        loading....
+      </li>
+      <li ng-repeat="good in goods">
+        <div class="goodItem">
+          <div class="imgCont" ng-click="gotoDetail(good);" ng-style='{"background-image":"url("+good.imageUrl+")"}'>
+            <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
+          </div>
+          <div class="details">
 <!-- 输出标签29分钟达/次日达 -->
-
-          <p class="goodname" ng-click="gotoDetail(good);">{{good.activityGoodsName}}</p>
-          <p class="priceCont">
+            <p class="goodname" ng-click="gotoDetail(good);">{{good.activityGoodsName}}</p>
+            <p class="priceCont">
 <!-- 单品或者组合最高价-->
-            <span class="new-price" ng-if="good.goodsType==1||good.goodsType==2">
-              &yen;<i>{{good.skuList[0].activityPrice|xiaomaiprice}}</i>
-            </span>
-            <span class="old-price" ng-if="good.goodsType==1||good.goodsType==2">
-              &yen;{{good.skuList[0].originPrice|xiaomaiprice}}</span>
+              <span class="new-price" ng-if="good.goodsType==1||good.goodsType==2">
+                &yen;<i>{{good.skuList[0].activityPrice|xiaomaiprice}}</i>
+              </span>
+              <span class="old-price" ng-if="good.goodsType==1||good.goodsType==2">
+                &yen;{{good.skuList[0].originPrice|xiaomaiprice}}</span>
 <!-- 聚合 -->
-            <span class="aggregate-price" ng-if="good.goodsType==3 && good.minWapPrice==good.maxWapPrice">
-              &yen;{{good.minWapPrice|xiaomaiprice}}</span>
-            <span class="aggregate-price" ng-if="good.goodsType==3 && good.minWapPrice!=good.maxWapPrice">
-              &yen;{{good.minWapPrice|xiaomaiprice}} ~ &yen;{{good.maxWapPrice|xiaomaiprice}}
-            </span>
-          </p>
-          <p  ng-class="{paying:good.isPaying}" class="buy-icon iconfont icon-plus" ng-click="buyHandler(good,$index);" ng-if="good.goodsStatusDisplay!=3"></p>
-          <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
+              <span class="aggregate-price" ng-if="good.goodsType==3 && good.minWapPrice==good.maxWapPrice">
+                &yen;{{good.minWapPrice|xiaomaiprice}}</span>
+              <span class="aggregate-price" ng-if="good.goodsType==3 && good.minWapPrice!=good.maxWapPrice">
+                &yen;{{good.minWapPrice|xiaomaiprice}} ~ &yen;{{good.maxWapPrice|xiaomaiprice}}
+              </span>
+            </p>
+            <p class="buy-icon iconfont icon-plus" ng-class="{paying:good.isPaying}" ng-click="buyHandler(good,$index);" ng-if="good.goodsStatusDisplay!=3"></p>
+            <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
+          </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
 </div>

@@ -76,11 +76,6 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
 
     //打开详情页面
     $scope.gotoDetail = function(good) {
-      // $state.go($state.current.name, {
-      //   showDetail: true,
-      //   goodId: good.goodsId,
-      //   sourceType: good.sourceType
-      // });
 
       xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.goodsId,
         good.sourceType);

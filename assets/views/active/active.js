@@ -6,8 +6,9 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
   'buyProcessManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
+  'xiaomaiMessageNotify',
   function($scope, $state, xiaomaiService, detailManager, buyProcessManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify) {
+    xiaomaiCacheManager, xiaomaiMessageNotify, xiaomaiMessageNotify) {
     var collegeId, activityId, page;
     //监听路由参数变化
 
@@ -39,15 +40,41 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     loadSku().then(function(res) {
       $scope.activityShowName = res.activityShowName;
       $scope.goods = res.goods;
-      $scope.paginationInfo = $scope.paginationInfo;
+      $scope.paginationInfo = res.paginationInfo;
       $scope.haserror = $scope.goods.length ? false : true;
-      debugger;
+
     }, function() {
       $scope.haserror = true;
     }).finally(function() {
       $scope.isloading = false;
+      xiaomaiMessageNotify.pub('activeheightstatus', 'down',
+        'ready');
     });
 
+
+
+    var iscrollSubId = xiaomaiMessageNotify.sub('activeiscrollupdate',
+      function(arrow) {
+        if (arrow == 'down' && $scope.paginationInfo.currentPage !=
+          $scope.paginationInfo
+          .totalPage) {
+
+          //提示文案 下一页数据
+          xiaomaiMessageNotify.pub('activeheightstatus', 'down',
+            'pending', '请求下一页数据');
+          //发送下页数据请求
+          getNextPageData().then(function(res) {
+            xiaomaiMessageNotify.pub('activeheightstatus', 'down',
+              'ready');
+          });
+        }
+      });
+
+    $scope.$on('$destroy', function() {
+      //删除订阅
+      xiaomaiMessageNotify.removeOne('activeiscrollupdate',
+        iscrollSubId);
+    });
 
     loadBanner().then(function(res) {
       $scope.banners = res.banners;
@@ -104,7 +131,19 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     };
 
     //翻页
-    $scope.pagination = function(page) {}
+    var getNextPageData = function() {
+      return xiaomaiService.fetchOne('activeGoods', {
+        collegeId: collegeId,
+        activityId: activityId,
+        recordPerPage: 20,
+        currentPage: $scope.paginationInfo.currentPage + 1
+      }).then(function(res) {
+        //更新当前页码数据
+        $scope.paginationInfo = res.paginationInfo;
+        $scope.goods = $scope.goods.concat(res.goods);
+        return res;
+      });
+    }
   }
 ]);
 
@@ -189,12 +228,9 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
       function(arrow) {
         if (arrow == 'up') {
           //跳转到上一页
-
-          alert('before router');
           siblingsNav('up', collegeId, 2, activityId).then(function(
             router) {
 
-            alert(router.name)
             $state.go(router.name, router.params);
           });
 
@@ -203,6 +239,8 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
           //跳转到下一页
           siblingsNav('down', collegeId, 2, activityId).then(function(
             router) {
+
+            alert(router.name);
             $state.go(router.name, router.params);
           });
 

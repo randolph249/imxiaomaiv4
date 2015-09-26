@@ -28,7 +28,6 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
       status, id,
       type) {
       if (status == 'show') {
-
         goodId = id;
         sourceType = type;
         loadDetail(goodId, sourceType).then(function(res) {
@@ -63,11 +62,6 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     });
 
 
-    //页面变化之前销毁订阅 防止重复订阅
-
-    $scope.$on('$stateChangeStart', function() {
-      xiaomaiMessageNotify.removeOne('detailGuiManager', detailSubId)
-    });
 
     //获取详情信息
     var loadDetail = function(goodId, sourceType) {
