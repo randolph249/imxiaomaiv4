@@ -245,6 +245,9 @@ body {
 .f14{
     font-size: 1.4rem;
 }
+.colorOrg{
+    color: #ff5300;
+}
 .mod-wrap {
     /* position: fixed;
     top: 0;
@@ -289,8 +292,8 @@ body {
 .label {
     display: inline-block;
     padding: 0 0.5rem;
-    height: 1.5rem;
-    line-height: 1.5rem;
+    height: 1.3rem;
+    line-height: 1.3rem;
     font-size: 1.1rem;
     border: #ccc solid 1px;
 }

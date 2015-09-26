@@ -96,7 +96,7 @@
     color: #ff5300;
     font-size: 1.5rem;
     border-bottom: #ff5300 solid 0.3rem;
-    background: #fff;
+    background-color: #fff;
 }
 
 .list-main .list-category .nav-super p.arrow-down {
@@ -116,7 +116,15 @@
 }
 
 .list-main .list-category .nav-super p.arrow-down.arrow-up:after {
-    transform: rotate(180deg);
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 0 6px 8px 6px;
+    border-style: solid;
+    border-color:  #f5f5f5 #f5f5f5 #ccc#f5f5f5;
+    right: 4px;
+    top: 2rem;
 }
 
 .list-main .list-category .nav-sub {
