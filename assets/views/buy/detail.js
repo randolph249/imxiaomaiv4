@@ -52,6 +52,9 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
           //弹出对话框
           $scope.showdetail = true;
 
+        }).finally(function() {
+          xiaomaiMessageNotify.pub('detailgoodheightupdate', 'up',
+            'ready');
         });
       } else {
         //关闭对话框
@@ -97,6 +100,11 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
       }
     };
 
+    //打开分享对话框
+    $scope.showShareModel = function() {
+      xiaomaiMessageNotify.pub('shareModelManager', 'show');
+    };
+
 
 
     /**
@@ -121,16 +129,6 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
           propertyIds = propertyIds.join('_');
         }
       }
-
-
-      //       goodsId:4632
-      // sourceType:2
-      // skuId:6049
-      // distributeType:1
-      // price:1
-      // propertyIds:
-
-      // debugger;
 
 
       var options = sourceType == 2 ? {

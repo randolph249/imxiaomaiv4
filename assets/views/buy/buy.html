@@ -1,31 +1,32 @@
 <div ui-view></div>
 <!-- 购物车x-->
-<div  ng-controller="buy.cartThumbCtrl" class="pub-footer">
+<div class="pub-footer" ng-controller="buy.cartThumbCtrl">
   <div class="cartThumb" ng-class="{showcart:isShowCart,showdetail:isShowDetail}">
     <span class="iconfont icon-cart" ng-click="gotoDetail();">
       <span class="totalCount" ng-class="{big:hasChange}" ng-show="totalCount && totalCount!=0">{{totalCount}}</span>
     </span>
     <p class="totalPrice" ng-show="totalCount && totalCount!=0">共计<em>&yen;</em>
       <span>{{totalPrice|xiaomaiprice}}</span></p>
-    <div class="gotoPay" ng-show="totalCount && totalCount!=0">选好了</div>
+    <div class="gotoPay" ng-show="totalCount && totalCount!=0" ng-click="goSettlement();">选好了</div>
     <p class="emptyTip" ng-show="!totalCount || totalCount==0">购物车是空的,快快选购吧~</p>
   </div>
-
-  <div ng-class="{'cartDetail-show':showcart}" class="cartDetail" ng-controller="buy.cartDetailCtrl">
+  <div class="cartDetail" ng-class="{'cartDetail-show':showcart}" ng-controller="buy.cartDetailCtrl">
     <span class="goback" ng-click="continueShop();">继续购物<i class=" iconfont icon-YF_more"></i>
     </span>
-    <div class="cartDetailWrap">
-      <div class="haserror" ng-click="goHomepage();" ng-if="haserror">购物车空了 赶快去<span>购物吧</span></div>
-      <div class="good-info" ng-repeat="good in goods">
-        <div class="goodWrap">
-          <p class="good-title">{{good.sourceType==2?good.activityGoodsName:good.bgGoodsName}}</p>
-          <p class="good-price">&yen;{{good.minWapPrice|xiaomaiprice}}</p>
-          <lable class="label" ng-class="{ldc:$index==0,rdc:$index==1}" ng-repeat="distribute in good.distributeTypeDisplay" ng-show="distribute.length">{{distribute}}</lable>
-        </div>
-        <div class="iconWrap">
-          <i  ng-class="{paying:isPaying}" class="iconfont icon-minus" ng-click="buyHandler('minus',$index);"></i>
-          <span class="good-count">{{good.skuList[0].numInCart}}</span>
-          <i  ng-class="{paying:isPaying}" class="iconfont icon-plus" ng-click="buyHandler('plus',$index);"></i>
+    <div class="cartDetailWrap" subname="{{'shopcartdetailheightupdate'}}" xiaomai-iscroll>
+      <div>
+        <div class="haserror" ng-click="goHomepage();" ng-if="haserror">购物车空了 赶快去<span>购物吧</span></div>
+        <div class="good-info" ng-repeat="good in goods">
+          <div class="goodWrap">
+            <p class="good-title">{{good.sourceType==2?good.activityGoodsName:good.bgGoodsName}}</p>
+            <p class="good-price">&yen;{{good.minWapPrice|xiaomaiprice}}</p>
+            <lable class="label" ng-class="{ldc:$index==0,rdc:$index==1}" ng-repeat="distribute in good.distributeTypeDisplay" ng-show="distribute.length">{{distribute}}</lable>
+          </div>
+          <div class="iconWrap">
+            <i class="iconfont icon-minus" ng-class="{paying:isPaying}" ng-click="buyHandler('minus',$index);"></i>
+            <span class="good-count">{{good.skuList[0].numInCart}}</span>
+            <i class="iconfont icon-plus" ng-class="{paying:isPaying}" ng-click="buyHandler('plus',$index);"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -39,90 +40,95 @@
 </div>
 <!--遮罩-->
 <div class="mask" mask-gui ng-click="closeMask();"></div>
+<div class="shareModel" ng-show="shareIsShow" ng-click="closeShare();"></div>
+
+
 
 
 <div class="goodDetail" ng-class="{'goodDetail-show':showdetail}" ng-controller="buy.detailCtrl">
   <div class="detailCont">
     <div class="goodIconWrap">
-      <div class="iconfont icon-share"></div>
+      <div class="iconfont icon-share" ng-click="showShareModel();"></div>
       <div class="iconfont icon-unfold" ng-click="closeDetail();"></div>
     </div>
-    <div class="goodDetailWrap">
-      <div class="imgCont" ng-style="{'background-image':'url('+good.imageUrl+')'}">
+    <div class="goodDetailWrap" subname="{{'detailgoodheightupdate'}}" xiaomai-iscroll>
+      <div>
+        <div class="imgCont" ng-style="{'background-image':'url('+good.imageUrl+')'}">
 <!--到达类型-->
-        <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
-      </div>
-      <div class="good-normal-info">
+          <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
+        </div>
+        <div class="good-normal-info">
 <!--产品名称-->
-        <p class="title">{{good.sourceType==2?good.activityGoodsName:good.bgGoodsName}}</p>
+          <p class="title">{{good.sourceType==2?good.activityGoodsName:good.bgGoodsName}}</p>
 <!--产品价格-->
-        <p class="priceCont" ng-if="skuInfo">
-          <span class="new-price">&yen;<i>{{good.sourceType==2?skuInfo.activityPrice:good.minWapPrice|xiaomaiprice}}</i></span>
-          <span class="old-price">&yen;{{skuInfo.originPrice|xiaomaiprice}}</span>
-        </p>
-        <p class="priceCont" ng-if="!skuInfo">
-          <span class="aggregate-price">&yen;{{good.minWapPrice|xiaomaiprice}}</span>~
-          <span class="f14">
-            &yen;{{good.maxWapPrice|xiaomaiprice}}
-          </span>
-        </p>
+          <p class="priceCont" ng-if="skuInfo">
+            <span class="new-price">&yen;<i>{{good.sourceType==2?skuInfo.activityPrice:good.minWapPrice|xiaomaiprice}}</i></span>
+            <span class="old-price">&yen;{{skuInfo.originPrice|xiaomaiprice}}</span>
+          </p>
+          <p class="priceCont" ng-if="!skuInfo">
+            <span class="aggregate-price">&yen;{{good.minWapPrice|xiaomaiprice}}</span>~
+            <span class="f14">
+              &yen;{{good.maxWapPrice|xiaomaiprice}}
+            </span>
+          </p>
 <!--普通类活动-->
-        <div ng-if="good.isSeckill!=1">
+          <div ng-if="good.isSeckill!=1">
 <!--如果没有货 显示补货中-->
-          <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
+            <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
 <!--进行数量选择-->
-          <p class="buy-handler-cont " ng-if="good.goodsStatusDisplay!=3">
-            <span class="buy-handler iconfont icon-minus" ng-class="{'disabled':!skuInfo}" ng-click="buyHandler('minus');"></span>
+            <p class="buy-handler-cont " ng-if="good.goodsStatusDisplay!=3">
+              <span class="buy-handler iconfont icon-minus" ng-class="{'disabled':!skuInfo}" ng-click="buyHandler('minus');"></span>
 <!--当前已经购买的数量 -->
-            <span class="buy-result">{{numInCart}}</span>
-            <span  ng-class="{paying:good.isPaying}" class="buy-handler iconfont icon-plus buy-icon" ng-class="{'disabled':!skuInfo}" ng-click="buyHandler('plus');"></span>
-          </p>
-        </div>
+              <span class="buy-result">{{numInCart}}</span>
+              <span class="buy-handler iconfont icon-plus buy-icon" ng-class="{'disabled':!skuInfo}" ng-class="{paying:good.isPaying}" ng-click="buyHandler('plus');"></span>
+            </p>
+          </div>
 <!--秒杀类产品-->
-        <div ng-if="good.isSeckill==1">
+          <div ng-if="good.isSeckill==1">
 <!--倒计时-->
-          <p class="countdown" ng-if="good.killStarted==0">
-            距开始
-            <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.timeBeforeStart}}" timeid="{{good.activityBgGoodsId}}"></span>
-          </p>
+            <p class="countdown" ng-if="good.killStarted==0">
+              距开始
+              <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.timeBeforeStart}}" timeid="{{good.activityBgGoodsId}}"></span>
+            </p>
 <!-- 活动已开始-->
-          <p class="countdown" ng-if="good.killStarted==1">
-            距结束
-            <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.buyLeftTime}}" timeid="{{good.activityBgGoodsId}}"></span>
-          </p>
+            <p class="countdown" ng-if="good.killStarted==1">
+              距结束
+              <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.buyLeftTime}}" timeid="{{good.activityBgGoodsId}}"></span>
+            </p>
 <!-- 未开始-->
-          <p class="sk-icon disabled" ng-if="good.killStarted==0">抢</p>
+            <p class="sk-icon disabled" ng-if="good.killStarted==0">抢</p>
 <!-- 已结束-->
-          <p class="sk-end" ng-if="good.killStarted==2">已结束</p>
+            <p class="sk-end" ng-if="good.killStarted==2">已结束</p>
 <!-- 已经售空-->
-          <p class="sold-out" ng-if="good.killStarted==1 && good.goodsStatusDisplay==3">已售空</p>
+            <p class="sold-out" ng-if="good.killStarted==1 && good.goodsStatusDisplay==3">已售空</p>
 <!-- 已经抢过了 -->
-          <p class="sold-geted" ng-if="good.killStarted==1 && good.killed">已抢购</p>
+            <p class="sold-geted" ng-if="good.killStarted==1 && good.killed">已抢购</p>
 <!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
-          <p  ng-class="{paying:good.isPaying}" class="sk-icon" ng-click="buyHandler('plus')" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
-        </div>
-      </div>
-<!--如果是聚合类产品-->
-      <div class="complex-properties" ng-if="good.goodsType==3">
-        <div class="complex-property" ng-repeat="goodProperty in good.skuGoodsPropertyList">
-          <p class="complex-property-name">{{goodProperty.propertyName}}</p>
-          <div class="complex-property-values">
-            <span ng-class="{checked:checkedProperties[goodProperty.propertyNameId]==valueItem.propertyValueId}" ng-click="complexCheckProperty(goodProperty.propertyNameId,valueItem.propertyValueId)" ng-repeat="valueItem in goodProperty.propertyValues">{{valueItem.propertyValue}}</span>
+            <p class="sk-icon" ng-class="{paying:good.isPaying}" ng-click="buyHandler('plus')" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
           </div>
         </div>
-      </div>
+<!--如果是聚合类产品-->
+        <div class="complex-properties" ng-if="good.goodsType==3">
+          <div class="complex-property" ng-repeat="goodProperty in good.skuGoodsPropertyList">
+            <p class="complex-property-name">{{goodProperty.propertyName}}</p>
+            <div class="complex-property-values">
+              <span ng-class="{checked:checkedProperties[goodProperty.propertyNameId]==valueItem.propertyValueId}" ng-click="complexCheckProperty(goodProperty.propertyNameId,valueItem.propertyValueId)" ng-repeat="valueItem in goodProperty.propertyValues">{{valueItem.propertyValue}}</span>
+            </div>
+          </div>
+        </div>
 <!-- 产品描述-->
-      <div class="detail-desc">
-        <div class="detail-desc-key">产品描述:</div>
-        <div class="detail-desc-main">{{good.goodsDesc}}</div>
-      </div>
-      <div class="detail-desc">
-        <div class="detail-desc-key">产品规格:</div>
-        <div class="detail-desc-main">{{good.saleSpec}}/{{good.unit}}</div>
-      </div>
-      <div class="detail-desc">
-        <div class="detail-desc-key">产地:</div>
-        <div class="detail-desc-main">{{good.originPlace}}</div>
+        <div class="detail-desc">
+          <div class="detail-desc-key">产品描述:</div>
+          <div class="detail-desc-main">{{good.goodsDesc}}</div>
+        </div>
+        <div class="detail-desc">
+          <div class="detail-desc-key">产品规格:</div>
+          <div class="detail-desc-main">{{good.saleSpec}}/{{good.unit}}</div>
+        </div>
+        <div class="detail-desc">
+          <div class="detail-desc-key">产地:</div>
+          <div class="detail-desc-main">{{good.originPlace}}</div>
+        </div>
       </div>
     </div>
   </div>

@@ -5,8 +5,9 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
   'cartManager',
   '$timeout',
   'xiaomaiMessageNotify',
+  'env',
   function($state, $scope, xiaomaiService, cartManager, $timeout,
-    xiaomaiMessageNotify) {
+    xiaomaiMessageNotify, env) {
     cartManager.query(function(res) {
       $scope.totalCount = res.totalCount;
       $scope.totalPrice = res.totalPrice;
@@ -30,7 +31,15 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
 
     xiaomaiMessageNotify.sub('detailGuiManager', function(status) {
       $scope.isShowDetail = status == 'show';
-    })
+    });
+
+
+    //跳转到结算界面
+    $scope.goSettlement = function() {
+      var host = env == 'online' ? 'http://h5.imxiaomai.com' :
+        'http://wap.tmall.imxiaomai.com';
+      window.href = host + "/order/create";
+    };
 
     //打开详情页面
     $scope.gotoDetail = function() {
@@ -86,6 +95,9 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
           }).then(function(coupons) {
             //获取优惠劵
             $scope.coupons = coupons.couponInfo;
+          }).finally(function() {
+            xiaomaiMessageNotify.pub('shopcartdetailheightupdate',
+              'up', 'ready');
           });
         };
 

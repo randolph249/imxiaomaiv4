@@ -2,12 +2,11 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
   '$scope',
   '$state',
   'xiaomaiService',
-  'detailManager',
   'buyProcessManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
   'xiaomaiMessageNotify',
-  function($scope, $state, xiaomaiService, detailManager, buyProcessManager,
+  function($scope, $state, xiaomaiService, buyProcessManager,
     xiaomaiCacheManager, xiaomaiMessageNotify, xiaomaiMessageNotify) {
     var collegeId, activityId, page;
     //监听路由参数变化
@@ -154,12 +153,11 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
   '$scope',
   '$state',
   'xiaomaiService',
-  'detailManager',
   'buyProcessManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
   'siblingsNav',
-  function($scope, $state, xiaomaiService, detailManager, buyProcessManager,
+  function($scope, $state, xiaomaiService, buyProcessManager,
     xiaomaiCacheManager, xiaomaiMessageNotify, siblingsNav) {
     var collegeId, activityId, page;
     //监听路由参数变化

@@ -29,6 +29,8 @@ angular.module('xiaomaiApp').factory('xiaomaiMessageNotify', [
     //发布通知
     var pub = function(eventname) {
 
+      debugger;
+
 
       //先看池子中是否有订阅事件
       var callbacks = notifyPool[eventname];
