@@ -35,7 +35,10 @@ angular.module('xiaomaiApp').factory('cartManager', [
   function($q, xiaomaiService, xiaomaiCacheManager, env, $timeout) {
     //监听最后操作时间
     var updateQueryResult = function(res) {
+      xiaomaiCacheManager.writeCache('queryCart', res);
+      xiaomaiCacheManager.clean('queryCartDetail');
       queryCallback && queryCallback(res);
+      //因为购物车信息更新了 需要重新获取购物车详情信息
     };
     //创建Promise实例
     var createPromise = function() {
@@ -82,6 +85,8 @@ angular.module('xiaomaiApp').factory('cartManager', [
 
       xiaomaiService.fetchOne('queryCart').then(function(res) {
         queryCallback(res);
+
+        xiaomaiCacheManager.writeCache('queryCart', res);
       }, function(msg) {
         queryCallback('error');
       });
@@ -100,13 +105,64 @@ angular.module('xiaomaiApp').factory('cartManager', [
     var clear = function() {
 
     };
+    //读取购物车详情
+    var queryCartDetail = function() {
+
+      //读取购物车详情
+      var deferred = $q.defer();
+      xiaomaiService.fetchOne('queryCartDetail').then(function(res) {
+        deferred.resolve(res);
+
+        //写入到缓存中
+        xiaomaiCacheManager.writeCache('queryCartDetail', res);
+      });
+
+      return deferred.promise;
+    };
+
+    //获取当前购物中的数量
+    var getnumInCart = function(skuid) {
+      var detailCarts = [];
+      var deferred = $q.defer();
+      queryCartDetail().then(function(res) {
+        detailCarts = res;
+        return detailCarts['goods'];
+      }).then(function(carts) {
+        var $index = -1;
+
+
+
+        //根据skuid从购物车查询对应的sku信息
+        angular.forEach(carts, function(item, i) {
+          var itemSku = item.skuList[0];
+
+          if (itemSku.bgSkuId == skuid) {
+            $index = i;
+          }
+        });
+
+
+        //如果从skulist中查询不到 说明购物车没有添加
+        deferred.resolve($index == -1 ? 0 : carts[$index]['skuList'][
+            0
+          ]
+          ['numInCart']);
+
+      }, function() {
+        deferred.reject(false);
+      });
+
+      return deferred.promise;
+    };
     return {
+      getnumInCart: getnumInCart,
       add: add,
       remove: remove,
       query: query,
       clear: clear,
       store: store,
-      readCartCache: readCartCache
+      readCartCache: readCartCache,
+      queryCartDetail: queryCartDetail
     }
   }
 ]);
@@ -164,20 +220,32 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
     //默认可以购买 添加到购物车过程中 不允许继续操作
     var lock = false;
 
+
+
     /**
      *@param {Object} param 购买提交的参数
      *@param  {string} type 购买操作类型 {minus|plus}
      *@param {Number} numIncart 当前已购买数量
      *@param {Number} maxNum 最大可购买数量
      **/
+
+    var submit = function(type, param) {
+      var eventName = type == 'plus' ? 'add' : 'remove';
+      return cartManager[eventName](param);
+      return deferred.promise;
+    };
+
     return function() {
 
       var deferred = $q.defer(),
         args = Array.prototype.slice.call(arguments, 0),
         param = args[0] || {},
         type = args[1],
-        numInCart = args[2],
-        maxNum = args[3];
+        maxNum = args[2],
+        numInCart = args[3]; //可选参数 如果带过来了说明自己有这个参数 不需要从后台去查询
+      var skuId = param.skuId;
+      var eventName = type == 'plus' ? 'add' : 'remove';
+
 
       //判断当前购买流程 如果正在购买 禁止发生购买行为
       if (lock) {
@@ -185,7 +253,7 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
         return deferred.promise;
       }
 
-      if (args.length != 4) {
+      if (args.length < 3) {
         deferred.reject('参数缺失!');
         return deferred.promise;
       }
@@ -193,26 +261,50 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
 
 
       if (type == 'minus' && numInCart <= 0) {
-        deferred.reject('购物该商品已经不存在')
+        deferred.reject('该商品已经不存在')
         return deferred.promise;
       }
 
+      //如果传递了numIncart 可以不去购物车详情中查询
+      if (angular.isNumber(numInCart)) {
+        if (type == 'plus' && numInCart >= maxNum) {
+          deferred.reject('超出库存!');
+          return deferred.promise;
+        }
 
 
-      if (type == 'plus' && numInCart >= maxNum) {
-        deferred.reject('超出库存!');
-        return deferred.promise;
-      };
+        //执行提交
+        cartManager[eventName](param).then(function() {
 
-      //执行购买
+          deferred.resolve(type == 'plus' ? (numInCart + 1) : (
+            numInCart - 1));
+        }, function(msg) {
+          deferred.reject(msg);
+        });
 
-      var eventName = type == 'plus' ? 'add' : 'remove';
-      cartManager[eventName](param).then(function() {
-        deferred.resolve(type == 'plus' ? (numInCart + 1) : (
-          numInCart - 1));
-      }, function(msg) {
-        deferred.reject(msg);
-      })
+      } else {
+        //根据SkuId去库里查询
+        var numIncart = undefined;
+
+        cartManager.getnumInCart(skuId).then(function(num) {
+
+          if (angular.isNumber(num) && num < maxNum) {
+            numInCart = num;
+            return cartManager[eventName](param);
+          } else {
+            return false;
+          }
+
+        }).then(function(res) {
+          numIncart = type == 'plus' ? (numIncart + 1) : (numIncart -
+            1);
+
+          deferred.resolve(numInCart);
+        }, function() {
+          deferred.reject('操作失败');
+        })
+      }
+
       return deferred.promise;
     }
 

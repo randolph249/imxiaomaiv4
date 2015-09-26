@@ -16,6 +16,7 @@
     background-repeat: no-repeat;
     background-image: url('../../img/skuDefault.png');
     position: relative;
+    border:#f0f0f0 solid 1px;
 }
 
 .GoodsCont .details {

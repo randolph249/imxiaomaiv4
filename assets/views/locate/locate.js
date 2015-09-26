@@ -28,10 +28,8 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
       })
 
     }).then(function(res) {
-      alert(JSON.stringify(res));
       $scope.locationResult = res.colleges;
     }, function(msg) {
-      alert(msg);
       $scope.localFail = true;
     }).finally(function() {
       $scope.isLocating = false;

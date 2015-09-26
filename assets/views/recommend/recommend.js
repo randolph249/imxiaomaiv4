@@ -6,8 +6,10 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
   'buyProcessManager',
+  'siblingsNav',
   function($scope, $state, xiaomaiService, schoolManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify, buyProcessManager) {
+    xiaomaiCacheManager, xiaomaiMessageNotify, buyProcessManager,
+    siblingsNav) {
     var collegeId;
 
     $scope.isloading = true;
@@ -25,32 +27,41 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
     }).finally(function(res) {
 
       //通知iscroll说高度发生变化
-      xiaomaiMessageNotify.pub('navmainheightstatus', 'down', 'ready',
-        '');
-
+      xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
+        'ready');
       $scope.isloading = false;
     });
+    //接受directive指令
+    //当上拉的时候跳到上一个导航页面
+    //如果下拉 先查询是否分页 如果分页 如果分页 请求下一页数据
+    var iscrollSubId = xiaomaiMessageNotify.sub('navmainscrollupdate',
+      function(arrow) {
 
-    var subId = xiaomaiMessageNotify.sub('navmainscrollupdate', function(
-      arrow) {
+        if (arrow == 'up') {
+          //跳转到上一页
+          siblingsNav('up', collegeId, 1).then(function(
+            router) {
+            $state.go(router.name, router.params);
+          });
 
-      if (arrow == 'up') {
+        } else if ($scope.paginationInfo.currentPage == $scope.paginationInfo
+          .totalPage) {
+          //跳转到下一页
+          siblingsNav('down', collegeId, 1).then(function(
+            router) {
+            $state.go(router.name, router.params);
+          });
 
-        xiaomaiMessageNotify.pub('navmainheightstatus', 'up', 'doing',
-          '将进入首页');
+        }
 
-        $state.go('root.buy.nav.all')
-      } else {
-        xiaomaiMessageNotify.pub('navmainheightstatus', 'down', 'doing',
-          '下一页是老李活动');
-      }
-    });
+      });
 
-
-
-    //数据销毁之前保存数据
     $scope.$on('$destroy', function() {
+      //保存页面数据
       xiaomaiCacheManager.writeCache('categoryGoods', $scope.categorys);
+      //删除订阅
+      xiaomaiMessageNotify.removeOne('navmainscrollupdate',
+        iscrollSubId);
     });
 
 
@@ -79,14 +90,15 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
     //购买按钮点击处理
     //如果是聚合类产品 打开购买链接
     //如果是非聚合类产品 执行购买流程
-    $scope.buyHandler = function(good) {
+    $scope.buyHandler = function(good, $index, $parentindex) {
+
 
       if (good.goodsType == 3) {
         $scope.gotoDetail(good);
         return false;
       }
 
-      $scope.isPaying = true;
+      $scope.categorys[$parentindex]['goods'][$index]['isPaying'] = true;
       buyProcessManager({
         goodsId: good.bgGoodsId,
         sourceType: good.sourceType,
@@ -94,12 +106,14 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
         skuId: good.skuList[0].skuId,
         price: good.skuList[0].wapPrice,
         propertyIds: '',
-      }, 'plus', good.skuList[0].numInCart, good.maxNum).then(function() {
+      }, 'plus', good.maxNum).then(function() {
 
       }, function(msg) {
         alert(msg);
       }).finally(function() {
-        $scope.isPaying = false;
+        $scope.categorys[$parentindex]['goods'][$index]['isPaying'] =
+          false;
+
       });
     };
   }

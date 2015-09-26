@@ -57,7 +57,7 @@
         <p class="title">{{good.sourceType==2?good.activityGoodsName:good.bgGoodsName}}</p>
 <!--产品价格-->
         <p class="priceCont" ng-if="skuInfo">
-          <span class="new-price">&yen;<i>{{skuInfo.activityPrice|xiaomaiprice}}</i></span>
+          <span class="new-price">&yen;<i>{{good.sourceType==2?skuInfo.activityPrice:good.minWapPrice|xiaomaiprice}}</i></span>
           <span class="old-price">&yen;{{skuInfo.originPrice|xiaomaiprice}}</span>
         </p>
         <p class="priceCont" ng-if="!skuInfo">
@@ -74,8 +74,8 @@
           <p class="buy-handler-cont " ng-if="good.goodsStatusDisplay!=3">
             <span class="buy-handler iconfont icon-minus" ng-class="{'disabled':!skuInfo}" ng-click="buyHandler('minus');"></span>
 <!--当前已经购买的数量 -->
-            <span class="buy-result">{{!skuInfo?0:skuInfo.numInCart}}</span>
-            <span  ng-class="{paying:isPaying}" class="buy-handler iconfont icon-plus buy-icon" ng-class="{'disabled':!skuInfo}" ng-click="buyHandler('plus');"></span>
+            <span class="buy-result">{{numInCart}}</span>
+            <span  ng-class="{paying:good.isPaying}" class="buy-handler iconfont icon-plus buy-icon" ng-class="{'disabled':!skuInfo}" ng-click="buyHandler('plus');"></span>
           </p>
         </div>
 <!--秒杀类产品-->
@@ -99,7 +99,7 @@
 <!-- 已经抢过了 -->
           <p class="sold-geted" ng-if="good.killStarted==1 && good.killed">已抢购</p>
 <!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
-          <p  ng-class="{paying:isPaying}" class="sk-icon" ng-click="buyHandler('plus')" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
+          <p  ng-class="{paying:good.isPaying}" class="sk-icon" ng-click="buyHandler('plus')" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
         </div>
       </div>
 <!--如果是聚合类产品-->

@@ -25,7 +25,7 @@
       "sourceType": 0,
       "displayType": 2,
       "activityType": 1,
-      "labelType": 0
+      "labelType": 2
     }, {
       "navigateName": "秒杀抢购",
       "activityId": 21134,
@@ -49,7 +49,7 @@
       "sourceType": 1,
       "displayType": 3,
       "activityType": null,
-      "labelType": 0
+      "labelType": 2
     }, {
       "navigateName": "App-王锐类目",
       "activityId": null,
@@ -161,7 +161,7 @@
       "sourceType": 1,
       "displayType": 3,
       "activityType": null,
-      "labelType": 0
+      "labelType": 2
     }]
   },
   "serverTime": "2015-09-24 16:32:38"

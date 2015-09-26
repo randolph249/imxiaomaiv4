@@ -55,6 +55,15 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     //回退
     $scope.goback = function() {
       $state.go('root.buy.nav.all');
+    };
+
+
+    //跳转到对应的活动
+    $scope.gotoActive = function(banner) {
+      $state.go('root.buy.skactive', {
+        collegeId: banner.collegeId,
+        activityId: banner.activityId
+      });
     }
 
     //跳转到详情页
@@ -72,8 +81,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     //执行购买
     $scope.buyHandler = function(good, $index) {
 
-
-      $scope.isPaying = true;
+      $scope.goodsList[$index]['isPaying'] = true;
       buyProcessManager({
         goodsId: good.activityGoodsId,
         sourceType: 2,
@@ -81,14 +89,14 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
         skuId: good.skuList[0].activitySkuId,
         price: good.skuList[0].activityPrice,
         propertyIds: ''
-      }, 'plus', good.skuList[0].numInCart, good.maxNum).then(function() {
+      }, 'plus', good.maxNum).then(function() {
         $scope.goodsList[$index].killed = true;
 
       }, function(msg) {
         alert(msg);
         return false;
       }).finally(function() {
-        $scope.isPaying = false;
+        $scope.goodsList[$index]['isPaying'] = false;
       });
     };
 

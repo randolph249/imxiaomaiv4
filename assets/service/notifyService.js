@@ -32,6 +32,7 @@ angular.module('xiaomaiApp').factory('xiaomaiMessageNotify', [
 
       //先看池子中是否有订阅事件
       var callbacks = notifyPool[eventname];
+
       //如果没有订阅或者订阅为空
       if (!angular.isObject(callbacks) || !Object.keys(callbacks).length) {
         return false;
@@ -43,9 +44,11 @@ angular.module('xiaomaiApp').factory('xiaomaiMessageNotify', [
           args);
       });
     };
+
     //从订阅列表中删除某一个订阅
     var removeOne = function(eventname, subId) {
-      var callbacks = notifyPool[eventName];
+      var callbacks = notifyPool[eventname];
+
       if (angular.isObject(callbacks) && callbacks.hasOwnProperty(
           subId)) {
         delete callbacks[subId];
@@ -53,6 +56,7 @@ angular.module('xiaomaiApp').factory('xiaomaiMessageNotify', [
     };
     //删除所有订阅释放缓存
     var remove = function(eventname) {
+
       delete notifyPool[eventname];
     };
     return {

@@ -7,9 +7,7 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
   'xiaomaiMessageNotify',
   function($state, $scope, xiaomaiService, cartManager, $timeout,
     xiaomaiMessageNotify) {
-
     cartManager.query(function(res) {
-
       $scope.totalCount = res.totalCount;
       $scope.totalPrice = res.totalPrice;
 
@@ -19,26 +17,15 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
         $scope.totalCount ? true :
         false;
 
+      //200ms之后把hasChange重置成false hasChange可以一直变化 来表示动画效果
       $scope.hasChange && $timeout(function() {
         $scope.hasChange = false;
       }, 200);
-
-      //因为购物车信息请求过一次之后 任何操作都会更新购物车数据
-      //所以可以缓存购物车信息
-
-      cartManager.store({
-        totalCount: $scope.totalCount,
-        totalPrice: $scope.totalPrice
-      });
-
-
     });
 
     //自己也监听购物车详情的变化
     xiaomaiMessageNotify.sub('cartGuiManager', function(status) {
       $scope.isShowCart = status == 'show';
-
-
     });
 
     xiaomaiMessageNotify.sub('detailGuiManager', function(status) {
@@ -47,15 +34,20 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
 
     //打开详情页面
     $scope.gotoDetail = function() {
+
+
+      // debugger;
+
       if (!$scope.totalCount || $scope.totalCount == 0) {
         return false;
       }
-
+      xiaomaiMessageNotify.pub('detailGuiManager', 'hide');
       xiaomaiMessageNotify.pub('cartGuiManager', 'show');
     };
 
     //页面销毁之前销毁购物车信息
-    $scope.$on('$destory', function() {
+    //大开页面的时候 重新请求购物车信息
+    $scope.$on('$destroy', function() {
       cartManager.store(false);
     });
 
@@ -70,39 +62,47 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
   'cookie_openid',
   'buyProcessManager',
   'xiaomaiMessageNotify',
+  'cartManager',
   function($state, $scope, xiaomaiService, cookie_openid, buyProcessManager,
-    xiaomaiMessageNotify) {
+    xiaomaiMessageNotify, cartManager) {
 
-    xiaomaiMessageNotify.sub('cartGuiManager', function(status) {
 
-      if (status == 'show') {
-        loadDetail().then(function(res) {
-          $scope.goods = res['goods'];
-          $scope.ldcFreight = res['ldcFreight'];
-          $scope.showcart = true;
-          $scope.haserror = false;
+    //显示或者隐藏购物车
+    var cartDetailSubId = xiaomaiMessageNotify.sub('cartGuiManager',
+      function(status) {
 
-          return loadCouponCount();
-        }, function() {
-          $scope.haserror = true;
-        }).then(function(coupons) {
 
-          $scope.coupons = coupons.couponInfo;
+        if (status == 'show') {
+          //获取购物车详情
+          loadDetail().then(function(res) {
+            $scope.goods = res['goods'];
+            $scope.ldcFreight = res['ldcFreight'];
+            $scope.haserror = false;
+            return res;
+          }, function() {
+            $scope.haserror = true;
+            return loadCouponCount();
 
-          return false;
-        });
-      } else {
-        $scope.showcart = false;
-      }
+          }).then(function(coupons) {
+            //获取优惠劵
+            $scope.coupons = coupons.couponInfo;
+          });
+        };
 
-      xiaomaiMessageNotify.pub('maskManager', status);
+        $scope.showcart = status == 'show' ? true : false;
+        //通知遮罩层做掉对应的
+        xiaomaiMessageNotify.pub('maskManager', status);
+      });
+
+    $scope.$on('destory', function() {
+      xiaomaiMessageNotify.removeOne('cartGuiManager', cartDetailSubId);
     })
+
 
     //继续购物
     $scope.continueShop = function() {
       xiaomaiMessageNotify.pub('cartGuiManager', 'hide');
     };
-
 
     $scope.goHomepage = function() {
       $state.go('root.buy.nav.all', {
@@ -110,8 +110,9 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
       });
     }
 
+    //返回购物车详情
     var loadDetail = function() {
-      return xiaomaiService.fetchOne('queryCartDetail', {});
+      return cartManager.queryCartDetail();
     };
 
     //获取用户优惠劵数量
@@ -148,7 +149,7 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
 
       $scope.isPaying = true;
 
-      buyProcessManager(options, type, good.skuList[0].numInCart, good.maxNum)
+      buyProcessManager(options, type, good.maxNum, good.skuList[0].numInCart)
         .then(function(
           numInCart) {
           good.skuList[0]['numInCart'] = numInCart;
