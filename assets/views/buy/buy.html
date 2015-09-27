@@ -66,9 +66,9 @@
             <span class="old-price">&yen;{{skuInfo.originPrice|xiaomaiprice}}</span>
           </p>
           <p class="priceCont" ng-if="!skuInfo">
-            <span class="aggregate-price">&yen;{{good.minWapPrice|xiaomaiprice}}</span>~
-            <span class="f14">
-              &yen;{{good.maxWapPrice|xiaomaiprice}}
+            <span class="aggregate-price">&yen;{{good.minWapPrice|xiaomaiprice}}</span>
+            <span class="f14 aggregate-price">
+            ~&yen;{{good.maxWapPrice|xiaomaiprice}}
             </span>
           </p>
 <!--普通类活动-->
@@ -104,7 +104,7 @@
 <!-- 已经抢过了 -->
             <p class="sold-geted" ng-if="good.killStarted==1 && good.killed">已抢购</p>
 <!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
-            <p class="sk-icon" ng-class="{paying:good.isPaying}" ng-click="buyHandler('plus')" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
+            <p class="sk-icon" ng-class="{paying:good.isPaying}" ng-click="buyHandler('plus',true)" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
           </div>
         </div>
 <!--如果是聚合类产品-->

@@ -13,6 +13,10 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
     var collegeId;
 
     $scope.isloading = true;
+
+
+    var preRouter, nextRouter;
+
     //获取学校ID 根据学校ID 获取推荐类目
     schoolManager.get().then(function(schoolInfo) {
       collegeId = schoolInfo.collegeId;
@@ -22,15 +26,27 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
     }).then(function(res) {
       $scope.categorys = res;
       $scope.haserror = false;
+      return siblingsNav('up', collegeId, 1)
     }, function() {
       $scope.haserror = true;
-    }).finally(function(res) {
-
-      //通知iscroll说高度发生变化
-      xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
-        'ready');
+    }).then(function(router) {
+      preRouter = router;
+      return siblingsNav('down', collegeId, 1);
+    }).then(function(router) {
+      nextRouter = router;
+      return true;
+    }).finally(function(flag) {
       $scope.isloading = false;
+      //通知iscroll说高度发生变化
+      var uptip = angular.isObject(preRouter) ? '上一个导航:' + preRouter.text :
+        '';
+      var downtip = angular.isObject(nextRouter) ?
+        '下一个导航:' + nextRouter.text : '';
+      xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
+        'ready', uptip, downtip);
     });
+
+
     //接受directive指令
     //当上拉的时候跳到上一个导航页面
     //如果下拉 先查询是否分页 如果分页 如果分页 请求下一页数据
@@ -38,20 +54,10 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
       function(arrow) {
 
         if (arrow == 'up') {
-          //跳转到上一页
-          siblingsNav('up', collegeId, 1).then(function(
-            router) {
-            $state.go(router.name, router.params);
-          });
-
+          $state.go(preRouter.name, preRouter.params);
         } else if ($scope.paginationInfo.currentPage == $scope.paginationInfo
           .totalPage) {
-          //跳转到下一页
-          siblingsNav('down', collegeId, 1).then(function(
-            router) {
-            $state.go(router.name, router.params);
-          });
-
+          $state.go(nextRouter.name, nextRouter.params);
         }
 
       });

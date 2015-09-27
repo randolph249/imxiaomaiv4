@@ -22,6 +22,23 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
         probeType: 1
       });
 
+
+      //更新提示文案
+      var updateTip = function(uptiptext, downtiptext) {
+        var childnode = ele.children()[0];
+        upTip.textContent = uptiptext;
+        downTip.textContent = downtiptext;
+
+        upTip.className = upTip.className.replace('pending', '').trim();
+        downTip.className = downTip.className.replace('pending', '').trim();
+
+
+        childnode.firstChild != upTip && childnode.insertBefore(upTip,
+          childnode.firstChild);
+        childnode.lastChild != downTip && childnode.appendChild(downTip);
+      };
+
+
       $scope.scrollstatus = 'ready'; //默认的状态是ready
 
       myScroll.on('scrollStart', function() {});
@@ -40,14 +57,14 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
       //区域高度
       var maxScrollY;
 
+      // debugger;
+
       myScroll.on('scroll', function() {
 
 
         if ($scope.scrollstatus !== 'ready') {
           return false;
         }
-
-
 
         if (this.y > 30) {
           $scrolltimeout && clearTimeout($scrolltimeout);
@@ -67,7 +84,7 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
 
       $scope.subname && xiaomaiMessageNotify.sub($scope.subname, function(
         arrow, status,
-        tip) {
+        uptiptext, downtiptext) {
 
         var childnode = ele.children()[0];
 
@@ -83,15 +100,16 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
               myScroll && myScroll.refresh();
               maxScrollY = childnode.offsetHeight - ele[0].offsetHeight;
               myScroll.scrollTo(0, 0);
+              //更新提示信息
+              updateTip(uptiptext, downtiptext);
 
             }, 50);
-            childnode.firstChild == upTip && childnode.removeChild(
-              upTip);
 
           } else {
+
             $scope.scrollstatus = 'pending';
-            upTip.textContent = tip;
-            childnode.insertBefore(upTip, childnode.firstChild);
+            upTip.className = upTip.className + ' pending';
+            upTip.textContent = uptiptext;
           }
         } else if (arrow == 'down') {
 
@@ -104,18 +122,15 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
 
               myScroll && myScroll.refresh();
               maxScrollY = childnode.offsetHeight - ele[0].offsetHeight;
+              updateTip(uptiptext, downtiptext);
 
             }, 500);
-
-            childnode.lastChild == upTip && childnode.removeChild(
-              upTip);
-
 
           } else {
 
             $scope.scrollstatus = 'pending';
-            upTip.textContent = tip;
-            childnode.appendChild(upTip);
+            downTip.className = downTip.className + ' pending';
+            downTip.textContent = uptiptext;
           }
         }
       });

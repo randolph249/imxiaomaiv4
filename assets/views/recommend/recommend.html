@@ -1,9 +1,9 @@
 <div class="recommendCategoryCont">
   <div class="errortip" ng-if="haserror">
-      错误提示....
+    错误提示....
   </div>
-  <div  ng-if="isloading" class="loading">
-     loading...
+  <div class="loading" ng-if="isloading">
+    loading...
   </div>
   <div class="" ng-repeat="item in categorys">
     <div class="recommendCateTitle">
@@ -24,12 +24,15 @@
             </span>
             <span class="old-price" ng-if="good.goodsType==1||good.goodsType==2">
               &yen;{{good.skuList[0].originPrice|xiaomaiprice}}</span>
-              <!-- 聚合 -->
+<!-- 聚合 -->
+            <span class="aggregate-price" ng-if="good.goodsType==3 && good.skuList[0].minWapPrice==good.skuList[0].maxWapPrice">
+              &yen;{{good.minWapPrice|xiaomaiprice}}
+            </span>
             <span class="aggregate-price" ng-if="good.goodsType==3 && good.skuList[0].minWapPrice!=good.skuList[0].maxWapPrice">
-              &yen;{{good.skuList[0].minWapPrice|xiaomaiprice}} ~ &yen;{{good.skuList[0].maxWapPrice|xiaomaiprice}}
+              &yen;{{good.minWapPrice|xiaomaiprice}} ~ &yen;{{good.maxWapPrice|xiaomaiprice}}
             </span>
           </p>
-          <p  ng-class="{paying:good.isPaying}" ng-click="buyHandler(good ,$index,$parent.$parent.$index);" class="buy-icon iconfont icon-plus" ng-if="good.goodsStatusDisplay!=3"></p>
+          <p class="buy-icon iconfont icon-plus" ng-class="{paying:good.isPaying}" ng-click="buyHandler(good ,$index,$parent.$parent.$index);" ng-if="good.goodsStatusDisplay!=3"></p>
           <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
         </div>
       </div>

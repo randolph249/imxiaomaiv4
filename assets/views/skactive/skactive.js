@@ -45,25 +45,25 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
       });
     }
 
-
     collegeId = $state.params.collegeId;
     activityId = $state.params.activityId;
     page = $state.params.page || 1;
-
-
 
     $scope.isloading = true;
     loadSku().then(function(res) {
       $scope.activityShowName = res.activityShowName;
       $scope.goods = res.goods;
       $scope.paginationInfo = res.paginationInfo;
-      $scope.haserror = $scope.goodsList.length ? false : true;
+      $scope.haserror = $scope.goods.length ? false : true;
     }, function() {
       $scope.haserror = true;
     }).finally(function() {
       $scope.isloading = false;
-      xiaomaiMessageNotify.pub('skactiveheightstatus', 'down',
-        'ready');
+      var hasNextPage = $scope.paginationInfo.currentPage != $scope.paginationInfo
+        .totalPage;
+
+      xiaomaiMessageNotify.pub('skactiveheightstatus', 'up', 'ready',
+        '', hasNextPage ? '请求下一页数据' : '没有更多数据了');
     });
 
     loadBanner().then(function(res) {
@@ -79,12 +79,16 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
           .totalPage) {
 
           //提示文案 下一页数据
-          xiaomaiMessageNotify.pub('activeheightstatus', 'down',
-            'pending', '请求下一页数据');
+          xiaomaiMessageNotify.pub('skactiveheightstatus', 'down',
+            'pending', '', '正在请求数据');
           //发送下页数据请求
           getNextPageData().then(function(res) {
-            xiaomaiMessageNotify.pub('skactiveheightstatus', 'down',
-              'ready');
+            var hasNextPage = $scope.paginationInfo.currentPage !=
+              $scope.paginationInfo
+              .totalPage;
+            xiaomaiMessageNotify.pub('skactiveheightstatus', 'up',
+              'ready',
+              '', hasNextPage ? '请求下一页数据' : '没有更多数据了');
           });
         }
       });

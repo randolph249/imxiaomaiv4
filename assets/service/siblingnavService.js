@@ -66,6 +66,7 @@ angular.module('xiaomaiApp').factory('siblingsNav', ['$q', 'xiaomaiService',
       };
 
       return {
+        text: nav.navigateName,
         name: paths[nav.displayType],
         params: {
           collegeId: collegeId,

@@ -112,7 +112,7 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
      *先校验是否可以进行添加或者删除
      *然后向后台提交操作请求
      **/
-    $scope.buyHandler = function(type) {
+    $scope.buyHandler = function(type, isSnap) {
 
 
       var propertyIds = '';
@@ -158,8 +158,12 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
           //更新numInCart
 
           $scope.numInCart = numInCart;
-          //如果是抢购商品 表示抢购成功
-          $scope.good.sourceType == 2 && ($scope.good.killed = true);
+
+          //如果是抢购
+          if ($scope.good.soruceType == 2) {
+            $scope.good.killed = true;
+            alert('抢购成功,赶紧去下单吧!');
+          }
 
         }, function(msg) {
           alert(msg);

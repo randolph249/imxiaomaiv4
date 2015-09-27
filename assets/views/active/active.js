@@ -46,25 +46,30 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
       $scope.haserror = true;
     }).finally(function() {
       $scope.isloading = false;
-      xiaomaiMessageNotify.pub('activeheightstatus', 'down',
-        'ready');
+
+      var hasNextPage = $scope.paginationInfo.currentPage != $scope.paginationInfo
+        .totalPage;
+
+      xiaomaiMessageNotify.pub('activeheightstatus', 'up', 'ready',
+        '', hasNextPage ? '请求下一页数据' : '没有更多数据了');
     });
-
-
 
     var iscrollSubId = xiaomaiMessageNotify.sub('activeiscrollupdate',
       function(arrow) {
         if (arrow == 'down' && $scope.paginationInfo.currentPage !=
           $scope.paginationInfo
           .totalPage) {
-
           //提示文案 下一页数据
           xiaomaiMessageNotify.pub('activeheightstatus', 'down',
-            'pending', '请求下一页数据');
+            'pending', '', '正在请求数据');
           //发送下页数据请求
           getNextPageData().then(function(res) {
-            xiaomaiMessageNotify.pub('activeheightstatus', 'down',
-              'ready');
+            var hasNextPage = $scope.paginationInfo.currentPage !=
+              $scope.paginationInfo
+              .totalPage;
+            xiaomaiMessageNotify.pub('activeheightstatus', 'up',
+              'ready',
+              '', hasNextPage ? '请求下一页数据' : '没有更多数据了');
           });
         }
       });
@@ -80,6 +85,12 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
       return res;
     });
 
+    //分享
+    $scope.showShareModel = function() {
+      xiaomaiMessageNotify.pub('shareModelManager', 'show');
+      xiaomaiMessageNotify.pub('maskManager', 'show');
+    };
+
 
     //回退
     $scope.goback = function() {
@@ -92,7 +103,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
         activityId: banner.activityId,
         collegeId: banner.collegeId
       });
-    }
+    };
 
     //跳转到详情页
     $scope.gotoDetail = function(good) {
@@ -188,17 +199,34 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
     //初始化数据请求
     $scope.isloading = true;
 
+
+    var preRouter, nextRouter;
+
     loadSku().then(function(res) {
       $scope.haserror = res.goods.length ? false : true;
       $scope.goods = res.goods;
       //
       $scope.paginationInfo = res.paginationInfo;
+      return siblingsNav('up', collegeId, 2, activityId)
     }, function() {
       $scope.haserror = true;
+    }).then(function(router) {
+      preRouter = router;
+      return siblingsNav('down', collegeId, 2, activityId);
+    }).then(function(router) {
+      nextRouter = router;
+      return true;
     }).finally(function() {
       $scope.isloading = false;
+
+      var uptip = angular.isObject(preRouter) ? '上一个导航:' + preRouter.text :
+        '';
+      var isLastPage = $scope.paginationInfo.currentPage ==
+        $scope.paginationInfo.totalPage;
+      var downtip = isLastPage ? (angular.isObject(nextRouter) ?
+        '下一个导航:' + nextRouter.text : '') : '请求下一页数据';
       xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
-        'ready');
+        'ready', uptip, downtip);
     });
 
 
@@ -211,7 +239,6 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
 
     //跳转到详情页
     $scope.gotoDetail = function(good) {
-
       xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.activityGoodsId,
         good.sourceType);
       return false;
@@ -225,31 +252,30 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
     var iscrollSubId = xiaomaiMessageNotify.sub('navmainscrollupdate',
       function(arrow) {
         if (arrow == 'up') {
-          //跳转到上一页
-          siblingsNav('up', collegeId, 2, activityId).then(function(
-            router) {
-
-            $state.go(router.name, router.params);
-          });
+          preRouter && $state.go(preRouter.name, preRouter.params);
 
         } else if ($scope.paginationInfo.currentPage == $scope.paginationInfo
           .totalPage) {
-          //跳转到下一页
-          siblingsNav('down', collegeId, 2, activityId).then(function(
-            router) {
-
-            alert(router.name);
-            $state.go(router.name, router.params);
-          });
-
+          /**
+          xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
+            'ready', angular.isObject(preRouter) ? preRouter.text : '',
+            angular.isObject(nextRouter) ? nextRouter.text : '');
+            **/
+          nextRouter && $state.go(nextRouter.name, nextRouter.params);
         } else {
           //提示文案 下一页数据
           xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
-            'pending', '请求下一页数据');
+            'pending', '正在请求数据...');
           //发送下页数据请求
           getNextPageData().then(function(res) {
+            var uptip = angular.isObject(preRouter) ? preRouter.text :
+              '';
+            var isLastPage = $scope.paginationInfo.currentPage ==
+              $scope.paginationInfo.totalPage;
+            var downtip = isLastPage ? (angular.isObject(nextRouter) ?
+              nextRouter.text : '') : '请求下一页数据';
             xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
-              'ready');
+              'ready', uptip, downtip);
           });
         }
 
