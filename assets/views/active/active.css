@@ -62,18 +62,17 @@
 .activeGoodList li > .goodItem .details .sold-out {
     border-radius: 3px;
     border: 1px solid #ff5300;
-    ;
     -webkit-transform: rotate(-30deg);
     -webkit-transform-origin: 30px 15px;
     text-align: center;
     color: #ff5300;
-    right: 4px;
+    right: 1rem;
     position: absolute;
     line-height: 1.8rem;
     height: 2rem;
     font-size: 1.2rem;
     /* padding: 0 5px; */
-    bottom: 3.6rem;
+    bottom: 3rem;
     width: 4.8rem;
     text-align: center;
 }

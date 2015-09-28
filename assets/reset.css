@@ -383,14 +383,13 @@ p.goodname {
     -webkit-transform-origin: 30px 15px;
     text-align: center;
     color: #ff5300;
-    right: 0px;
+    right: 1rem;
     position: absolute;
-    bottom: 1rem;
     line-height: 1.8rem;
     height: 2rem;
     font-size: 1.5rem;
     /* padding: 0 5px; */
-    bottom: 5rem;
+    bottom: 3rem;
     width: 5.5rem;
     text-align: center;
     background-color: #fff
@@ -410,7 +409,9 @@ p.goodname {
     .sold-out,
     .sold-geted {
         bottom: 3.4rem;
+        right: 0;
         line-height: 1.6rem;
         width: 4.4rem;
+
     }
 }
