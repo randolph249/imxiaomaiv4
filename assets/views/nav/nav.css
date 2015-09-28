@@ -158,7 +158,7 @@
     right: 0;
     top: 4.4rem;
     bottom: 4.5rem;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .list-main .list-product .GoodsCont{

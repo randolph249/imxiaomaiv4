@@ -122,10 +122,6 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
         good.sourceType);
       return false;
     };
-    //翻页
-    $scope.pagination = function(page) {
-
-    };
 
 
     //执行购买
@@ -139,13 +135,16 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
         skuId: good.skuList[0].activitySkuId,
         price: good.skuList[0].activityPrice,
         propertyIds: ''
-      }, 'plus', good.maxNum).then(function() {
-        $scope.goodsList[$index].killed = true;
+      }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
+        function() {
+          alert('赶快去下单吧\n否则可能会被其他人抢走了哦');
+          $scope.goods[$index].killed = true;
 
-      }, function(msg) {
-        alert(msg);
-        return false;
-      }).finally(function() {
+        },
+        function(msg) {
+          alert(msg);
+          return false;
+        }).finally(function() {
         $scope.goods[$index]['isPaying'] = false;
       });
     };

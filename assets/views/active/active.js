@@ -128,12 +128,14 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
         skuId: good.skuList[0].activitySkuId,
         price: good.skuList[0].activityPrice,
         propertyIds: ''
-      }, 'plus', good.maxNum).then(function() {
+      }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
+        function() {
 
-      }, function(msg) {
-        alert(msg);
-        return false;
-      }).finally(function() {
+        },
+        function(msg) {
+          alert(msg);
+          return false;
+        }).finally(function() {
         $scope.goods[$index]['isPaying'] = false;
 
       });
@@ -316,12 +318,14 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
         skuId: good.skuList[0].activitySkuId,
         price: good.skuList[0].activityPrice,
         propertyIds: ''
-      }, 'plus', good.maxNum).then(function() {
+      }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
+        function() {
 
-      }, function(msg) {
-        alert(msg);
-        return false;
-      }).finally(function() {
+        },
+        function(msg) {
+          alert(msg);
+          return false;
+        }).finally(function() {
         $scope.goods[$index]['isPaying'] = true;
       });
     };

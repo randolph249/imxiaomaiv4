@@ -21,7 +21,7 @@ angular.module('xiaomaiApp').factory('registerWx', [
     var register = function(config) {
 
       wx.config({
-        debug: env == 'online' ? false : true,
+        debug: false,
         appId: config.appId,
         timestamp: config.timestamp,
         nonceStr: config.nonceStr,

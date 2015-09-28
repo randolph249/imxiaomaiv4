@@ -104,11 +104,13 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
         skuId: good.skuList[0].skuId,
         price: good.skuList[0].wapPrice,
         propertyIds: '',
-      }, 'plus', good.maxNum).then(function() {
+      }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
+        function() {
 
-      }, function(msg) {
-        alert(msg);
-      }).finally(function() {
+        },
+        function(msg) {
+          alert(msg);
+        }).finally(function() {
         $scope.categorys[$parentindex]['goods'][$index]['isPaying'] =
           false;
 

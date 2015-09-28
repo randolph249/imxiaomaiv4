@@ -16,9 +16,8 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
       collegeId = toParam.collegeId;
       categoryId = toParam.categoryId;
       loadGoodList();
+      // loadBanner();
     });
-
-
 
     //下载商品列表
     var preRouter, nextRouter;
@@ -33,6 +32,9 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         $scope.paginationInfo = res.paginationInfo;
         $scope.haserror = false;
         return siblingsNav('up', collegeId, 3, categoryId);
+      }, function(tip) {
+        $scope.haserror = true;
+        $scope.errortip = tip;
       }).then(function(router) {
         preRouter = router;
         return siblingsNav('down', collegeId, 3, categoryId);
@@ -73,7 +75,8 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
           preRouter && $state.go(preRouter.name, preRouter.params);
         } else if ($scope.paginationInfo.currentPage == $scope.paginationInfo
           .totalPage) {
-          nextRouter && $state.go(nextRouter.name, nextRouter.params);
+          // alert('Router\' name:' + nextRouter.name);
+          $state.go(nextRouter.name, nextRouter.params);
           return false;
           // nextRouter && $state.go(nextRouter.name, nextRouter.params);
         } else {
@@ -140,9 +143,11 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         skuId: good.skuList[0].skuId,
         price: good.skuList[0].wapPrice,
         propertyIds: '',
-      }, 'plus', good.maxNum).then(function(numInCart) {}, function(msg) {
-        alert(msg);
-      }).finally(function() {
+      }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
+        function(numInCart) {},
+        function(msg) {
+          alert(msg);
+        }).finally(function() {
         $scope.goods[$index].isPaying = false;
 
       });

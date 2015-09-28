@@ -38,7 +38,7 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
     $scope.goSettlement = function() {
       var host = env == 'online' ? 'http://h5.imxiaomai.com' :
         'http://wap.tmall.imxiaomai.com';
-      window.href = host + "/order/create";
+      window.location.href = host + "/order/create";
     };
 
     //打开详情页面

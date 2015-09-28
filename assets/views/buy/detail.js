@@ -83,9 +83,9 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     //聚合类产品选择产品类型
     $scope.complexCheckProperty = function(key, val) {
       $scope.checkedProperties[key] = val;
-
       //判断是否组合出了存在的Sku信息
       var skuInfo = getSkuInfo($scope.checkedProperties, $scope.skuObject);
+
       $scope.skuInfo = skuInfo == false ? false : skuInfo;
       //如果skuInfo确定之后
       if ($scope.skuInfo) {
@@ -105,8 +105,6 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
       xiaomaiMessageNotify.pub('shareModelManager', 'show');
     };
 
-
-
     /**
      *添加到购物车或者那个购物中删除
      *先校验是否可以进行添加或者删除
@@ -115,19 +113,17 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     $scope.buyHandler = function(type, isSnap) {
 
 
-      var propertyIds = '';
+      var propertyIds = [];
       //如果聚合商品
-      if ($scope.good.goodsType == 3) {
 
-        if (!skuInfo) {
-          alert('请选择商品规格');
-          return false;
-        } else {
-          angular.forEach($scope.checkedProperty, function(item) {
-            propertyIds.push(item);
-          });
-          propertyIds = propertyIds.join('_');
-        }
+      if (!$scope.skuInfo) {
+        alert('请选择商品规格');
+        return false;
+      } else {
+        angular.forEach($scope.checkedProperty, function(item) {
+          propertyIds.push(item);
+        });
+        propertyIds = propertyIds.join('_');
       }
 
 
@@ -153,7 +149,8 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
       //执行购买
       //如果是聚合类产品 需要将选中的PropertyIdVal提交给后台
       buyProcessManager(options, type,
-          $scope.good.maxNum, $scope.numInCart)
+          Math.min($scope.good.maxNum, $scope.skuInfo.stock), $scope.numInCart
+        )
         .then(function(numInCart) {
           //更新numInCart
 
