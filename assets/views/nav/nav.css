@@ -148,7 +148,7 @@
 
 .list-main .list-product {
     /* flex-grow: 1; */
-    padding: 1rem;
+    padding: 0 1rem;
     background-color: #fff;
     border-left: 1px solid #ddd;
     float: left;
@@ -187,6 +187,29 @@
     -webkit-text-stroke-width: 0px;
 }
 
+.navmain-uptip{
+  position: absolute;
+  line-height: 30px;
+  height:30px;
+  font-size:1.2em;
+  text-align: center;
+  top:-30px;
+  width:100%;
+}
+.navmain-uptip.pending{
+  position: static;
+}
+.navmain-downtip,.skactive-downtip{
+  position: absolute;
+  height:30px;
+  font-size:1.2em;
+  bottom:-30px;
+  width:100%;
+  line-height: 30px;
+}
+.navmain-downtip.pending{
+  position: static;
+}
 
 /* 小屏兼容 */
 

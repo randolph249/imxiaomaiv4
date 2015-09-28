@@ -125,59 +125,6 @@ angular.module('xiaomaiApp').factory('urlInterceptor', ['env', function(env) {
   return interceptor;
 }]);
 
-
-
-//销毁页面数据管理
-//在当前$scope被销毁之前可以保存销毁数据 当页面回退到销毁页面的时候 可以直接读取销毁数据
-//不需要再次向后台去做请求
-angular.module('xiaomaiApp').factory('destoryDataManager', [
-  'xiaomaiCacheManager',
-  function(xiaomaiCacheManager) {
-    //从整体缓存中读取销毁数据的缓存
-    /**
-     *@param {String} router 当前页面的路由
-     *这个路由要和已经缓存的路由name进行比对
-     *如果不一致 说明缓存的不是同一个页面数据 把之前的缓存全部删掉 重新缓存
-     *如果一致 只需要在这个缓存上继续添加
-     *@param {name} 自定义数据Key
-     **/
-    var write = function(router, name, obj) {
-
-        var destoryCaches = xiaomaiCacheManager.readCache(
-          'beforeDestoryPageData');
-
-        if (!destoryCaches || destoryCaches['router'] != router) {
-          destoryCaches = {
-            router: router,
-            data: {}
-          };
-        }
-
-        destoryCaches.data[name] = obj;
-        //写入缓存
-        xiaomaiCacheManager.writeCache('beforeDestoryPageData',
-          destoryCaches);
-
-      },
-      read = function(name) {
-        var destoryCaches = xiaomaiCacheManager.readCache(
-          'beforeDestoryPageData');
-        if (!destoryCaches) {
-          return false;
-        }
-
-        return destoryCaches['data'][name] ||
-          false;
-      };
-
-    return {
-      read: read,
-      write: write
-    }
-  }
-]);
-
-
 /**
  *提供ajax服务
  **/
@@ -209,10 +156,6 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
       //处理返回结果
       handlerResult = function(res) {
         //如果返回码错误 或者返回data不存在
-        if (!res.hasOwnProperty('code') || !res.hasOwnProperty('data')) {
-          return res;
-        }
-
         if (res.code != 0 || !res.data) {
           return false;
         }

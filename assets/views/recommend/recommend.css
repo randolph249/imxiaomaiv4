@@ -1,5 +1,5 @@
 .recommendCategoryCont {
-    margin: -10px;
+    margin: 0 -10px;
     background: #fff;
 }
 
@@ -25,6 +25,7 @@
     color: #bbb;
     transform: rotate(-90deg);
     font-size: 1.2rem;
+
 }
 
 .recommendCategoryCont .recommendCateColumn {

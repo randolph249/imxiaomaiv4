@@ -66,22 +66,11 @@ angular.module('xiaomaiApp').factory('schoolManager', [
     //设置学校信息 同时把学校信息提交给后台接口
     var setSchool = function(info) {
       var deferred = $q.defer();
-
-      var schoolInfo = xiaomaiCacheManager.readCache('getSchool'); //尝试从缓存中读取学校信息
-
-
-      //如果用户提交过来的学校信息和缓存中的学校信息一致
-      if (schoolInfo && schoolInfo.collegeId == info.collegeId) {
-        deferred.resolve();
-        return deferred.promise;
-      }
-
       xiaomaiService.save('saveSchool', {
         collegeId: info.collegeId
       }).then(function(res) {
+        xiaomaiCacheManager.writeCache('getSchool', res);
         deferred.resolve();
-        xiaomaiCacheManager.clean('getSchool')
-
       }, function(msg) {
         deferred.reject(msg)
       });

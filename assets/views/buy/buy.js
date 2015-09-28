@@ -23,16 +23,43 @@ angular.module('xiaomaiApp').controller('buyCtrl', [
     $scope.closeMask = function() {
       xiaomaiMessageNotify.pub('cartGuiManager', 'hide');
       xiaomaiMessageNotify.pub('detailGuiManager', 'hide');
+      xiaomaiMessageNotify.pub('shareModelManager', 'hide');
+
+    }
+
+    //关闭分享对话框
+    $scope.closeShare = function() {
+      xiaomaiMessageNotify.pub('shareModelManager',
+        'hide');
+      //判断是否
+      if (detailGuiStatus == 'hide' && cartGuiStatus == 'hide') {
+        xiaomaiMessageNotify.pub('maskManager', 'hide')
+      }
     }
 
     var detailGuiStatus, cartGuiStatus;
-    xiaomaiMessageNotify.sub('detailGuiManager', function(status) {
+    var detailGuiId = xiaomaiMessageNotify.sub('detailGuiManager', function(
+      status) {
       detailGuiStatus = status;
     });
 
-    xiaomaiMessageNotify.sub('cartGuiManager', function(status) {
+    var cartGuiId = xiaomaiMessageNotify.sub('cartGuiManager', function(
+      status) {
       cartGuiStatus = status;
     });
+
+    var sharModelId = xiaomaiMessageNotify.sub('shareModelManager',
+      function(status) {
+        $scope.shareIsShow = status == 'show' ? true : false;
+      });
+
+
+    $scope.$on('$destroy', function() {
+      xiaomaiMessageNotify.removeOne('cartGuiManager', cartGuiId);
+      xiaomaiMessageNotify.removeOne('detailGuiManager', detailGuiId);
+      xiaomaiMessageNotify.removeOne('shareModelManager', sharModelId);
+    });
+
 
 
     //监听路由变化前 如果详情页 或者购物车打开 组织默认行为 关闭对话框

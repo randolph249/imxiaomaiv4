@@ -35,6 +35,8 @@ angular.module('xiaomaiApp').controller('feedbackCtrl', [
       }).then(function() {
         alert('提交成功!谢谢!');
         $state.go('root.buy.nav.all');
+      }, function(msg) {
+        alert('提交失败,请重新尝试!\n失败原因:' + msg);
       });
 
     }

@@ -3,10 +3,10 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
   '$state',
   'xiaomaiService',
   'schoolManager',
-  'destoryDataManager',
   'xiaomaiMessageNotify',
+  'xiaomaiCacheManager',
   function($scope, $state, xiaomaiService, schoolManager,
-    destoryDataManager, xiaomaiMessageNotify) {
+    xiaomaiMessageNotify, xiaomaiCacheManager) {
 
     $scope.activities = [];
 
@@ -32,17 +32,33 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
         '');
     });
 
-    //缓存当前页面数据
-    var destoryRouter;
-    $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
-      destoryRouter = toState.name + angular.toJson(toParam);
-    });
 
+    var iscrollSubId = xiaomaiMessageNotify.sub('navmainscrollupdate',
+      function(arrow) {
+
+        if (arrow == 'up') {
+          //跳转到上一页
+          siblingsNav('up', collegeId, 0).then(function(
+            router) {
+            $state.go(router.name, router.params);
+          });
+        } else {
+          //跳转到下一页
+          siblingsNav('down', collegeId, 0).then(function(
+            router) {
+            $state.go(router.name, router.params);
+          });
+
+        }
+
+      });
+
+
+    //缓存页面数据
     $scope.$on('$destory', function() {
-      destoryDataManager.write(
-        destoryRouter, 'activities', {
-          activities: $scope.activities
-        });
+      xiaomaiCacheManager.writeCache('activities', {
+        activities: $scope.activities
+      });
     });
 
 

@@ -17,7 +17,7 @@ angular.module('xiaomaiApp').directive('countdown', [
           })
           return false;
         }
-        counttime = counttime - 1000;
+        counttime = counttime - 1;
         // $scope.counttime = hhmmss(counttime);
         ele.html(hhmmss(counttime));
       }, 1000);

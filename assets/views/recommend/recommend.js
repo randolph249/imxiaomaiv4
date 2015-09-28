@@ -6,11 +6,17 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
   'buyProcessManager',
+  'siblingsNav',
   function($scope, $state, xiaomaiService, schoolManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify, buyProcessManager) {
+    xiaomaiCacheManager, xiaomaiMessageNotify, buyProcessManager,
+    siblingsNav) {
     var collegeId;
 
     $scope.isloading = true;
+
+
+    var preRouter, nextRouter;
+
     //获取学校ID 根据学校ID 获取推荐类目
     schoolManager.get().then(function(schoolInfo) {
       collegeId = schoolInfo.collegeId;
@@ -20,37 +26,48 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
     }).then(function(res) {
       $scope.categorys = res;
       $scope.haserror = false;
+      return siblingsNav('up', collegeId, 1)
     }, function() {
       $scope.haserror = true;
-    }).finally(function(res) {
-
-      //通知iscroll说高度发生变化
-      xiaomaiMessageNotify.pub('navmainheightstatus', 'down', 'ready',
-        '');
-
+    }).then(function(router) {
+      preRouter = router;
+      return siblingsNav('down', collegeId, 1);
+    }).then(function(router) {
+      nextRouter = router;
+      return true;
+    }).finally(function(flag) {
       $scope.isloading = false;
-    });
-
-    var subId = xiaomaiMessageNotify.sub('navmainscrollupdate', function(
-      arrow) {
-
-      if (arrow == 'up') {
-
-        xiaomaiMessageNotify.pub('navmainheightstatus', 'up', 'doing',
-          '将进入首页');
-
-        $state.go('root.buy.nav.all')
-      } else {
-        xiaomaiMessageNotify.pub('navmainheightstatus', 'down', 'doing',
-          '下一页是老李活动');
-      }
+      //通知iscroll说高度发生变化
+      var uptip = angular.isObject(preRouter) ? '上一个导航:' + preRouter.text :
+        '';
+      var downtip = angular.isObject(nextRouter) ?
+        '下一个导航:' + nextRouter.text : '';
+      xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
+        'ready', uptip, downtip);
     });
 
 
+    //接受directive指令
+    //当上拉的时候跳到上一个导航页面
+    //如果下拉 先查询是否分页 如果分页 如果分页 请求下一页数据
+    var iscrollSubId = xiaomaiMessageNotify.sub('navmainscrollupdate',
+      function(arrow) {
 
-    //数据销毁之前保存数据
+        if (arrow == 'up') {
+          $state.go(preRouter.name, preRouter.params);
+        } else if ($scope.paginationInfo.currentPage == $scope.paginationInfo
+          .totalPage) {
+          $state.go(nextRouter.name, nextRouter.params);
+        }
+
+      });
+
     $scope.$on('$destroy', function() {
+      //保存页面数据
       xiaomaiCacheManager.writeCache('categoryGoods', $scope.categorys);
+      //删除订阅
+      xiaomaiMessageNotify.removeOne('navmainscrollupdate',
+        iscrollSubId);
     });
 
 
@@ -65,11 +82,6 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
 
     //打开详情页面
     $scope.gotoDetail = function(good) {
-      // $state.go($state.current.name, {
-      //   showDetail: true,
-      //   goodId: good.goodsId,
-      //   sourceType: good.sourceType
-      // });
 
       xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.goodsId,
         good.sourceType);
@@ -79,14 +91,15 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
     //购买按钮点击处理
     //如果是聚合类产品 打开购买链接
     //如果是非聚合类产品 执行购买流程
-    $scope.buyHandler = function(good) {
+    $scope.buyHandler = function(good, $index, $parentindex) {
+
 
       if (good.goodsType == 3) {
         $scope.gotoDetail(good);
         return false;
       }
 
-      $scope.isPaying = true;
+      $scope.categorys[$parentindex]['goods'][$index]['isPaying'] = true;
       buyProcessManager({
         goodsId: good.bgGoodsId,
         sourceType: good.sourceType,
@@ -94,12 +107,14 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
         skuId: good.skuList[0].skuId,
         price: good.skuList[0].wapPrice,
         propertyIds: '',
-      }, 'plus', good.skuList[0].numInCart, good.maxNum).then(function() {
+      }, 'plus', good.maxNum).then(function() {
 
       }, function(msg) {
         alert(msg);
       }).finally(function() {
-        $scope.isPaying = false;
+        $scope.categorys[$parentindex]['goods'][$index]['isPaying'] =
+          false;
+
       });
     };
   }

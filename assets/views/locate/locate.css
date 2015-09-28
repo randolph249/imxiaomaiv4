@@ -20,6 +20,10 @@
 .pub-header .icon-locate-right {
     width: 45px;
     text-align: center;
+    float:left;
+}
+.pub-header .icon-locate-right {
+  float:right;
 }
 
 .pub-header .icon-back:before,
@@ -33,11 +37,11 @@
     line-height: 4.4rem;
     position: absolute;
     top: 0;
-    left: 44px;
-    right: 44px;
+    left: 45px;
+    right: 45px;
 }
 
-.countrylist 
+.countrylist
 .colleges_content {
     position: absolute;
     left: 0;
@@ -58,8 +62,8 @@
 
 .colleges_content .locateCollege,
 .colleges_content .allSchools .citylist li {
-    height: 50px;
-    line-height: 50px;
+    height: 4rem;
+    line-height: 4rem;
     font-size: 14px;
     padding: 0 15px;
     border-bottom: #eee solid 1px;
@@ -97,4 +101,13 @@
 .iconfont {
     font-family: "iconfont" !important;
     -webkit-text-stroke-width: 0px;
+}
+
+.colleges_content{
+  position: absolute;
+  left:0;
+  right:0;
+  top:4.4em;
+  bottom:0;
+  overflow:hidden;
 }

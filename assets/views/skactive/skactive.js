@@ -7,7 +7,8 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
   'xiaomaiMessageNotify',
   function($scope, $state, xiaomaiService, buyProcessManager,
     xiaomaiCacheManager, xiaomaiMessageNotify) {
-    var collegeId, activityId, page, bannerhasFresh = false;
+    var collegeId, activityId, page = 1,
+      bannerhasFresh = false;
     //监听路由参数变化
 
     //抓取Banner信息
@@ -18,7 +19,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
       });
     };
 
-    $scope.goodsList = [];
+    $scope.goods = [];
     //获取活动商品列表数据
     var loadSku = function() {
       return xiaomaiService.fetchOne('activeGoods', {
@@ -30,31 +31,89 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     };
 
 
+    //获取下一页数据
+    var getNextPageData = function() {
+      return xiaomaiService.fetchOne('activeGoods', {
+        collegeId: collegeId,
+        activityId: activityId,
+        currentPage: $scope.paginationInfo.currentPage + 1,
+        recordPerPage: 20
+      }).then(function(res) {
+        $scope.paginationInfo = res.paginationInfo;
+        $scope.goods = $scope.goods.concat(res.goods);
+        return res;
+      });
+    }
+
     collegeId = $state.params.collegeId;
     activityId = $state.params.activityId;
     page = $state.params.page || 1;
 
-
-
     $scope.isloading = true;
     loadSku().then(function(res) {
       $scope.activityShowName = res.activityShowName;
-      $scope.goodsList = res.goods;
+      $scope.goods = res.goods;
       $scope.paginationInfo = res.paginationInfo;
-      $scope.haserror = $scope.goodsList.length ? false : true;
+      $scope.haserror = $scope.goods.length ? false : true;
     }, function() {
       $scope.haserror = true;
     }).finally(function() {
       $scope.isloading = false;
+      var hasNextPage = $scope.paginationInfo.currentPage != $scope.paginationInfo
+        .totalPage;
+
+      xiaomaiMessageNotify.pub('skactiveheightstatus', 'up', 'ready',
+        '', hasNextPage ? '请求下一页数据' : '没有更多数据了');
     });
 
     loadBanner().then(function(res) {
       $scope.banners = res.banners;
       return res;
     });
+
+
+    var iscrollSubId = xiaomaiMessageNotify.sub('skactiveiscrollupdate',
+      function(arrow) {
+        if (arrow == 'down' && $scope.paginationInfo.currentPage !=
+          $scope.paginationInfo
+          .totalPage) {
+
+          //提示文案 下一页数据
+          xiaomaiMessageNotify.pub('skactiveheightstatus', 'down',
+            'pending', '', '正在请求数据');
+          //发送下页数据请求
+          getNextPageData().then(function(res) {
+            var hasNextPage = $scope.paginationInfo.currentPage !=
+              $scope.paginationInfo
+              .totalPage;
+            xiaomaiMessageNotify.pub('skactiveheightstatus', 'up',
+              'ready',
+              '', hasNextPage ? '请求下一页数据' : '没有更多数据了');
+          });
+        }
+      });
+
+
+
+    $scope.$on('$destroy', function() {
+      //删除订阅
+      xiaomaiMessageNotify.removeOne('skactiveiscrollupdate',
+        iscrollSubId);
+    });
+
+
     //回退
     $scope.goback = function() {
       $state.go('root.buy.nav.all');
+    };
+
+
+    //跳转到对应的活动
+    $scope.gotoActive = function(banner) {
+      $state.go('root.buy.skactive', {
+        collegeId: banner.collegeId,
+        activityId: banner.activityId
+      });
     }
 
     //跳转到详情页
@@ -72,8 +131,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     //执行购买
     $scope.buyHandler = function(good, $index) {
 
-
-      $scope.isPaying = true;
+      $scope.goods[$index]['isPaying'] = true;
       buyProcessManager({
         goodsId: good.activityGoodsId,
         sourceType: 2,
@@ -81,14 +139,14 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
         skuId: good.skuList[0].activitySkuId,
         price: good.skuList[0].activityPrice,
         propertyIds: ''
-      }, 'plus', good.skuList[0].numInCart, good.maxNum).then(function() {
+      }, 'plus', good.maxNum).then(function() {
         $scope.goodsList[$index].killed = true;
 
       }, function(msg) {
         alert(msg);
         return false;
       }).finally(function() {
-        $scope.isPaying = false;
+        $scope.goods[$index]['isPaying'] = false;
       });
     };
 
@@ -103,15 +161,15 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
       });
 
       //如果是活动开始了
-      if ($scope.goodsList[countdownindex]['killStarted'] === 0) {
+      if ($scope.goods[countdownindex]['killStarted'] === 0) {
         //修改活动状态
-        $scope.goodsList[countdownindex]['killStarted'] = 1;
+        $scope.goods[countdownindex]['killStarted'] = 1;
         //修改距离开始时间
-        $scope.goodsList[countdownindex]['beginTime'] = -1;
+        $scope.goods[countdownindex]['beginTime'] = -1;
         //截止时间到期了
       } else if ($scope.goodsList[countdownindex]['killStarted'] === 1) {
-        $scope.goodsList[countdownindex]['killStarted'] = 2;
-        $scope.goodsList[countdownindex]['buyLeftTime'] = -1;
+        $scope.goods[countdownindex]['killStarted'] = 2;
+        $scope.goods[countdownindex]['buyLeftTime'] = -1;
       }
     }
   }
