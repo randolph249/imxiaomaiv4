@@ -235,11 +235,13 @@ body {
 
 .loading,.errortip{
     position: absolute;
-    top: 40%;
+    margin-top: 80%;
     width: 100%;
     text-align: center;
     font-size: 1.6rem;
     color: #ff5300;
+    border: 0 !important;
+    background: none !important;
 }
 
 .f14{
@@ -247,6 +249,9 @@ body {
 }
 .colorOrg{
     color: #ff5300;
+}
+.hgt100{
+    height: 100%;
 }
 .mod-wrap {
     /* position: fixed;
@@ -313,7 +318,7 @@ body {
     right: 0;
     bottom: 10px;
     background-color: #fff;
-    font-size: 3.6rem;
+    font-size: 3.3rem;
     line-height: 1;
     color: #fc541f;
 }

@@ -8,6 +8,7 @@
 }
 .skactiveGoodList {
     min-height: 1px;
+    border-top: 0.5rem solid #eee;
 }
 
 .skactiveGoodList li {
@@ -101,8 +102,9 @@
 /*banner*/
 
 .skactiveGoodBanner {
-     width: 100%;
-    height: 160px; 
+    /*  width: 100%;
+        height: 160px;  */
+    padding-bottom: 40%;
     background: #eee;
     background-size: 100% auto;
     background-repeat: no-repeat;

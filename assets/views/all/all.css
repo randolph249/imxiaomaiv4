@@ -1,5 +1,6 @@
 .category-active-list{
   padding-top:10px;
+  min-height: 100%;
 }
 .category-active-list li {
     background-size: 100% auto;
