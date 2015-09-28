@@ -48,7 +48,7 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
       var refreshTimeout = setTimeout(function() {
         var childnode = ele.children()[0];
         maxScrollY = childnode.offsetHeight - ele[0].offsetHeight;
-        myScroll.refresh();
+        myScroll && myScroll.refresh();
       }, 1000);
 
       //scroll默认延时100MS执行

@@ -50,6 +50,11 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/wap/index/categoryGoods',
         type: 'GET'
       },
+      //类目下的banner
+      'categoryBanners': {
+        type: 'GET',
+        url: '/wap/category/banners'
+      },
       //普通类目下产品
       'goods': {
         url: '/wap/category/goods',

@@ -53,7 +53,7 @@
     </div>
     <div class="goodDetailWrap" subname="{{'detailgoodheightupdate'}}" xiaomai-iscroll>
       <div>
-        <div class="imgCont" ng-style="{'background-image':'url('+good.imageUrl+')'}">
+        <div class="imgCont" ng-style="{'background-image':'url('+(skuInfo&&skuInfo.imageUrl?skuInfo.imageUrl:good.imageUrl)+')'}">
 <!--到达类型-->
           <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
         </div>
@@ -77,7 +77,7 @@
             <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
 <!--进行数量选择-->
             <p class="buy-handler-cont " ng-if="good.goodsStatusDisplay!=3">
-              <span class="buy-handler iconfont icon-minus" ng-class="{'disabled':!skuInfo}" ng-click="buyHandler('minus');"></span>
+              <span class="buy-handler iconfont icon-minus" ng-class="{'disabled':!skuInfo||numInCart<1}" ng-click="buyHandler('minus');"></span>
 <!--当前已经购买的数量 -->
               <span class="buy-result">{{numInCart}}</span>
               <span class="buy-handler iconfont icon-plus buy-icon" ng-class="{'disabled':!skuInfo}" ng-class="{paying:good.isPaying}" ng-click="buyHandler('plus');"></span>

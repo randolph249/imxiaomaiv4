@@ -1,10 +1,16 @@
 <div class="GoodsCont">
 
-  <div class="errortip" ng-if="haserror">{{errorip}}</div>
+  <div class="errortip" ng-if="haserror">{{errortip}}</div>
   <div  ng-if="isloading" class="loading">
       loading....
   </div>
-
+  <!-- <div class="banner">
+    <ks-swiper-container swiper="swiper">
+      <ks-swiper-slide class="swiper-slide" ng-repeat="banner in banners">
+        <div class="categoryBanners" ng-click="gotoActive(banner);" ng-style="{'background-image':'url('+banner.imageUrl+')'}"></div>
+      </ks-swiper-slide>
+    </ks-swiper-container>
+  </div> -->
   <div class="GoodCont" ng-repeat="good in goods">
     <div class="imgCont" ng-click="gotoDetail(good);" ng-style='{"background-image":"url("+good.imageUrl+")"}'></div>
     <div class="details">

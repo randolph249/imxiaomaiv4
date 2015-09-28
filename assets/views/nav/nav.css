@@ -95,8 +95,8 @@
 .list-main .list-category .nav-super.nav-checked {
     color: #ff5300;
     font-size: 1.5rem;
-    border-bottom: #ff5300 solid 0.3rem;
-    background: #fff;
+    border-bottom: #ff5300 solid 3px;
+    background-color: #fff;
 }
 
 .list-main .list-category .nav-super p.arrow-down {
@@ -150,7 +150,7 @@
     right: 0;
     top: 4.4rem;
     bottom: 4.5rem;
-    overflow: auto;
+    overflow: hidden;
 }
 
 /* *

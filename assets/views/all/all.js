@@ -26,7 +26,8 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
       $scope.haserror = false;
       $scope.activities = res.activities;
       return siblingsNav('down', collegeId, 0);
-    }, function() {
+    }, function(msg) {
+      debugger;
       $scope.haserror = true;
     }).then(function(router) {
       nextRouter = router;
@@ -68,6 +69,12 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
 
     //链接跳转
     $scope.goto = function(active) {
+
+      if (active.isLinkUrl == '1') {
+        window.location.href = active.linkUrl;
+        return false;
+      }
+
       var tostate = '';
       switch (active.activityType) {
         case 1:
