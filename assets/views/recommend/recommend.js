@@ -42,7 +42,7 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
         '';
       var downtip = angular.isObject(nextRouter) ?
         '下一个导航:' + nextRouter.text : '';
-      xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
+      xiaomaiMessageNotify.pub('navmainheightstatus', 'up',
         'ready', uptip, downtip);
     });
 
@@ -52,14 +52,11 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
     //如果下拉 先查询是否分页 如果分页 如果分页 请求下一页数据
     var iscrollSubId = xiaomaiMessageNotify.sub('navmainscrollupdate',
       function(arrow) {
-
         if (arrow == 'up') {
           $state.go(preRouter.name, preRouter.params);
-        } else if ($scope.paginationInfo.currentPage == $scope.paginationInfo
-          .totalPage) {
-          $state.go(nextRouter.name, nextRouter.params);
+        } else {
+          nextRouter && $state.go(nextRouter.name, nextRouter.params);
         }
-
       });
 
     $scope.$on('$destroy', function() {

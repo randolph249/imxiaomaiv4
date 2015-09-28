@@ -47,7 +47,7 @@ angular.module('xiaomaiApp').factory('siblingsNav', ['$q', 'xiaomaiService',
 
       //如果是
       if (arrow == 'up') {
-        return $index == 0 ? false : ($index - 1);
+        return $index == -1 ? false : ($index - 1);
       }
 
       if (arrow == 'down') {
@@ -64,7 +64,6 @@ angular.module('xiaomaiApp').factory('siblingsNav', ['$q', 'xiaomaiService',
         '2': 'root.buy.nav.active',
         '3': 'root.buy.nav.category'
       };
-
       return {
         text: nav.navigateName,
         name: paths[nav.displayType],
@@ -80,13 +79,14 @@ angular.module('xiaomaiApp').factory('siblingsNav', ['$q', 'xiaomaiService',
       var $index = 0;
       var deferred = $q.defer();
 
+      // console.log(arguments);
+
       xiaomaiService.fetchOne('navgatorlist', {
         collegeId: collegeId
       }).then(function(res) {
         var navs = res.navigateItems;
         var navIndex = getSiblings(navs, arrow, displayType,
           relateId);
-
         angular.isNumber(navIndex) ? deferred.resolve(getNav(navs[
             navIndex], collegeId)) :
           deferred.reject();

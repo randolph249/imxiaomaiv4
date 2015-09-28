@@ -161,6 +161,10 @@
     overflow: auto;
 }
 
+.list-main .list-product .GoodsCont{
+    min-height: 100%;
+}
+
 /* *
     *hot-1 new-2 recommend-3
     ***/

@@ -43,10 +43,6 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
 
     //打开详情页面
     $scope.gotoDetail = function() {
-
-
-      // debugger;
-
       if (!$scope.totalCount || $scope.totalCount == 0) {
         return false;
       }

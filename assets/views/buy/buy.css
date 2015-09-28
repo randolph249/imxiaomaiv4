@@ -367,6 +367,8 @@
     float: left;
     text-align: right;
     line-height: 6.5rem;
+    position: relative;
+    top: 1rem;
 }
 .cartDetail .good-info p.good-title {
   font-size: 1.4rem;
@@ -387,8 +389,13 @@
   color: #ff5300;
   line-height: 4.5rem;
   font-size: 2.5rem;
+  position: absolute;
+}
+.cartDetail .good-info .icon-minus{
+      right: 6rem;
 }
 .cartDetail .good-info .icon-plus {
+    right: 0;
   font-size: 2.9rem;
 }
 .cartDetail .good-info .good-count {
@@ -398,6 +405,8 @@
   width: 2.0rem;
   color: #333;
   text-align: center;
+  position: absolute;
+  right: 3.4rem;
 }
 .cartDetail .cartDetail-tip {
     position: absolute;

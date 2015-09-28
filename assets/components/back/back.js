@@ -57,8 +57,6 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
       //区域高度
       var maxScrollY;
 
-      // debugger;
-
       myScroll.on('scroll', function() {
 
 
@@ -66,13 +64,13 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
           return false;
         }
 
-        if (this.y > 30) {
+        if (this.y > 40) {
           $scrolltimeout && clearTimeout($scrolltimeout);
           $scrolltimeout = setTimeout(function() {
             xiaomaiMessageNotify.pub($scope.pubname, 'up');
             $scope.scrollstatus = 'pending';
           }, 100);
-        } else if (Math.abs(this.y) > maxScrollY + 10) {
+        } else if (Math.abs(this.y) > maxScrollY + 40) {
           $scrolltimeout && clearTimeout($scrolltimeout);
           $scrolltimeout = setTimeout(function() {
             xiaomaiMessageNotify.pub($scope.pubname, 'down');
@@ -82,10 +80,10 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
 
       });
 
+
       $scope.subname && xiaomaiMessageNotify.sub($scope.subname, function(
         arrow, status,
         uptiptext, downtiptext) {
-
         var childnode = ele.children()[0];
 
         if (arrow == 'up') {
@@ -95,14 +93,12 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
 
             refreshTimeout && clearTimeout(refreshTimeout);
             refreshTimeout = null;
-
             setTimeout(function() {
               myScroll && myScroll.refresh();
               maxScrollY = childnode.offsetHeight - ele[0].offsetHeight;
               myScroll.scrollTo(0, 0);
               //更新提示信息
               updateTip(uptiptext, downtiptext);
-
             }, 50);
 
           } else {
@@ -112,7 +108,6 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
             upTip.textContent = uptiptext;
           }
         } else if (arrow == 'down') {
-
           if (status == 'ready') {
             $scope.scrollstatus = 'ready';
             refreshTimeout && clearTimeout(refreshTimeout);
@@ -123,6 +118,8 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
               myScroll && myScroll.refresh();
               maxScrollY = childnode.offsetHeight - ele[0].offsetHeight;
               updateTip(uptiptext, downtiptext);
+              xiaomaiMessageNotify.pub('navmainscrollupdate',
+                'down');
 
             }, 500);
 
@@ -142,8 +139,6 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
         myScroll = null;
         //删除订阅
         xiaomaiMessageNotify.remove($scope.subname);
-
-
       });
     }
 
