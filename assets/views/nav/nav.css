@@ -205,10 +205,11 @@
 }
 .navmain-downtip,.skactive-downtip{
   position: absolute;
-  height:30px;
+  height:3rem;
   font-size:1.2em;
   width:100%;
-  line-height: 30px;
+  line-height: 3rem;
+  color: #3a404b;
 }
 .navmain-downtip.pending{
   position: static;
