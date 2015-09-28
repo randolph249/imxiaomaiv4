@@ -35,17 +35,43 @@ angular.module('xiaomaiApp').factory('schoolManager', [
     };
 
     //查询学校信息
+    //然后查询白名单 如果在白明白之呢i
     var querySchoolInfo = function(deferred) {
-      lock = true, //请求功能中上锁
-        schoolInfo = xiaomaiCacheManager.readCache('getSchool'); //尝试从缓存中读取学校信息
-      //如果有缓存的学校信息 直接执行缓存 如果没有向后台发送请求
-
+      lock = true; //请求功能中上锁
+      var schoolInfo;
       xiaomaiService.fetchOne('getSchool').then(function(res) {
         //缓存到本地
         xiaomaiCacheManager.writeCache('getSchool', res)
           //吐给用户备份数据 防止原数据被修改
-        deferred.resolve(res);
+        schoolInfo = res;
+        console.log(schoolInfo.collegeName + '的ID是:' + schoolInfo.collegeId);
+        // deferred.resolve(res);
+        // hanlderQuerys();
+        return xiaomaiService.fetchOne('whitelist');
+      }).then(function(whitelist) {
+        console.log('白名单是:' + whitelist.collegeWhiteList);
+
+        var reg = new RegExp(",?(" + schoolInfo.collegeId + "),?");
+        //缓存学校白名单
+        xiaomaiCacheManager.writeCache('whitelist', whitelist);
+        /**回头注释掉**/
+        deferred.resolve(schoolInfo);
         hanlderQuerys();
+        /****/
+
+        //如果当前学校不在白名单里面 就不用继续处理队列了
+        // if (reg.test(whitelist.collegeWhiteList)) {
+        //   deferred.resolve(schoolInfo);
+        //   hanlderQuerys();
+        // } else {
+        //   alert('当前学校不在商城V4的白名单,将跳到旧版商城!');
+        //   var host = env == 'online' ? 'http://h5.imxiaomai.com/' :
+        //     'http://wap.tmall.imxiaomai.com/';
+        //   window.location.href = host;
+        //   //
+        // }
+
+
       });
     }
     var getSchool = function() {
@@ -64,15 +90,32 @@ angular.module('xiaomaiApp').factory('schoolManager', [
     };
 
     //设置学校信息 同时把学校信息提交给后台接口
+    //获取到学校白名单之后 查询是否在白名单中 只允许白名单中的学校使用新版
     var setSchool = function(info) {
       var deferred = $q.defer();
+      var schoolInfo = info;
       xiaomaiService.save('saveSchool', {
         collegeId: info.collegeId
       }).then(function(res) {
         xiaomaiCacheManager.writeCache('getSchool', res);
-        deferred.resolve();
+        return xiaomaiService.fetchOne('whitelist');
+      }).then(function(whitelist) {
+        var reg = new RegExp(",?(" + schoolInfo.collegeId + "),?");
+        //缓存学校白名单
+        xiaomaiCacheManager.writeCache('whitelist', whitelist);
+        //如果当前学校不在白名单里面 就不用继续处理队列了
+        if (reg.test(whitelist.collegeWhiteList)) {
+          deferred.resolve(schoolInfo);
+        } else {
+          alert('当前学校不在商城V4的白名单,将跳到旧版商城!');
+          var host = env == 'online' ? 'http://h5.imxiaomai.com/' :
+            'http://wap.tmall.imxiaomai.com/';
+          window.location.href = host;
+        }
+        return false;
       }, function(msg) {
         deferred.reject(msg)
+
       });
       return deferred.promise;
     };

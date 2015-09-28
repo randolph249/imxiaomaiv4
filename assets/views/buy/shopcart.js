@@ -154,8 +154,7 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
 
       var good = $scope.goods[$index];
 
-
-      $scope.isPaying = true;
+      $scope.goods[$index].isPaying = true;
 
       buyProcessManager(options, type, good.maxNum, good.skuList[0].numInCart)
         .then(function(
@@ -168,7 +167,8 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
         }, function(msg) {
           alert(msg);
         }).then(function() {
-          $scope.isPaying = false;
+          $scope.goods[$index].isPaying = false;
+
         });
 
     };

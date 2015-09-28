@@ -68,3 +68,12 @@ angular.module('xiaomaiApp').factory('getDataType', [function() {
     return type.match(reg)[1].toLowerCase()
   }
 }])
+
+//解析URL参数
+angular.module('xiaomaiApp').factory('parseUrlParams', [function() {
+  return function(url, name) {
+    var reg = new RegExp('[\\?&]' + name + '=([^\\?&]+)');
+    var result = url.match(reg);
+    return result && result.length ? result[1] : false;
+  }
+}])

@@ -70,6 +70,10 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/wap/cart/remove',
         type: 'POST'
       },
+      'whitelist': {
+        type: 'GET',
+        url: '/wap/college/whitelist'
+      },
       //添加到购物车
       'addCart': {
         url: '/wap/cart/add',

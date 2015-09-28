@@ -120,9 +120,10 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
         alert('请选择商品规格');
         return false;
       } else {
-        angular.forEach($scope.checkedProperty, function(item) {
+        angular.forEach($scope.checkedProperties, function(item) {
           propertyIds.push(item);
         });
+
         propertyIds = propertyIds.join('_');
       }
 

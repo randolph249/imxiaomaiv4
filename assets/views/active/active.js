@@ -5,8 +5,9 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
   'buyProcessManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
+  'parseUrlParams',
   function($scope, $state, xiaomaiService, buyProcessManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify) {
+    xiaomaiCacheManager, xiaomaiMessageNotify, parseUrlParams) {
     var collegeId, activityId, page;
     //监听路由参数变化
 
@@ -50,7 +51,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
         .totalPage;
 
       xiaomaiMessageNotify.pub('activeheightstatus', 'up', 'ready',
-        '', hasNextPage ? '' : '没有更多数据了');
+        '', hasNextPage ? '请求下一页数据' : '');
     });
 
     var iscrollSubId = xiaomaiMessageNotify.sub('activeiscrollupdate',
@@ -66,9 +67,9 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
             var hasNextPage = $scope.paginationInfo.currentPage !=
               $scope.paginationInfo
               .totalPage;
-            xiaomaiMessageNotify.pub('activeheightstatus', 'up',
+            xiaomaiMessageNotify.pub('activeheightstatus', 'down',
               'ready',
-              '', hasNextPage ? '' : '没有更多数据了');
+              '', hasNextPage ? '请求下一页数据' : '');
           });
         }
       });
@@ -96,13 +97,43 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
       $state.go('root.buy.nav.all');
     };
 
-    //跳转活动链接
-    $scope.gotoActive = function(banner) {
-      $state.go('root.buy.active', {
-        activityId: banner.activityId,
-        collegeId: banner.collegeId
-      });
+    //根据URl解析Router参数
+    var getRouterTypeFromUrl = function(url) {
+      var router = {};
+      if (url.match(/[\?&]m=([^\?&]+)/)) {
+        router.name = 'root.buy.nav.category';
+        router.params = {
+          categoryId: url.match(/[\?&]id=([^\?&]+)/)[1],
+          collegeId: collegeId
+        }
+      } else if (url.match(/skActivity/)) {
+        router.name = 'root.buy.skactive';
+        router.params = {
+          collegeId: collegeId,
+          activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
+        }
+      } else if (url.match(/activity/)) {
+        router.name = 'root.buy.skactive';
+        router.params = {
+          collegeId: collegeId,
+          activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
+        }
+      } else {
+        router.path = url;
+      }
+      return router;
     };
+    //跳转到对应的活动
+    $scope.gotoActive = function(banner) {
+      var router = getRouterTypeFromUrl(banner.hrefUrl);
+
+      if (router.hasOwnProperty('path')) {
+        window.location.href = router.path;
+      } else {
+        $state.go(router.name, router.params);
+      }
+      return false;
+    }
 
     //跳转到详情页
     $scope.gotoDetail = function(good) {
@@ -146,7 +177,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
       return xiaomaiService.fetchOne('activeGoods', {
         collegeId: collegeId,
         activityId: activityId,
-        recordPerPage: 20,
+        recordPerPage: 10,
         currentPage: $scope.paginationInfo.currentPage + 1
       }).then(function(res) {
         //更新当前页码数据

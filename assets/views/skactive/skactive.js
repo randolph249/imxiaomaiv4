@@ -5,8 +5,9 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
   'buyProcessManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
+  'parseUrlParams',
   function($scope, $state, xiaomaiService, buyProcessManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify) {
+    xiaomaiCacheManager, xiaomaiMessageNotify, parseUrlParams) {
     var collegeId, activityId, page = 1,
       bannerhasFresh = false;
     //监听路由参数变化
@@ -107,13 +108,42 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
       $state.go('root.buy.nav.all');
     };
 
-
+    //根据URl解析Router参数
+    var getRouterTypeFromUrl = function(url) {
+      var router = {};
+      if (url.match(/[\?&]m=([^\?&]+)/)) {
+        router.name = 'root.buy.nav.category';
+        router.params = {
+          categoryId: url.match(/[\?&]id=([^\?&]+)/)[1],
+          collegeId: collegeId
+        }
+      } else if (url.match(/skActivity/)) {
+        router.name = 'root.buy.skactive';
+        router.params = {
+          collegeId: collegeId,
+          activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
+        }
+      } else if (url.match(/activity/)) {
+        router.name = 'root.buy.skactive';
+        router.params = {
+          collegeId: collegeId,
+          activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
+        }
+      } else {
+        router.path = url;
+      }
+      return router;
+    };
     //跳转到对应的活动
     $scope.gotoActive = function(banner) {
-      $state.go('root.buy.skactive', {
-        collegeId: banner.collegeId,
-        activityId: banner.activityId
-      });
+      var router = getRouterTypeFromUrl(banner.hrefUrl);
+
+      if (router.hasOwnProperty('path')) {
+        window.location.href = router.path;
+      } else {
+        $state.go(router.name, router.params);
+      }
+      return false;
     }
 
     //跳转到详情页
