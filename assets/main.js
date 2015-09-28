@@ -29,29 +29,29 @@ angular.module('xiaomaiApp').config([
               files: [
 
                 window.__SYS_CONF.resourceUrl +
-                'service/notifyService.js',
+                'service/notifyService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/root/font.css',
                 window.__SYS_CONF.resourceUrl +
                 'scss/common.css',
                 window.__SYS_CONF.resourceUrl +
-                'service/commonService.js',
+                'service/commonService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
-                'service/ajaxService.js',
+                'service/ajaxService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
-                'service/cacheService.js',
+                'service/cacheService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
-                'service/cartService.js',
+                'service/cartService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
-                'service/detailService.js',
+                'service/detailService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
-                'service/schoolService.js',
+                'service/schoolService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
-                'service/wxService.js',
+                'service/wxService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
-                'service/cookieService.js',
+                'service/cookieService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
-                'service/siblingnavService.js'
+                'service/siblingnavService.js?v=' + (+new Date)
               ]
             })
           }],
@@ -61,7 +61,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'filters/price.js'
+                'filters/price.js?v=' + (+new Date)
               ]
             })
           }],
@@ -70,9 +70,9 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'components/countdown/countdown.js',
+                'components/countdown/countdown.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
-                'components/back/back.js'
+                'components/back/back.js?v=' + (+new Date)
               ]
             })
           }]
@@ -88,13 +88,13 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/buy/buy.js',
+                'views/buy/buy.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/buy/buy.css',
                 window.__SYS_CONF.resourceUrl +
-                'views/buy/detail.js',
+                'views/buy/detail.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
-                'views/buy/shopcart.js'
+                'views/buy/shopcart.js?v=' + (+new Date)
               ]
             })
           }]
@@ -109,7 +109,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/nav/nav.js',
+                'views/nav/nav.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/nav/nav.css'
               ]
@@ -128,7 +128,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/all/all.js',
+                'views/all/all.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/all/all.css'
               ]
@@ -147,7 +147,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/recommend/recommend.js',
+                'views/recommend/recommend.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/recommend/recommend.css'
               ]
@@ -166,7 +166,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/active/active.js',
+                'views/active/active.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/active/active.css'
               ]
@@ -185,7 +185,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/active/active.js',
+                'views/active/active.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/active/active.css'
               ]
@@ -204,7 +204,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/skactive/skactive.js',
+                'views/skactive/skactive.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/skactive/skactive.css'
               ]
@@ -224,7 +224,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/category/category.js',
+                'views/category/category.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/category/category.css'
               ]
@@ -243,7 +243,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/locate/locate.js',
+                'views/locate/locate.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/locate/locate.css'
               ]
@@ -262,7 +262,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/colleges/colleges.js',
+                'views/colleges/colleges.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/colleges/colleges.css'
 
@@ -281,7 +281,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/coupon/coupon.js'
+                'views/coupon/coupon.js?v=' + (+new Date)
               ]
             });
           }]
@@ -297,7 +297,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                'views/feedback/feedback.js',
+                'views/feedback/feedback.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/feedback/feedback.css'
 

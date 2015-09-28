@@ -5,14 +5,15 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
   'schoolManager',
   'xiaomaiMessageNotify',
   'xiaomaiCacheManager',
+  'siblingsNav',
   function($scope, $state, xiaomaiService, schoolManager,
-    xiaomaiMessageNotify, xiaomaiCacheManager) {
+    xiaomaiMessageNotify, xiaomaiCacheManager, siblingsNav) {
 
     $scope.activities = [];
 
     //先获取当前学校信息
     //学校ID
-    var collegeId;
+    var collegeId, nextRouter;
 
     $scope.isloading = true;
     schoolManager.get().then(function(res) {
@@ -24,12 +25,15 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
     }).then(function(res) {
       $scope.haserror = false;
       $scope.activities = res.activities;
+      return siblingsNav('down', collegeId, 0);
     }, function() {
       $scope.haserror = true;
+    }).then(function(router) {
+      nextRouter = router;
     }).finally(function() {
       $scope.isloading = false;
-      xiaomaiMessageNotify.pub('navmainheightstatus', 'down', 'ready',
-        '');
+      xiaomaiMessageNotify.pub('navmainheightstatus', 'up',
+        'ready', '', nextRouter.text);
     });
 
 

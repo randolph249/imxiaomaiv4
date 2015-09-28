@@ -5,9 +5,8 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
   'buyProcessManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
-  'xiaomaiMessageNotify',
   function($scope, $state, xiaomaiService, buyProcessManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify, xiaomaiMessageNotify) {
+    xiaomaiCacheManager, xiaomaiMessageNotify) {
     var collegeId, activityId, page;
     //监听路由参数变化
 
@@ -172,7 +171,6 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
     xiaomaiCacheManager, xiaomaiMessageNotify, siblingsNav) {
     var collegeId, activityId, page;
     //监听路由参数变化
-
     //抓取Banner信息
     var loadBanner = function() {
       return xiaomaiService.fetchOne('activeBanner', {
@@ -225,7 +223,7 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
         $scope.paginationInfo.totalPage;
       var downtip = isLastPage ? (angular.isObject(nextRouter) ?
         '下一个导航:' + nextRouter.text : '') : '请求下一页数据';
-      xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
+      xiaomaiMessageNotify.pub('navmainheightstatus', 'up',
         'ready', uptip, downtip);
     });
 
@@ -245,7 +243,6 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
     };
 
 
-
     //接受directive指令
     //当上拉的时候跳到上一个导航页面
     //如果下拉 先查询是否分页 如果分页 如果分页 请求下一页数据
@@ -256,11 +253,9 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
 
         } else if ($scope.paginationInfo.currentPage == $scope.paginationInfo
           .totalPage) {
-          /**
           xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
             'ready', angular.isObject(preRouter) ? preRouter.text : '',
             angular.isObject(nextRouter) ? nextRouter.text : '');
-            **/
           nextRouter && $state.go(nextRouter.name, nextRouter.params);
         } else {
           //提示文案 下一页数据

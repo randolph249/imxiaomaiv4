@@ -15,14 +15,12 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
 
       collegeId = toParam.collegeId;
       categoryId = toParam.categoryId;
-
       loadGoodList();
     });
 
 
 
     //下载商品列表
-
     var preRouter, nextRouter;
     $scope.isloading = true;
     var loadGoodList = function() {
@@ -35,42 +33,49 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         $scope.paginationInfo = res.paginationInfo;
         $scope.haserror = false;
         return siblingsNav('up', collegeId, 3, categoryId);
-      }, function(msg) {
-        $scope.errorip = msg;
-        $scope.haserror = true;
       }).then(function(router) {
         preRouter = router;
         return siblingsNav('down', collegeId, 3, categoryId);
       }).then(function(router) {
         nextRouter = router;
-        return true;
+        return router;
       }).finally(function() {
         $scope.isloading = false;
         //发送提示;
         var uptip = angular.isObject(preRouter) ? '上一个导航:' +
           preRouter.text :
           '';
+
         var isLastPage = $scope.paginationInfo.currentPage ==
           $scope.paginationInfo.totalPage;
         var downtip = isLastPage ? (angular.isObject(nextRouter) ?
           '下一个导航:' + nextRouter.text : '') : '请求下一页数据';
-        xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
+        // $state.go(nextRouter.name, nextRouter.params);
+        // alert('我进来了吗?');
+        xiaomaiMessageNotify.pub('navmainheightstatus',
+          'up',
           'ready', uptip, downtip);
+      }, function(msg) {
+        $scope.errorip = msg;
+        $scope.haserror = true;
       });
     };
-
     //接受directive指令
     //当上拉的时候跳到上一个导航页面
     //如果下拉 先查询是否分页 如果分页 如果分页 请求下一页数据
     var iscrollSubId = xiaomaiMessageNotify.sub('navmainscrollupdate',
       function(arrow) {
 
+        // /category/?collegeId=3270&categoryId=55
+
+
         if (arrow == 'up') {
           preRouter && $state.go(preRouter.name, preRouter.params);
         } else if ($scope.paginationInfo.currentPage == $scope.paginationInfo
           .totalPage) {
           nextRouter && $state.go(nextRouter.name, nextRouter.params);
-
+          return false;
+          // nextRouter && $state.go(nextRouter.name, nextRouter.params);
         } else {
 
           //提示文案 下一页数据
