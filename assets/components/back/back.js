@@ -70,7 +70,7 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
             xiaomaiMessageNotify.pub($scope.pubname, 'up');
             $scope.scrollstatus = 'pending';
           }, 100);
-        } else if (Math.abs(this.y) > maxScrollY + 40) {
+        } else if (Math.abs(this.y) > maxScrollY + 15) {
           $scrolltimeout && clearTimeout($scrolltimeout);
           $scrolltimeout = setTimeout(function() {
             xiaomaiMessageNotify.pub($scope.pubname, 'down');
@@ -124,7 +124,6 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
             }, 500);
 
           } else {
-
             $scope.scrollstatus = 'pending';
             downTip.className = downTip.className + ' pending';
             downTip.textContent = uptiptext;

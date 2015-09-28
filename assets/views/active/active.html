@@ -36,9 +36,7 @@
               <span class="old-price" ng-if="good.goodsType==1||good.goodsType==2">
                 &yen;{{good.skuList[0].originPrice|xiaomaiprice}}</span>
 <!-- 聚合 -->
-              <span class="aggregate-price" ng-if="good.goodsType==3 && good.minWapPrice==good.maxWapPrice">
-                &yen;{{good.minWapPrice|xiaomaiprice}}</span>
-              <span class="aggregate-price" ng-if="good.goodsType==3 && good.minWapPrice!=good.maxWapPrice">
+              <span class="aggregate-price" ng-if="good.goodsType==3">
                 &yen;{{good.minWapPrice|xiaomaiprice}} ~ &yen;{{good.maxWapPrice|xiaomaiprice}}
               </span>
             </p>

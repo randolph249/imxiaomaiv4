@@ -142,6 +142,7 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
   'xiaomaiCacheManager',
   'getDataType',
   'httpRequstParam',
+  '$timeout',
   function(
     env,
     $q,
@@ -150,7 +151,8 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
     $http,
     xiaomaiCacheManager,
     getDataType,
-    httpRequstParam
+    httpRequstParam,
+    $timeout
   ) {
 
     //验证接口是否存在

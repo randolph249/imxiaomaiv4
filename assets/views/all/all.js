@@ -25,39 +25,14 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
     }).then(function(res) {
       $scope.haserror = false;
       $scope.activities = res.activities;
-      return siblingsNav('down', collegeId, 0);
+      // return siblingsNav('down', collegeId, 0);
     }, function(msg) {
-      debugger;
       $scope.haserror = true;
-    }).then(function(router) {
-      nextRouter = router;
     }).finally(function() {
       $scope.isloading = false;
       xiaomaiMessageNotify.pub('navmainheightstatus', 'up',
-        'ready', '', nextRouter.text);
+        'ready', '', '');
     });
-
-
-    var iscrollSubId = xiaomaiMessageNotify.sub('navmainscrollupdate',
-      function(arrow) {
-
-        if (arrow == 'up') {
-          //跳转到上一页
-          siblingsNav('up', collegeId, 0).then(function(
-            router) {
-            $state.go(router.name, router.params);
-          });
-        } else {
-          //跳转到下一页
-          siblingsNav('down', collegeId, 0).then(function(
-            router) {
-            $state.go(router.name, router.params);
-          });
-
-        }
-
-      });
-
 
     //缓存页面数据
     $scope.$on('$destory', function() {

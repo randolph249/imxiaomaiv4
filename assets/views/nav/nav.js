@@ -40,8 +40,9 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
   'xiaomaiService',
   'schoolManager',
   'xiaomaiCacheManager',
+  'xiaomaiMessageNotify',
   function($scope, $state, xiaomaiService, schoolManager,
-    xiaomaiCacheManager) {
+    xiaomaiCacheManager, xiaomaiMessageNotify) {
 
     $scope.navs = [];
     //获取导航栏
@@ -51,6 +52,7 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
       });
     }).then(function(res) {
       $scope.navs = res.navigateItems;
+      xiaomaiMessageNotify.pub('navheightupdate', 'up', 'ready', '', '')
       xiaomaiCacheManager.writeCache('navgatorlist', res);
     });
 
