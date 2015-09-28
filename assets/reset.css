@@ -301,6 +301,7 @@ body {
     line-height: 1.3rem;
     font-size: 1.1rem;
     border: #ccc solid 1px;
+    background-color: #fff;
 }
 
 .label.ldc {

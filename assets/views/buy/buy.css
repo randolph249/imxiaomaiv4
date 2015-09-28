@@ -465,6 +465,20 @@
   background-position: right top;
 }
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
+    .detailCont .good-normal-info .buy-icon{
+        font-size: 3.8rem;
+    }
+    .detailCont .good-normal-info .buy-result{
+        line-height: 2.4rem;
+        right: 4.4rem;
+    }
+    .cartDetail .good-info .icon-plus{
+        font-size: 3rem;
+
+    }
+    .cartDetail .good-info .good-count{
+        right: 3.1rem;
+    }
   .cartThumb .totalCount {
     /* left: 4.4rem;
         top: -1.8rem; */
