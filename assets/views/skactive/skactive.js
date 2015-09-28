@@ -26,7 +26,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
         collegeId: collegeId,
         activityId: activityId,
         currentPage: page,
-        recordPerPage: 20
+        recordPerPage: 10
       });
     };
 
@@ -37,7 +37,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
         collegeId: collegeId,
         activityId: activityId,
         currentPage: $scope.paginationInfo.currentPage + 1,
-        recordPerPage: 20
+        recordPerPage: 10
       }).then(function(res) {
         $scope.paginationInfo = res.paginationInfo;
         $scope.goods = $scope.goods.concat(res.goods);
@@ -88,7 +88,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
               .totalPage;
             xiaomaiMessageNotify.pub('skactiveheightstatus', 'up',
               'ready',
-              '', hasNextPage ? '请求下一页数据' : '没有更多数据了');
+              '', hasNextPage ? '请求下一页数据' : '');
           });
         }
       });

@@ -8,13 +8,15 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
   'xiaomaiService',
   'schoolManager',
   'xiaomaiCacheManager',
+  'xiaomaiMessageNotify',
   function(
     $scope,
     locationManager,
     $state,
     xiaomaiService,
     schoolManager,
-    xiaomaiCacheManager
+    xiaomaiCacheManager,
+    xiaomaiMessageNotify
   ) {
     $scope.locationResult = [];
     $scope.isLocating = true; //默认正在执行定位
@@ -46,6 +48,8 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
       $scope.haserror = true;
     }).finally(function() {
       $scope.isloading = false;
+      xiaomaiMessageNotify.pub('locateheightupdate', 'up', 'ready',
+        '', '');
     });
 
 

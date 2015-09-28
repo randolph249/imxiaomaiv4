@@ -4,8 +4,9 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
   'xiaomaiService',
   'schoolManager',
   'xiaomaiCacheManager',
+  'xiaomaiMessageNotify',
   function($state, $scope, xiaomaiService, schoolManager,
-    xiaomaiCacheManager) {
+    xiaomaiCacheManager, xiaomaiMessageNotify) {
     //根据cityid获取学校列表
     $scope.countrylist = [];
 
@@ -26,6 +27,8 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
       }, function(msg) {
         $scope.haserror = true;
       }).finally(function() {
+        xiaomaiMessageNotify.pub('collegesheightupdate', 'up',
+          'ready', '', '');
         $scope.isloading = false;
       });
     };

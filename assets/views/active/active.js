@@ -24,7 +24,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
         collegeId: collegeId,
         activityId: activityId,
         currentPage: page,
-        recordPerPage: 20
+        recordPerPage: 10
       });
     };
 
@@ -50,7 +50,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
         .totalPage;
 
       xiaomaiMessageNotify.pub('activeheightstatus', 'up', 'ready',
-        '', hasNextPage ? '请求下一页数据' : '没有更多数据了');
+        '', hasNextPage ? '' : '没有更多数据了');
     });
 
     var iscrollSubId = xiaomaiMessageNotify.sub('activeiscrollupdate',
@@ -68,7 +68,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
               .totalPage;
             xiaomaiMessageNotify.pub('activeheightstatus', 'up',
               'ready',
-              '', hasNextPage ? '请求下一页数据' : '没有更多数据了');
+              '', hasNextPage ? '' : '没有更多数据了');
           });
         }
       });
@@ -188,7 +188,7 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
         collegeId: collegeId,
         activityId: activityId,
         currentPage: page,
-        recordPerPage: 20
+        recordPerPage: 10
       });
     };
 
@@ -207,26 +207,16 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
       $scope.goods = res.goods;
       //
       $scope.paginationInfo = res.paginationInfo;
-      return siblingsNav('up', collegeId, 2, activityId)
     }, function() {
       $scope.haserror = true;
-    }).then(function(router) {
-      preRouter = router;
-      return siblingsNav('down', collegeId, 2, activityId);
-    }).then(function(router) {
-      nextRouter = router;
-      return true;
     }).finally(function() {
       $scope.isloading = false;
 
-      var uptip = angular.isObject(preRouter) ? '上一个导航:' + preRouter.text :
-        '';
       var isLastPage = $scope.paginationInfo.currentPage ==
         $scope.paginationInfo.totalPage;
-      var downtip = isLastPage ? (angular.isObject(nextRouter) ?
-        '下一个导航:' + nextRouter.text : '') : '请求下一页数据';
+      var downtip = isLastPage ? '' : '请求下一页数据';
       xiaomaiMessageNotify.pub('navmainheightstatus', 'up',
-        'ready', uptip, downtip);
+        'ready', '', downtip);
     });
 
 
@@ -251,28 +241,27 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
     var iscrollSubId = xiaomaiMessageNotify.sub('navmainscrollupdate',
       function(arrow) {
         if (arrow == 'up') {
+          return false;
           preRouter && $state.go(preRouter.name, preRouter.params);
 
         } else if ($scope.paginationInfo.currentPage == $scope.paginationInfo
           .totalPage) {
-          xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
-            'ready', angular.isObject(preRouter) ? preRouter.text : '',
-            angular.isObject(nextRouter) ? nextRouter.text : '');
-          nextRouter && $state.go(nextRouter.name, nextRouter.params);
+          return false;
+          // xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
+          //   'ready', angular.isObject(preRouter) ? preRouter.text : '',
+          //   angular.isObject(nextRouter) ? nextRouter.text : '');
+          // nextRouter && $state.go(nextRouter.name, nextRouter.params);
         } else {
           //提示文案 下一页数据
           xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
             'pending', '正在请求数据...');
           //发送下页数据请求
           getNextPageData().then(function(res) {
-            var uptip = angular.isObject(preRouter) ? preRouter.text :
-              '';
             var isLastPage = $scope.paginationInfo.currentPage ==
               $scope.paginationInfo.totalPage;
-            var downtip = isLastPage ? (angular.isObject(nextRouter) ?
-              nextRouter.text : '') : '请求下一页数据';
+            var downtip = isLastPage ? '' : '请求下一页数据';
             xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
-              'ready', uptip, downtip);
+              'ready', '', downtip);
           });
         }
 
@@ -283,7 +272,7 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
       return xiaomaiService.fetchOne('activeGoods', {
         collegeId: collegeId,
         activityId: activityId,
-        recordPerPage: 20,
+        recordPerPage: 10,
         currentPage: $scope.paginationInfo.currentPage + 1
       }).then(function(res) {
         //更新当前页码数据

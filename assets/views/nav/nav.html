@@ -10,7 +10,7 @@
 
 </div>
 <div class="list-main main-both" >
-  <div class="list-category" xiaomai-iscroll>
+  <div class="list-category" xiaomai-iscroll subname="{{'navheightupdate'}}">
     <ul ng-controller="nav.listCtrl">
       <li ng-repeat="nav in navs" ng-class="{'nav-checked':navChecked(nav)}" class="nav  nav-super nav-mark-{{nav.labelType}}" ng-click="goto(nav);" ng-if="nav.displayType!=3">{{nav.navigateName}}</li>
      <li  class="nav nav-super " ng-init="isShowSub=true;">
