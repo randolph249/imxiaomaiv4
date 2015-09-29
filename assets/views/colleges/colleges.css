@@ -1,10 +1,4 @@
-.countrylist{
-    position: absolute;
-    top: 0rem;
-    left: 0;
-    right: 0;
 
-}
 .countrylist li {
     line-height: 42px;
     font-size: 1.4rem;
