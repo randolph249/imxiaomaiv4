@@ -44,12 +44,33 @@
     left: 44px;
     right: 44px;
 }
-
-/**
-<i class="locate iconfont"></i>
-{{schoolname}}
-<i class="changeLocate"></i>
-**/
+.pub-header .icon-back, .pub-header .icon-locate-right {
+  width: 45px;
+  text-align: center;
+  float: left;
+}
+.pub-header .icon-locate-right {
+  float: right;
+}
+.pub-header .icon-back:before, .pub-header .icon-locate-right:before {
+  font-size: 2.4rem;
+  line-height: 4.4rem;
+}
+.pub-header .location-info {
+  text-align: center;
+  line-height: 4.4rem;
+  position: absolute;
+  top: 0;
+  left: 45px;
+  right: 45px;
+}
+.countrylist {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4.5rem;
+  bottom: 0;
+}
 .pub-header .location-info.icon-school:before{
     color: #ccc;
     content: '\e613';
