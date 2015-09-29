@@ -2,3 +2,4 @@ bower_components/
 node_modules/
 app/index.html
 app/index-debug.html
+api/wap/college/
