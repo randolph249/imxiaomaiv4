@@ -345,7 +345,7 @@ body {
 }
 
 p.goodname {
-    line-height: 1.8rem;
+    line-height: 2rem;
     height: 3.4rem;
     overflow: hidden;
     font-size: 1.3rem;
@@ -411,7 +411,6 @@ p.goodname {
         bottom: 3.4rem;
         right: 0;
         line-height: 1.6rem;
-        width: 4.4rem;
-
+        width: 5rem;
     }
 }
