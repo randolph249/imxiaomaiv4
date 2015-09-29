@@ -99,7 +99,7 @@ input::-moz-focus-inner {
 }
 
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button{
+input::-webkit-inner-spin-button {
     -webkit-appearance: none !important;
     margin: 0;
 }
@@ -124,11 +124,29 @@ html {
     -webkit-text-size-adjust: none;
     -webkit-tap-highlight-color: transparent;
     tap-highlight-color: transparent;
-    box-sizing:border-box;
+    box-sizing: border-box;
+    -webkit-touch-callout: none;
+    touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+input {
+    outline: none;
+    -webkit-appearance: none !important;
+}
+
+input,
+textarea,
+button,
+a,
+a:hover,
+a:active {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .cf:after,
@@ -233,18 +251,28 @@ body {
     }
 }
 
-.loading,.errortip{
+.loading,
+.errortip {
     position: absolute;
-    top: 40%;
+    margin-top: 80%;
     width: 100%;
     text-align: center;
     font-size: 1.6rem;
     color: #ff5300;
+    border: 0 !important;
+    background: none !important;
 }
 
-.f14{
+.f14 {
     font-size: 1.4rem;
 }
+
+.colorOrg {
+    color: #ff5300;
+}
+
+.hgt100 {}
+
 .mod-wrap {
     /* position: fixed;
     top: 0;
@@ -289,10 +317,11 @@ body {
 .label {
     display: inline-block;
     padding: 0 0.5rem;
-    height: 1.5rem;
-    line-height: 1.5rem;
+    height: 1.3rem;
+    line-height: 1.3rem;
     font-size: 1.1rem;
     border: #ccc solid 1px;
+    background-color: #fff;
 }
 
 .label.ldc {
@@ -310,7 +339,7 @@ body {
     right: 0;
     bottom: 10px;
     background-color: #fff;
-    font-size: 3.6rem;
+    font-size: 3.3rem;
     line-height: 1;
     color: #fc541f;
 }
@@ -354,17 +383,16 @@ p.goodname {
     -webkit-transform-origin: 30px 15px;
     text-align: center;
     color: #ff5300;
-    right: 0px;
+    right: 1rem;
     position: absolute;
-    bottom: 10px;
-    line-height: 2rem;
-    height: 20px;
+    line-height: 1.8rem;
+    height: 2rem;
     font-size: 1.5rem;
     /* padding: 0 5px; */
-    bottom: 50px;
-    width: 55px;
+    bottom: 3rem;
+    width: 5.5rem;
     text-align: center;
-    background-color:#fff
+    background-color: #fff
 }
 
 .sold-geted {
@@ -372,13 +400,18 @@ p.goodname {
     border-color: #fc541f;
 }
 
-.paying{
+.paying {
     opacity: 0.3;
 }
+
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
     .sk-end,
     .sold-out,
     .sold-geted {
-        bottom: 34px;
+        bottom: 3.4rem;
+        right: 0;
+        line-height: 1.6rem;
+        width: 4.4rem;
+
     }
 }

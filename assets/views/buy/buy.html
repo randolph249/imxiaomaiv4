@@ -61,6 +61,7 @@
 <!--产品名称-->
           <p class="title">{{good.sourceType==2?good.activityGoodsName:good.bgGoodsName}}</p>
 <!--产品价格-->
+
           <p class="priceCont" ng-if="skuInfo">
             <span class="new-price">&yen;<i>{{good.sourceType==2?skuInfo.activityPrice:skuInfo.wapPrice|xiaomaiprice}}</i></span>
             <span class="old-price">&yen;{{skuInfo.originPrice|xiaomaiprice}}</span>
