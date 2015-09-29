@@ -31,8 +31,8 @@ angular.module('xiaomaiApp').controller('buyCtrl', [
     $scope.closeShare = function() {
       xiaomaiMessageNotify.pub('shareModelManager',
         'hide');
-      //判断是否
-      if (detailGuiStatus == 'hide' && cartGuiStatus == 'hide') {
+      //判断是否购物车或者商品详情是否打开
+      if (detailGuiStatus != 'show' && cartGuiStatus != 'show') {
         xiaomaiMessageNotify.pub('maskManager', 'hide')
       }
     }

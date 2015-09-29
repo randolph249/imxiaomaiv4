@@ -121,7 +121,7 @@ angular.module('xiaomaiApp').factory('cartManager', [
     };
 
     //获取当前购物中的数量
-    var getnumInCart = function(skuid) {
+    var getnumInCart = function(skuid, sourceType) {
       var detailCarts = [];
       var deferred = $q.defer();
       queryCartDetail().then(function(res) {
@@ -129,14 +129,14 @@ angular.module('xiaomaiApp').factory('cartManager', [
         return detailCarts['goods'];
       }).then(function(carts) {
         var $index = -1;
-
-
-        // debugger;
         //根据skuid从购物车查询对应的sku信息
         angular.forEach(carts, function(item, i) {
           var itemSku = item.skuList[0];
-
-          if (itemSku.skuId == skuid) {
+          //sourceType 2是活动商品 1是普通商品
+          if (sourceType == 2 && itemSku.activitySkuId ==
+            skuid) {
+            $index = i;
+          } else if (sourceType == 1 && itemSku.skuId == skuid) {
             $index = i;
           }
         });
@@ -244,6 +244,7 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
         maxNum = args[2],
         numInCart = args[3]; //可选参数 如果带过来了说明自己有这个参数 不需要从后台去查询
       var skuId = param.skuId;
+      var sourceType = param.sourceType;
       var eventName = type == 'plus' ? 'add' : 'remove';
 
 
@@ -286,8 +287,7 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
       } else {
         //根据SkuId去库里查询
         var numIncart = undefined;
-
-        cartManager.getnumInCart(skuId).then(function(num) {
+        cartManager.getnumInCart(skuId, sourceType).then(function(num) {
           if (angular.isNumber(num) && num < maxNum) {
             numInCart = num;
             return cartManager[eventName](param);

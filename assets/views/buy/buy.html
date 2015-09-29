@@ -32,7 +32,7 @@
     </div>
     <div class="cartDetail-tip">
       <p class="cartDetail-tip-freight" ng-if="ldcFreight.sub && ldcFreight.sub!=0">29分钟达产品满{{ldcFreight.total|xiaomaiprice}}减{{ldcFreight.sub|xiaomaiprice}}</p>
-      <p class="cartDetail-tip-coupon" ng-if="coupons.length">{{coupons.length}}张可用优惠劵<i class="couponMore iconfont icon-YF_more"></i>
+      <p ng-click="gotoCoupon();" class="cartDetail-tip-coupon" ng-if="coupons.length">{{coupons.length}}张可用优惠劵<i class="couponMore iconfont icon-YF_more"></i>
       </p>
       <p class="cartDetail-tip-coupon" ng-if="!coupons.length">暂无可用优惠劵</p>
     </div>

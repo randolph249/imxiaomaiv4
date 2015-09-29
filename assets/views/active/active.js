@@ -150,7 +150,6 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
       }
 
       $scope.goods[$index]['isPaying'] = true;
-
       buyProcessManager({
         distributeType: good.skuList[0].distributeType,
         goodsId: good.activityGoodsId,

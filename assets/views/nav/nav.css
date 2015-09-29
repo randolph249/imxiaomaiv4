@@ -50,13 +50,13 @@
 {{schoolname}}
 <i class="changeLocate"></i>
 **/
-.pub-header .location-info.icon-school:before{
+.pub-header .location-info.icon-school .locate:before{
     color: #ccc;
     content: '\e613';
     font-size: 2rem;
 }
 
-.pub-header .location-info.icon-school:after {
+.pub-header .location-info.icon-school .changeLocate {
     position: absolute;
     top: 1.8rem;
     margin-left: 0.5rem;

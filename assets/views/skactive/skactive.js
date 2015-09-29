@@ -159,10 +159,15 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
       return false;
     };
 
+    //弹出分享窗口
+    $scope.showShareModel = function() {
+      xiaomaiMessageNotify.pub('shareModelManager', 'show');
+      xiaomaiMessageNotify.pub('maskManager', 'show');
+    }
+
 
     //执行购买
     $scope.buyHandler = function(good, $index) {
-      debugger;
       $scope.goods[$index]['isPaying'] = true;
       buyProcessManager({
         goodsId: good.activityGoodsId,

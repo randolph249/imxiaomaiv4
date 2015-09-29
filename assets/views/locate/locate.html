@@ -1,6 +1,7 @@
 <div class="pub-header">
   <div class="iconfont icon-back" ng-click="goback();"></div>
   <div class="location-info">选择学校</div>
+
   <div class="iconfont icon-locate-right"></div>
 </div>
 <div class="colleges_content" xiaomai-iscroll subname="{{'locateheightupdate'}}">
@@ -8,7 +9,7 @@
     <p class="title">定位学校</p>
     <div class="localColleges" ng-class="{locating:isLocating}">
       <p class="" ng-if="isloading"></p>
-      <p class="errortip" ng-if="haserror">小麦迷路了,手动选择一下吧</p>
+      <p class="locateerrortip" ng-if="haserror">小麦迷路了,手动选择一下吧</p>
       <p class="locateCollege" ng-class="{holiday:item.isOpen!=1}" ng-click="checkCollege(item)" ng-repeat="item in locationResult">{{item.collegeName}}</p>
     </div>
     <p class="title">手动选择</p>

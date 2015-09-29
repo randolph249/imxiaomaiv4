@@ -1,7 +1,9 @@
 <div class="pub-header" ng-controller="nav.headCtrl">
-
   <div class="iconfont icon-feedback" ng-click="gotoFeedback();"></div>
-  <div class="location-info iconfont icon-school" ng-click="gotoLocate();" ng-bind="schoolname">
+  <div class="location-info iconfont icon-school" ng-click="gotoLocate();">
+    <i class="locate iconfont"></i>
+    {{schoolname}}
+    <i class="changeLocate"></i>
   </div>
   <div class="iconfont icon-user" style="display:none;"></div>
 

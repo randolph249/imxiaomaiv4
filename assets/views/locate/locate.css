@@ -35,6 +35,13 @@
   left: 45px;
   right: 45px;
 }
+.locateerrortip {
+  width: 100%;
+  text-align: center;
+  font-size: 1.6rem;
+  color: #ff5300;
+  line-height: 102px;
+}
 .countrylist {
   position: absolute;
   left: 0;
