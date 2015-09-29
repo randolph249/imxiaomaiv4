@@ -1,10 +1,11 @@
 .category-active-list{
   padding-top:10px;
+  min-height: 100%;
 }
 .category-active-list li {
     background-size: 100% auto;
     background-repeat: no-repeat;
-    background-image: url('../../img/skuDefault.png');
+    background-image: url('http://xiaomai-p2p.qiniudn.com/8e15885872350480ae32f3e87ad84f49');
     margin-bottom: 10px;
     border: #dddddd solid 1px;
     height: 99px;
