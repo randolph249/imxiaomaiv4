@@ -169,19 +169,19 @@
     *hot-1 new-2 recommend-3
     ***/
 .nav-mark-1 {
-    background-image: url('../../img/hot.png');
+    background-image: url('http://xiaomai-p2p.qiniudn.com/e83ca608a46386a595d5989df2ef8235');
     background-repeat: no-repeat;
     background-size: 2.4rem;
 }
 
 .nav-mark-2 {
-    background-image: url('../../img/new.png');
+    background-image: url('http://xiaomai-p2p.qiniudn.com/d4fa1301b5a3a3ef5ab6f6b9c5cc5292');
     background-repeat: no-repeat;
     background-size: 2.4rem;
 }
 
 .nav-mark-3 {
-    background-image: url('../../img/recommend.png');
+    background-image: url('http://xiaomai-p2p.qiniudn.com/af158d0f27ede1fde01102cbf4d7825d');
     background-repeat: no-repeat;
     background-size: 2.4rem;
 }
