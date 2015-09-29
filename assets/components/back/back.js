@@ -69,13 +69,13 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
           $scrolltimeout = setTimeout(function() {
             xiaomaiMessageNotify.pub($scope.pubname, 'up');
             $scope.scrollstatus = 'pending';
-          }, 100);
+          }, 10);
         } else if (Math.abs(this.y) > maxScrollY + 15) {
           $scrolltimeout && clearTimeout($scrolltimeout);
           $scrolltimeout = setTimeout(function() {
             xiaomaiMessageNotify.pub($scope.pubname, 'down');
             $scope.scrollstatus = 'pending';
-          }, 100);
+          }, 10);
         }
 
       });

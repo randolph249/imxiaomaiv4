@@ -37,6 +37,8 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         $scope.haserror = true;
         $scope.errortip = tip;
       }).finally(function() {
+        // debugger;
+        getNextPageData();
         $scope.isloading = false;
         //发送提示;
         var isLastPage = $scope.paginationInfo.currentPage ==
