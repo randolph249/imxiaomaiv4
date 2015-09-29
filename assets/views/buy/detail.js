@@ -54,7 +54,7 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
 
         }).finally(function() {
           xiaomaiMessageNotify.pub('detailgoodheightupdate', 'up',
-            'ready');
+            'ready', '', '');
         });
       } else {
         //关闭对话框

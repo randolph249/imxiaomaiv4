@@ -5,9 +5,8 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
   'buyProcessManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
-  'parseUrlParams',
   function($scope, $state, xiaomaiService, buyProcessManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify, parseUrlParams) {
+    xiaomaiCacheManager, xiaomaiMessageNotify) {
     var collegeId, activityId, page;
     //监听路由参数变化
 
@@ -63,7 +62,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
           xiaomaiMessageNotify.pub('activeheightstatus', 'down',
             'pending', '', '正在请求数据');
           //发送下页数据请求
-          getNextPageData().then(function(res) {
+          !nextPageLock && getNextPageData().then(function(res) {
             var hasNextPage = $scope.paginationInfo.currentPage !=
               $scope.paginationInfo
               .totalPage;
@@ -173,7 +172,12 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     };
 
     //翻页
+    var nextPageLock = false;
     var getNextPageData = function() {
+      if (nextPageLock) {
+        return false;
+      }
+      nextPageLock = true;
       return xiaomaiService.fetchOne('activeGoods', {
         collegeId: collegeId,
         activityId: activityId,
@@ -181,6 +185,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
         currentPage: $scope.paginationInfo.currentPage + 1
       }).then(function(res) {
         //更新当前页码数据
+        nextPageLock = false;
         $scope.paginationInfo = res.paginationInfo;
         $scope.goods = $scope.goods.concat(res.goods);
         return res;
@@ -199,9 +204,8 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
   'buyProcessManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
-  'siblingsNav',
   function($scope, $state, xiaomaiService, buyProcessManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify, siblingsNav) {
+    xiaomaiCacheManager, xiaomaiMessageNotify) {
     var collegeId, activityId, page;
     //监听路由参数变化
     //抓取Banner信息
@@ -287,7 +291,7 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
           xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
             'pending', '正在请求数据...');
           //发送下页数据请求
-          getNextPageData().then(function(res) {
+          !nextPageLock && getNextPageData().then(function(res) {
             var isLastPage = $scope.paginationInfo.currentPage ==
               $scope.paginationInfo.totalPage;
             var downtip = isLastPage ? '' : '请求下一页数据';
@@ -299,7 +303,12 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
       });
 
     //请求下一页数据
+    var nextPageLock = false;
     var getNextPageData = function() {
+      if (nextPageLock) {
+        return false;
+      }
+      nextPageLock = true;
       return xiaomaiService.fetchOne('activeGoods', {
         collegeId: collegeId,
         activityId: activityId,
@@ -307,6 +316,7 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
         currentPage: $scope.paginationInfo.currentPage + 1
       }).then(function(res) {
         //更新当前页码数据
+        nextPageLock = false;
         $scope.paginationInfo = res.paginationInfo;
         $scope.goods = $scope.goods.concat(res.goods);
         return res;

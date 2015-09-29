@@ -5,11 +5,8 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
   'xiaomaiCacheManager',
   'buyProcessManager',
   'xiaomaiMessageNotify',
-  'siblingsNav',
-  '$timeout',
   function($state, xiaomaiService, $scope,
-    xiaomaiCacheManager, buyProcessManager, xiaomaiMessageNotify,
-    siblingsNav, $timeout) {
+    xiaomaiCacheManager, buyProcessManager, xiaomaiMessageNotify) {
     var collegeId, categoryId;
 
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
@@ -17,7 +14,7 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
       collegeId = toParam.collegeId;
       categoryId = toParam.categoryId;
       loadGoodList();
-      // loadBanner();
+      loadBanner();
     });
 
     //下载商品列表
@@ -37,8 +34,6 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         $scope.haserror = true;
         $scope.errortip = tip;
       }).finally(function() {
-        // debugger;
-        getNextPageData();
         $scope.isloading = false;
         //发送提示;
         var isLastPage = $scope.paginationInfo.currentPage ==
@@ -51,6 +46,55 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         $scope.haserror = true;
       });
     };
+
+    var loadBanner = function() {
+      xiaomaiService.fetchOne('categoryBanners', {
+        categoryId: categoryId,
+        collegeId: collegeId
+      }).then(function(res) {
+        $scope.banners = res.banners;
+      });
+    };
+
+
+    //根据URl解析Router参数
+    var getRouterTypeFromUrl = function(url) {
+      var router = {};
+      if (url.match(/[\?&]m=([^\?&]+)/)) {
+        router.name = 'root.buy.nav.category';
+        router.params = {
+          categoryId: url.match(/[\?&]id=([^\?&]+)/)[1],
+          collegeId: collegeId
+        }
+      } else if (url.match(/skActivity/)) {
+        router.name = 'root.buy.skactive';
+        router.params = {
+          collegeId: collegeId,
+          activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
+        }
+      } else if (url.match(/activity/)) {
+        router.name = 'root.buy.skactive';
+        router.params = {
+          collegeId: collegeId,
+          activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
+        }
+      } else {
+        router.path = url;
+      }
+      return router;
+    };
+    //跳转到对应的活动
+    $scope.gotoActive = function(banner) {
+      var router = getRouterTypeFromUrl(banner.hrefUrl);
+
+      if (router.hasOwnProperty('path')) {
+        window.location.href = router.path;
+      } else {
+        $state.go(router.name, router.params);
+      }
+      return false;
+    }
+
     //接受directive指令
     //当上拉的时候跳到上一个导航页面
     //如果下拉 先查询是否分页 如果分页 如果分页 请求下一页数据
@@ -73,7 +117,7 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
           xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
             'pending', '正在请求数据...');
           //发送下页数据请求
-          getNextPageData().then(function(res) {
+          !nextPageLock && getNextPageData().then(function(res) {
             var isLastPage = $scope.paginationInfo.currentPage ==
               $scope.paginationInfo.totalPage;
             var downtip = isLastPage ? '' : '请求下一页数据';
@@ -86,7 +130,12 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
       });
 
     //请求下一页数据
+    var nextPageLock = false;
     var getNextPageData = function() {
+      if (nextPageLock) {
+        return false;
+      }
+      nextPageLock = true;
       return xiaomaiService.fetchOne('goods', {
         collegeId: collegeId,
         categoryId: categoryId,
@@ -94,6 +143,7 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         currentPage: $scope.paginationInfo.currentPage + 1
       }).then(function(res) {
         //更新当前页码数据
+        nextPageLock = false;
         $scope.paginationInfo = res.paginationInfo;
         $scope.goods = $scope.goods.concat(res.goods);
         return res;
@@ -137,7 +187,6 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         $scope.goods[$index].isPaying = false;
 
       });
-
     }
   }
 ]);

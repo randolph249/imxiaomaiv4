@@ -314,7 +314,7 @@ angular.module('xiaomaiApp').config([
 ]);
 
 angular.module('xiaomaiApp').run(['$state', function($state) {
-  $state.go('root.locate');
+  $state.go('root.buy.nav.all');
 }]);
 
 //禁止页面滑动

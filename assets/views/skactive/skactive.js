@@ -5,9 +5,8 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
   'buyProcessManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
-  'parseUrlParams',
   function($scope, $state, xiaomaiService, buyProcessManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify, parseUrlParams) {
+    xiaomaiCacheManager, xiaomaiMessageNotify) {
     var collegeId, activityId, page = 1,
       bannerhasFresh = false;
     //监听路由参数变化
@@ -33,13 +32,20 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
 
 
     //获取下一页数据
+    //上锁 频繁请求 只触发一个请求
+    var nextPageLock = false
     var getNextPageData = function() {
+      if (nextPageLock) {
+        return false;
+      }
+      nextPageLock = true;
       return xiaomaiService.fetchOne('activeGoods', {
         collegeId: collegeId,
         activityId: activityId,
         currentPage: $scope.paginationInfo.currentPage + 1,
         recordPerPage: 10
       }).then(function(res) {
+        nextPageLock = false;
         $scope.paginationInfo = res.paginationInfo;
         $scope.goods = $scope.goods.concat(res.goods);
         return res;
@@ -64,7 +70,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
         .totalPage;
 
       xiaomaiMessageNotify.pub('skactiveheightstatus', 'up', 'ready',
-        '', hasNextPage ? '请求下一页数据' : '没有更多数据了');
+        '', hasNextPage ? '请求下一页数据' : '');
     });
 
     loadBanner().then(function(res) {
@@ -83,7 +89,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
           xiaomaiMessageNotify.pub('skactiveheightstatus', 'down',
             'pending', '', '正在请求数据');
           //发送下页数据请求
-          getNextPageData().then(function(res) {
+          !nextPageLock && getNextPageData().then(function(res) {
             var hasNextPage = $scope.paginationInfo.currentPage !=
               $scope.paginationInfo
               .totalPage;
@@ -156,7 +162,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
 
     //执行购买
     $scope.buyHandler = function(good, $index) {
-
+      debugger;
       $scope.goods[$index]['isPaying'] = true;
       buyProcessManager({
         goodsId: good.activityGoodsId,

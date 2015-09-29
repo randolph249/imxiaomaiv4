@@ -45,13 +45,18 @@
     right: 44px;
 }
 
-.pub-header .location-info .locate:after {
+/**
+<i class="locate iconfont"></i>
+{{schoolname}}
+<i class="changeLocate"></i>
+**/
+.pub-header .location-info.icon-school:before{
     color: #ccc;
     content: '\e613';
     font-size: 2rem;
 }
 
-.pub-header .location-info .changeLocate {
+.pub-header .location-info.icon-school:after {
     position: absolute;
     top: 1.8rem;
     margin-left: 0.5rem;

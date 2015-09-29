@@ -93,7 +93,7 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
             $scope.coupons = coupons.couponInfo;
           }).finally(function() {
             xiaomaiMessageNotify.pub('shopcartdetailheightupdate',
-              'up', 'ready');
+              'up', 'ready', '', '');
           });
         };
 

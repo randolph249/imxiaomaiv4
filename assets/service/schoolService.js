@@ -54,22 +54,22 @@ angular.module('xiaomaiApp').factory('schoolManager', [
         var reg = new RegExp(",?(" + schoolInfo.collegeId + "),?");
         //缓存学校白名单
         xiaomaiCacheManager.writeCache('whitelist', whitelist);
-        /**回头注释掉**/
+        /**回头注释掉
         deferred.resolve(schoolInfo);
         hanlderQuerys();
-        /****/
+        **/
 
         //如果当前学校不在白名单里面 就不用继续处理队列了
-        // if (reg.test(whitelist.collegeWhiteList)) {
-        //   deferred.resolve(schoolInfo);
-        //   hanlderQuerys();
-        // } else {
-        //   alert('当前学校不在商城V4的白名单,将跳到旧版商城!');
-        //   var host = env == 'online' ? 'http://h5.imxiaomai.com/' :
-        //     'http://wap.tmall.imxiaomai.com/';
-        //   window.location.href = host;
-        //   //
-        // }
+        if (reg.test(whitelist.collegeWhiteList)) {
+          deferred.resolve(schoolInfo);
+          hanlderQuerys();
+        } else {
+          alert('当前学校不在商城V4的白名单,将跳到旧版商城!');
+          var host = env == 'online' ? 'http://h5.imxiaomai.com/' :
+            'http://wap.tmall.imxiaomai.com/';
+          window.location.href = host;
+          return false;
+        }
 
 
       });

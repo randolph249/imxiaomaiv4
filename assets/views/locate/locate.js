@@ -19,7 +19,7 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
     xiaomaiMessageNotify
   ) {
     $scope.locationResult = [];
-    $scope.isLocating = true; //默认正在执行定位
+    $scope.isloading = true; //默认正在执行定位
 
     //获取定位
     locationManager().then(function(lnglat) {
@@ -30,11 +30,12 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
       })
 
     }).then(function(res) {
+      $scope.haserror = false;
       $scope.locationResult = res.colleges;
     }, function(msg) {
-      $scope.localFail = true;
+      $scope.haserror = true;
     }).finally(function() {
-      $scope.isLocating = false;
+      $scope.isloading = false;
     });
 
 

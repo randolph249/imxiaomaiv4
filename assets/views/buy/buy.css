@@ -302,7 +302,7 @@
     left: 1.5rem;
     right: 1.5rem;
     bottom: 3rem;
-    overflow: auto;
+    overflow: hidden;
 }
 .goodDetail .goodDetailWrap {
     bottom: 4.5rem;
@@ -462,7 +462,7 @@
   top: 0;
   bottom:80%;
   z-index: 2;
-  background-image:url('http://imxiaomai.b0.upaiyun.com/imxiaomai/assets/img/share.png');
+  background-image:url('http://xiaomai-p2p.qiniudn.com/0d470e003646a7180ac57526d74456f2');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right top;

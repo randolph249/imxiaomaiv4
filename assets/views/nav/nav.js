@@ -15,7 +15,6 @@ angular.module('xiaomaiApp').controller('nav.headCtrl', [
   'schoolManager',
   function($scope, $state, schoolManager) {
     //获取用户当前定位学校
-    $scope.schoolname = '未选择所在学校';
     schoolManager.get().then(function(res) {
       $scope.schoolname = res.collegeName;
     });

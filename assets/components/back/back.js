@@ -63,7 +63,7 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
         if ($scope.scrollstatus !== 'ready') {
           return false;
         }
-
+        //10ms延时 100ms太长可能会触发多次
         if (this.y > 40) {
           $scrolltimeout && clearTimeout($scrolltimeout);
           $scrolltimeout = setTimeout(function() {

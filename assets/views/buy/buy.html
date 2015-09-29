@@ -44,14 +44,14 @@
 
 
 
-
+<!--商品详情-->
 <div class="goodDetail" ng-class="{'goodDetail-show':showdetail}" ng-controller="buy.detailCtrl">
   <div class="detailCont">
     <div class="goodIconWrap">
       <div class="iconfont icon-share" ng-click="showShareModel();"></div>
       <div class="iconfont icon-unfold" ng-click="closeDetail();"></div>
     </div>
-    <div class="goodDetailWrap" subname="{{'detailgoodheightupdate'}}" xiaomai-iscroll>
+    <div class="goodDetailWrap" subname="{{'detailgoodheightupdate'}}" xiaomai-iscroll subname="{{'shopcartdetailheightupdate'}}">
       <div>
         <div class="imgCont" ng-style="{'background-image':'url('+(skuInfo&&skuInfo.imageUrl?skuInfo.imageUrl:good.imageUrl)+')'}">
 <!--到达类型-->
@@ -78,7 +78,7 @@
             <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
 <!--进行数量选择-->
             <p class="buy-handler-cont " ng-if="good.goodsStatusDisplay!=3">
-              <span class="buy-handler iconfont icon-minus" ng-show="!skuInfo||numInCart<1" ng-click="buyHandler('minus');"></span>
+              <span class="buy-handler iconfont icon-minus" ng-hide="!skuInfo||numInCart<1" ng-click="buyHandler('minus');"></span>
 <!--当前已经购买的数量 -->
               <span class="buy-result">{{numInCart}}</span>
               <span class="buy-handler iconfont icon-plus buy-icon" ng-class="{'disabled':!skuInfo}" ng-class="{paying:good.isPaying}" ng-click="buyHandler('plus');"></span>
@@ -91,17 +91,17 @@
               距开始
               <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.timeBeforeStart}}" timeid="{{good.activityBgGoodsId}}"></span>
             </p>
-<!-- 活动已开始-->
-            <p class="countdown" ng-if="good.killStarted==1">
+<!-- 活动已开始同时没有被抢空-->
+            <p class="countdown" ng-if="good.killStarted==1 && good.goodsStatusDisplay!=3">
               距结束
               <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.buyLeftTime}}" timeid="{{good.activityBgGoodsId}}"></span>
             </p>
 <!-- 未开始-->
-            <p class="sk-icon disabled" ng-if="good.killStarted==0">抢</p>
+            <p class="sold-out" ng-if="good.killStarted==0">未开始</p>
 <!-- 已结束-->
             <p class="sk-end" ng-if="good.killStarted==2">已结束</p>
 <!-- 已经售空-->
-            <p class="sold-out" ng-if="good.killStarted==1 && good.goodsStatusDisplay==3">已售空</p>
+            <p class="sold-out" ng-if="good.killStarted==1 && good.goodsStatusDisplay==3">抢光了</p>
 <!-- 已经抢过了 -->
             <p class="sold-geted" ng-if="good.killStarted==1 && good.killed">已抢购</p>
 <!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
@@ -118,15 +118,15 @@
           </div>
         </div>
 <!-- 产品描述-->
-        <div class="detail-desc">
+        <div class="detail-desc" ng-if="good.goodsDesc && good.goodsDesc.length">
           <div class="detail-desc-key">产品描述:</div>
           <div class="detail-desc-main">{{good.goodsDesc}}</div>
         </div>
-        <div class="detail-desc">
+        <div class="detail-desc" ng-if="good.saleSpec && good.saleSpec.length">
           <div class="detail-desc-key">产品规格:</div>
           <div class="detail-desc-main">{{good.saleSpec}}/{{good.unit}}</div>
         </div>
-        <div class="detail-desc">
+        <div class="detail-desc" ng-if="good.originPlace && good.originPlace.length">
           <div class="detail-desc-key">产地:</div>
           <div class="detail-desc-main">{{good.originPlace}}</div>
         </div>
