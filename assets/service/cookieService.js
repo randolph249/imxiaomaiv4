@@ -12,8 +12,8 @@ angular.module('xiaomaiApp').factory('cookieManager', ['ipCookie', function(
 angular.module('xiaomaiApp').factory('cookie_openid', ['env', 'ipCookie',
   function(env, ipCookie) {
 
-    if (env == 'online') {
-      return ipCookie('xiaomai_open_id');
+    if (env != 'develop') {
+      return ipCookie('xiaomai_open_id') || '';
     } else {
       return 'oTS2xjtXWVPcdQd9OPI11jjBheco'
     }

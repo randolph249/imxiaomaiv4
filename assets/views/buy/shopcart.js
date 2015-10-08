@@ -69,8 +69,9 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
   'xiaomaiMessageNotify',
   'cartManager',
   'env',
+  'xiaomaiCacheManager',
   function($state, $scope, xiaomaiService, cookie_openid, buyProcessManager,
-    xiaomaiMessageNotify, cartManager, env) {
+    xiaomaiMessageNotify, cartManager, env, xiaomaiCacheManager) {
 
 
     //显示或者隐藏购物车
@@ -83,14 +84,15 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
           loadDetail().then(function(res) {
             $scope.goods = res['goods'];
             $scope.ldcFreight = res['ldcFreight'];
+            debugger;
             $scope.haserror = false;
-            return res;
+            return loadCouponCount();
           }, function() {
             $scope.haserror = true;
-            return loadCouponCount();
 
           }).then(function(coupons) {
             //获取优惠劵
+            xiaomaiCacheManager.writeCache('mycoupon', coupons);
             $scope.coupons = coupons.couponInfo;
           }).finally(function() {
             xiaomaiMessageNotify.pub('shopcartdetailheightupdate',
@@ -136,7 +138,8 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
     //获取用户优惠劵数量
     var loadCouponCount = function() {
       return xiaomaiService.fetchOne('mycoupon', {
-        openId: cookie_openid
+        openId: cookie_openid,
+        type: 1
       });
     };
 
@@ -152,21 +155,21 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
           skuId: skuInfo.activitySkuId,
           distributeType: skuInfo.distributeType,
           price: skuInfo.activityPrice,
-          propertyIds: ''
+          propertyIds: skuInfo.skuPropertyValueIdList || '',
         } : {
           goodsId: good.goodsId,
           sourceType: good.sourceType,
           distributeType: skuInfo.distributeType,
           skuId: skuInfo.skuId,
           price: skuInfo.wapPrice,
-          propertyIds: '',
+          propertyIds: skuInfo.skuPropertyValueIdList || '',
         };
 
       var good = $scope.goods[$index];
 
       $scope.goods[$index].isPaying = true;
-
-      buyProcessManager(options, type, good.maxNum, good.skuList[0].numInCart)
+      buyProcessManager(options, type, Math.min(good.maxNum, good.skuList[
+          0].stock), good.skuList[0].numInCart)
         .then(function(
           numInCart) {
           good.skuList[0]['numInCart'] = numInCart;

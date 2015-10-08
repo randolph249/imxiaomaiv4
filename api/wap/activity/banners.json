@@ -27,7 +27,7 @@
       "bannerName": "跳转非本校类目",
       "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=162532",
       "bannerHeight": 0,
-      "hrefUrl": "/#p=index?m=category&id=71&v=1443446500329",
+      "hrefUrl": "/#p=index?m=category&id=71&v=1443531290382",
       "bannerPosition": 1,
       "bannerType": 0,
       "actionType": 2,
@@ -47,7 +47,7 @@
       "bannerName": "跳转活动",
       "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=162531",
       "bannerHeight": 0,
-      "hrefUrl": "/skActivity?collegeId=1181&activityId=175&v=1443446500329",
+      "hrefUrl": "/skActivity?collegeId=1181&activityId=175&v=1443531290382",
       "bannerPosition": 1,
       "bannerType": 0,
       "actionType": 1,
@@ -84,5 +84,5 @@
       "heightWidthRatio": null
     }]
   },
-  "serverTime": "2015-09-28 21:21:40"
+  "serverTime": "2015-09-29 20:54:50"
 }

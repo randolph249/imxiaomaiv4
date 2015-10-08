@@ -68,10 +68,9 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
         $scope.gotoDetail(good);
         return false;
       }
-
       $scope.categorys[$parentindex]['goods'][$index]['isPaying'] = true;
       buyProcessManager({
-        goodsId: good.bgGoodsId,
+        goodsId: good.goodsId,
         sourceType: good.sourceType,
         distributeType: good.skuList[0].distributeType,
         skuId: good.skuList[0].skuId,

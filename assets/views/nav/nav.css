@@ -64,13 +64,6 @@
   left: 45px;
   right: 45px;
 }
-.countrylist {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 4.5rem;
-  bottom: 0;
-}
 .pub-header .location-info.icon-school:before{
     color: #ccc;
     content: '\e613';
@@ -236,6 +229,7 @@
   width:100%;
   line-height: 3rem;
   color: #3a404b;
+  text-align: center;
 }
 .navmain-downtip.pending{
   position: static;

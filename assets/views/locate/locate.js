@@ -44,6 +44,8 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
     $scope.isloading = true;
     xiaomaiService.fetchOne('citylist', {}, true).then(function(res) {
       $scope.citylist = res.cities;
+
+      xiaomaiCacheManager.writeCache('citylist', res);
       $scope.haserror = false;
     }, function() {
       $scope.haserror = true;

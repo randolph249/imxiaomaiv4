@@ -7,7 +7,8 @@
  **/
 angular.module('xiaomaiApp').factory('env', ['$window', function($window) {
   var onlineReg = /h5\.imxiaomai\.com/,
-    testReg = /wap\.tmall\.imxiaomai\.com/,
+    testReg =
+    /(wap\.tmall\.imxiaomai\.com)|(qa\.wap\.test\.imxiaomai\.com)/,
     host = $window.location.host;
 
   if (onlineReg.test(host)) {

@@ -24,3 +24,11 @@
     color: #000;
     font-size:1.4rem;
 }
+.colleges_content{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4.4em;
+  bottom: 0;
+  overflow: hidden;
+}

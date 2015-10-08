@@ -43,11 +43,6 @@
   line-height: 102px;
 }
 .countrylist {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 45px;
-  bottom: 0;
 }
 .colleges_content .title {
   padding: 0 10px;

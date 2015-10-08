@@ -42,11 +42,14 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
             $scope.skuObject = createSkukvList($scope.good.skuList);
           } else {
             $scope.skuInfo = $scope.good.skuList[0];
+            var skuId = $scope.good.sourceType == 1 ? $scope.skuInfo
+              .skuId : $scope.skuInfo.activitySkuId;
 
-            cartManager.getnumInCart($scope.skuInfo.skuId).then(
-              function(num) {
-                $scope.numInCart = num;
-              });
+            cartManager.getnumInCart(skuId, $scope.good.sourceType)
+              .then(
+                function(num) {
+                  $scope.numInCart = num;
+                });
           }
 
           //弹出对话框
@@ -91,10 +94,13 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
       if ($scope.skuInfo) {
         //从后台查询numInCart信息
 
-        var skuId = skuInfo.activitySkuId;
-        cartManager.getnumInCart(skuId).then(function(num) {
-          $scope.numInCart = num;
-        });
+        var skuId = $scope.good.sourceType == 1 ? $scope.skuInfo.skuId :
+          $scope.skuInfo.activitySkuId;
+
+        cartManager.getnumInCart(skuId, $scope.good.sourceType).then(
+          function(num) {
+            $scope.numInCart = num;
+          });
       } else {
         $scope.numInCart = 0;
       }

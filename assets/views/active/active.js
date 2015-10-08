@@ -338,7 +338,7 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
       }
 
 
-      $scope.goods[$index]['isPaying'] = false;
+      $scope.goods[$index]['isPaying'] = true;
 
       buyProcessManager({
         distributeType: good.skuList[0].distributeType,
@@ -355,7 +355,7 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
           alert(msg);
           return false;
         }).finally(function() {
-        $scope.goods[$index]['isPaying'] = true;
+        $scope.goods[$index]['isPaying'] = false;
       });
     };
 

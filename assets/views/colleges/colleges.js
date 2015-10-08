@@ -24,9 +24,11 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
       }).then(function(res) {
         $scope.haserror = res.cities.length ? false : true;
         $scope.countrylist = res.cities;
+        // alert('cityloaded');
       }, function(msg) {
         $scope.haserror = true;
       }).finally(function() {
+        // alert(123);
         xiaomaiMessageNotify.pub('collegesheightupdate', 'up',
           'ready', '', '');
         $scope.isloading = false;

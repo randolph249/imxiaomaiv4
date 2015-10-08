@@ -19,7 +19,7 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
       var myScroll = new IScroll(ele[0], {
         click: true,
         tap: true,
-        probeType: 1
+        probeType: 2
       });
 
 

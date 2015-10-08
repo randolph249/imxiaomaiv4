@@ -269,6 +269,7 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
 
       //如果传递了numIncart 可以不去购物车详情中查询
       if (angular.isNumber(numInCart)) {
+
         if (type == 'plus' && numInCart >= maxNum) {
           deferred.reject('该商品购买数量超上限了哦~');
           return deferred.promise;

@@ -108,9 +108,8 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         } else if ($scope.paginationInfo.currentPage == $scope.paginationInfo
           .totalPage) {
           return false;
-          // alert('Router\' name:' + nextRouter.name);
-          $state.go(nextRouter.name, nextRouter.params);
-          // nextRouter && $state.go(nextRouter.name, nextRouter.params);
+
+          //$state.go(nextRouter.name, nextRouter.params);
         } else {
 
           //提示文案 下一页数据
