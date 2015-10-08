@@ -9,8 +9,8 @@
 }
 
 .GoodsCont .imgCont {
-    width: 100px;
-    height: 100px;
+    width: 8rem;
+    height: 8rem;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -21,7 +21,7 @@
 
 .GoodsCont .details {
     position: absolute;
-    left: 110px;
+    left: 9rem;
     right: 0;
     bottom: 10px;
     top: 10px;
@@ -33,21 +33,7 @@
 /* 小屏兼容 */
 
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
-    .GoodsCont .imgCont {
-        width: 80px;
-        height: 80px;
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-        position: relative;
-    }
-    .GoodsCont .details {
-        position: absolute;
-        left: 90px;
-        right: 0;
-        bottom: 10px;
-        top: 10px;
-    }
+  
 }
 
 .categoryBanners {
