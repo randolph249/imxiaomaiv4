@@ -183,6 +183,11 @@
 .list-main .list-product .GoodsCont{
     min-height: 100%;
 }
+.list-main .list-product .sk-end,
+.list-main .list-product .sk-geted,
+.list-main .list-product .sk-out{
+    right: 0;
+}
 
 /* *
     *hot-1 new-2 recommend-3
