@@ -339,7 +339,7 @@ body {
 .iconfont.buy-icon {
     position: absolute;
     right: 0;
-    bottom: 10px;
+    bottom: 0px;
     background-color: #fff;
     font-size: 3.3rem;
     line-height: 1;
@@ -401,6 +401,22 @@ p.goodname {
     color: #fc541f;
     border-color: #fc541f;
 }
+
+
+.list-product .sk-end,
+.list-product .sold-out,
+.list-product .sold-geted{
+    bottom: 1.3rem;
+    right: 0;
+}
+
+.skactiveGoodList .sk-end,
+.skactiveGoodList .sold-out,
+.skactiveGoodList .sold-geted{
+    bottom: 1.3rem;
+    right: 1rem;
+}
+
 
 .paying {
     opacity: 0.3;
