@@ -76,15 +76,6 @@ angular.module('xiaomaiApp').config([
                 'components/back/back.js?v=' + (+new Date)
               ]
             })
-          }],
-          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'xiaomaiApp',
-              files: [
-                window.__SYS_CONF.resourceUrl +
-                'views/root/root.js'
-              ]
-            })
           }]
         }
       })

@@ -7,8 +7,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
   'xiaomaiMessageNotify',
   'wxshare',
   'getRouterTypeFromUrl',
-  'xiaomaiLog'
-
+  'xiaomaiLog',
   function($scope, $state, xiaomaiService, buyProcessManager,
     xiaomaiCacheManager, xiaomaiMessageNotify, wxshare,
     getRouterTypeFromUrl, xiaomaiLog) {
