@@ -75,8 +75,9 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     });
 
     var wxshareConfig = function() {
-      var title = $scope.good.sourceType == 2 ? $scope.good.activityGoodsName :
-        $scope.good.bgGoodsName;
+      var title = '小麦特供-' + ($scope.good.sourceType == 2 ? $scope.good.activityGoodsName :
+        $scope.good.bgGoodsName);
+      var desc = "小麦特供,便宜有好货,赶快点进来看看吧!";
       var link = [
         'http://',
         window.location.host,
@@ -98,6 +99,7 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
       wxshare({
         title: title,
         link: link,
+        desc: desc,
         imgUrl: imgUrl,
         success: success,
         cancel: cancel
@@ -168,6 +170,8 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
 
       if (!$scope.skuInfo) {
         alert('请选择商品规格');
+        $event.preventDefault();
+        $event.stopPropagation();
         return false;
       } else {
         angular.forEach($scope.checkedProperties, function(item) {
@@ -240,8 +244,9 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     };
 
     //关闭详情页
-    $scope.closeDetail = function() {
+    $scope.closeDetail = function($event) {
       xiaomaiMessageNotify.pub('detailGuiManager', 'hide');
+      $event.preventDefault();
     };
 
 

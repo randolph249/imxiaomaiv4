@@ -158,7 +158,6 @@ angular.module('xiaomaiApp').controller('sharedetailCtrl', [
       $event.stopPropagation();
     };
 
-
     //倒计时截止 修改数据状态
     $scope.timecountdown = function(goodId) {
       //如果是活动开始了

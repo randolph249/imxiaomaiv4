@@ -131,10 +131,11 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
     });
 
     //打开详情页面
-    $scope.gotoDetail = function(good) {
+    $scope.gotoDetail = function($event, good) {
       xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.goodsId,
         good.sourceType);
-      return false;
+      $event.preventDefault();
+      $event.stopPropagation();
     };
 
     //进行流程购买

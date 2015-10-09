@@ -36,7 +36,9 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     //微信分享配置
     var wxshareConfig = function() {
       wxshare({
-        title: $scope.activityShowName
+        title: '小麦特供-' + $scope.activityShowName,
+        imgUrl: 'http://wap.tmall.imxiaomai.com/img/logo_new.png',
+        desc: '小麦特供,便宜有好货,赶快点进来看看吧!'
       });
     };
 

@@ -11,7 +11,7 @@
     <p class="emptyTip" ng-show="!totalCount || totalCount==0">购物车是空的,快快选购吧~</p>
   </div>
   <div class="cartDetail" ng-class="{'cartDetail-show':showcart}" ng-controller="buy.cartDetailCtrl">
-    <span class="goback" ng-click="continueShop();">继续购物<i class=" iconfont icon-YF_more"></i>
+    <span class="goback" ng-click="continueShop($event);">继续购物<i class=" iconfont icon-YF_more"></i>
     </span>
     <div class="cartDetailWrap" subname="{{'shopcartdetailheightupdate'}}" xiaomai-iscroll>
       <div>
@@ -40,7 +40,7 @@
 </div>
 <!--遮罩-->
 <div class="mask" mask-gui ng-click="closeMask($event);"></div>
-<div class="shareModel" ng-show="shareIsShow" ng-click="closeShare();"></div>
+<div class="shareModel" ng-show="shareIsShow" ng-click="closeShare($event);"></div>
 
 
 
@@ -48,8 +48,8 @@
 <div class="goodDetail" ng-class="{'goodDetail-show':showdetail}" ng-controller="buy.detailCtrl">
   <div class="detailCont">
     <div class="goodIconWrap">
-      <div class="iconfont icon-share" ng-click="showShareModel();"></div>
-      <div class="iconfont icon-unfold" ng-click="closeDetail();"></div>
+      <div class="iconfont icon-share" ng-click="showShareModel($event);"></div>
+      <div class="iconfont icon-unfold" ng-click="closeDetail($event);"></div>
     </div>
     <div class="goodDetailWrap" subname="{{'detailgoodheightupdate'}}" xiaomai-iscroll>
       <div>

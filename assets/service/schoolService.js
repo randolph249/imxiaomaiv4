@@ -55,8 +55,6 @@ angular.module('xiaomaiApp').factory('schoolManager', [
           deferred.resolve(schoolInfo);
           hanlderQuerys();
         } else {
-          // alert('当前学校不在商城V4的白名单,将跳到旧版商城!');
-
           window.location.href = 'http://' + window.location.host;
         }
 
@@ -96,8 +94,6 @@ angular.module('xiaomaiApp').factory('schoolManager', [
         if (reg.test(whitelist.collegeWhiteList)) {
           deferred.resolve(schoolInfo);
         } else {
-
-          // alert('当前学校不在商城V4的白名单,将跳到旧版商城!');
           window.location.href = 'http://' + window.location.host;
         }
         return false;

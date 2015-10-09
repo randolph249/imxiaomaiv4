@@ -120,10 +120,10 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
       return false;
     };
 
-
     //继续购物
-    $scope.continueShop = function() {
+    $scope.continueShop = function($event) {
       xiaomaiMessageNotify.pub('cartGuiManager', 'hide');
+      $event.preventDefault();
     };
 
     $scope.goHomepage = function() {
