@@ -5,8 +5,10 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
   'xiaomaiCacheManager',
   'buyProcessManager',
   'xiaomaiMessageNotify',
+  'getRouterTypeFromUrl',
   function($state, xiaomaiService, $scope,
-    xiaomaiCacheManager, buyProcessManager, xiaomaiMessageNotify) {
+    xiaomaiCacheManager, buyProcessManager, xiaomaiMessageNotify,
+    getRouterTypeFromUrl) {
     var collegeId, categoryId;
 
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
@@ -56,33 +58,6 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
       });
     };
 
-
-    //根据URl解析Router参数
-    var getRouterTypeFromUrl = function(url) {
-      var router = {};
-      if (url.match(/[\?&]m=([^\?&]+)/)) {
-        router.name = 'root.buy.nav.category';
-        router.params = {
-          categoryId: url.match(/[\?&]id=([^\?&]+)/)[1],
-          collegeId: collegeId
-        }
-      } else if (url.match(/skActivity/)) {
-        router.name = 'root.buy.skactive';
-        router.params = {
-          collegeId: collegeId,
-          activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
-        }
-      } else if (url.match(/activity/)) {
-        router.name = 'root.buy.skactive';
-        router.params = {
-          collegeId: collegeId,
-          activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
-        }
-      } else {
-        router.path = url;
-      }
-      return router;
-    };
     //跳转到对应的活动
     $scope.gotoActive = function(banner) {
       var router = getRouterTypeFromUrl(banner.hrefUrl);
@@ -93,7 +68,7 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         $state.go(router.name, router.params);
       }
       return false;
-    }
+    };
 
     //接受directive指令
     //当上拉的时候跳到上一个导航页面
@@ -163,14 +138,15 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
     };
 
     //进行流程购买
-    $scope.buyHandler = function(good, $index) {
+    $scope.buyHandler = function($event, good, $index) {
+
       if (good.goodsType == 3) {
         $scope.gotoDetail(good);
+        $event.stopPropagation();
         return false;
       }
 
       $scope.goods[$index].isPaying = true;
-
       buyProcessManager({
         goodsId: good.goodsId,
         sourceType: good.sourceType,
@@ -184,8 +160,8 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
           alert(msg);
         }).finally(function() {
         $scope.goods[$index].isPaying = false;
-
       });
+      $event.stopPropagation();
     }
   }
 ]);

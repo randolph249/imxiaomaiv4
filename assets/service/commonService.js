@@ -78,3 +78,32 @@ angular.module('xiaomaiApp').factory('parseUrlParams', [function() {
     return result && result.length ? result[1] : false;
   }
 }])
+
+angular.module('xiaomaiApp').factory('getRouterTypeFromUrl', function() {
+  //根据URl解析Router参数
+  return function(url, collegeId) {
+    var router = {};
+    if (url.match(/[\?&]m=([^\?&]+)/)) {
+      router.name = 'root.buy.nav.category';
+      router.params = {
+        categoryId: url.match(/[\?&]id=([^\?&]+)/)[1],
+        collegeId: collegeId
+      }
+    } else if (url.match(/skActivity/)) {
+      router.name = 'root.buy.skactive';
+      router.params = {
+        collegeId: collegeId,
+        activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
+      }
+    } else if (url.match(/activity/)) {
+      router.name = 'root.buy.skactive';
+      router.params = {
+        collegeId: collegeId,
+        activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
+      }
+    } else {
+      router.path = url;
+    }
+    return router;
+  };
+});

@@ -25,7 +25,7 @@ angular.module('xiaomaiApp').config([
         templateUrl: '../assets/views/root/root.html'
       })
       .state('root.buy', {
-        url: 'buy/?goodId&sourceType',
+        url: 'buy/',
         controller: 'buyCtrl',
         templateUrl: '../assets/views/buy/buy.html'
       })
@@ -81,6 +81,11 @@ angular.module('xiaomaiApp').config([
         controller: 'collegesCtrl',
         templateUrl: '../assets/views/colleges/colleges.html'
       })
+      .state('root.buy.sharedetail', {
+        url: 'sharedetail/?goodId&sourceType',
+        controller: 'sharedetailCtrl',
+        templateUrl: '../assets/views/sharedetail/sharedetail.html'
+      })
       .state('root.buy.coupon', {
         url: 'coupon/',
         controller: 'buy.couponCtrl',
@@ -99,8 +104,15 @@ angular.module('xiaomaiApp').config([
 ]);
 
 //默认跳转到首页
-angular.module('xiaomaiApp').run(['$state', function($state) {
-  $state.go('root.buy.nav.all');
+angular.module('xiaomaiApp').run(['$state', '$rootScope', '$timeout', function(
+  $state,
+  $rootScope, $timeout) {
+  var t = $timeout(function() {
+    $state.go('root.buy.nav.all');
+  }, 50);
+  $rootScope.$on('$stateChangeStart', function(e, toState, toParam) {
+    $timeout.cancel(t);
+  });
 }]);
 
 //禁止页面滑动

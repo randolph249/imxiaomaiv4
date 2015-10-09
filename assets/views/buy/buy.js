@@ -18,13 +18,13 @@ angular.module('xiaomaiApp').controller('buyCtrl', [
       });
     });
 
-
     //点击遮罩关闭所有图层
-    $scope.closeMask = function() {
+    $scope.closeMask = function($event) {
       xiaomaiMessageNotify.pub('cartGuiManager', 'hide');
       xiaomaiMessageNotify.pub('detailGuiManager', 'hide');
       xiaomaiMessageNotify.pub('shareModelManager', 'hide');
-
+      // $event.stopPropagation();
+      $event.preventDefault();
     }
 
     //关闭分享对话框

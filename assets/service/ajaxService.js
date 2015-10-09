@@ -119,6 +119,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
 
 
 /**
+
  *url拦截器
  *如果是当前环境是线下环境 拦截URL转成对应的JS文件
  **/
@@ -128,7 +129,6 @@ angular.module('xiaomaiApp').factory('urlInterceptor', ['env', function(env) {
       return url;
     }
     return '/api' + url + '.json';
-    return url + '.json';
 
   };
   return interceptor;

@@ -77,14 +77,11 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
     //显示或者隐藏购物车
     var cartDetailSubId = xiaomaiMessageNotify.sub('cartGuiManager',
       function(status) {
-
-
         if (status == 'show') {
           //获取购物车详情
           loadDetail().then(function(res) {
             $scope.goods = res['goods'];
             $scope.ldcFreight = res['ldcFreight'];
-            debugger;
             $scope.haserror = false;
             return loadCouponCount();
           }, function() {
@@ -93,7 +90,12 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
           }).then(function(coupons) {
             //获取优惠劵
             xiaomaiCacheManager.writeCache('mycoupon', coupons);
-            $scope.coupons = coupons.couponInfo;
+            var availableCoupons = [];
+            angular.forEach(coupons.couponInfo, function(item) {
+              item.status === 0 && (availableCoupons.push(
+                availableCoupons));
+            });
+            $scope.coupons = availableCoupons;
           }).finally(function() {
             xiaomaiMessageNotify.pub('shopcartdetailheightupdate',
               'up', 'ready', '', '');
@@ -144,7 +146,7 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
     };
 
     //执行购买操作
-    $scope.buyHandler = function(type, $index) {
+    $scope.buyHandler = function($event, type, $index) {
 
       var good = $scope.goods[$index],
         sourceType = good.sourceType,
@@ -178,11 +180,15 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
             false);
           if (good.skuList[0]['numInCart'] == 0) {
             $scope.goods.splice($index, 1);
+            xiaomaiMessageNotify.pub('shopcartdetailheightupdate',
+              'up', 'ready', '', '');
           }
 
         }, function(msg) {
           alert(msg);
         });
+      $event.stopPropagation();
+      $event.preventDefault();
 
     };
   }

@@ -96,7 +96,7 @@
 }
 
 
-.list-main .list-category .nav-super {
+.list-main .list-category .nav-super,.list-main .list-category .nav-parent{
     overflow: hidden;
     line-height: 4.9rem;
     color: #3a404b;
@@ -105,6 +105,11 @@
     border-bottom: solid 1px #ddd;
     white-space: nowrap;
     text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+
+.list-main .list-category .nav-super{
+  height:4.9rem;
 }
 
 .list-main .list-category .nav-super:last-child {
@@ -114,15 +119,15 @@
 .list-main .list-category .nav-super.nav-checked {
     color: #ff5300;
     font-size: 1.5rem;
-    border-bottom: #ff5300 solid 0.3rem;
+    border-bottom: #ff5300 solid 3px;
     background-color: #fff;
 }
 
-.list-main .list-category .nav-super p.arrow-down {
+.list-main .list-category .nav-parent p.arrow-down {
     position: relative;
 }
 
-.list-main .list-category .nav-super p.arrow-down:after {
+.list-main .list-category .nav-parent p.arrow-down:after {
     position: absolute;
     content: '';
     width: 0;
@@ -134,7 +139,7 @@
     top: 2rem;
 }
 
-.list-main .list-category .nav-super p.arrow-down.arrow-up:after {
+.list-main .list-category .nav-parent p.arrow-down.arrow-up:after {
     position: absolute;
     content: '';
     width: 0;
@@ -156,6 +161,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    box-sizing: border-box;
 }
 
 .list-main .list-category .nav-sub.nav-checked {

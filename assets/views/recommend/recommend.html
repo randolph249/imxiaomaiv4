@@ -11,10 +11,10 @@
       <span class="iconfont icon-unfold" ng-click="gotocategory(item);"></span>
     </div>
     <div class="recommendCateColumn">
-      <div class="recommendCateGood" ng-repeat="good in item.goods">
-        <div class="imgCont" ng-click="gotoDetail(good);" ng-style='{"background-image":"url("+good.imageUrl+")"}'></div>
+      <div class="recommendCateGood" ng-repeat="good in item.goods" ng-click="gotoDetail(good);">
+        <div class="imgCont" ng-style='{"background-image":"url("+good.imageUrl+")"}'></div>
         <div class="details">
-          <p class="goodname" ng-click="gotoDetail(good);">{{good.bgGoodsName}}</p>
+          <p class="goodname">{{good.bgGoodsName}}</p>
 <!-- 输出标签29分钟达/次日达 -->
           <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
           <p class="priceCont">
@@ -29,7 +29,7 @@
               &yen;{{good.minWapPrice|xiaomaiprice}} ~ &yen;{{good.maxWapPrice|xiaomaiprice}}
             </span>
           </p>
-          <p class="buy-icon iconfont icon-plus" ng-class="{paying:good.isPaying}" ng-click="buyHandler(good ,$index,$parent.$parent.$index);" ng-if="good.goodsStatusDisplay!=3"></p>
+          <p class="buy-icon iconfont icon-plus" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,good ,$index,$parent.$parent.$index);" ng-if="good.goodsStatusDisplay!=3"></p>
           <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
         </div>
       </div>

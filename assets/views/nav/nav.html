@@ -12,7 +12,7 @@
   <div class="list-category" xiaomai-iscroll subname="{{'navheightupdate'}}">
     <ul ng-controller="nav.listCtrl">
       <li ng-repeat="nav in navs" ng-class="{'nav-checked':navChecked(nav)}" class="nav  nav-super nav-mark-{{nav.labelType}}" ng-click="goto(nav);" ng-if="nav.displayType!=3">{{nav.navigateName}}</li>
-     <li  class="nav nav-super " ng-init="isShowSub=true;">
+     <li  class="nav nav-parent" ng-init="isShowSub=true;">
         <p class="arrow-down" ng-class="{'arrow-up':!isShowSub}" ng-click="isShowSub=!isShowSub;">聚类导航</p>
         <ul ng-show="isShowSub">
           <li ng-click="goto(subnav);" class="nav-sub nav-mark-{{subnav.labelType}}" ng-class="{'nav-checked':subnav.categoryId==curcategoryId}" ng-if="subnav.displayType==3" class="nav-sub" ng-repeat="subnav in navs">{{subnav.navigateName}}</li>

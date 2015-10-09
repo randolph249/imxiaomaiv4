@@ -103,10 +103,12 @@ angular.module('xiaomaiApp').factory('locationManager', [
 //获取当前用户网络环境
 angular.module('xiaomaiApp').factory('networkType', [
   '$q',
-  function($q) {
+  'registerWx',
+  function($q, registerWx) {
     var getNetworkType = function() {
       var deferred = $q.defer();
       registerWx.then(function() {
+        alert(123);
         wx.getNetworkType(function(res) {
           deferred.resolve(res);
         }, function(msg) {
@@ -119,3 +121,14 @@ angular.module('xiaomaiApp').factory('networkType', [
     return xiaomaiApp;
   }
 ]);
+
+//微信分享入口
+angular.module('xiaomaiApp').factory('wxshare', ['$q', 'registerWx', function(
+  $q, registerWx) {
+  return function(config) {
+    registerWx.then(function() {
+      wx.onMenuShareTimeline(config);
+      wx.onMenuShareAppMessage(config);
+    });
+  }
+}])

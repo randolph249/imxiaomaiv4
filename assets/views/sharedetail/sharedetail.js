@@ -1,14 +1,11 @@
-/**详情页面**/
-angular.module('xiaomaiApp').controller('buy.detailCtrl', [
+angular.module('xiaomaiApp').controller('sharedetailCtrl', [
   '$scope',
   '$state',
   'xiaomaiService',
   'getSkuInfo',
   'skuListToObject',
   'buyProcessManager',
-  'xiaomaiMessageNotify',
   'cartManager',
-  'wxshare',
   function(
     $scope,
     $state,
@@ -16,101 +13,42 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     getSkuInfo,
     skuListToObject,
     buyProcessManager,
-    xiaomaiMessageNotify,
-    cartManager,
-    wxshare
+    cartManager
   ) {
     var goodId, sourceType;
 
     //初始化的时候 默认购物中有O个商品
     $scope.numInCart = 0;
 
-    //接受DetailPageChange变化
-    var detailSubId = xiaomaiMessageNotify.sub('detailGuiManager', function(
-      status, id,
-      type) {
-      if (status == 'show') {
-        goodId = id;
-        sourceType = type;
-        loadDetail(goodId, sourceType).then(function(res) {
+    $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
+      goodId = toParam.goodId;
+      sourceType = toParam.sourceType;
 
-          //如果是聚合类产品 生成SkuObject
-          //创建一个skuInfo 聚合类如果选出了一个存在的商品 就生成一个skunInfo
-          //非聚合类默认有一个SkuInfo
-          $scope.good = res;
-          //弹出对话框
-          $scope.showdetail = true;
+      loadDetail(goodId, sourceType).then(function(res) {
+        //如果是聚合类产品 生成SkuObject
+        //创建一个skuInfo 聚合类如果选出了一个存在的商品 就生成一个skunInfo
+        //非聚合类默认有一个SkuInfo
+        $scope.good = res;
+        if ($scope.good.goodsType == 3) {
+          $scope.skuInfo = false;
+          $scope.checkedProperties = {};
+          $scope.skuObject = createSkukvList($scope.good.skuList);
+        } else {
+          $scope.skuInfo = $scope.good.skuList[0];
+          var skuId = $scope.good.sourceType == 1 ? $scope.skuInfo
+            .skuId : $scope.skuInfo.activitySkuId;
+          //如果不是聚合商品查询当前库存
+          return cartManager.getnumInCart(skuId, $scope.good.sourceType);
+        }
 
-          if ($scope.good.goodsType == 3) {
-            $scope.skuInfo = false;
-            $scope.checkedProperties = {};
-            $scope.skuObject = createSkukvList($scope.good.skuList);
-          } else {
-            $scope.skuInfo = $scope.good.skuList[0];
-            var skuId = $scope.good.sourceType == 1 ? $scope.skuInfo
-              .skuId : $scope.skuInfo.activitySkuId;
-            return cartManager.getnumInCart(skuId, $scope.good.sourceType)
-          }
-
-        }).then(function(num) {
-          return angular.isNumber(num) && ($scope.numInCart = num);
-        }).finally(function() {
-          wxshareConfig();
-          xiaomaiMessageNotify.pub('detailgoodheightupdate', 'up',
-            'ready', '', '');
-        });
-      } else {
-        //关闭对话框
-        $scope.showdetail = false;
-        wxshare({
-          title: '',
-          url: '',
-          imgUrl: '',
-          success: '',
-          cancel: ''
-        });
-      }
-      //通知遮罩做出相应的改变
-      xiaomaiMessageNotify.pub('maskManager', status);
-    });
-
-    var wxshareConfig = function() {
-      var title = $scope.good.sourceType == 2 ? $scope.good.activityGoodsName :
-        $scope.good.bgGoodsName;
-      var link = [
-        'http://',
-        window.location.host,
-        window.location.pathname,
-        window.location.search,
-        '#/buy/sharedetail/',
-        '?goodId=',
-        goodId,
-        '&sourceType=',
-        sourceType
-      ].join('');
-      var imgUrl = $scope.good.iconImageUrl;
-      var success = function() {
-
-      };
-      var cancel = function() {
-
-      };
-      wxshare({
-        title: title,
-        link: link,
-        imgUrl: imgUrl,
-        success: success,
-        cancel: cancel
+      }).then(function(num) {
+        angular.isNumber(num) && ($scope.numInCart = num);
+      }).finally(function() {
+        xiaomaiMessageNotify.pub('sharedetailheightupdate', 'up',
+          'ready', '', '');
       });
 
-    }
-
-
-    //监听scope销毁 删除订阅
-    $scope.$on('$destroy', function() {
-      xiaomaiMessageNotify.removeOne('detailGuiManager', detailSubId);
     });
-
 
 
     //获取详情信息
@@ -148,11 +86,6 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
       } else {
         $scope.numInCart = 0;
       }
-    };
-
-    //打开分享对话框
-    $scope.showShareModel = function() {
-      xiaomaiMessageNotify.pub('shareModelManager', 'show');
     };
 
     /**
@@ -197,6 +130,7 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
 
       $scope.good.isPaying = true;
 
+
       //执行购买
       //如果是聚合类产品 需要将选中的PropertyIdVal提交给后台
       buyProcessManager(options, type,
@@ -219,6 +153,7 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
         }).then(function() {
           $scope.good.isPaying = false;
         });
+
       $event.preventDefault();
       $event.stopPropagation();
     };
@@ -238,12 +173,5 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
         $scope.good['buyLeftTime'] = -1;
       }
     };
-
-    //关闭详情页
-    $scope.closeDetail = function() {
-      xiaomaiMessageNotify.pub('detailGuiManager', 'hide');
-    };
-
-
   }
-]);
+])

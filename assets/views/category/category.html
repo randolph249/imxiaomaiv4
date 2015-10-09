@@ -11,12 +11,12 @@
       </ks-swiper-slide>
     </ks-swiper-container>
   </div>
-  <div class="GoodCont" ng-repeat="good in goods">
-    <div class="imgCont" ng-click="gotoDetail(good);" ng-style='{"background-image":"url("+good.imageUrl+")"}'></div>
+  <div class="GoodCont" ng-repeat="good in goods" ng-click="gotoDetail(good);">
+    <div class="imgCont" ng-style='{"background-image":"url("+good.imageUrl+")"}'></div>
     <div class="details">
-      <p class="goodname" ng-click="gotoDetail(good);">{{good.bgGoodsName}}</p>
+      <p class="goodname">{{good.bgGoodsName}}</p>
 <!-- 输出标签29分钟达/次日达 -->
-      <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
+      <label class="label" ng-class="{'ldc':$index===0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.trim().length">{{label}}</label>
       <p class="priceCont">
 <!-- 单品或者组合最高价-->
         <span class="new-price" ng-if="good.goodsType!=3">
@@ -30,7 +30,7 @@
           &yen;{{good.minWapPrice|xiaomaiprice}} ~ &yen;{{good.maxWapPrice|xiaomaiprice}}
         </span>
       </p>
-      <p ng-class="{paying:good.isPaying}" ng-click="buyHandler(good,$index);" class="buy-icon iconfont icon-plus" ng-if="good.goodsStatusDisplay!=3"></p>
+      <p ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,good,$index);" class="buy-icon iconfont icon-plus" ng-if="good.goodsStatusDisplay!=3"></p>
       <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
     </div>
   </div>

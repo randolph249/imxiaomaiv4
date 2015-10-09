@@ -23,9 +23,9 @@
             <lable class="label" ng-class="{ldc:$index==0,rdc:$index==1}" ng-repeat="distribute in good.distributeTypeDisplay" ng-show="distribute.length">{{distribute}}</lable>
           </div>
           <div class="iconWrap">
-            <i class="iconfont icon-minus" ng-class="{paying:good.isPaying}" ng-click="buyHandler('minus',$index);"></i>
+            <i class="iconfont icon-minus" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'minus',$index);"></i>
             <span class="good-count">{{good.skuList[0].numInCart}}</span>
-            <i class="iconfont icon-plus" ng-class="{paying:goo.isPaying}" ng-click="buyHandler('plus',$index);"></i>
+            <i class="iconfont icon-plus" ng-class="{paying:goo.isPaying}" ng-click="buyHandler($event,'plus',$index);"></i>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
   </div>
 </div>
 <!--遮罩-->
-<div class="mask" mask-gui ng-click="closeMask();"></div>
+<div class="mask" mask-gui ng-click="closeMask($event);"></div>
 <div class="shareModel" ng-show="shareIsShow" ng-click="closeShare();"></div>
 
 
@@ -48,10 +48,10 @@
 <div class="goodDetail" ng-class="{'goodDetail-show':showdetail}" ng-controller="buy.detailCtrl">
   <div class="detailCont">
     <div class="goodIconWrap">
-      <div style="display:none;" class="iconfont icon-share" ng-click="showShareModel();"></div>
+      <div class="iconfont icon-share" ng-click="showShareModel();"></div>
       <div class="iconfont icon-unfold" ng-click="closeDetail();"></div>
     </div>
-    <div class="goodDetailWrap" subname="{{'detailgoodheightupdate'}}" xiaomai-iscroll subname="{{'shopcartdetailheightupdate'}}">
+    <div class="goodDetailWrap" subname="{{'detailgoodheightupdate'}}" xiaomai-iscroll>
       <div>
         <div class="imgCont" ng-style="{'background-image':'url('+(skuInfo&&skuInfo.imageUrl?skuInfo.imageUrl:good.imageUrl)+')'}">
 <!--到达类型-->
@@ -78,10 +78,10 @@
             <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
 <!--进行数量选择-->
             <p class="buy-handler-cont " ng-if="good.goodsStatusDisplay!=3">
-              <span class="buy-handler iconfont icon-minus" ng-hide="!skuInfo||numInCart<1" ng-click="buyHandler('minus');"></span>
+              <span class="buy-handler iconfont icon-minus" ng-class="{paying:good.isPaying}" ng-hide="!skuInfo||!numInCart||numInCart<1" ng-click="buyHandler($event,'minus');"></span>
 <!--当前已经购买的数量 -->
               <span class="buy-result">{{numInCart}}</span>
-              <span class="buy-handler iconfont icon-plus buy-icon" ng-class="{'disabled':!skuInfo}" ng-class="{paying:good.isPaying}" ng-click="buyHandler('plus');"></span>
+              <span class="buy-handler iconfont icon-plus buy-icon" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'plus');"></span>
             </p>
           </div>
 <!--秒杀类产品-->
@@ -105,7 +105,7 @@
 <!-- 已经抢过了 -->
             <p class="sold-geted" ng-if="good.killStarted==1 && good.killed">已抢购</p>
 <!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
-            <p class="sk-icon" ng-class="{paying:good.isPaying}" ng-click="buyHandler('plus',true)" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
+            <p class="sk-icon" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'plus',true)" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
           </div>
         </div>
 <!--如果是聚合类产品-->

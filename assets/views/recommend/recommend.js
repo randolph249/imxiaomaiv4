@@ -52,7 +52,6 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
 
     //打开详情页面
     $scope.gotoDetail = function(good) {
-
       xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.goodsId,
         good.sourceType);
 
@@ -61,11 +60,12 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
     //购买按钮点击处理
     //如果是聚合类产品 打开购买链接
     //如果是非聚合类产品 执行购买流程
-    $scope.buyHandler = function(good, $index, $parentindex) {
+    $scope.buyHandler = function($event, good, $index, $parentindex) {
 
 
       if (good.goodsType == 3) {
         $scope.gotoDetail(good);
+        $event.stopPropagation();
         return false;
       }
       $scope.categorys[$parentindex]['goods'][$index]['isPaying'] = true;
@@ -77,16 +77,15 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
         price: good.skuList[0].wapPrice,
         propertyIds: '',
       }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
-        function() {
-
-        },
+        function() {},
         function(msg) {
           alert(msg);
         }).finally(function() {
         $scope.categorys[$parentindex]['goods'][$index]['isPaying'] =
           false;
-
       });
+
+      $event.stopPropagation();
     };
   }
 ])

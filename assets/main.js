@@ -79,7 +79,7 @@ angular.module('xiaomaiApp').config([
         }
       })
       .state('root.buy', {
-        url: 'buy/?goodId&sourceType',
+        url: 'buy/',
         controller: 'buyCtrl',
         templateUrl: '../assets/views/buy/buy.html',
         resolve: {
@@ -232,6 +232,23 @@ angular.module('xiaomaiApp').config([
           }]
         }
       })
+      //分享的详情页
+      .state('root.buy.sharedetail', {
+        url: 'sharedetail/?goodId&sourceType',
+        controller: 'sharedetailCtrl',
+        templateUrl: '../assets/views/sharedetail/sharedetail.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl +
+                'views/sharedetail/sharedetail.js'
+              ]
+            })
+          }]
+        }
+      })
       //进行定位
       .state('root.locate', {
         url: 'locate/',
@@ -313,8 +330,15 @@ angular.module('xiaomaiApp').config([
   }
 ]);
 
-angular.module('xiaomaiApp').run(['$state', function($state) {
-  $state.go('root.buy.nav.all');
+angular.module('xiaomaiApp').run(['$state', '$rootScope', '$timeout', function(
+  $state,
+  $rootScope, $timeout) {
+  var t = $timeout(function() {
+    $state.go('root.buy.nav.all');
+  }, 50);
+  $rootScope.$on('$stateChangeStart', function(e, toState, toParam) {
+    $timeout.cancel(t);
+  });
 }]);
 
 //禁止页面滑动

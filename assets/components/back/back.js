@@ -58,8 +58,6 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
       var maxScrollY;
 
       myScroll.on('scroll', function() {
-
-
         if ($scope.scrollstatus !== 'ready') {
           return false;
         }
@@ -132,7 +130,6 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
       });
 
       $scope.$on('$destroy', function() {
-
         myScroll && myScroll.destroy();
         $timeout.cancel($t);
         myScroll = null;
