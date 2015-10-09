@@ -21,7 +21,7 @@
         正在加载活动商品列表...
       </li>
       <li ng-repeat="good in goods">
-        <div class="goodItem" ng-click="gotoDetail(good);">
+        <div class="goodItem" ng-click="gotoDetail($event,good);">
           <div class="imgCont" ng-style='{"background-image":"url("+good.imageUrl+")"}'>
             <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
           </div>

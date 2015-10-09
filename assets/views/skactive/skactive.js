@@ -7,9 +7,12 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
   'xiaomaiMessageNotify',
   'wxshare',
   'getRouterTypeFromUrl',
+  'xiaomaiLog'
+
   function($scope, $state, xiaomaiService, buyProcessManager,
     xiaomaiCacheManager, xiaomaiMessageNotify, wxshare,
-    getRouterTypeFromUrl) {
+    getRouterTypeFromUrl, xiaomaiLog) {
+
     var collegeId, activityId, page = 1,
       bannerhasFresh = false;
     //监听路由参数变化
@@ -68,6 +71,12 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     collegeId = $state.params.collegeId;
     activityId = $state.params.activityId;
     page = $state.params.page || 1;
+
+
+    //独立活动PV统计
+    xiaomaiLog('m_p_31singleactivity' + activityId);
+    //页面来源统计
+    xiaomaiLog('m_r_31activefrom' + $state.params.refer);
 
     $scope.isloading = true;
     loadSku().then(function(res) {
@@ -141,7 +150,8 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
 
     //跳转到对应的活动
     $scope.gotoActive = function(banner) {
-      var router = getRouterTypeFromUrl(banner.hrefUrl);
+      var router = getRouterTypeFromUrl(banner.hrefUrl, collegeId,
+        'activebanner' + activityId);
 
       if (router.hasOwnProperty('path')) {
         window.location.href = router.path;
@@ -152,9 +162,9 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     }
 
     //跳转到详情页
-    $scope.gotoDetail = function(good) {
+    $scope.gotoDetail = function($event, good) {
       xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.activityGoodsId,
-        good.sourceType);
+        good.sourceType, 'active' + activityId);
       return false;
     };
 
@@ -165,8 +175,12 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     }
 
 
+
     //执行购买
     $scope.buyHandler = function($event, good, $index) {
+      //日志：抢点击次数
+      xiaomaiLog('m_b_31singleactivitypanicbuy' + activityId);
+
       $scope.goods[$index]['isPaying'] = true;
       buyProcessManager({
         goodsId: good.activityGoodsId,
@@ -177,6 +191,9 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
         propertyIds: ''
       }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
         function() {
+          //购物车来源统计
+          xiaomaiLog('m_r_31cartfromactive' + activityId);
+
           alert('赶快去下单吧\n否则可能会被其他人抢走了哦');
           $scope.goods[$index].killed = true;
 

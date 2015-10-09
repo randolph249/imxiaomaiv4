@@ -32,7 +32,7 @@ angular.module('xiaomaiApp').factory('systemInfo', ['$window', function(
     model, //手机型号
     androidReg = /(android)\s+([\d\.]+)/i,
     iphoneReg = /(iphone|ipad).+(os\s[\d_]+)/i,
-    wechartReg = /micromessenger/,
+    wechartReg = /micromessenger\/[\d\.]+/i,
     result;
 
   if (UA.match(androidReg) && UA.match(androidReg).length) {
@@ -48,8 +48,9 @@ angular.module('xiaomaiApp').factory('systemInfo', ['$window', function(
     version = 'unknown';
   }
 
-  if (wechartReg.test(UA)) {
-    browser = 'wechart';
+
+  if (UA.match(wechartReg) && UA.match(wechartReg).length) {
+    browser = UA.match(wechartReg)[0];
   } else {
     browser = 'other';
   }
@@ -79,27 +80,32 @@ angular.module('xiaomaiApp').factory('parseUrlParams', [function() {
   }
 }])
 
+
+//点击Banner的时候执行解析
 angular.module('xiaomaiApp').factory('getRouterTypeFromUrl', function() {
   //根据URl解析Router参数
-  return function(url, collegeId) {
+  return function(url, collegeId, refer) {
     var router = {};
     if (url.match(/[\?&]m=([^\?&]+)/)) {
       router.name = 'root.buy.nav.category';
       router.params = {
         categoryId: url.match(/[\?&]id=([^\?&]+)/)[1],
-        collegeId: collegeId
+        collegeId: collegeId,
+        refer: refer
       }
     } else if (url.match(/skActivity/)) {
       router.name = 'root.buy.skactive';
       router.params = {
         collegeId: collegeId,
-        activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
+        activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1],
+        refer: refer,
       }
     } else if (url.match(/activity/)) {
       router.name = 'root.buy.skactive';
       router.params = {
         collegeId: collegeId,
-        activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
+        activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1],
+        refer: refer
       }
     } else {
       router.path = url;

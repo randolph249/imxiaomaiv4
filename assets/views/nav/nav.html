@@ -6,21 +6,20 @@
     <i class="changeLocate"></i>
   </div>
   <div class="iconfont icon-user" style="display:none;"></div>
-
 </div>
-<div class="list-main main-both" >
-  <div class="list-category" xiaomai-iscroll subname="{{'navheightupdate'}}">
+<div class="list-main main-both">
+  <div class="list-category" subname="{{'navheightupdate'}}" xiaomai-iscroll>
     <ul ng-controller="nav.listCtrl">
-      <li ng-repeat="nav in navs" ng-class="{'nav-checked':navChecked(nav)}" class="nav  nav-super nav-mark-{{nav.labelType}}" ng-click="goto(nav);" ng-if="nav.displayType!=3">{{nav.navigateName}}</li>
-     <li  class="nav nav-parent" ng-init="isShowSub=true;">
-        <p class="arrow-down" ng-class="{'arrow-up':!isShowSub}" ng-click="isShowSub=!isShowSub;">聚类导航</p>
+      <li class="nav nav-super nav-mark-{{nav.labelType}}" ng-class="{'nav-checked':navChecked(nav)}" ng-click="goto($event,nav);" ng-if="nav.displayType!=3" ng-repeat="nav in navs">{{nav.navigateName}}</li>
+      <li class="nav nav-parent" ng-init="isShowSub=true;">
+        <p class="arrow-down" ng-class="{'arrow-up':!isShowSub}" ng-click="isShowSub=!isShowSub;motherNavLog($event);">聚类导航</p>
         <ul ng-show="isShowSub">
-          <li ng-click="goto(subnav);" class="nav-sub nav-mark-{{subnav.labelType}}" ng-class="{'nav-checked':subnav.categoryId==curcategoryId}" ng-if="subnav.displayType==3" class="nav-sub" ng-repeat="subnav in navs">{{subnav.navigateName}}</li>
+          <li class="nav-sub nav-mark-{{subnav.labelType}}" class="nav-sub" ng-class="{'nav-checked':subnav.categoryId==curcategoryId}" ng-click="goto($event,subnav);" ng-if="subnav.displayType==3" ng-repeat="subnav in navs">{{subnav.navigateName}}</li>
         </ul>
       </li>
     </ul>
   </div>
-  <div class="list-product" up-tip-cls="{{'navmain-uptip'}}" down-tip-cls="{{'navmain-downtip'}}" xiaomai-iscroll subname="{{'navmainheightstatus'}}" pubname="{{'navmainscrollupdate'}}">
-      <div ui-view></div>
+  <div class="list-product" down-tip-cls="{{'navmain-downtip'}}" pubname="{{'navmainscrollupdate'}}" subname="{{'navmainheightstatus'}}" up-tip-cls="{{'navmain-uptip'}}" xiaomai-iscroll>
+    <div ui-view></div>
   </div>
 </div>

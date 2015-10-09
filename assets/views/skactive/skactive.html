@@ -20,7 +20,7 @@
         正在加载活动商品列表...
       </li>
       <li ng-repeat="good in goods">
-        <div class="goodItem" ng-click="gotoDetail(good);">
+        <div class="goodItem" ng-click="gotoDetail($event,good);">
           <div class="imgCont" ng-style='{"background-image":"url("+good.imageUrl+")"}'>
 <!--如果活动未开始-->
             <p class="countdown" ng-if="good.killStarted==0">

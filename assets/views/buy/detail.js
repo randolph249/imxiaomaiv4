@@ -9,6 +9,7 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
   'xiaomaiMessageNotify',
   'cartManager',
   'wxshare',
+  'xiaomaiLog',
   function(
     $scope,
     $state,
@@ -18,7 +19,8 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     buyProcessManager,
     xiaomaiMessageNotify,
     cartManager,
-    wxshare
+    wxshare,
+    xiaomaiLog
   ) {
     var goodId, sourceType;
 
@@ -28,8 +30,14 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     //接受DetailPageChange变化
     var detailSubId = xiaomaiMessageNotify.sub('detailGuiManager', function(
       status, id,
-      type) {
+      type, source) {
       if (status == 'show') {
+
+        //详情页面来源统计
+        xiaomaiLog('m_r_31detailfrom' + source);
+        //详情页面PV统计
+        xiaomaiLog('m_p_31productdetailinfo');
+
         goodId = id;
         sourceType = type;
         loadDetail(goodId, sourceType).then(function(res) {
@@ -155,6 +163,7 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     //打开分享对话框
     $scope.showShareModel = function() {
       xiaomaiMessageNotify.pub('shareModelManager', 'show');
+      xiaomaiLog('m_b_31productdetailinfoshare');
     };
 
     /**
@@ -162,8 +171,13 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
      *先校验是否可以进行添加或者删除
      *然后向后台提交操作请求
      **/
-    $scope.buyHandler = function($event, type, isSnap) {
+    $scope.buyHandler = function($event, type) {
 
+      //购买点击次数统计
+      var logname = $scope.good.isSeckill == 1 ?
+        'm_b_31productdetailinfopanicbuy' : (type == 'plus' ?
+          'm_b_31productdetailinfoadd' : 'm_b_31productdetailinfoless');
+      xiaomaiLog(logname);
 
       var propertyIds = [];
       //如果聚合商品
@@ -211,6 +225,9 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
 
           $scope.numInCart = numInCart;
 
+          //购物车来源统计
+          type == 'plus' && xiaomaiLog('m_r_31cartfromdetail');
+
           //如果是抢购
           if ($scope.good.soruceType == 2) {
             $scope.good.killed = true;
@@ -247,6 +264,7 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     $scope.closeDetail = function($event) {
       xiaomaiMessageNotify.pub('detailGuiManager', 'hide');
       $event.preventDefault();
+      xiaomaiLog('m_b_31productdetailinfoclose');
     };
 
 

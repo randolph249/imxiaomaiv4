@@ -10,7 +10,7 @@
     <div class="localColleges" ng-class="{locating:isLocating}">
       <p class="" ng-if="isloading"></p>
       <p class="locateerrortip" ng-if="haserror">小麦迷路了,手动选择一下吧</p>
-      <p class="locateCollege" ng-class="{holiday:item.isOpen!=1}" ng-click="checkCollege(item)" ng-repeat="item in locationResult">{{item.collegeName}}</p>
+      <p class="locateCollege" ng-class="{holiday:item.isOpen!=1}" ng-click="checkCollege(item,$index)" ng-repeat="item in locationResult">{{item.collegeName}}</p>
     </div>
     <p class="title">手动选择</p>
     <div class="allSchools">

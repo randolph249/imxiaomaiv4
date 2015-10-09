@@ -36,9 +36,30 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
 
     //跳转到结算界面
     $scope.goSettlement = function() {
+
+      var statename = $state.current.name;
+      var namereg = /root\.buy(\.nav)?\.(category)/;
+      var refer = "";
+      switch (namereg[2]) {
+        case 'all':
+          refer = 'homepage';
+          break;
+        case 'recommend':
+          refer = 'recommend'
+          break;
+        case 'category':
+          refer = 'category' + $state.params.categoryId;
+          break;
+        case 'active':
+          refer = 'active' + $state.params.activityId;
+          break;
+        case 'skactive':
+          refer = 'active' + $state.params.activityId;
+          break;
+      }
       var host = env == 'online' ? 'http://h5.imxiaomai.com' :
         'http://wap.tmall.imxiaomai.com';
-      window.location.href = host + "/order/create";
+      window.location.href = host + "/order/create?r=" + refer;
     };
 
     //打开详情页面
@@ -70,14 +91,17 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
   'cartManager',
   'env',
   'xiaomaiCacheManager',
+  'xiaomaiLog',
   function($state, $scope, xiaomaiService, cookie_openid, buyProcessManager,
-    xiaomaiMessageNotify, cartManager, env, xiaomaiCacheManager) {
-
-
+    xiaomaiMessageNotify, cartManager, env, xiaomaiCacheManager, xiaomaiLog
+  ) {
     //显示或者隐藏购物车
     var cartDetailSubId = xiaomaiMessageNotify.sub('cartGuiManager',
       function(status) {
         if (status == 'show') {
+          //购物车PV统计
+          xiaomaiLog('m_p_31shoppingcart');
+
           //获取购物车详情
           loadDetail().then(function(res) {
             $scope.goods = res['goods'];
@@ -86,7 +110,6 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
             return loadCouponCount();
           }, function() {
             $scope.haserror = true;
-
           }).then(function(coupons) {
             //获取优惠劵
             xiaomaiCacheManager.writeCache('mycoupon', coupons);
@@ -114,6 +137,8 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
 
     //跳转到优惠劵
     $scope.gotoCoupon = function() {
+      //优惠劵点击次数统计
+      xiaomaiLog('m_b_31shoppingcartcoupons');
       var host = env == 'online' ? 'http://h5.imxiaomai.com' :
         'http://wap.tmall.imxiaomai.com';
       window.location.href = host + '/couponwap/myCouponList/webwiew';
@@ -124,6 +149,8 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
     $scope.continueShop = function($event) {
       xiaomaiMessageNotify.pub('cartGuiManager', 'hide');
       $event.preventDefault();
+      //继续购物点击次数统计
+      xiaomaiLog('m_b_31shoppingcartclose');
     };
 
     $scope.goHomepage = function() {
@@ -147,6 +174,9 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
 
     //执行购买操作
     $scope.buyHandler = function($event, type, $index) {
+      //点击+/-日志统计次数
+      xiaomaiLog(type == 'plus' ? 'm_b_31shoppingcartadd' :
+        'm_b_31shoppingcartless');
 
       var good = $scope.goods[$index],
         sourceType = good.sourceType,
@@ -174,6 +204,11 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
           0].stock), good.skuList[0].numInCart)
         .then(function(
           numInCart) {
+
+          //购物车来源统计
+          type == 'plus' && xiaomaiLog('m_r_31cartfromcart');
+
+
           good.skuList[0]['numInCart'] = numInCart;
           //如果这个数据的numInCart==0 删除这条数据
           $scope.goods[$index] && ($scope.goods[$index].isPaying =
@@ -189,7 +224,6 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
         });
       $event.stopPropagation();
       $event.preventDefault();
-
     };
   }
 ]);

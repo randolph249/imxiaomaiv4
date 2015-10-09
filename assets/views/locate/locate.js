@@ -9,6 +9,7 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
   'schoolManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
+  'xiaomaiLog',
   function(
     $scope,
     locationManager,
@@ -16,10 +17,14 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
     xiaomaiService,
     schoolManager,
     xiaomaiCacheManager,
-    xiaomaiMessageNotify
+    xiaomaiMessageNotify,
+    xiaomaiLog
   ) {
     $scope.locationResult = [];
     $scope.isloading = true; //默认正在执行定位
+
+    //选择学校PV统计
+    xiaomaiLog('m_p_31selectsch');
 
     //获取定位
     locationManager().then(function(lnglat) {
@@ -33,6 +38,8 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
       $scope.haserror = false;
       $scope.locationResult = res.colleges;
     }, function(msg) {
+      //定位失败 发送Log
+      xiaomaiLog('m_b_31manuallyselectcity', '');
       $scope.haserror = true;
     }).finally(function() {
       $scope.isloading = false;
@@ -58,6 +65,8 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
 
     //选择当前城市
     $scope.showCollegeList = function(city) {
+      //日志 统计当前当即城市
+      xiaomaiLog('m_b_31manuallyselectcity', '');
       $state.go('root.colleges', {
         cityid: city.cityId
       });
@@ -69,8 +78,12 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
       //获取当前城市学校列表
     });
 
-    //返回首页
-    $scope.checkCollege = function(college) {
+    //从两个定位结果中选择一个
+    $scope.checkCollege = function(college, $index) {
+      //
+      xiaomaiLog($index == 0 ? 'm_b_31autoselectsch1' :
+        'm_b_31autoselectsch2', college.collegeId);
+
       schoolManager.set(college).then(function() {
         xiaomaiCacheManager.clean('navgatorlist');
         return true;

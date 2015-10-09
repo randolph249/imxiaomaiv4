@@ -26,6 +26,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/wap/college/detail',
         type: 'GET'
       },
+      //保存学校信息
       'saveSchool': {
         url: '/wap/college/detail',
         type: 'POST'
@@ -70,6 +71,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/wap/cart/remove',
         type: 'POST'
       },
+      //新版本学校白名单
       'whitelist': {
         type: 'GET',
         url: '/wap/college/whitelist'
@@ -94,12 +96,19 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/couponwap/myCouponList',
         type: 'GET'
       },
+      //获取微信配置
       "getWxConfig": {
         url: "/wap/getWxConfig",
         type: "GET"
       },
+      //提交反馈
       "feedback": {
         url: "/wap/feedback/detail",
+        type: "POST"
+      },
+      //日志统计
+      "log": {
+        url: "/wap/log",
         type: "POST"
       }
     },

@@ -1,6 +1,10 @@
 {
-  "signature": "a49c245234a0d84f75236407a28e7a4d086b0873",
-  "appId": "wxd888b8a9c5763733",
-  "nonceStr": "xm_wx_jsmge04",
-  "timestamp": 1443164943728
+  "msg": "success",
+  "code": 0,
+  "data": {
+    "signature": "a49c245234a0d84f75236407a28e7a4d086b0873",
+    "appId": "wxd888b8a9c5763733",
+    "nonceStr": "xm_wx_jsmge04",
+    "timestamp": 1443164943728
+  }
 }

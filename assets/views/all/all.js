@@ -5,9 +5,13 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
   'schoolManager',
   'xiaomaiMessageNotify',
   'xiaomaiCacheManager',
-  'siblingsNav',
+  'xiaomaiLog',
   function($scope, $state, xiaomaiService, schoolManager,
-    xiaomaiMessageNotify, xiaomaiCacheManager, siblingsNav) {
+    xiaomaiMessageNotify, xiaomaiCacheManager, xiaomaiLog) {
+
+
+    //导航栏homepagePV统计
+    xiaomaiLog('m_p_31tabhome');
 
     $scope.activities = [];
 
@@ -35,7 +39,7 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
     });
 
     //缓存页面数据
-    $scope.$on('$destory', function() {
+    $scope.$on('$destroy', function() {
       xiaomaiCacheManager.writeCache('activities', {
         activities: $scope.activities
       });
@@ -63,7 +67,8 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
       $state.go(tostate, {
         //编译活动名会不会导致活动名过长
         collegeId: collegeId,
-        activityId: active.activityId
+        activityId: active.activityId,
+        refer: 'homepage'
       });
     }
   }

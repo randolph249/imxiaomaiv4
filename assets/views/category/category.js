@@ -6,17 +6,19 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
   'buyProcessManager',
   'xiaomaiMessageNotify',
   'getRouterTypeFromUrl',
+  'xiaomaiLog',
   function($state, xiaomaiService, $scope,
     xiaomaiCacheManager, buyProcessManager, xiaomaiMessageNotify,
-    getRouterTypeFromUrl) {
+    getRouterTypeFromUrl, xiaomaiLog) {
     var collegeId, categoryId;
-
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
 
       collegeId = toParam.collegeId;
       categoryId = toParam.categoryId;
       loadGoodList();
       loadBanner();
+      //类目页面PV统计
+      xiaomaiLog('m_p_31tabcategory' + categoryId);
     });
 
     //下载商品列表
@@ -60,7 +62,8 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
 
     //跳转到对应的活动
     $scope.gotoActive = function(banner) {
-      var router = getRouterTypeFromUrl(banner.hrefUrl);
+      var router = getRouterTypeFromUrl(banner.hrefUrl, collegeId,
+        'categorybanner' + categoryId);
 
       if (router.hasOwnProperty('path')) {
         window.location.href = router.path;
@@ -133,7 +136,7 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
     //打开详情页面
     $scope.gotoDetail = function($event, good) {
       xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.goodsId,
-        good.sourceType);
+        good.sourceType, 'category' + categoryId);
       $event.preventDefault();
       $event.stopPropagation();
     };
@@ -141,8 +144,12 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
     //进行流程购买
     $scope.buyHandler = function($event, good, $index) {
 
+      //类目下购买按钮点击次数统计
+      xiaomaiLog('m_b_31homepagetabcategoryadd' + categoryId);
+
+
       if (good.goodsType == 3) {
-        $scope.gotoDetail(good);
+        $scope.gotoDetail($event, good);
         $event.stopPropagation();
         return false;
       }
@@ -156,7 +163,9 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         price: good.skuList[0].wapPrice,
         propertyIds: '',
       }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
-        function(numInCart) {},
+        function(numInCart) {
+          xiaomaiLog('m_r_31cartfromcategory' + categoryId);
+        },
         function(msg) {
           alert(msg);
         }).finally(function() {

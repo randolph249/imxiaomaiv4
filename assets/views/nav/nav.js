@@ -13,7 +13,8 @@ angular.module('xiaomaiApp').controller('nav.headCtrl', [
   '$scope',
   '$state',
   'schoolManager',
-  function($scope, $state, schoolManager) {
+  'xiaomaiLog',
+  function($scope, $state, schoolManager, xiaomaiLog) {
     //获取用户当前定位学校
     schoolManager.get().then(function(res) {
       $scope.schoolname = res.collegeName;
@@ -21,11 +22,14 @@ angular.module('xiaomaiApp').controller('nav.headCtrl', [
 
     //跳转到选择学校页面
     $scope.gotoLocate = function() {
+      xiaomaiLog('m_b_31homepageswitchsch');
       $state.go('root.locate');
     };
 
     //跳转到反馈页面
     $scope.gotoFeedback = function() {
+      //日志统计反馈页面点击量
+      xiaomaiLog('m_b_31homepagefeedback');
       $state.go('root.feedback');
     };
 
@@ -40,10 +44,15 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
   'schoolManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
+  'xiaomaiLog',
   function($scope, $state, xiaomaiService, schoolManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify) {
+    xiaomaiCacheManager, xiaomaiMessageNotify, xiaomaiLog) {
 
     $scope.navs = [];
+
+    //homepagePV统计
+    xiaomaiLog('m_p_31homepage');
+
     //获取导航栏
     schoolManager.get().then(function(res) {
       return xiaomaiService.fetchOne('navgatorlist', {
@@ -103,13 +112,34 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
 
     });
 
-    $scope.goto = function(routerInfo) {
+    //左侧导航栏点击日志统计
+    var clickLog = function(routerInfo) {
+      var logNames = {
+        '0': 'm_b_31homepagetabhome',
+        '1': 'm_b_31homepagetabrec',
+        '2': 'm_b_31homepagetabactivity' + routerInfo.activityId,
+        '3': 'm_b_31homepagetabcategory' + routerInfo.categoryId
+      };
+      xiaomaiLog(logNames[routerInfo.displayType]);
+    };
+
+    //聚类导航点击日志统计
+    $scope.motherNavLog = function($event) {
+      xiaomaiLog('m_b_31homepagetabmothernavi');
+      //避免多次点击
+      $event.preventDefault();
+      $event.stopPropagation();
+    };
+
+    //导航跳转
+    $scope.goto = function($event, routerInfo) {
       schoolManager.get().then(function(res) {
         var collegeId = res.collegeId,
           displayType = routerInfo.displayType,
           activityType = routerInfo.activityType,
           path;
-
+        //日志统计
+        clickLog(routerInfo);
 
         path = $scope.paths[displayType];
         //跳转到对应的链接上
@@ -121,6 +151,10 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
           showCart: false
         });
       });
+
+      //避免多次触发
+      $event.preventDefault();
+      $event.stopPropagation();
     }
 
   }

@@ -27,7 +27,6 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-
                 window.__SYS_CONF.resourceUrl +
                 'service/notifyService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
@@ -51,7 +50,9 @@ angular.module('xiaomaiApp').config([
                 window.__SYS_CONF.resourceUrl +
                 'service/cookieService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
-                'service/siblingnavService.js?v=' + (+new Date)
+                'service/siblingnavService.js?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl +
+                'service/logService.js?v=' + (+new Date)
               ]
             })
           }],
@@ -73,6 +74,15 @@ angular.module('xiaomaiApp').config([
                 'components/countdown/countdown.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'components/back/back.js?v=' + (+new Date)
+              ]
+            })
+          }],
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl +
+                'views/root/root.js'
               ]
             })
           }]
@@ -176,7 +186,7 @@ angular.module('xiaomaiApp').config([
       })
       //普通活动 从首页进入一个新连接
       .state('root.buy.active', {
-        url: 'active/?collegeId&activityId',
+        url: 'active/?collegeId&activityId&refer',
         controller: 'buy.activeCtrl',
         templateUrl: '../assets/views/active/active.html',
         resolve: {
@@ -195,7 +205,7 @@ angular.module('xiaomaiApp').config([
       })
       //抢购活动
       .state('root.buy.skactive', {
-        url: 'skactive/?collegeId&activityId',
+        url: 'skactive/?collegeId&activityId&refer',
         controller: 'buy.skactiveCtrl',
         templateUrl: '../assets/views/skactive/skactive.html',
         resolve: {

@@ -5,11 +5,11 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
   'schoolManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
+  'xiaomaiLog',
   function($state, $scope, xiaomaiService, schoolManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify) {
+    xiaomaiCacheManager, xiaomaiMessageNotify, xiaomaiLog) {
     //根据cityid获取学校列表
     $scope.countrylist = [];
-
 
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
       var cityid = toParam.cityid;
@@ -37,6 +37,8 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
 
     //选择学校
     $scope.checkCollege = function(college) {
+      xiaomaiLog('m_b_31manuallyselectsch', college.collegeId);
+
       schoolManager.set(college).then(function() {
         xiaomaiCacheManager.clean('navgatorlist');
         return true;

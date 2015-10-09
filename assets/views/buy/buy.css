@@ -456,6 +456,7 @@
   display: none;
 }
 .shareModel{
+  display: none;
   position: fixed;
   left: 2em;
   right: 2.4em;
