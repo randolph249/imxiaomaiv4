@@ -1,22 +1,43 @@
+/**
+*20151012135658^m_b_31homepagetabcategoryadd^other~3270~~~~^data~tag~~~^
+*20151012135851^m_b_shoppingcartbuy^~3090~undefined~~161675~^data~tag~~~^
+
+**/
 //日志log统计服务
+
+
+
 angular.module('xiaomaiApp').factory('xiaomaiLog', [
   'xiaomaiService',
   'cookie_openid',
   'xiaomaiLogDate',
   'systemInfo',
   'schoolManager',
+  '$http',
   function(xiaomaiService, cookie_openid, xiaomaiLogDate, systemInfo,
-    schoolManager) {
-    var createEventStr = function(eventname, collegeId) {
+    schoolManager, $http) {
+
+    //如果eventname带了数字 说明是事件名+categoryID/activityId/
+    var createEventStr = function(e, collegeId) {
+      var eventnamereg = /(\w+)\+?(\d+)?/;
+      var eventname = e.match(eventnamereg)[1];
+      var dataid = e.match(eventnamereg)[2];
+
       var logstr = [
           xiaomaiLogDate(),
           eventname,
           systemInfo.browser
         ].join('^') + '~' + collegeId + '~' + cookie_openid +
-        '~~~^data~tag~~~^';
-      xiaomaiService.save('log', {
-        data: logstr
-      });
+        '~' + (dataid || '') + '~~^data~tag~~~^';
+      $http.jsonp(
+        'http://logger.imxiaomai.com/client/event?callback=JSON_CALLBACK&data=' +
+        logstr);
+    };
+    var submitLog = function(logstr) {
+      var logValueId = document.querySelector('#logValueId');
+      logValueId.value = logstr;
+      var logForm = document.querySelector('#logForm');
+      logForm.submit();
     };
     return function(eventname, collegeId) {
 

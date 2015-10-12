@@ -25,7 +25,7 @@
       "sourceType": 1,
       "displayType": 3,
       "activityType": null,
-      "labelType": 0
+      "labelType": 1
     }, {
       "navigateName": "方便速食",
       "activityId": null,
@@ -33,7 +33,7 @@
       "sourceType": 1,
       "displayType": 3,
       "activityType": null,
-      "labelType": 0
+      "labelType": 2
     }, {
       "navigateName": "休闲零食",
       "activityId": null,
@@ -41,7 +41,7 @@
       "sourceType": 1,
       "displayType": 3,
       "activityType": null,
-      "labelType": 0
+      "labelType": 3
     }, {
       "navigateName": "奶饮酒水",
       "activityId": null,

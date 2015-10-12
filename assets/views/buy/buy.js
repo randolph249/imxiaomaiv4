@@ -28,13 +28,15 @@ angular.module('xiaomaiApp').controller('buyCtrl', [
     }
 
     //关闭分享对话框
-    $scope.closeShare = function() {
+    $scope.closeShare = function($event) {
       xiaomaiMessageNotify.pub('shareModelManager',
         'hide');
       //判断是否购物车或者商品详情是否打开
       if (detailGuiStatus != 'show' && cartGuiStatus != 'show') {
-        xiaomaiMessageNotify.pub('maskManager', 'hide')
+        xiaomaiMessageNotify.pub('maskManager', 'hide');
       }
+      $event.preventDefault();
+      $event.stopPropagation();
     }
 
     var detailGuiStatus, cartGuiStatus;
@@ -50,6 +52,7 @@ angular.module('xiaomaiApp').controller('buyCtrl', [
 
     var sharModelId = xiaomaiMessageNotify.sub('shareModelManager',
       function(status) {
+
         $scope.shareIsShow = status == 'show' ? true : false;
       });
 

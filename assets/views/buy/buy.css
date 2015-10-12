@@ -56,7 +56,7 @@
     text-align: center;
 }
 
-.detailCont .icon-share {
+.detailCont .icon-fenxiang {
   position: absolute;
   left: 1rem;
   top: 0.5rem;
@@ -114,20 +114,20 @@
   font-size: 1.8rem;
   line-height: 2.8rem;
   position: absolute;
-  width: 4rem;
-  right: 4.6rem;
-  bottom: 1rem;
+  width: 3rem;
+  right: 3.6rem;
+  bottom: 0.8rem;
   text-align: center;
 }
-.detailCont .good-normal-info .icon-minus {
+.detailCont .good-normal-info .icon-jianqugouwuche {
   position: absolute;
-  right: 9rem;
-  bottom: 1rem;
+  right: 6.5rem;
+  bottom: 0.8rem;
   font-size: 3.0rem;
   color: #fc541f;
   line-height: 1;
 }
-.detailCont .good-normal-info .icon-minus.disabled {
+.detailCont .good-normal-info .icon-jianqugouwuche.disabled {
   color: #ccc;
 }
 .detailCont .good-normal-info .countdown {
@@ -317,18 +317,18 @@
   color: #555;
   right: 0;
   top: 0;
-  padding-right: 4rem;
+  padding-right: 3.6rem;
 }
-.cartDetail .goback i:before {
+.cartDetail .goback .iconfont{
   position: absolute;
   right: 1rem;
   top: 1.2rem;
   display: inline-block;
-  width: 2.2rem;
-  height: 2.2rem;
-  line-height: 2.2rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  line-height: 1.8rem;
   text-align: center;
-  border-radius: 2.2rem;
+  border-radius: 1rem;
   background-color: #ff5300;
   color: #fff;
   font-size: 1.4rem;
@@ -388,28 +388,27 @@
   font-size: 1.6rem;
   vertical-align: middle;
 }
-.cartDetail .good-info .icon-plus, .cartDetail .good-info .icon-minus {
+.cartDetail .good-info .icon-tianjiagouwuche, .cartDetail .good-info .icon-jianqugouwuche {
   color: #ff5300;
   line-height: 4.5rem;
-  font-size: 2.5rem;
+  font-size: 3rem;
   position: absolute;
 }
-.cartDetail .good-info .icon-minus{
-      right: 6rem;
+.cartDetail .good-info .icon-jianqugouwuche{
+    right: 5rem;
 }
-.cartDetail .good-info .icon-plus {
+.cartDetail .good-info .icon-tianjiagouwuche {
     right: 0;
-  font-size: 2.9rem;
 }
 .cartDetail .good-info .good-count {
   display: inline-block;
   line-height: 4.5rem;
   font-size: 1.4rem;
-  width: 2.0rem;
+  width: 3.0rem;
   color: #333;
   text-align: center;
   position: absolute;
-  right: 3.4rem;
+  right: 2.2rem;
 }
 .cartDetail .cartDetail-tip {
     position: absolute;
@@ -456,7 +455,6 @@
   display: none;
 }
 .shareModel{
-  display: none;
   position: fixed;
   left: 2em;
   right: 2.4em;
@@ -469,22 +467,5 @@
   background-position: right top;
 }
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
-    .detailCont .good-normal-info .buy-icon{
-        font-size: 3.8rem;
-    }
-    .detailCont .good-normal-info .buy-result{
-        line-height: 2.4rem;
-        right: 4.4rem;
-    }
-    .cartDetail .good-info .icon-plus{
-        font-size: 3rem;
 
-    }
-    .cartDetail .good-info .good-count{
-        right: 3.1rem;
-    }
-  .cartThumb .totalCount {
-    /* left: 4.4rem;
-        top: -1.8rem; */
-  }
 }

@@ -15,6 +15,7 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
 
       collegeId = toParam.collegeId;
       categoryId = toParam.categoryId;
+      $scope.categoryId = categoryId;
       loadGoodList();
       loadBanner();
       //类目页面PV统计
@@ -63,7 +64,7 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
     //跳转到对应的活动
     $scope.gotoActive = function(banner) {
       var router = getRouterTypeFromUrl(banner.hrefUrl, collegeId,
-        'categorybanner' + categoryId);
+        'categorybanner+' + categoryId);
 
       if (router.hasOwnProperty('path')) {
         window.location.href = router.path;
@@ -132,46 +133,5 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
       xiaomaiMessageNotify.removeOne('navmainscrollupdate',
         iscrollSubId);
     });
-
-    //打开详情页面
-    $scope.gotoDetail = function($event, good) {
-      xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.goodsId,
-        good.sourceType, 'category' + categoryId);
-      $event.preventDefault();
-      $event.stopPropagation();
-    };
-
-    //进行流程购买
-    $scope.buyHandler = function($event, good, $index) {
-
-      //类目下购买按钮点击次数统计
-      xiaomaiLog('m_b_31homepagetabcategoryadd' + categoryId);
-
-
-      if (good.goodsType == 3) {
-        $scope.gotoDetail($event, good);
-        $event.stopPropagation();
-        return false;
-      }
-
-      $scope.goods[$index].isPaying = true;
-      buyProcessManager({
-        goodsId: good.goodsId,
-        sourceType: good.sourceType,
-        distributeType: good.skuList[0].distributeType,
-        skuId: good.skuList[0].skuId,
-        price: good.skuList[0].wapPrice,
-        propertyIds: '',
-      }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
-        function(numInCart) {
-          xiaomaiLog('m_r_31cartfromcategory' + categoryId);
-        },
-        function(msg) {
-          alert(msg);
-        }).finally(function() {
-        $scope.goods[$index].isPaying = false;
-      });
-      $event.stopPropagation();
-    }
   }
 ]);

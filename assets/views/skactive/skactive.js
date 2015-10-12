@@ -39,7 +39,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     var wxshareConfig = function() {
       wxshare({
         title: '小麦特供-' + $scope.activityShowName,
-        imgUrl: 'http://wap.tmall.imxiaomai.com/img/logo_new.png',
+        imgUrl: 'http://xiaomai-p2p.qiniudn.com/1367ef469fd4469211fd71b27b10f16d',
         desc: '小麦特供,便宜有好货,赶快点进来看看吧!'
       });
     };
@@ -73,7 +73,8 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
 
 
     //独立活动PV统计
-    xiaomaiLog('m_p_31singleactivity' + activityId);
+    xiaomaiLog('m_p_31singleactivity+' + activityId);
+
     //页面来源统计
     xiaomaiLog('m_r_31activefrom' + $state.params.refer);
 
@@ -126,7 +127,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
             var hasNextPage = $scope.paginationInfo.currentPage !=
               $scope.paginationInfo
               .totalPage;
-            xiaomaiMessageNotify.pub('skactiveheightstatus', 'up',
+            xiaomaiMessageNotify.pub('skactiveheightstatus', 'down',
               'ready',
               '', hasNextPage ? '请求下一页数据' : '');
           });
@@ -150,7 +151,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     //跳转到对应的活动
     $scope.gotoActive = function(banner) {
       var router = getRouterTypeFromUrl(banner.hrefUrl, collegeId,
-        'activebanner' + activityId);
+        'activebanner+' + activityId);
 
       if (router.hasOwnProperty('path')) {
         window.location.href = router.path;
@@ -163,7 +164,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     //跳转到详情页
     $scope.gotoDetail = function($event, good) {
       xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.activityGoodsId,
-        good.sourceType, 'active' + activityId);
+        good.sourceType, 'active+' + activityId);
       return false;
     };
 
@@ -178,7 +179,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
     //执行购买
     $scope.buyHandler = function($event, good, $index) {
       //日志：抢点击次数
-      xiaomaiLog('m_b_31singleactivitypanicbuy' + activityId);
+      xiaomaiLog('m_b_31singleactivitypanicbuy+' + activityId);
 
       $scope.goods[$index]['isPaying'] = true;
       buyProcessManager({
@@ -191,7 +192,7 @@ angular.module('xiaomaiApp').controller('buy.skactiveCtrl', [
       }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
         function() {
           //购物车来源统计
-          xiaomaiLog('m_r_31cartfromactive' + activityId);
+          xiaomaiLog('m_r_31cartfromactive+' + activityId);
 
           alert('赶快去下单吧\n否则可能会被其他人抢走了哦');
           $scope.goods[$index].killed = true;

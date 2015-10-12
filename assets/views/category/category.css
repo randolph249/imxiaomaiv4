@@ -1,39 +1,7 @@
-.GoodsCont .GoodCont {
-    position: relative;
-    border-bottom: solid 1px #ddd;
-    padding: 10px 0;
-}
-
-.GoodsCont .GoodCont:last-child {
-    border-bottom-width: 0px;
-}
-
-.GoodsCont .imgCont {
-    width: 8rem;
-    height: 8rem;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url('http://xiaomai-p2p.qiniudn.com/8e15885872350480ae32f3e87ad84f49');
-    position: relative;
-    border:#f0f0f0 solid 1px;
-}
-
-.GoodsCont .details {
-    position: absolute;
-    left: 9rem;
-    right: 0;
-    bottom: 10px;
-    top: 10px;
-}
-
-.list-main .list-product .goodname{
-    padding-bottom: 0.5rem;
-}
 /* 小屏兼容 */
 
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
-  
+
 }
 
 .categoryBanners {

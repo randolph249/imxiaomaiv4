@@ -32,7 +32,6 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
       status, id,
       type, source) {
       if (status == 'show') {
-
         //详情页面来源统计
         xiaomaiLog('m_r_31detailfrom' + source);
         //详情页面PV统计
@@ -227,9 +226,8 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
 
           //购物车来源统计
           type == 'plus' && xiaomaiLog('m_r_31cartfromdetail');
-
           //如果是抢购
-          if ($scope.good.soruceType == 2) {
+          if ($scope.good.isSeckill == 1) {
             $scope.good.killed = true;
             alert('抢购成功,赶紧去下单吧!');
           }

@@ -50,7 +50,9 @@ gulp.task('sass:watch', function() {
 });
 
 gulp.task('JsIndexBuild', function() {
-  return gulp.src(['assets/**/*.js', '!assets/main.js', '!assets/lib/*.js'])
+  return gulp.src(['assets/**/*.js', '!assets/main-debug.js',
+      '!assets/lib/*.js'
+    ])
     .pipe(concat('index.all.js'))
     .pipe(uglify())
     .pipe(rename({

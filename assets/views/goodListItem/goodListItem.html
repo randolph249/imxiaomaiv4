@@ -1,0 +1,24 @@
+<div ng-class="{'goodlistItem-column':column&&column=='true','goodlistitem-row':column!='true'}"  ng-click="gotoDetail($event,goods);">
+  <div class="imgCont" ng-style='{"background-image":"url("+goods.imageUrl+")"}'></div>
+  <div class="details">
+    <p class="goodname">{{goods.sourceType==2?goods.activityGoodsName:goods.bgGoodsName}}</p>
+<!-- 输出标签29分钟达/次日达 -->
+    <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in goods.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
+    <p class="priceCont">
+<!-- 单品或者组合最高价-->
+      <span class="new-price" ng-if="goods.goodsType!=3">
+        &yen;<i>{{goods.sourceType==2?goods.skuList[0].activityPrice:goods.skuList[0].wapPrice|xiaomaiprice}}</i>
+      </span>
+      <span class="old-price" ng-if="goods.goodsType!=3">
+        &yen;{{goods.skuList[0].originPrice|xiaomaiprice}}
+      </span>
+<!-- 聚合 -->
+      <span class="aggregate-price" ng-if="goods.goodsType==3">
+        &yen;{{goods.minWapPrice|xiaomaiprice}} ~ &yen;{{goods.maxWapPrice|xiaomaiprice}}
+      </span>
+    </p>
+    <p class="buy-icon iconfont icon-tianjiagouwuche" ng-class="{paying:goods.isPaying}" ng-click="buyHandler($event,good);" ng-if="goods.goodsStatusDisplay==2"></p>
+    <p class="iconfont icon-buhuozhong sold-out" ng-if="goods.goodsStatusDisplay==3"></p>
+    <p class="iconfont icon-dayangle close-time" ng-if="goods.goodsStatusDisplay==5"></p>
+  </div>
+</div>

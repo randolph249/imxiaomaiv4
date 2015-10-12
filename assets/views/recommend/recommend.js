@@ -41,8 +41,6 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
       //删除订阅
     });
 
-
-
     //更多跳转
     $scope.gotocategory = function(item) {
       $state.go('root.buy.nav.category', {
@@ -52,51 +50,5 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
 
       xiaomaiLog('m_b_31homepagetabrecmore');
     };
-
-    //打开详情页面
-    $scope.gotoDetail = function($event, good) {
-      xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.goodsId,
-        good.sourceType, 'recommend');
-
-      $event.preventDefault();
-      $event.stopPropagation();
-
-    };
-
-    //购买按钮点击处理
-    //如果是聚合类产品 打开购买链接
-    //如果是非聚合类产品 执行购买流程
-    $scope.buyHandler = function($event, good, $index, $parentindex) {
-
-      //点击购买日志统计
-      xiaomaiLog('m_b_31homepagetabrecadd');
-
-      if (good.goodsType == 3) {
-        $scope.gotoDetail($event, good);
-        $event.stopPropagation();
-        return false;
-      }
-      $scope.categorys[$parentindex]['goods'][$index]['isPaying'] = true;
-      buyProcessManager({
-        goodsId: good.goodsId,
-        sourceType: good.sourceType,
-        distributeType: good.skuList[0].distributeType,
-        skuId: good.skuList[0].skuId,
-        price: good.skuList[0].wapPrice,
-        propertyIds: '',
-      }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
-        function() {
-          //购物车来源统计
-          xiaomaiLog('m_r_31cartfromrecommend');
-        },
-        function(msg) {
-          alert(msg);
-        }).finally(function() {
-        $scope.categorys[$parentindex]['goods'][$index]['isPaying'] =
-          false;
-      });
-
-      $event.stopPropagation();
-    };
   }
-])
+]);

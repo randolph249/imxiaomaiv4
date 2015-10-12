@@ -101,6 +101,8 @@ angular.module('xiaomaiApp').controller('sharedetailCtrl', [
 
       if (!$scope.skuInfo) {
         alert('请选择商品规格');
+        $event.preventDefault();
+        $event.stopPropagation();
         return false;
       } else {
         angular.forEach($scope.checkedProperties, function(item) {

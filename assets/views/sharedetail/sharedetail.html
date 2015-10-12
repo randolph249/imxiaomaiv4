@@ -1,13 +1,3 @@
-<style media="screen">
-.shareGoodDetail .goodDetailWrap{
-  position:fixed;
-  left:0;
-  right:0;
-  top:0;
-  bottom:4.5rem;
-}
-
-</style>
 <div class="shareGoodDetail">
   <div class="goodDetailWrap detailCont" subname="{{'sharedetailheightupdate'}}" xiaomai-iscroll>
     <div>
@@ -32,13 +22,14 @@
 <!--普通类活动-->
         <div ng-if="good.isSeckill!=1">
 <!--如果没有货 显示补货中-->
-          <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
+          <p class="skicon cantsnap sk-snap iconfont icon-buhuozhong" ng-if="good.goodsStatusDisplay==3"></p>
+          <p class="skicon cantsnap sk-snap iconfont icon-dayangle" ng-if="good.goodsStatusDisplay==5"></p>
 <!--进行数量选择-->
-          <p class="buy-handler-cont " ng-if="good.goodsStatusDisplay!=3">
-            <span class="buy-handler iconfont icon-minus" ng-click="buyHandler($event,'minus');" ng-class="{paying:good.isPaying}" ng-hide="!skuInfo||!numInCart||numInCart<1"></span>
+          <p class="buy-handler-cont " ng-if="good.goodsStatusDisplay==2">
+            <span class="buy-handler iconfont icon-jianqugouwuche" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'minus');" ng-hide="!skuInfo||!numInCart||numInCart<1"></span>
 <!--当前已经购买的数量 -->
             <span class="buy-result">{{numInCart}}</span>
-            <span class="buy-handler iconfont icon-plus buy-icon"  ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'plus');"></span>
+            <span class="buy-handler iconfont icon-tianjiagouwuche buy-icon" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'plus');"></span>
           </p>
         </div>
 <!--秒杀类产品-->
@@ -53,16 +44,17 @@
             距结束
             <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.buyLeftTime}}" timeid="{{good.activityBgGoodsId}}"></span>
           </p>
-<!-- 未开始-->
-          <p class="sold-out" ng-if="good.killStarted==0">未开始</p>
+          <p class="skicon sk-snap iconfont icon-qianggou disabled" ng-if="good.killStarted==0"></p>
 <!-- 已结束-->
-          <p class="sk-end" ng-if="good.killStarted==2">已结束</p>
+          <p class="skicon cantsnap iconfont icon-yijieshu" ng-if="good.killStarted==2"></p>
 <!-- 已经售空-->
-          <p class="sold-out" ng-if="good.killStarted==1 && good.goodsStatusDisplay==3">抢光了</p>
+          <p class="skicon cantsnap sold-out iconfont icon-buhuozhong" ng-if="good.killStarted==1 && good.goodsStatusDisplay==3"></p>
 <!-- 已经抢过了 -->
-          <p class="sold-geted" ng-if="good.killStarted==1 && good.killed">已抢购</p>
+          <p class="skicon cantsnap sk-geted iconfont icon-yiqianggou" ng-if="good.killStarted==1 && good.killed"></p>
 <!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
-          <p class="sk-icon" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'plus',true)" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
+          <p class="skicon sk-snap iconfont icon-qianggou" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'plus',true);" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2"></p>
+<!--打烊了-->
+          <p class="skicon cantsnap sk-snap iconfont icon-dayangle" ng-if="good.goodsStatusDisplay==5"></p>
         </div>
       </div>
 <!--如果是聚合类产品-->

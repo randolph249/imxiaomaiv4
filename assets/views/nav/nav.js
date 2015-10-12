@@ -33,6 +33,13 @@ angular.module('xiaomaiApp').controller('nav.headCtrl', [
       $state.go('root.feedback');
     };
 
+    //跳转到搜索操作页面
+    $scope.gotoSearch = function() {
+      //
+      xiaomaiLog('m_b_31homepagesearch');
+      $state.go('root.search');
+    };
+
   }
 ]);
 
@@ -117,8 +124,8 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
       var logNames = {
         '0': 'm_b_31homepagetabhome',
         '1': 'm_b_31homepagetabrec',
-        '2': 'm_b_31homepagetabactivity' + routerInfo.activityId,
-        '3': 'm_b_31homepagetabcategory' + routerInfo.categoryId
+        '2': 'm_b_31homepagetabactivity+' + routerInfo.activityId,
+        '3': 'm_b_31homepagetabcategory+' + routerInfo.categoryId
       };
       xiaomaiLog(logNames[routerInfo.displayType]);
     };

@@ -38,9 +38,10 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
     $scope.goSettlement = function() {
 
       var statename = $state.current.name;
-      var namereg = /root\.buy(\.nav)?\.(category)/;
+      var namereg =
+        /root\.buy(\.nav)?\.(category|all|recommend|active|skactive)/;
       var refer = "";
-      switch (namereg[2]) {
+      switch (statename.match(namereg)[2]) {
         case 'all':
           refer = 'homepage';
           break;
@@ -48,13 +49,13 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
           refer = 'recommend'
           break;
         case 'category':
-          refer = 'category' + $state.params.categoryId;
+          refer = 'category&categoryId=' + $state.params.categoryId;
           break;
         case 'active':
-          refer = 'active' + $state.params.activityId;
+          refer = 'active&activityId=' + $state.params.activityId;
           break;
         case 'skactive':
-          refer = 'active' + $state.params.activityId;
+          refer = 'active&activityId=' + $state.params.activityId;
           break;
       }
       var host = env == 'online' ? 'http://h5.imxiaomai.com' :

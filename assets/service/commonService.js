@@ -34,12 +34,11 @@ angular.module('xiaomaiApp').factory('systemInfo', ['$window', function(
     iphoneReg = /(iphone|ipad).+(os\s[\d_]+)/i,
     wechartReg = /micromessenger\/[\d\.]+/i,
     result;
-
   if (UA.match(androidReg) && UA.match(androidReg).length) {
     result = UA.match(androidReg);
     platform = result[1];
     version = UA.match(androidReg)[2];
-  } else if (UA.match(iphoneReg) && UA.match(androidReg).length) {
+  } else if (UA.match(iphoneReg) && UA.match(iphoneReg).length) {
     result = UA.match(iphoneReg);
     platform = result[1];
     version = result[2];

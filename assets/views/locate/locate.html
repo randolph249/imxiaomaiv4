@@ -1,21 +1,22 @@
 <div class="pub-header">
-  <div class="iconfont icon-back" ng-click="goback();"></div>
-  <div class="location-info">选择学校</div>
-
-  <div class="iconfont icon-locate-right"></div>
+  <div class="iconfont icon-fanhui lefticon" ng-click="goback();"></div>
+  <div class="middlearea">选择学校</div>
 </div>
 <div class="colleges_content" xiaomai-iscroll subname="{{'locateheightupdate'}}">
   <div class="">
     <p class="title">定位学校</p>
-    <div class="localColleges" ng-class="{locating:isLocating}">
-      <p class="" ng-if="isloading"></p>
+    <div class="localColleges">
+      <p class="locateerrortip" ng-if="islocating">正在进行定位</p>
       <p class="locateerrortip" ng-if="haserror">小麦迷路了,手动选择一下吧</p>
-      <p class="locateCollege" ng-class="{holiday:item.isOpen!=1}" ng-click="checkCollege(item,$index)" ng-repeat="item in locationResult">{{item.collegeName}}</p>
+      <p class="locateCollege" ng-class="{holiday:item.isOpen!=1}" ng-click="checkCollege($event,item,$index)" ng-repeat="item in locationResult">{{item.collegeName}}</p>
     </div>
     <p class="title">手动选择</p>
     <div class="allSchools">
       <ul class="citylist iconfont">
-        <li ng-class="{checked:item.cityId==curcityid}" ng-click="showCollegeList(item);" ng-repeat="item in citylist">{{item.cityName}}</li>
+        <li ng-class="{checked:item.cityId==curcityid}" ng-click="showCollegeList(item);" ng-repeat="item in citylist">
+          {{item.cityName}}
+          <i class="iconfont icon-yfmore"></i>
+        </li>
       </ul>
     </div>
   </div>

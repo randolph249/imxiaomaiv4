@@ -108,8 +108,19 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       },
       //日志统计
       "log": {
-        url: "/wap/log",
-        type: "POST"
+        // url: "/wap/log",
+        url: "http://logger.imxiaomai.com/client/event",
+        type: "GET"
+      },
+      //搜索结果页
+      "searchresult": {
+        url: "/wap/goods/search",
+        type: "GET"
+      },
+      //搜索提示
+      "searchsuggest": {
+        url: "/wap/goods/suggest",
+        type: "GET"
       }
     },
     getModel = function() {

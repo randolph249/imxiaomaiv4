@@ -44,21 +44,9 @@ angular.module('xiaomaiApp').factory('schoolManager', [
         xiaomaiCacheManager.writeCache('getSchool', res)
           //吐给用户备份数据 防止原数据被修改
         schoolInfo = res;
-        return xiaomaiService.fetchOne('whitelist');
-      }).then(function(whitelist) {
 
-        var reg = new RegExp(",?(" + schoolInfo.collegeId + "),?");
-        //缓存学校白名单
-        xiaomaiCacheManager.writeCache('whitelist', whitelist);
-        //如果当前学校不在白名单里面 就不用继续处理队列了
-        if (reg.test(whitelist.collegeWhiteList)) {
-          deferred.resolve(schoolInfo);
-          hanlderQuerys();
-        } else {
-          window.location.href = 'http://' + window.location.host;
-        }
-
-
+        deferred.resolve(schoolInfo);
+        hanlderQuerys();
       });
     }
     var getSchool = function() {
@@ -85,18 +73,7 @@ angular.module('xiaomaiApp').factory('schoolManager', [
         collegeId: info.collegeId
       }).then(function(res) {
         xiaomaiCacheManager.writeCache('getSchool', res);
-        return xiaomaiService.fetchOne('whitelist');
-      }).then(function(whitelist) {
-        var reg = new RegExp(",?(" + schoolInfo.collegeId + "),?");
-        //缓存学校白名单
-        xiaomaiCacheManager.writeCache('whitelist', whitelist);
-        //如果当前学校不在白名单里面 就不用继续处理队列了
-        if (reg.test(whitelist.collegeWhiteList)) {
-          deferred.resolve(schoolInfo);
-        } else {
-          window.location.href = 'http://' + window.location.host;
-        }
-        return false;
+        deferred.resolve(schoolInfo);
       }, function(msg) {
         deferred.reject(msg)
 

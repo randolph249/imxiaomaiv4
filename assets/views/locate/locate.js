@@ -21,29 +21,39 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
     xiaomaiLog
   ) {
     $scope.locationResult = [];
-    $scope.isloading = true; //默认正在执行定位
 
     //选择学校PV统计
     xiaomaiLog('m_p_31selectsch');
 
-    //获取定位
-    locationManager().then(function(lnglat) {
 
-      return xiaomaiService.fetchOne('locate', {
-        latitude: lnglat.lat,
-        longitude: lnglat.lng
-      })
 
-    }).then(function(res) {
-      $scope.haserror = false;
-      $scope.locationResult = res.colleges;
-    }, function(msg) {
-      //定位失败 发送Log
-      xiaomaiLog('m_b_31manuallyselectcity', '');
-      $scope.haserror = true;
-    }).finally(function() {
-      $scope.isloading = false;
-    });
+    //如果有缓存结果
+    if (xiaomaiCacheManager.readCache('locate')) {
+      $scope.locationResult = xiaomaiCacheManager.readCache('locate')[
+        'colleges'];
+    } else {
+      $scope.islocating = true; //默认正在执行定位
+      //获取定位
+      locationManager().then(function(lnglat) {
+        //获取定位位置附近的学校
+        return xiaomaiService.fetchOne('locate', {
+          latitude: lnglat.lat,
+          longitude: lnglat.lng
+        })
+
+      }).then(function(res) {
+        $scope.haserror = false;
+        $scope.locationResult = res.colleges;
+        //写入缓存
+        xiaomaiCacheManager.writeCache('locate', res);
+      }, function(msg) {
+        //定位失败 发送Log
+        xiaomaiLog('m_b_31manuallyselectcity', '');
+        $scope.haserror = true;
+      }).finally(function() {
+        $scope.islocating = false;
+      });
+    }
 
 
     //获取所有城市列表
@@ -79,7 +89,7 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
     });
 
     //从两个定位结果中选择一个
-    $scope.checkCollege = function(college, $index) {
+    $scope.checkCollege = function($event, college, $index) {
       //
       xiaomaiLog($index == 0 ? 'm_b_31autoselectsch1' :
         'm_b_31autoselectsch2', college.collegeId);
@@ -90,6 +100,9 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
       }).then(function() {
         $state.go('root.buy.nav.all');
       });
+
+      $event.preventDefault();
+      $event.stopPropagation();
     };
 
     //返回首页

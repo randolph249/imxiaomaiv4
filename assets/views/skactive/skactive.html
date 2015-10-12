@@ -1,7 +1,7 @@
 <div class="pub-header">
-  <div back-icon class="iconfont icon-back" ng-click="goback();"></div>
-  <div class="location-info">{{activityShowName}}</div>
-  <div class="iconfont   icon-share icon-locate-right" ng-click="showShareModel();"></div>
+  <div back-icon class="iconfont icon-fanhui lefticon" ng-click="goback();"></div>
+  <div class="location-info middlearea">{{activityShowName}}</div>
+  <div class="iconfont icon-fenxiang active-share righticon" ng-click="showShareModel();"></div>
 </div>
 <div class="skWrap" down-tip-cls="{{'skactive-downtip'}}" pubname="{{'skactiveiscrollupdate'}}" subname="{{'skactiveheightstatus'}}" xiaomai-iscroll>
   <div>
@@ -20,7 +20,7 @@
         正在加载活动商品列表...
       </li>
       <li ng-repeat="good in goods">
-        <div class="goodItem" ng-click="gotoDetail($event,good);">
+        <div class="goodItem goodlistitem-row" ng-click="gotoDetail($event,good);">
           <div class="imgCont" ng-style='{"background-image":"url("+good.imageUrl+")"}'>
 <!--如果活动未开始-->
             <p class="countdown" ng-if="good.killStarted==0">
@@ -28,7 +28,7 @@
               <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.timeBeforeStart}}" timeid="{{good.activityBgGoodsId}}"></span>
             </p>
 <!-- 活动已开始且没有被抢空-->
-            <p class="countdown" ng-if="good.killStarted==1 && good.goodsStatusDisplay!=3">
+            <p class="countdown" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">
               距结束
               <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.buyLeftTime}}" timeid="{{good.activityBgGoodsId}}"></span>
             </p>
@@ -46,15 +46,17 @@
                 &yen;{{good.skuList[0].originPrice|xiaomaiprice}}</span>
             </p>
 <!-- 未开始-->
-            <p class="sold-geted" ng-if="good.killStarted==0">未开始</p>
+            <p class="skicon sk-snap iconfont icon-qianggou disabled" ng-if="good.killStarted==0"></p>
 <!-- 已结束-->
-            <p class="sk-end" ng-if="good.killStarted==2">已结束</p>
+            <p class="skicon cantsnap iconfont icon-yijieshu" ng-if="good.killStarted==2"></p>
 <!-- 已经售空-->
-            <p class="sold-out" ng-if="good.killStarted==1 && good.goodsStatusDisplay==3">抢光了</p>
+            <p class="skicon cantsnap sold-out iconfont icon-buhuozhong" ng-if="good.killStarted==1 && good.goodsStatusDisplay==3"></p>
 <!-- 已经抢过了 -->
-            <p class="sold-geted" ng-if="good.killStarted==1 && good.killed">已抢购</p>
+            <p class="skicon cantsnap sk-geted iconfont icon-yiqianggou" ng-if="good.killStarted==1 && good.killed"></p>
 <!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
-            <p class="sk-icon" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,good,$index);" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2">抢</p>
+            <p class="skicon sk-snap iconfont icon-qianggou" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,good,$index);" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2"></p>
+<!--打烊了-->
+            <p class="skicon cantsnap sk-snap iconfont icon-dayangle" ng-if="good.killStarted==1 && good.goodsStatusDisplay==5"></p>
           </div>
         </div>
       </li>

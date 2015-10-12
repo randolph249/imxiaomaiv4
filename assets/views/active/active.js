@@ -26,7 +26,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     var wxshareConfig = function() {
       wxshare({
         title: '小麦特供-' + $scope.activityShowName,
-        imgUrl: 'http://wap.tmall.imxiaomai.com/img/logo_new.png',
+        imgUrl: 'http://xiaomai-p2p.qiniudn.com/1367ef469fd4469211fd71b27b10f16d',
         desc: '小麦特供,便宜有好货,赶快点进来看看吧!'
       });
     };
@@ -45,9 +45,9 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     activityId = $state.params.activityId;
     page = $state.params.page || 1;
 
-
+    $scope.activityId = activityId;
     //独立活动页面PV统计
-    xiaomaiLog('m_p_31singleactivity' + activityId);
+    xiaomaiLog('m_p_31singleactivity+' + activityId);
     //页面来源统计
     xiaomaiLog('m_r_31activefrom' + $state.params.refer);
 
@@ -132,7 +132,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     //跳转到对应的活动
     $scope.gotoActive = function(banner) {
       var router = getRouterTypeFromUrl(banner.hrefUrl, collegeId,
-        'activebanner' + activityId);
+        'activebanner+' + activityId);
 
       if (router.hasOwnProperty('path')) {
         window.location.href = router.path;
@@ -147,43 +147,6 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
       xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.activityGoodsId,
         good.sourceType, 'active' + activityId);
       return false;
-    };
-
-    //执行购买
-    $scope.buyHandler = function($event, good, $index) {
-
-      //点击日志统计
-      xiaomaiLog('m_b_31singleactivityadd' + activityId);
-
-      if (good.goodsType == 3) {
-        $scope.gotoDetail($event, good);
-        $event.stopPropagation();
-        return false;
-      }
-
-
-      $scope.goods[$index]['isPaying'] = true;
-      buyProcessManager({
-        distributeType: good.skuList[0].distributeType,
-        goodsId: good.activityGoodsId,
-        sourceType: good.sourceType,
-        skuId: good.skuList[0].activitySkuId,
-        price: good.skuList[0].activityPrice,
-        propertyIds: ''
-      }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
-        function() {
-          //购物车来源统计
-          xiaomaiLog('m_r_31cartfromactive' + activityId);
-        },
-        function(msg) {
-          alert(msg);
-          return false;
-        }).finally(function() {
-        $scope.goods[$index]['isPaying'] = false;
-
-      });
-
-      $event.stopPropagation();
     };
 
     //翻页
@@ -248,6 +211,8 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
     collegeId = $state.params.collegeId;
     activityId = $state.params.activityId;
     page = $state.params.page || 1;
+
+    $scope.activityId = activityId;
 
     //左侧导航活动页面PV统计
     xiaomaiLog('m_p_31tabactivity' + activityId);
@@ -347,44 +312,6 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
       xiaomaiMessageNotify.removeOne('navmainscrollupdate',
         iscrollSubId);
     });
-
-
-
-    //执行购买
-    $scope.buyHandler = function($event, good, $index) {
-      //点击购买日志统计
-      xiaomaiLog('m_b_31homepagetabactivityadd' + activityId);
-
-
-      if (good.goodsType == 3) {
-        $scope.gotoDetail($event, good);
-        $event.stopPropagation();
-        return false;
-      }
-
-
-      $scope.goods[$index]['isPaying'] = true;
-
-      buyProcessManager({
-        distributeType: good.skuList[0].distributeType,
-        goodsId: good.activityGoodsId,
-        sourceType: good.sourceType,
-        skuId: good.skuList[0].activitySkuId,
-        price: good.skuList[0].activityPrice,
-        propertyIds: ''
-      }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
-        function() {
-          xiaomaiLog('m_r_31cartfromactive' + activityId);
-        },
-        function(msg) {
-          alert(msg);
-          return false;
-        }).finally(function() {
-        $scope.goods[$index]['isPaying'] = false;
-      });
-
-      $event.stopPropagation();
-    };
 
     //翻页
     $scope.pagination = function(page) {}

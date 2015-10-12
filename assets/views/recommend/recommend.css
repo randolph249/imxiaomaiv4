@@ -23,7 +23,6 @@
     top: 0;
     right: 1rem;
     color: #bbb;
-    transform: rotate(-90deg);
     font-size: 1.2rem;
     height: 2.5rem
 
@@ -31,51 +30,4 @@
 
 .recommendCategoryCont .recommendCateColumn {
     padding: 0 10px;
-}
-
-.recommendCategoryCont .recommendCateColumn .recommendCateGood {
-    position: relative;
-    border-bottom: solid 1px #ddd;
-    padding: 10px 0;
-}
-
-.recommendCategoryCont .recommendCateColumn .recommendCateGood:last-child {
-    border-bottom-width: 0px;
-}
-
-.recommendCategoryCont .recommendCateColumn .imgCont {
-    width: 8rem;
-    height: 8rem;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url('../../img/skuDefault.png');
-    position: relative;
-}
-
-.recommendCategoryCont .recommendCateColumn .details {
-    position: absolute;
-    left: 9rem;
-    right: 0;
-    bottom: 1rem;
-    top: 1rem;
-}
-
-.recommendCategoryCont .recommendCateColumn .details .goodname{
-   padding-bottom: 0.5rem;
-}
-
-.recommendCategoryCont .recommendCateColumn .details .iconfont.buy-icon{
-    bottom: 0;
-}
-
-@media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
-    .recommendCategoryCont .recommendCateColumn .imgCont {
-      width: 80px;
-      height: 80px;
-    }
-
-   .recommendCategoryCont .recommendCateColumn .details {
-      left: 90px;
-   }
 }
