@@ -5,3 +5,52 @@
   </div>
   <div class="righticon searchbtn" ng-click="gotosearch($event);">取消</div>
 </div>
+<div class="search-result-cont" down-tip-cls="{{'navmain-downtip'}}" pubname="{{'searchresultscrollupdate'}}" subname="{{'searchresultheightupdate'}}" up-tip-cls="{{'navmain-uptip'}}" xiaomai-iscroll>
+    <div class="loadingAnimation" ng-if="loading"></div>
+    <p class="loadText" ng-if="loading">小麦卖正在努力搜索中...</p>
+    <p class="haserror errorip">
+
+    </p>
+    <ul>
+        <li ng-repeat="good in goods">
+          <div xiaomai-good-list-item goods="good" detail-source-event="search" click-event="m_b_31searchadd" source-event="m_r_31cartfromsearch"></div>
+        </li>
+    </ul>
+
+</div>
+
+<style media="screen">
+.search-result-cont{
+  position:absolute;
+  left:0;
+  right:0;
+  top:4.4rem;
+  bottom:4.4rem;
+  background:#fff;
+  overflow:hidden;
+}
+.search-result-cont ul li{
+  padding:0 1rem;
+}
+<!--  -->
+.loadingAnimation{
+  width: 8rem;
+    height: 8rem;
+    position: absolute;
+    left: 50%;
+    top: 10rem;
+    z-index: 2;
+    margin-left: -4rem;
+    background-image:url('http://imxiaomai.b0.upaiyun.com/images/loading.gif');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+.loadText{
+  color:#3a404b;
+  font-size:1.6rem;
+  line-height:2.4rem;
+  text-align:center;
+  padding-top:18rem;
+}
+</style>
