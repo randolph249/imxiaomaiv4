@@ -1,0 +1,62 @@
+.gooddetail-swiper {
+  width: 24rem;
+  height: 24rem;
+  margin: 0 auto;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: relative;
+}
+.gooddetail-swiper-item {
+  width: 24rem;
+  height: 24rem;
+  margin: 0 auto;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.gooddetail-swiper-nums {
+  position: absolute;
+  bottom: 3rem;
+  width: 100%;
+  z-index: 2;
+  display: -webkit-flex;
+  /* Safari */
+  -webkit-justify-content: center;
+  /* Safari 6.1+ */
+  display: flex;
+  justify-content: center;
+}
+.gooddetail-swiper-nums i {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  content: '';
+  border-radius: 1rem;
+  background: #ccc;
+  margin: 0 5px;
+}
+.gooddetail-swiper-nums i.active {
+  background-color: #ff5300;
+}
+.detail-graphics {
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+.detail-graphic {
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 100%;
+}
+.thirdsellertip {
+  font-size: 1.2rem;
+  line-height: 2rem;
+  /* margin: 0 1.5rem; */
+  /* background-color: #ddd; */
+  border-radius: 1rem;
+  padding: 0 1.5rem;
+}
+.thirdsellertip span {
+  color: #ff5300;
+}

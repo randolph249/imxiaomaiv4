@@ -56,6 +56,14 @@ angular.module('xiaomaiApp').config([
                 window.__SYS_CONF.resourceUrl +
                 'views/goodListItem/goodListItem.css?v=' + (+
                   new Date),
+                window.__SYS_CONF.resourceUrl +
+                'views/gooddetail/gooddetail.js?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl +
+                'views/gooddetail/gooddetail.css?v=' + (+
+                  new Date),
+                window.__SYS_CONF.resourceUrl +
+                'views/root/swiper.min.css?v=' + (+
+                  new Date)
 
               ]
             })
@@ -198,26 +206,6 @@ angular.module('xiaomaiApp').config([
           }]
         }
       })
-      //抢购活动
-      .state('root.buy.skactive', {
-        url: 'skactive/?collegeId&activityId&refer',
-        controller: 'buy.skactiveCtrl',
-        templateUrl: '../assets/views/skactive/skactive.html',
-        resolve: {
-          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'xiaomaiApp',
-              files: [
-                window.__SYS_CONF.resourceUrl +
-                'views/skactive/skactive.js?v=' + (+new Date),
-                window.__SYS_CONF.resourceUrl +
-                'views/skactive/skactive.css'
-              ]
-            })
-          }]
-
-        }
-      })
       //类目列表页
       .state('root.buy.nav.category', {
         url: 'category/?collegeId&categoryId',
@@ -332,7 +320,7 @@ angular.module('xiaomaiApp').config([
       })
       //搜索操作页面
       .state('root.search', {
-        url: 'search/',
+        url: 'search/?key',
         controller: 'searchCtrl',
         templateUrl: '../assets/views/search/search.html',
         resolve: {
@@ -340,8 +328,10 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                '../assets/views/search/search.js',
-                '../assets/views/search/search.css'
+                window.__SYS_CONF.resourceUrl +
+                '/views/search/search.js',
+                window.__SYS_CONF.resourceUrl +
+                '/views/search/search.css'
               ]
             })
           }]
@@ -357,8 +347,10 @@ angular.module('xiaomaiApp').config([
             $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                '../assets/views/search/searchresult.js',
-                '../assets/views/search/search.css'
+                window.__SYS_CONF.resourceUrl +
+                '/views/search/searchresult.js',
+                window.__SYS_CONF.resourceUrl +
+                '/views/search/search.css'
               ]
             })
           }]

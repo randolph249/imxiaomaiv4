@@ -14,10 +14,24 @@ angular.module('xiaomaiApp').controller('nav.headCtrl', [
   '$state',
   'schoolManager',
   'xiaomaiLog',
-  function($scope, $state, schoolManager, xiaomaiLog) {
+  'xiaomaiService',
+  function($scope, $state, schoolManager, xiaomaiLog, xiaomaiService) {
     //获取用户当前定位学校
+    var collegeId;
     schoolManager.get().then(function(res) {
       $scope.schoolname = res.collegeName;
+      collegeId = res.collegeId;
+      return xiaomaiService.fetchOne('whitelist');
+    }).then(function(res) {
+      var whiteList = res.collegeWhiteList,
+        reg = new RegExp('\\,?' + collegeId + '\\,?');
+
+      if (reg.test(whiteList)) {
+        $scope.showsearch = true;
+      } else {
+        $scope.showsearch = false;
+
+      }
     });
 
     //跳转到选择学校页面
@@ -61,14 +75,18 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
     xiaomaiLog('m_p_31homepage');
 
     //获取导航栏
+    var collegeId;
     schoolManager.get().then(function(res) {
+      collegeId = res.collegeId;
       return xiaomaiService.fetchOne('navgatorlist', {
         collegeId: res.collegeId
       });
     }).then(function(res) {
       $scope.navs = res.navigateItems;
       xiaomaiMessageNotify.pub('navheightupdate', 'up', 'ready', '', '')
-      xiaomaiCacheManager.writeCache('navgatorlist', res);
+      xiaomaiCacheManager.writeCache('navgatorlist', res, {
+        collegeId: collegeId
+      });
     });
 
     $scope.paths = {
@@ -89,9 +107,6 @@ angular.module('xiaomaiApp').controller('nav.listCtrl', [
           flag = nav.displayType == 1;
           break;
         case 'active':
-          flag = $scope.activityId == nav.activityId;
-          break;
-        case 'skactive':
           flag = $scope.activityId == nav.activityId;
           break;
         case 'category':

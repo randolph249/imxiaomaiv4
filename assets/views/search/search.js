@@ -19,6 +19,8 @@ angular.module('xiaomaiApp').controller('searchCtrl', [
       referParam = fromParam;
     });
 
+    $scope.searchkey = $state.params.key || '';
+
     //从哪个页面打开回到哪个页面
     $scope.goback = function() {
       $state.go(referRouter, referParam);
@@ -112,21 +114,32 @@ angular.module('xiaomaiApp').controller('searchsuggestCtrl', [
     $scope.showSuggest = false;
     var subId = xiaomaiMessageNotify.sub('searchkeyupdate', function(key) {
       $scope.showSuggest = key.length ? true : false;
-      loadSuggest(key);
+      //如果关键词为空直接清除数据 不发送请求
+      if (key.length) {
+        loadSuggest(key);
+      } else {
+        $scope.suggests = [];
+      }
+      $scope.keywords = key;
     });
 
     //删除订阅
     $scope.$on('$destroy', function() {
       xiaomaiMessageNotify.removeOne('searchkeyupdate', subId);
     });
+
+    //获取关键字
     var loadSuggest = function(key) {
       $scope.isloading = true;
       xiaomaiService.fetchOne('searchsuggest', {
         keywords: key
       }).then(function(res) {
         $scope.suggests = res.suggestGoods;
+        $scope.haserror = $scope.suggests && $scope.suggests.length ?
+          false : true;
       }, function() {
         $scope.suggests = [];
+        $scope.haserror = true;
       }).finally(function() {
         $scope.isloading = false;
       });
@@ -143,17 +156,3 @@ angular.module('xiaomaiApp').controller('searchsuggestCtrl', [
     };
   }
 ]);
-
-angular.module('xiaomaiApp').directive('xiaomaiEnterKey', function() {
-  return function(scope, element, attrs) {
-    element.bind("keydown keypress", function(event) {
-      if (event.which === 13) {
-        scope.$apply(function() {
-          scope.$eval(attrs.xiaomaiEnterKey);
-        });
-
-        event.preventDefault();
-      }
-    });
-  };
-});

@@ -26,7 +26,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     var wxshareConfig = function() {
       wxshare({
         title: '小麦特供-' + $scope.activityShowName,
-        imgUrl: 'http://xiaomai-p2p.qiniudn.com/1367ef469fd4469211fd71b27b10f16d',
+        imgUrl: 'http://xiaomai-p2p.qiniudn.com/2b7ef2e2c2ce364303283bf49131a40f',
         desc: '小麦特供,便宜有好货,赶快点进来看看吧!'
       });
     };
@@ -113,6 +113,9 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     });
 
     loadBanner().then(function(res) {
+      angular.forEach(res.banners, function(banner) {
+        banner.imageUrl + '&imageView2/0/w/600';
+      });
       $scope.banners = res.banners;
       return res;
     });
@@ -312,8 +315,5 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
       xiaomaiMessageNotify.removeOne('navmainscrollupdate',
         iscrollSubId);
     });
-
-    //翻页
-    $scope.pagination = function(page) {}
   }
 ]);

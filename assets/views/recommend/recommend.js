@@ -37,7 +37,9 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
 
     $scope.$on('$destroy', function() {
       //保存页面数据
-      xiaomaiCacheManager.writeCache('categoryGoods', $scope.categorys);
+      xiaomaiCacheManager.writeCache('categoryGoods', $scope.categorys, {
+        collegeId: collegeId
+      });
       //删除订阅
     });
 

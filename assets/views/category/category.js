@@ -57,6 +57,9 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         categoryId: categoryId,
         collegeId: collegeId
       }).then(function(res) {
+        angular.forEach(res.banners, function(banner) {
+          banner.imageUrl + '&imageView2/0/w/600';
+        });
         $scope.banners = res.banners;
       });
     };

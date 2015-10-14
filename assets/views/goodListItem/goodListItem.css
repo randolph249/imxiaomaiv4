@@ -53,13 +53,13 @@
   line-height: 3.6rem;
   clear: both;
 }
-.priceCont .new-price,.priceCont .aggregate-price {
+.priceCont .new-price, .priceCont .aggregate-price {
   color: #ff5300;
   font-size: 1.2rem;
   padding-right: 0.5rem;
   float: left;
 }
-.priceCont .new-price i,.priceCont .aggregate-price i {
+.priceCont .new-price i, .priceCont .aggregate-price i {
   font-style: normal;
   font-size: 1.8rem;
 }
@@ -74,7 +74,7 @@
 .priceCont .aggregate-price {
   font-size: 1.3rem;
 }
-.iconfont.sold-out,.iconfont.close-time {
+.iconfont.sold-out, .iconfont.close-time {
   color: #ff5300;
   right: 0;
   position: absolute;
@@ -103,6 +103,7 @@
   top: -1.8rem;
   left: 1rem;
 }
+
 /* .goodlistItem-column .goodname {
   line-height: 1.8rem;
   height: 3.4rem;
@@ -114,22 +115,36 @@
   height:3.6rem;
 } */
 
-.goodlistitem-row .skicon,
-.goodDetailWrap .skicon{
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
-    line-height: 4rem;
-    color: #ff5300;
-    font-size: 4rem;
+.skactiveGoodList {
+  min-height: 1px;
 }
-
-.goodlistitem-row .cantsnap,
-.goodDetailWrap .cantsnap{
-  font-size:6rem;
+.skactiveGoodList li .goodlistitem-row {
+  padding: 1rem;
 }
-
-.goodlistitem-row .skicon.disabled,
-.goodDetailWrap .skicon.disabled{
-    color:#ccc;
+.skactiveGoodList li .goodlistitem-row .details {
+  left: 10rem;
+}
+.goodlistitem-row .skicon, .goodDetailWrap .skicon {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  line-height: 4rem;
+  color: #ff5300;
+  font-size: 4rem;
+}
+.goodlistitem-row .cantsnap, .goodDetailWrap .cantsnap {
+  font-size: 6rem;
+}
+.goodlistitem-row .skicon.disabled, .goodDetailWrap .skicon.disabled {
+  color: #ccc;
+}
+.goodlistitem-row .countdown {
+  background: #ffebe3;
+  color: #fc541f;
+  font-size: 1rem;
+  line-height: 1.6rem;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }

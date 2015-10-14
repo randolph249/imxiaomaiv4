@@ -220,7 +220,6 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           params = args[1];
         }
 
-
         //判断接口是否已经在modelManager中定义
         url = getUrl(name, 'GET');
         //如果当前开发环境是线下环境 将接口转成本地文件地址
@@ -231,8 +230,9 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
         }
 
         //从页面缓存中查找
-        if (xiaomaiCacheManager.readCache(name)) {
-          deferred.resolve(xiaomaiCacheManager.readCache(name));
+        var cacheResult = xiaomaiCacheManager.readCache(name, params);
+        if (cacheResult) {
+          deferred.resolve(cacheResult);
           return deferred.promise;
         }
 

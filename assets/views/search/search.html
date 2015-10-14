@@ -14,9 +14,10 @@
     <p class="searchhistory-clean" ng-show="cookies.length" ng-click="cleancookie($event);">清除历史</p>
 </div>
 <!--搜索提示列表-->
-<div ng-controller="searchsuggestCtrl" ng-show="showSuggest">
+<div ng-controller="searchsuggestCtrl" ng-show="showSuggest" class=searchsuggests>
   <ul class="searchtiplist">
       <li  ng-repeat="suggest in suggests" ng-click="goresult($event,suggest);">{{suggest}}</li>
   </ul>
-  <p class="searchhistory-norecord" ng-show="isloading">正在请求数据</p>
+  <p class="searchsuggest-loading" ng-if="isloading">正在请求数据</p>
+  <p class="searchsuggest-error" ng-if="haserror">没有搜到与{{''}}相关的关键字</p>
 </div>

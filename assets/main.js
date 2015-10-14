@@ -57,12 +57,6 @@ angular.module('xiaomaiApp').config([
         controller: 'buy.activeCtrl',
         templateUrl: '../assets/views/active/active.html'
       })
-      //抢购活动
-      .state('root.buy.skactive', {
-        url: 'skactive/?collegeId&activityId',
-        controller: 'buy.skactiveCtrl',
-        templateUrl: '../assets/views/skactive/skactive.html',
-      })
       //类目列表页
       .state('root.buy.nav.category', {
         url: 'category/?collegeId&categoryId',

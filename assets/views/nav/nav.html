@@ -5,14 +5,14 @@
     {{schoolname}}
     <i class="changeLocate"></i>
   </div>
-  <div class="iconfont icon-sousuo righticon" ng-click="gotoSearch();"></div>
+  <div class="iconfont icon-sousuo righticon" ng-show="showsearch" ng-click="gotoSearch();"></div>
 </div>
 <div class="list-main main-both">
   <div class="list-category" subname="{{'navheightupdate'}}" xiaomai-iscroll>
     <ul ng-controller="nav.listCtrl">
       <li class="nav nav-super nav-mark-{{nav.labelType}}" ng-class="{'nav-checked':navChecked(nav)}" ng-click="goto($event,nav);" ng-if="nav.displayType!=3" ng-repeat="nav in navs">{{nav.navigateName}}</li>
       <li class="nav nav-parent" ng-init="isShowSub=true;">
-        <p class="arrow-down" ng-class="{'arrow-up':!isShowSub}" ng-click="isShowSub=!isShowSub;motherNavLog($event);">聚类导航</p>
+        <p class="arrow-down" ng-class="{'arrow-up':!isShowSub}" ng-click="isShowSub=!isShowSub;motherNavLog($event);">商品分类</p>
         <ul ng-show="isShowSub">
           <li class="nav-sub nav-mark-{{subnav.labelType}}" class="nav-sub" ng-class="{'nav-checked':subnav.categoryId==curcategoryId}" ng-click="goto($event,subnav);" ng-if="subnav.displayType==3" ng-repeat="subnav in navs">{{subnav.navigateName}}</li>
         </ul>

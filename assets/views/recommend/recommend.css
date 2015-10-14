@@ -1,5 +1,5 @@
 .recommendCategoryCont {
-    margin: 0 -10px;
+    margin: 0 -1rem;
     background: #fff;
 }
 
@@ -29,5 +29,5 @@
 }
 
 .recommendCategoryCont .recommendCateColumn {
-    padding: 0 10px;
+    padding: 0 1rem;
 }

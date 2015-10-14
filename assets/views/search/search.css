@@ -14,6 +14,7 @@
   margin-top:0.7rem;
   line-height: 3rem;
   text-align: left;
+  float:left;
 }
 .search-handler .searchbtn{
   font-size: 1.4rem;
@@ -23,28 +24,101 @@
 .search-handler .searchbtn.disabled{
   color:#91959d;
 }
-.searchhistory,.searchtiplist{
+.searchhistory{
   padding:4.4rem 0 0 1.5rem;
   background:#fff;
+}
+.searchsuggests{
+  position: absolute;
+  left:0;
+  right:0;
+  top:4.4rem;
+  bottom:0;
+  background:#fff;
+  padding-left: 1.5rem;
 }
 .searchhistory .searchhistory-tip{
   font-size: 1.3rem;
   color:#91959d;
   line-height:2.3rem;
 }
-.searchhistory .searchhistory-list li,.searchhistory .searchhistory-norecord,.searchtiplist li{
+.searchhistory .searchhistory-list li,.searchhistory .searchhistory-norecord,.searchtiplist li,.searchsuggest-loading,.searchsuggest-error{
   line-height: 4rem;
   font-size:1.3rem;
   color:#3a404b;
   border-bottom: solid 1px #ddd;
 }
-.searchhistory .searchhistory-norecord{
+.searchhistory .searchhistory-norecord,.searchsuggest-loading,.searchsuggest-error{
     text-align: center;
     color:#91959d;
+}
+.searchsuggest-loading,.searchsuggest-error{
+  border-bottom: none 0;
 }
 .searchhistory .searchhistory-clean{
   text-align: center;
   color:#017fea;
   line-height: 4rem;
   font-size:1.3rem;
+}
+.delsearchkey{
+  position: absolute;
+  right:1rem;
+  line-height: 4.4rem;
+  top:0;
+  color:#bbb;
+}
+
+.search-result-cont{
+  position:absolute;
+  left:0;
+  right:0;
+  top:4.4rem;
+  bottom:4.4rem;
+  background:#fff;
+  overflow:hidden;
+}
+.search-result-cont .errorip{
+  margin-top:7rem;
+  width:100%;
+  font-size:1.6rem;
+  line-height:2.1rem;
+  color:#3a404b;
+  text-align: center;
+  padding-top:8rem;
+  background-image: url('http://xiaomai-p2p.qiniudn.com/f40cd01bce963e731b3cd91315ba86c1');
+  background-repeat: no-repeat;
+  background-size: auto 7rem;
+  background-position: top center;
+}
+.search-result-cont ul li{
+  padding:0 1rem;
+}
+
+.loadingAnimation{
+  width: 8rem;
+    height: 8rem;
+    position: absolute;
+    left: 50%;
+    top: 10rem;
+    z-index: 2;
+    margin-left: -4rem;
+    background-image:url('http://xiaomai-p2p.qiniudn.com/c1f4d5a0145aa59f0dcb979467c7dab7');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+.loadText{
+  color:#3a404b;
+  font-size:1.6rem;
+  line-height:2.4rem;
+  text-align:center;
+  padding-top:18rem;
+  background-image: url('http://xiaomai-p2p.qiniudn.com/c1f4d5a0145aa59f0dcb979467c7dab7');
+  background-size: 8rem 8rem;
+  background-repeat: no-repeat;
+  background-position: center 10rem;
+}
+.search-result-cont .haserror{
+
 }

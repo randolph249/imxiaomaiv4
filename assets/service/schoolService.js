@@ -10,6 +10,7 @@ angular.module('xiaomaiApp').factory('schoolManager', [
   function($q, xiaomaiService, env, xiaomaiCacheManager) {
 
     var queryQueue = [];
+    //切换学校之后清除这些数据缓存
     var lock = false; //多个请求过来 先锁住其他请求
     var hanlderQuerys = function() {
       lock = false; //上一个请求完成 解锁
@@ -72,8 +73,14 @@ angular.module('xiaomaiApp').factory('schoolManager', [
       xiaomaiService.save('saveSchool', {
         collegeId: info.collegeId
       }).then(function(res) {
-        xiaomaiCacheManager.writeCache('getSchool', res);
-        deferred.resolve(schoolInfo);
+
+        if (res.hasOwnProperty('collegeId')) {
+
+          xiaomaiCacheManager.writeCache('getSchool', res);
+          deferred.resolve(schoolInfo);
+        } else {
+          deferred.reject(msg);
+        }
       }, function(msg) {
         deferred.reject(msg)
 

@@ -13,17 +13,14 @@
         </ks-swiper-slide>
       </ks-swiper-container>
     </div>
-    <ul class="activeGoodList">
-      <li class="errortip" ng-if="haserror">
-        活动已经结束,去其他活动看看吧
-      </li>
-      <li class="loading" ng-if="isloading">
-        正在加载活动商品列表...
-      </li>
+    <div  class="errortip" ng-if="haserror" class="">活动已经结束,去其他活动看看吧</div>
+    <div class="loading" ng-if="isloading">正在加载活动商品列表...</div>
+    <ul ng-class="{'skactiveGoodList':goods[0].isSeckill==1,'activeGoodList':goods[0].isSeckill!=1}">
       <li ng-repeat="good in goods">
-        <div class="goodItem">
-          <div  xiaomai-good-list-item goods="good" detail-source-event="active+{{activityId}}" click-event="m_b_31singleactivityadd+{{activityId}}" source-event="m_r_31cartfromactive+{{activityId}}"  column="{{true}}" ></div>
+        <div class="goodItem"  ng-if="good.isSeckill!=1" >
+          <div xiaomai-good-list-item goods="good" detail-source-event="active+{{activityId}}" click-event="m_b_31singleactivityadd+{{activityId}}" source-event="m_r_31cartfromactive+{{activityId}}"  column="{{true}}" ></div>
         </div>
+        <div ng-if="good.isSeckill==1" xiaomai-good-list-item-sk goods="good"></div>
       </li>
     </ul>
   </div>

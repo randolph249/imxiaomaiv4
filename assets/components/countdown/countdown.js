@@ -12,9 +12,7 @@ angular.module('xiaomaiApp').directive('countdown', [
       var t = $interval(function() {
         if (counttime == 0) {
           $interval.cancel(t);
-          $scope.countDeadCall({
-            timeid: $scope.timeid
-          })
+          $scope.countDeadCall();
           return false;
         }
         counttime = counttime - 1;
@@ -57,8 +55,6 @@ angular.module('xiaomaiApp').directive('countdown', [
       template: '<span></span>',
       scope: {
         counttime: '@',
-        //传给directiveId  然后再传回给controller 可以让controller知道那个活动时间截止了
-        timeid: '@',
         countDeadCall: '&'
       },
       link: link,

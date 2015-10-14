@@ -39,7 +39,7 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
 
       var statename = $state.current.name;
       var namereg =
-        /root\.buy(\.nav)?\.(category|all|recommend|active|skactive)/;
+        /root\.buy(\.nav)?\.(category|all|recommend|active|searchresult)/;
       var refer = "";
       switch (statename.match(namereg)[2]) {
         case 'all':
@@ -54,12 +54,11 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
         case 'active':
           refer = 'active&activityId=' + $state.params.activityId;
           break;
-        case 'skactive':
-          refer = 'active&activityId=' + $state.params.activityId;
+        default:
           break;
       }
-      var host = env == 'online' ? 'http://h5.imxiaomai.com' :
-        'http://wap.tmall.imxiaomai.com';
+
+      var host = window.location.protocol + '//' + window.location.host;
       window.location.href = host + "/order/create?r=" + refer;
     };
 
@@ -104,6 +103,7 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
           xiaomaiLog('m_p_31shoppingcart');
 
           //获取购物车详情
+          $scope.isloading = true;
           loadDetail().then(function(res) {
             $scope.goods = res['goods'];
             $scope.ldcFreight = res['ldcFreight'];
@@ -121,6 +121,7 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
             });
             $scope.coupons = availableCoupons;
           }).finally(function() {
+            $scope.isloading = false;
             xiaomaiMessageNotify.pub('shopcartdetailheightupdate',
               'up', 'ready', '', '');
           });

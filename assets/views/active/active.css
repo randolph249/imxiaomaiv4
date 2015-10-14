@@ -9,7 +9,6 @@
     right:0;
     overflow: hidden;
 }
-
 .activeGoodBanner {
     min-height: 1px;
 }
@@ -18,12 +17,15 @@
     overflow: hidden;
 }
 
-.activeGoodList li {
+.activeGoodList li{
     width: 50%;
     padding-top: 0.5rem;
     float: left;
     background: #eee;
     box-sizing: border-box;
+}
+.activeGoodList li.errortip{
+    width:100%;
 }
 .activeGoodList li:nth-child(odd){
   padding-right:0.25rem;
