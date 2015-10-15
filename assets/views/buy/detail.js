@@ -39,8 +39,8 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     $scope.openDetailPop = function() {
       $scope.showdetail = true;
       xiaomaiMessageNotify.pub('maskManager', 'show');
-      xiaomaiMessageNotify.pub('detailgoodheightupdate', 'ready', 'up',
-        '');
+      xiaomaiMessageNotify.pub('detailgoodheightupdate',
+        'up', 'ready', '', '');
     };
 
     //监听scope销毁 删除订阅
@@ -63,8 +63,8 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
 
     //图片加载完成
     $scope.imageLoadedCall = function() {
-      xiaomaiMessageNotify.pub('detailgoodheightupdate', 'ready', 'down',
-        '');
+      xiaomaiMessageNotify.pub('detailgoodheightupdate',
+        'up', 'ready', '', '');
 
     };
   }

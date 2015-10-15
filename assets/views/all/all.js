@@ -31,9 +31,9 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
       $scope.haserror = false;
 
       angular.forEach(res.activities, function(item) {
-        var reg = /qiniudn/;
-        reg.test(item.wapImageUrl) && (item.wapImageUrl = item.wapImageUrl +
-          '&imageView2/0/w/400');
+        item.hasOwnProperty('wapImageUrl') && (item.wapImageUrl =
+          item.wapImageUrl +
+          '&imageView2/0/w/320');
       });
 
       $scope.activities = res.activities;

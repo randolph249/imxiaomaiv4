@@ -11,11 +11,10 @@ angular.module('xiaomaiApp').factory('cookieManager', ['ipCookie', function(
 //用户opend_id;
 angular.module('xiaomaiApp').factory('cookie_openid', ['env', 'ipCookie',
   function(env, ipCookie) {
-
     if (env != 'develop') {
       return ipCookie('xiaomai_open_id') || '';
     } else {
-      return 'oTS2xjtXWVPcdQd9OPI11jjBheco'
+      return 'oTS2xjtXWVPcdQd9OPI11jjBheco';
     }
 
   }

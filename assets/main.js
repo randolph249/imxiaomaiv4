@@ -76,7 +76,7 @@ angular.module('xiaomaiApp').config([
         templateUrl: '../assets/views/colleges/colleges.html'
       })
       .state('root.buy.sharedetail', {
-        url: 'sharedetail/?goodId&sourceType',
+        url: 'sharedetail/?goodId&sourceType&collegeId',
         controller: 'sharedetailCtrl',
         templateUrl: '../assets/views/sharedetail/sharedetail.html'
       })

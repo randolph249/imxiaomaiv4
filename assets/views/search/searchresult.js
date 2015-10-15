@@ -7,8 +7,12 @@ angular.module('xiaomaiApp').controller('searchresultCtrl', [
   'xiaomaiService',
   'schoolManager',
   'xiaomaiMessageNotify',
+  'xiaomaiLog',
   function($scope, $state, xiaomaiService, schoolManager,
-    xiaomaiMessageNotify) {
+    xiaomaiMessageNotify, xiaomaiLog) {
+
+    //search pv统计
+    xiaomaiLog('m_p_31searchresult');
 
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
       $scope.searchkey = decodeURIComponent(toParam.key);
@@ -43,8 +47,9 @@ angular.module('xiaomaiApp').controller('searchresultCtrl', [
           keywords: key,
           currentPage: 1
         });
-        debugger;
+
       }).then(function(res) {
+
         $scope.goods = res.goods;
         $scope.paginationInfo = res.paginationInfo;
         $scope.haserror = !$scope.goods || !$scope.goods.length;

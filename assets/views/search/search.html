@@ -1,9 +1,9 @@
 <div class="pub-header search-handler">
   <div class="lefticon iconfont icon-fanhui" ng-click="goback();"></div>
   <div class="middlearea">
-    <input autofocus tabindex="1" ng-keypress="goresult($event,searchkey);" class="searchtext" ng-model="searchkey" type="text" ng-change="updateSearchKey($event)"/>
+    <input autofocus tabindex="1" maxlength="20" ng-keypress="updatesearch($event,searchkey);" class="searchtext" ng-model="searchkey" type="text"/>
   </div>
-  <div class="righticon searchbtn" ng-class="{disabled:!searchkey || searchkey.length==0}" ng-click="goresult($event,searchkey);">搜索</div>
+  <div class="righticon searchbtn" ng-class="{disabled:!searchkey || searchkey.length==0}" ng-click="gotosearch($event,searchkey);">搜索</div>
 </div>
 <div class="searchhistory" ng-controller="searchrecordCtrl" ng-show="showCookie">
     <p class="searchhistory-tip">搜索历史</p>

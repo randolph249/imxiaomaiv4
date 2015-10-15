@@ -56,6 +56,19 @@ angular.module('xiaomaiApp').factory('quickGetImgHeight', [
   }
 ]);
 
+angular.module('xiaomaiApp').factory('safeApply', ['$rootScope', function(
+  $rootScope) {
+  return function(fn) {
+    var phase = $rootScope.$$phase;
+
+    if (phase == '$apply' || phase == '$digest') {
+      angular.isFunction(fn) && fn();
+    } else {
+      $rootScope.$apply(fn);
+    }
+  }
+}]);
+
 angular.module('xiaomaiApp').directive('goodDetail', [
   '$state',
   '$timeout',
@@ -67,6 +80,8 @@ angular.module('xiaomaiApp').directive('goodDetail', [
   'wxshare',
   'xiaomaiLog',
   'quickGetImgHeight',
+  'schoolManager',
+  'safeApply',
   function(
     $state,
     $timeout,
@@ -77,7 +92,9 @@ angular.module('xiaomaiApp').directive('goodDetail', [
     cartManager,
     wxshare,
     xiaomaiLog,
-    quickGetImgHeight
+    quickGetImgHeight,
+    schoolManager,
+    safeApply
   ) {
 
     var link = function($scope, ele, iAttrs) {
@@ -85,14 +102,27 @@ angular.module('xiaomaiApp').directive('goodDetail', [
       $scope.swiper = {};
       $scope.swiperIndex = 0;
       $scope.onReadySwiper = function(swiper) {
+
+        $scope.swiperSlider = function($event, arrow) {
+
+          $event.preventDefault();
+          $event.stopPropagation();
+          swiper[arrow == 'prev' ? 'slidePrev' : 'slideNext']();
+
+        };
         swiper.on('slideChangeStart', function(swiper) {
+
+
           var args1 = Array.prototype.slice.call(arguments)[0];
-          $scope.$apply(function() {
+          safeApply(function() {
             $scope.swiperIndex = args1.activeIndex;
+
           });
 
         });
+
       };
+
 
 
       //监听goodId和sourceType
@@ -106,14 +136,22 @@ angular.module('xiaomaiApp').directive('goodDetail', [
       });
 
       //获取详情数据
+      var collegeId;
       var loadDetail = function(goodsId, sourceType) {
-        xiaomaiService.fetchOne('goodDetail', {
-          goodsId: goodsId,
-          sourceType: sourceType
+        schoolManager.get().then(function(res) {
+          collegeId = res.collegeId;
+          return xiaomaiService.fetchOne('goodDetail', {
+            goodsId: goodsId,
+            sourceType: sourceType
+          })
         }).then(function(res) {
-          angular.forEach(res.goodsDetailImageList, function(item) {
-            item.imageUrl += '&imageView2/0/w/320';
-          });
+
+          //修改详情图片配置
+          angular.isArray(res.goodsDetailImageList) && angular.forEach(
+            res.goodsDetailImageList,
+            function(item) {
+              item.imageUrl += '&imageView2/0/w/410';
+            });
 
           $scope.good = res;
 
@@ -142,6 +180,7 @@ angular.module('xiaomaiApp').directive('goodDetail', [
         }).then(function(num) {
           return angular.isNumber(num) && ($scope.numInCart = num);
         }).finally(function() {
+          //通知parent controller数据创建成功
           angular.isFunction($scope.loadSuccess) && $scope.loadSuccess();
         });
       };
@@ -150,7 +189,11 @@ angular.module('xiaomaiApp').directive('goodDetail', [
       //快速加载图片加载
       var loadImgs = function() {
 
-        quickGetImgHeight($scope.good.goodsDetailImageList[0].imageUrl)
+        var hasImage = $scope.good.goodsDetailImageList && $scope.good.goodsDetailImageList
+          .length;
+        hasImage && quickGetImgHeight($scope.good.goodsDetailImageList[
+              0]
+            .imageUrl)
           .then(function(imgObj) {
             $scope.graphicsHeight = imgObj.height * $scope.good.goodsDetailImageList
               .length;
@@ -179,7 +222,9 @@ angular.module('xiaomaiApp').directive('goodDetail', [
           '?goodId=',
           $scope.goodsId,
           '&sourceType=',
-          $scope.sourceType
+          $scope.sourceType,
+          '&collegeId=',
+          collegeId
         ].join('');
         var imgUrl = $scope.good.iconImageUrl;
         var success = function() {
@@ -205,9 +250,70 @@ angular.module('xiaomaiApp').directive('goodDetail', [
         return skuListToObject(skulist);
       };
 
+
+      //提示用户想写想想可以选择
+      var showPropertiesTip = function(curpropertynameid) {
+
+        var keys = [];
+        angular.forEach($scope.skuObject, function(sku, key) {
+          //
+          var flag = true;
+          angular.forEach($scope.checkedProperties, function(
+            propertyVal, propertyName) {
+            var reg = new RegExp(propertyName + "=" +
+              propertyVal);
+            if (!reg.test(key)) {
+              flag = false;
+              return false;
+            }
+          });
+
+          if (flag == true) {
+            keys.push(key);
+          }
+        });
+
+
+        var skuGoodsPropertyList = $scope.good.skuGoodsPropertyList;
+        angular.forEach(skuGoodsPropertyList, function(
+          properties) {
+          angular.forEach(properties.propertyValues, function(
+            valueItem,
+            $index) {
+            var str = properties.propertyNameId + '=' +
+              valueItem.propertyValueId;
+            //当前点击行或者可以选择行可以显示为可选状态
+            if (keys.join('&').indexOf(str) != -1) {
+              valueItem.disabled = false;
+            } else {
+              valueItem.disabled = true;
+            }
+          });
+        });
+
+        $scope.good.skuGoodsPropertyList = skuGoodsPropertyList;
+
+      };
+
       //聚合类产品选择产品类型
-      $scope.complexCheckProperty = function(key, val) {
-        $scope.checkedProperties[key] = val;
+      $scope.complexCheckProperty = function($event, key, valItem) {
+
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        if (valItem.disabled) {
+          return false;
+        }
+        var val = valItem.propertyValueId;
+        //进行toggle操作
+        if ($scope.checkedProperties[key] === val) {
+          delete $scope.checkedProperties[key];
+        } else {
+          $scope.checkedProperties[key] = val;
+        }
+        //提示用户那些选项可以选
+        showPropertiesTip(key);
+
         //判断是否组合出了存在的Sku信息
         var skuInfo = getSkuInfo($scope.checkedProperties, $scope.skuObject);
 

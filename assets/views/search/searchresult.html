@@ -11,7 +11,7 @@
     <div class="loadText" ng-if="isloading">小麦麦正在努力搜索中...</div>
     <div class="haserror errorip" ng-if="haserror">小麦没有找到与"{{searchkey}}"相关的商品<br/>试试搜索其他商品吧~~</div>
     <ul>
-        <li ng-repeat="good in goods">
+        <li ng-repeat="good in goods" ng-if="good">
           <div xiaomai-good-list-item goods="good" detail-source-event="search" click-event="m_b_31searchadd" source-event="m_r_31cartfromsearch"></div>
         </li>
     </ul>

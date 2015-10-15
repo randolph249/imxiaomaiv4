@@ -241,7 +241,7 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           url: url,
           method: 'GET',
           params: angular.extend({
-            v: Math.random().toString().replace(/\./, '')
+            // v: Math.random().toString().replace(/\./, '')
           }, params)
         }).success(function(res) {
           //如果返回结果有异常 reject

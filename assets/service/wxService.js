@@ -37,7 +37,8 @@ angular.module('xiaomaiApp').factory('registerWx', [
       wx.error(function(res) {
         deferred.reject(JSON.stringify(res));
       });
-    }
+    };
+
     xiaomaiService.fetchOne('getWxConfig', {
       url: encodeURIComponent([
         location.protocol,
@@ -65,17 +66,20 @@ angular.module('xiaomaiApp').factory('locationManager', [
     var getLocation = function() {
       var deferred = $q.defer();
 
-      //默认2S后自动失败
+      //默认3S后自动失败
       var $t = $timeout(function() {
         deferred.reject('网络超时')
-      }, 2000);
+      }, 3000);
 
 
       //调用微信定位服务
       registerWx.then(function() {
+
         wx.getLocation({
           type: 'wgs84',
           success: function(res) {
+
+
 
             var lat = res.latitude,
               lng = res.longitude;
@@ -89,6 +93,7 @@ angular.module('xiaomaiApp').factory('locationManager', [
           }
         })
       }, function(msg) {
+
         deferred.reject(msg);
       });
 
@@ -108,7 +113,7 @@ angular.module('xiaomaiApp').factory('networkType', [
     var getNetworkType = function() {
       var deferred = $q.defer();
       registerWx.then(function() {
-        alert(123);
+
         wx.getNetworkType(function(res) {
           deferred.resolve(res);
         }, function(msg) {

@@ -39,7 +39,7 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
 
       var statename = $state.current.name;
       var namereg =
-        /root\.buy(\.nav)?\.(category|all|recommend|active|searchresult)/;
+        /root\.buy(\.nav)?\.(\w+)/;
       var refer = "";
       switch (statename.match(namereg)[2]) {
         case 'all':
@@ -55,6 +55,7 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
           refer = 'active&activityId=' + $state.params.activityId;
           break;
         default:
+          refer = statename.match(namereg)[2];
           break;
       }
 

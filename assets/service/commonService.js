@@ -93,14 +93,14 @@ angular.module('xiaomaiApp').factory('getRouterTypeFromUrl', function() {
         refer: refer
       }
     } else if (url.match(/skActivity/)) {
-      router.name = 'root.buy.skactive';
+      router.name = 'root.buy.active';
       router.params = {
         collegeId: collegeId,
         activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1],
         refer: refer,
       }
     } else if (url.match(/activity/)) {
-      router.name = 'root.buy.skactive';
+      router.name = 'root.buy.active';
       router.params = {
         collegeId: collegeId,
         activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1],

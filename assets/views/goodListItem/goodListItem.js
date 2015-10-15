@@ -120,8 +120,6 @@ angular.module('xiaomaiApp').directive('xiaomaiGoodListItemSk', [
             //购物车来源统计
             xiaomaiLog('m_r_31cartfromactive+' + activityId);
 
-            debugger;
-
             alert('赶快去下单吧\n否则可能会被其他人抢走了哦');
             $scope.goods.killed = true;
 

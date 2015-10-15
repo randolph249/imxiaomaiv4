@@ -9,10 +9,14 @@ angular.module('xiaomaiApp').controller('searchCtrl', [
   'xiaomaiMessageNotify',
   '$timeout',
   'searchcookieManager',
+  'xiaomaiLog',
   function($scope, $state, xiaomaiMessageNotify, searchcookieManager,
-    xiaomaiMessageNotify, $timeout, searchcookieManager) {
+    xiaomaiMessageNotify, $timeout, searchcookieManager, xiaomaiLog) {
 
     var referRouter, referParam;
+    //搜索页面PV统计
+    xiaomaiLog('m_p_31search');
+
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam,
       fromState, fromParam) {
       referRouter = fromState.name || 'root.buy.nav.all';
@@ -27,7 +31,8 @@ angular.module('xiaomaiApp').controller('searchCtrl', [
     };
 
     //执行搜索
-    $scope.goresult = function($event, searchkey) {
+    $scope.updatesearch = function($event, searchkey) {
+
       if ($event.keyCode == 13 && searchkey && searchkey.length) {
         $state.go('root.buy.searchresult', {
           key: encodeURIComponent(searchkey),
@@ -38,6 +43,18 @@ angular.module('xiaomaiApp').controller('searchCtrl', [
         $event.stopPropagation();
       }
     };
+
+    $scope.gotosearch = function($event, searchkey) {
+      if (searchkey && searchkey.length) {
+        $state.go('root.buy.searchresult', {
+          key: encodeURIComponent(searchkey),
+          page: 1
+        });
+        searchcookieManager.writeCookie(searchkey);
+        $event.preventDefault();
+        $event.stopPropagation();
+      }
+    }
 
     //输入搜索关键词
     //发布通知搜索关键词变更

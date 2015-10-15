@@ -1,8 +1,12 @@
 angular.module('xiaomaiApp').controller('sharedetailCtrl', [
   '$scope',
+  '$state',
+  'schoolManager',
   'xiaomaiMessageNotify',
   function(
     $scope,
+    $state,
+    schoolManager,
     xiaomaiMessageNotify
   ) {
     var goodId, sourceType;
@@ -14,6 +18,14 @@ angular.module('xiaomaiApp').controller('sharedetailCtrl', [
 
       $scope.goodsId = toParam.goodId;
       $scope.sourceType = toParam.sourceType;
+      $scope.collegeId = toParam.collegeId;
+    });
+
+    schoolManager.get().then(function(res) {
+      if (res.collegeId != $scope.collegeId) {
+        alert('您选择的学校门店中找不到该商品,将跳转到首页~');
+        $state.go('root.buy.nav.all');
+      }
     });
 
     //directive load数据成功之后触发回调

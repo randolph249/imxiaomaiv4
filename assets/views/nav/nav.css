@@ -165,17 +165,17 @@
 
 .navmain-uptip{
   position: absolute;
-  line-height: 30px;
-  height:30px;
+  line-height: 3rem;
+  height:3rem;
   font-size:1.2em;
   text-align: center;
-  top:-30px;
+  top:-3rem;
   width:100%;
 }
-.navmain-uptip.pending{
+.navmain-uptip.pending,.navmain-downtip.pending{
   position: static;
 }
-.navmain-downtip,.skactive-downtip{
+.navmain-downtip{
   position: absolute;
   height:3rem;
   font-size:1.2em;
@@ -183,9 +183,7 @@
   line-height: 3rem;
   color: #3a404b;
   text-align: center;
-}
-.navmain-downtip.pending{
-  position: static;
+  bottom: -3rem;
 }
 
 /* 小屏兼容 */

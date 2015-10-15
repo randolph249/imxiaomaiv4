@@ -89,6 +89,10 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
 
             $scope.scrollstatus = 'ready';
 
+            upTip.className = upTip.className.replace(
+              /\s?pending\s?/, '');
+
+
             refreshTimeout && clearTimeout(refreshTimeout);
             refreshTimeout = null;
             setTimeout(function() {
@@ -110,6 +114,9 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
             $scope.scrollstatus = 'ready';
             refreshTimeout && clearTimeout(refreshTimeout);
             refreshTimeout = null;
+            downTip.className = downTip.className.replace(
+              /\s?pending\s?/, '');
+
 
             setTimeout(function() {
 

@@ -3,7 +3,7 @@
   <div class="details">
     <p class="goodname">{{goods.sourceType==2?goods.activityGoodsName:goods.bgGoodsName}}</p>
 <!-- 输出标签29分钟达/次日达 -->
-    <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in goods.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
+    <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in goods.distributeTypeDisplay track by $index" ng-show="label.length">{{label}}</label>
     <p class="priceCont">
 <!-- 单品或者组合最高价-->
       <span class="new-price" ng-if="goods.goodsType!=3">

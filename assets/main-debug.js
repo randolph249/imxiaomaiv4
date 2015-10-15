@@ -227,7 +227,7 @@ angular.module('xiaomaiApp').config([
       })
       //分享的详情页
       .state('root.buy.sharedetail', {
-        url: 'sharedetail/?goodId&sourceType',
+        url: 'sharedetail/?goodId&sourceType&collegeId',
         controller: 'sharedetailCtrl',
         templateUrl: '../assets/views/sharedetail/sharedetail.html',
         resolve: {

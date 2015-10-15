@@ -20,12 +20,7 @@
   bottom: 3rem;
   width: 100%;
   z-index: 2;
-  display: -webkit-flex;
-  /* Safari */
-  -webkit-justify-content: center;
-  /* Safari 6.1+ */
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 .gooddetail-swiper-nums i {
   display: inline-block;
@@ -34,7 +29,7 @@
   content: '';
   border-radius: 1rem;
   background: #ccc;
-  margin: 0 5px;
+  margin: 0 0.4rem;
 }
 .gooddetail-swiper-nums i.active {
   background-color: #ff5300;
@@ -59,4 +54,187 @@
 }
 .thirdsellertip span {
   color: #ff5300;
+}
+
+.detailCont {}
+.detailCont .complex-properties, .detailCont .detail-info {
+  padding: 0 1.5rem;
+}
+.detailCont .label {
+  position: absolute;
+  left: 1.5rem;
+  top: -2.8rem;
+  font-size: 1.3rem;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  display:none;
+
+}
+.detailCont .label.ldc,.detailCont .label.rdc{
+  width: 6.8rem;
+  padding: 0;
+  text-align: center;
+  display: inline-block;
+  z-index:2
+
+}
+.detailCont .imgCont {
+  width: 24rem;
+  height: 24rem;
+  margin: 0 auto;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.detailCont .good-normal-info {
+  position: relative;
+  margin-bottom: 1rem;
+  height: 9rem;
+  padding: 0 1.5rem;
+  background-color: #eee;
+  /**倒计时**/
+}
+.detailCont .good-normal-info .title {
+  line-height: 2rem;
+  height: 3.4rem;
+  overflow: hidden;
+  font-size: 1.4rem;
+  color: #333;
+  overflow: hidden;
+  padding: 1rem 0 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.detailCont .good-normal-info .buy-icon {
+  background: #eee;
+  bottom: 0.8rem;
+  right: 1rem;
+}
+.detailCont .good-normal-info .buy-icon.disabled {
+  color: #ccc;
+}
+.detailCont .good-normal-info .buy-result {
+  color: #333;
+  font-size: 1.8rem;
+  line-height: 2.8rem;
+  position: absolute;
+  width: 3rem;
+  right: 3.6rem;
+  bottom: 0.8rem;
+  text-align: center;
+}
+.detailCont .good-normal-info .icon-jianqugouwuche {
+  position: absolute;
+  right: 6.5rem;
+  bottom: 0.8rem;
+  font-size: 3.0rem;
+  color: #fc541f;
+  line-height: 1;
+}
+.detailCont .good-normal-info .icon-jianqugouwuche.disabled {
+  color: #ccc;
+}
+.detailCont .good-normal-info .countdown {
+  position: absolute;
+  color: #333;
+  background: #ffd801;
+  height: 2.4rem;
+  font-size: 1.4rem;
+  width: 14rem;
+  border-radius: 1.2rem;
+  text-align: center;
+  top: -3.3rem;
+  left: 50%;
+  margin-left: -7rem;
+  line-height: 2.4rem;
+  z-index:2;
+}
+.detailCont .good-normal-info .maxPrice {
+  line-height: 3.8rem;
+}
+.detailCont .detail-info {
+  /* display: flex; */
+  overflow: hidden;
+}
+.detailCont .detail-info .detail-info-key {
+  width: 24%;
+  font-size: 1.3rem;
+  color: #91959d;
+  line-height: 2.5rem;
+  float: left;
+}
+.detailCont .detail-info .detail-info-main {
+  width: 74%;
+  /* flex-grow: 1; */
+  float: right;
+  font-size: 1.3rem;
+  line-height: 2.5rem;
+  color: #3a404b;
+}
+.detailCont .detail-desc{
+  background:#eee;
+  font-size:1.3rem;
+  line-height: :1.8rem;
+  padding:1rem 1.5rem;
+}
+.detailCont .complex-property {
+  border-bottom: solid 1px #ddd;
+}
+.detailCont .complex-property .complex-property-name {
+  line-height: 4.0rem;
+  color: #3a404b;
+  font-size: 1.4rem;
+}
+.detailCont .complex-property .complex-property-values {
+  /*  display: flex;
+   flex-flow: row wrap; */
+}
+.detailCont .complex-property .complex-property-values span {
+  display: inline-block;
+  padding: 0 1rem;
+  height: 3rem;
+  line-height: 2.8rem;
+  font-size: 1.3rem;
+  color: #3a404b;
+  text-align: center;
+  border: #91959d solid 1px;
+  margin: 0 1rem 1rem 0;
+}
+
+.detailCont .complex-property .complex-property-values span.disabled{
+  background:#ccc;
+  border-color:#ccc;
+}
+.detailCont .complex-property .complex-property-values span.checked {
+  background: #fc541f;
+  color: #fff;
+  border-color: #fc541f;
+}
+.occupiedPic{
+  width:100%;
+  height:10rem;
+  background-image:url('http://xiaomai-p2p.qiniudn.com/8e6f74ce507c58ed6210c7556f114e4d?imageView2/0/w/600&v=2');
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.iconfont.gooddetail-swiper-next-btn,.iconfont.gooddetail-swiper-prev-btn{
+  position: absolute;
+  font-size:5rem;
+  color:#ff5300;
+  width:5rem;
+  text-align: center;
+  line-height: 5rem;
+  top:50%;
+  margin-top:-2rem;
+  z-index:2;
+  left:-5rem;
+}
+.iconfont.gooddetail-swiper-next-btn.disabled,.iconfont.gooddetail-swiper-prev-btn.disabled{
+  opacity: 0.5;
+}
+.iconfont.gooddetail-swiper-next-btn{
+  left:inherit;
+  right:-5rem;
 }

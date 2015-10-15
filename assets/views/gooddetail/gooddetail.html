@@ -1,9 +1,17 @@
 <!-- 聚合类商品选中了最小单元-->
 <div class="imgCont" ng-if="skuInfo&&good.goodsType==3" ng-style="{'background-image':'url('+(skuInfo&&skuInfo.imageUrl?skuInfo.imageUrl:good.imageUrl)+')'}"></div>
 <!--非聚合类商品或者聚合类商品没有选中最小单元-->
-<div class="gooddetail-swiper" ng-if="!skuInfo || good.goodsType!=3">
+
+<div class="imgCont" ng-if="(!skuInfo || good.goodsType!=3) && good.goodsImageList.length==1" ng-style="{'background-image':'url('+good.goodsImageList[0].imageUrl+')'}"></div>
+
+<div class="gooddetail-swiper" ng-if="(!skuInfo || good.goodsType!=3) && good.goodsImageList.length>1">
   <div class="gooddetail-swiper-nums">
     <i class="gooddetail-swiper-num" ng-class="{active:swiperIndex==$index}" ng-repeat="goodsImage in good.goodsImageList"></i>
+  </div>
+  <div class="gooddetail-swiper-prev-btn iconfont icon-fanhui" ng-class="{disabled:swiperIndex==0}" ng-click="swiperSlider($event,'prev')">
+  </div>
+  <div class="gooddetail-swiper-next-btn iconfont icon-yfmore" ng-class="{disabled:swiperIndex==good.goodsImageList.length-1}" ng-click="swiperSlider($event,'next')">
+
   </div>
   <ks-swiper-container on-ready="onReadySwiper(swiper)" swiper="swiper">
     <ks-swiper-slide class="swiper-slide" ng-repeat="goodsImage in good.goodsImageList">
@@ -11,8 +19,9 @@
     </ks-swiper-slide>
   </ks-swiper-container>
 </div>
+
 <div class="good-normal-info">
-  <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
+  <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay track by $index" ng-show="label.length">{{label}}</label>
 <!--产品名称-->
   <p class="title">{{good.sourceType==2?good.activityGoodsName:good.bgGoodsName}}</p>
 <!--产品价格-->
@@ -70,45 +79,43 @@
 </div>
 
 <!-- 如果是第三方卖家-->
-<p class="thirdsellertip">本商品由<span>{{good.storageName}}</span>提供服务</p>
+<p class="thirdsellertip" ng-if="good.storageName&&good.storageName.length">本商品由<span>{{good.storageName}}</span>提供服务</p>
 
 <!--如果是聚合类产品-->
 <div class="complex-properties" ng-if="good.goodsType==3">
   <div class="complex-property" ng-repeat="goodProperty in good.skuGoodsPropertyList">
     <p class="complex-property-name">{{goodProperty.propertyName}}</p>
     <div class="complex-property-values">
-      <span ng-class="{checked:checkedProperties[goodProperty.propertyNameId]==valueItem.propertyValueId}" ng-click="complexCheckProperty(goodProperty.propertyNameId,valueItem.propertyValueId)" ng-repeat="valueItem in goodProperty.propertyValues">{{valueItem.propertyValue}}</span>
+      <span ng-class="{disabled:valueItem.disabled,checked:checkedProperties[goodProperty.propertyNameId]==valueItem.propertyValueId}" ng-click="complexCheckProperty($event,goodProperty.propertyNameId,valueItem)" ng-repeat="valueItem in goodProperty.propertyValues">{{valueItem.propertyValue}}</span>
     </div>
   </div>
 </div>
 
 <!-- 产品描述-->
-<div class="detail-desc" ng-if="good.goodsDesc && good.goodsDesc.length">
-  <div class="detail-desc-key">产品描述:</div>
-  <div class="detail-desc-main">{{good.goodsDesc}}</div>
+<div class="detail-info" ng-if="good.saleSpec && good.saleSpec.length">
+  <div class="detail-info-key">产品规格:</div>
+  <div class="detail-info-main">{{good.saleSpec}}/{{good.unit}}</div>
 </div>
-<div class="detail-desc" ng-if="good.saleSpec && good.saleSpec.length">
-  <div class="detail-desc-key">产品规格:</div>
-  <div class="detail-desc-main">{{good.saleSpec}}/{{good.unit}}</div>
+<div class="detail-info" ng-if="good.originPlace && good.originPlace.length">
+  <div class="detail-info-key">产地:</div>
+  <div class="detail-info-main">{{good.originPlace}}</div>
 </div>
-<div class="detail-desc" ng-if="good.originPlace && good.originPlace.length">
-  <div class="detail-desc-key">产地:</div>
-  <div class="detail-desc-main">{{good.originPlace}}</div>
+<div class="detail-info" ng-if="good.packageSpec && good.packageSpec.length">
+  <div class="detail-info-key">产品包装:</div>
+  <div class="detail-info-main">{{good.packageSpec}}</div>
 </div>
-<div class="detail-desc" ng-if="good.packageSpec && good.packageSpec.length">
-  <div class="detail-desc-key">产品包装:</div>
-  <div class="detail-desc-main">{{good.packageSpec}}</div>
+<div class="detail-info" ng-if="good.brand && good.brand.length">
+  <div class="detail-info-key">品牌:</div>
+  <div class="detail-info-main">{{good.brand}}</div>
 </div>
-<div class="detail-desc" ng-if="good.brand && good.brand.length">
-  <div class="detail-desc-key">品牌:</div>
-  <div class="detail-desc-main">{{good.brand}}</div>
+<div class="detail-info" ng-if="good.shelfLife && good.shelfLife.length">
+  <div class="detail-info-key">保质期:</div>
+  <div class="detail-info-main">{{good.shelfLife}}</div>
 </div>
-<div class="detail-desc" ng-if="good.shelfLife && good.shelfLife.length">
-  <div class="detail-desc-key">保质期:</div>
-  <div class="detail-desc-main">{{good.shelfLife}}</div>
+<div class="detail-desc" ng-if="good.goodsDesc && good.goodsDesc.length">{{good.goodsDesc}}</div>
+<!-- 图文详情-->
+<div class="detail-graphics" ng-if="good.goodsDetailImageList && good.goodsDetailImageList.length">
+  <img ng-src="{{goodsDetailImage.imageUrl}}" class="detail-graphic"/>
 </div>
-<div class="detail-graphics" ng-style="{'height':graphicsHeight+'px'}">
-  <div class="detail-graphic" ng-repeat="goodsDetailImage in good.goodsDetailImageList" ng-style="{'height':graphicHeight+'px','background-image':'url('+goodsDetailImage.imageUrl+')'}">
-
-  </div>
-</div>
+<!-- 展位图-->
+<div class="occupiedPic"></div>

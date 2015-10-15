@@ -14,6 +14,7 @@ angular.module('xiaomaiApp').controller('buyCtrl', [
           $state.go('root.buy.nav.all');
         }
       }, function() {
+        alert('无法获取学校信息,将跳转到选择学校页~');
         $state.go('root.locate');
       });
     });
