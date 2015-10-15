@@ -116,8 +116,10 @@ angular.module('xiaomaiApp').run(['$state', '$rootScope', '$timeout', function(
   var t = $timeout(function() {
     $state.go('root.buy.nav.all');
   }, 50);
-  $rootScope.$on('$stateChangeStart', function(e, toState, toParam) {
+  var startWatcher = $rootScope.$on('$stateChangeStart', function(e,
+    toState, toParam) {
     $timeout.cancel(t);
+    startWatcher();
   });
 }]);
 

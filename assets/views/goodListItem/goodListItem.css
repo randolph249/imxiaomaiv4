@@ -76,7 +76,7 @@
 }
 .iconfont.sold-out, .iconfont.close-time {
   color: #ff5300;
-  right: 0;
+  right: 1rem;
   position: absolute;
   line-height: 1.8rem;
   font-size: 6rem;
