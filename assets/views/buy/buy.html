@@ -2,9 +2,11 @@
 <!-- 购物车x-->
 <div class="pub-footer" ng-controller="buy.cartThumbCtrl">
   <div class="cartThumb" ng-class="{showcart:isShowCart,showdetail:isShowDetail}">
-    <span class="iconfont icon-cart icon-gouwuche" ng-click="gotoDetail();">
+    <div class="shopcarticons">
+      <span class="iconfont icon-cart icon-gouwuche" ng-click="gotoDetail();"></span>
       <span class="totalCount" ng-class="{big:hasChange}" ng-show="totalCount && totalCount!=0">{{totalCount}}</span>
-    </span>
+    </div>
+
     <p class="totalPrice" ng-show="totalCount && totalCount!=0">共计<em>&yen;</em>
       <span>{{totalPrice|xiaomaiprice}}</span></p>
     <div class="gotoPay" ng-click="goSettlement();" ng-show="totalCount && totalCount!=0">选好了</div>
@@ -20,8 +22,8 @@
         <div class="good-info" ng-repeat="good in goods">
           <div class="goodWrap">
             <p class="good-title">{{good.sourceType==2?good.activityGoodsName:good.bgGoodsName}}</p>
-            <p class="good-price">&yen;{{good.minWapPrice|xiaomaiprice}}</p>
-            <lable class="label" ng-class="{ldc:$index==0,rdc:$index==1}" ng-repeat="distribute in good.distributeTypeDisplay" ng-show="distribute.length">{{distribute}}</lable>
+            <p class="good-price">&yen;{{good.sourceType==2?good.skuList[0].activityPrice:good.skuList[0].wapPrice|xiaomaiprice}}</p>
+            <lable class="label" ng-class="{ldc:$index==0,rdc:$index==1}" ng-repeat="distribute in good.distributeTypeDisplay track by $index" ng-show="distribute.length">{{distribute}}</lable>
           </div>
           <div class="iconWrap">
             <i class="iconfont icon-jianqugouwuche" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'minus',$index);"></i>

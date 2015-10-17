@@ -187,14 +187,17 @@ body {
   font-size: 1.1rem;
   border: #ccc solid 1px;
   background-color: #fff;
+  display:none;
 }
 .label.ldc {
   border-color: #26adf0;
   color: #26adf0;
+  display:inline-block;
 }
 .label.rdc {
   border-color: #2cdb46;
   color: #2cdb46;
+  display:inline-block;
 }
 .iconfont.buy-icon {
   position: absolute;

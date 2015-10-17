@@ -1,7 +1,7 @@
 <div class="pub-header search-handler">
   <div class="lefticon iconfont icon-fanhui" ng-click="goback();"></div>
   <div class="middlearea">
-    <input autofocus tabindex="1" maxlength="20" ng-keypress="updatesearch($event,searchkey);" class="searchtext" ng-model="searchkey" type="text"/>
+    <input autofocus tabindex="1" ng-change="updateSearchKey($event)" maxlength="20" ng-keypress="updatesearch($event,searchkey);" class="searchtext" ng-model="searchkey" type="text"/>
   </div>
   <div class="righticon searchbtn" ng-class="{disabled:!searchkey || searchkey.length==0}" ng-click="gotosearch($event,searchkey);">搜索</div>
 </div>
@@ -19,5 +19,4 @@
       <li  ng-repeat="suggest in suggests" ng-click="goresult($event,suggest);">{{suggest}}</li>
   </ul>
   <p class="searchsuggest-loading" ng-if="isloading">正在请求数据</p>
-  <p class="searchsuggest-error" ng-if="haserror">没有搜到与{{''}}相关的关键字</p>
 </div>

@@ -113,9 +113,9 @@
   <div class="detail-info-main">{{good.shelfLife}}</div>
 </div>
 <div class="detail-desc" ng-if="good.goodsDesc && good.goodsDesc.length">{{good.goodsDesc}}</div>
+<div class="detail-desc" ng-if="good.activityGoodsDesc && good.activityGoodsDesc.length">{{good.activityGoodsDesc}}</div>
+
 <!-- 图文详情-->
 <div class="detail-graphics" ng-if="good.goodsDetailImageList && good.goodsDetailImageList.length">
-  <img ng-src="{{goodsDetailImage.imageUrl}}" class="detail-graphic"/>
+  <img ng-src="{{goodsDetailImage.imageUrl}}" class="detail-graphic" ng-repeat="goodsDetailImage in good.goodsDetailImageList track by $index"/>
 </div>
-<!-- 展位图-->
-<div class="occupiedPic"></div>

@@ -29,7 +29,7 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
       });
     }).then(function(res) {
       $scope.haserror = false;
-
+      debugger;
       angular.forEach(res.activities, function(item) {
         item.hasOwnProperty('wapImageUrl') && (item.wapImageUrl =
           item.wapImageUrl +

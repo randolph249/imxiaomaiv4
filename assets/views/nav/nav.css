@@ -5,9 +5,8 @@
 }
 .pub-header .location-info {
 }
-.pub-header .location-info.icon-school:before{
+.location-info .locate{
     color: #ccc;
-    content: '\e613';
     font-size: 2rem;
 }
 

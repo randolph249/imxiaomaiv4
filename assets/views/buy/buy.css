@@ -60,10 +60,17 @@
   background: #eee;
   z-index: 9;
 }
+.shopcarticons{
+  position: absolute;
+  left: 1rem;
+  bottom: 0.5rem;
+  width: 5.5rem;
+  height: 5.5rem;
+}
 .icon-cart {
   position: absolute;
-  left: 10px;
-  bottom: 5px;
+  left:0;
+  right:0;
   width: 5.5rem;
   height: 5.5rem;
   line-height: 5.5rem;
@@ -86,11 +93,11 @@
   text-align: center;
   line-height: 2rem;
   border: 1px solid #ffa000;
-  border-radius: 2.0rem;
   transition: transform .2s;
   -webkit-transition: -webkit-transform .2s;
   -moz-transition: -moz-transform .2s;
   -webkit-transform: scale(1);
+  top:0;
 }
 .totalCount.big {
   -webkit-transform: scale(1.4);
@@ -286,7 +293,7 @@
   float: right;
   margin-right: 1rem;
 }
-.showcart .icon-cart {
+.showcart .shopcarticons{
   position: absolute;
   bottom: 30rem;
   animation: showcartIcon 0.5s ease;

@@ -71,6 +71,7 @@ angular.module('xiaomaiApp').factory('safeApply', ['$rootScope', function(
 
 angular.module('xiaomaiApp').directive('goodDetail', [
   '$state',
+  '$q',
   '$timeout',
   'xiaomaiService',
   'getSkuInfo',
@@ -84,6 +85,7 @@ angular.module('xiaomaiApp').directive('goodDetail', [
   'safeApply',
   function(
     $state,
+    $q,
     $timeout,
     xiaomaiService,
     getSkuInfo,
@@ -191,18 +193,16 @@ angular.module('xiaomaiApp').directive('goodDetail', [
 
         var hasImage = $scope.good.goodsDetailImageList && $scope.good.goodsDetailImageList
           .length;
-        hasImage && quickGetImgHeight($scope.good.goodsDetailImageList[
-              0]
-            .imageUrl)
-          .then(function(imgObj) {
-            $scope.graphicsHeight = imgObj.height * $scope.good.goodsDetailImageList
-              .length;
-            $scope.graphicHeight = imgObj.height;
-            $timeout(function() {
-              $scope.imageLoadedCall && $scope.imageLoadedCall();
-            }, 100)
 
-          });
+        var queue = [];
+        angular.forEach($scope.good.goodsDetailImageList, function(
+          imageList) {
+          queue.push(quickGetImgHeight(imageList.imageUrl));
+        });
+
+        $q.all(queue).then(function() {
+          $scope.imageLoadedCall && $scope.imageLoadedCall();
+        });
 
       };
 
