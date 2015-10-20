@@ -123,8 +123,13 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
             $scope.coupons = availableCoupons;
           }).finally(function() {
             $scope.isloading = false;
-            xiaomaiMessageNotify.pub('shopcartdetailheightupdate',
-              'up', 'ready', '', '');
+            setTimeout(function() {
+              //因为 购物车弹起有延时效果（0.5S） 所以通知必须在购物车动画播放结束以后再放
+              xiaomaiMessageNotify.pub(
+                'shopcartdetailheightupdate',
+                'up', 'ready', '', '');
+            }, 600);
+
           });
         };
 

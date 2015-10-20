@@ -39,8 +39,12 @@ angular.module('xiaomaiApp').controller('buy.detailCtrl', [
     $scope.openDetailPop = function() {
       $scope.showdetail = true;
       xiaomaiMessageNotify.pub('maskManager', 'show');
-      xiaomaiMessageNotify.pub('detailgoodheightupdate',
-        'up', 'ready', '', '');
+      //因为购物车详情展开有一个动画延时效果(0.5S) 所以通知必须在动画播放结束以后发送
+      setTimeout(function() {
+        xiaomaiMessageNotify.pub('detailgoodheightupdate',
+          'up', 'ready', '', '');
+      }, 600);
+
     };
 
     //监听scope销毁 删除订阅
