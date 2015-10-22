@@ -22,7 +22,7 @@ angular.module('xiaomaiApp').controller('feedbackCtrl', [
       xiaomaiLog('m_b_31feedbacksubmit');
 
       var feedback = $scope.feedback,
-        mobile = $scope.mobile;
+        mobile = '' + $scope.mobile;
 
       feedback = feedback.trim && feedback.trim();
 

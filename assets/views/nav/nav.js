@@ -16,23 +16,12 @@ angular.module('xiaomaiApp').controller('nav.headCtrl', [
   'xiaomaiLog',
   'xiaomaiService',
   function($scope, $state, schoolManager, xiaomaiLog, xiaomaiService) {
-    //获取用户当前定位学校
+
     var collegeId;
     schoolManager.get().then(function(res) {
+      // debugger;
       $scope.schoolname = res.collegeName;
-      collegeId = res.collegeId;
-      return xiaomaiService.fetchOne('whitelist');
-    }).then(function(res) {
-      var whiteList = res.collegeWhiteList,
-        reg = new RegExp('\\,?' + collegeId + '\\,?');
-
-      if (reg.test(whiteList)) {
-        $scope.showsearch = true;
-      } else {
-        $scope.showsearch = false;
-
-      }
-    });
+    })
 
     //跳转到选择学校页面
     $scope.gotoLocate = function() {

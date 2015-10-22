@@ -32,7 +32,7 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
       angular.forEach(res.activities, function(item) {
         item.hasOwnProperty('wapImageUrl') && (item.wapImageUrl =
           item.wapImageUrl +
-          '&imageView2/0/w/320');
+          '&imageView2/0/w/400/q/100');
       });
 
       $scope.activities = res.activities;

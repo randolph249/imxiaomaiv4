@@ -4,9 +4,6 @@
 
 **/
 //日志log统计服务
-
-
-
 angular.module('xiaomaiApp').factory('xiaomaiLog', [
   'xiaomaiService',
   'cookie_openid',
@@ -19,16 +16,28 @@ angular.module('xiaomaiApp').factory('xiaomaiLog', [
 
     //如果eventname带了数字 说明是事件名+categoryID/activityId/
     var createEventStr = function(e, collegeId) {
-      var eventnamereg = /(\w+)\+?(\d+)?/;
-      var eventname = e.match(eventnamereg)[1];
-      var dataid = e.match(eventnamereg)[2];
+      var eventnamereg =
+        /(\w+)\+?(\d+)?\+?(dataid\d+)?\+?(tag\d+)?\+?(category\d+)?\+?(good\d+)?/;
+      var results = e.match(eventnamereg);
+      var eventname = results[1];
+      var ids = results[2];
+      var dataid = results[3];
+      var tag = results[4];
+      var categoryIndex = results[5];
+      var goodIndex = results[6];
 
       var logstr = [
           xiaomaiLogDate(),
           eventname,
           systemInfo.browser
         ].join('^') + '~' + collegeId + '~' + cookie_openid +
-        '~' + (dataid || '') + '~~^data~tag~~~^';
+        '~' + (ids || '') + '~~^' + [
+          dataid ? dataid.replace('dataid', '') : 'data',
+          tag ? tag.replace('tag', '') : 'tag',
+          categoryIndex ? categoryIndex.replace('category', '') : '',
+          goodIndex ? goodIndex.replace('good', '') : ''
+
+        ].join('~') + '~^';
       $http.jsonp(
         'http://logger.imxiaomai.com/client/event?callback=JSON_CALLBACK&data=' +
         logstr);
@@ -58,12 +67,6 @@ angular.module('xiaomaiApp').factory('xiaomaiLog', [
   }
 ]);
 
-//时间段统计 存活时间
-angular.module('xiaomaiApp').factory('xiaomaiTimeLineLog', ['xiaomaiLog',
-  function(xiaomaiLog) {
-    debugger;
-  }
-]);
 
 //生成时间字符串
 angular.module('xiaomaiApp').factory('xiaomaiLogDate', [function() {

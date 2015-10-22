@@ -83,7 +83,8 @@ angular.module('xiaomaiApp').directive('xiaomaiGoodListItemSk', [
   'xiaomaiMessageNotify',
   'xiaomaiLog',
   'buyProcessManager',
-  function(xiaomaiMessageNotify, xiaomaiLog, buyProcessManager) {
+  'cartManager',
+  function(xiaomaiMessageNotify, xiaomaiLog, buyProcessManager, cartManager) {
     var link = function($scope, iElm, iAttrs) {
       //打开详情页面
       $scope.gotoDetail = function($event) {
@@ -95,6 +96,21 @@ angular.module('xiaomaiApp').directive('xiaomaiGoodListItemSk', [
         $event.stopPropagation();
 
       };
+
+      //监听goods数据 然后查询购物车是否有对应商品
+      var goodswatcher = $scope.$watch('goods', function() {
+        if (!$scope.goods || !angular.isObject($scope.goods)) {
+          return false;
+        }
+        //销毁监听
+        goodswatcher();
+        cartManager.getnumInCart($scope.goods.skuList[0].activitySkuId,
+          $scope
+          .goods.sourceType).then(function(num) {
+          num == 1 && ($scope.goods.killed = true);
+        });
+      });
+
 
       $scope.buyHandler = function($event) {
 

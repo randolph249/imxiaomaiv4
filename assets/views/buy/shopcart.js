@@ -5,9 +5,9 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
   'cartManager',
   '$timeout',
   'xiaomaiMessageNotify',
-  'env',
+  'xiaomaiLog',
   function($state, $scope, xiaomaiService, cartManager, $timeout,
-    xiaomaiMessageNotify, env) {
+    xiaomaiMessageNotify, xiaomaiLog) {
     cartManager.query(function(res) {
       $scope.totalCount = res.totalCount;
       $scope.totalPrice = res.totalPrice;
@@ -37,6 +37,8 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
     //跳转到结算界面
     $scope.goSettlement = function() {
 
+      //去结算按钮的点击统计
+      xiaomaiLog('m_b_31shoppingsettle')
       var statename = $state.current.name;
       var namereg =
         /root\.buy(\.nav)?\.(\w+)/;
@@ -216,11 +218,8 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
           //购物车来源统计
           type == 'plus' && xiaomaiLog('m_r_31cartfromcart');
 
-
           good.skuList[0]['numInCart'] = numInCart;
           //如果这个数据的numInCart==0 删除这条数据
-          $scope.goods[$index] && ($scope.goods[$index].isPaying =
-            false);
           if (good.skuList[0]['numInCart'] == 0) {
             $scope.goods.splice($index, 1);
             xiaomaiMessageNotify.pub('shopcartdetailheightupdate',
@@ -229,6 +228,9 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
 
         }, function(msg) {
           alert(msg);
+        }).finally(function() {
+          $scope.goods[$index] && ($scope.goods[$index].isPaying =
+            false);
         });
       $event.stopPropagation();
       $event.preventDefault();

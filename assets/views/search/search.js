@@ -15,7 +15,7 @@ angular.module('xiaomaiApp').controller('searchCtrl', [
 
     var referRouter, referParam;
     //搜索页面PV统计
-    xiaomaiLog('m_p_31search');
+    xiaomaiLog('m_p_32search');
 
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam,
       fromState, fromParam) {
@@ -27,6 +27,8 @@ angular.module('xiaomaiApp').controller('searchCtrl', [
 
     //从哪个页面打开回到哪个页面
     $scope.goback = function() {
+      //返回按钮点击统计
+      xiaomaiLog('m_b_32searchback');
       $state.go(referRouter, referParam);
     };
 
@@ -44,17 +46,22 @@ angular.module('xiaomaiApp').controller('searchCtrl', [
       }
     };
 
+    //点击搜索按钮
     $scope.gotosearch = function($event, searchkey) {
-      if (searchkey && searchkey.length) {
-        $state.go('root.buy.searchresult', {
-          key: encodeURIComponent(searchkey),
-          page: 1
-        });
-        searchcookieManager.writeCookie(searchkey);
-        $event.preventDefault();
-        $event.stopPropagation();
+      $event.preventDefault();
+      $event.stopPropagation();
+      //搜索按钮的点击统计
+      xiaomaiLog('m_b_32searchsearch');
+      if (!searchkey || !searchkey.length) {
+        return false;
       }
-    }
+      $state.go('root.buy.searchresult', {
+        key: encodeURIComponent(searchkey),
+        page: 1
+      });
+      searchcookieManager.writeCookie(searchkey);
+
+    };
 
     //输入搜索关键词
     //发布通知搜索关键词变更
@@ -80,8 +87,9 @@ angular.module('xiaomaiApp').controller('searchrecordCtrl', [
   'searchcookieManager',
   'xiaomaiMessageNotify',
   'searchcookieManager',
+  'xiaomaiLog',
   function($scope, $state, searchcookieManager, xiaomaiMessageNotify,
-    searchcookieManager) {
+    searchcookieManager, xiaomaiLog) {
     //默认情况下 搜索Cookie是显示的
     $scope.showCookie = true;
     var subId = xiaomaiMessageNotify.sub('searchkeyupdate', function(key) {
@@ -92,6 +100,9 @@ angular.module('xiaomaiApp').controller('searchrecordCtrl', [
 
     //跳转到搜索结果页
     $scope.goresult = function($event, key) {
+      //搜索历史的点击统计
+      xiaomaiLog('m_b_32searchhistory');
+
       searchcookieManager.writeCookie(key);
       $state.go('root.buy.searchresult', {
         key: encodeURIComponent(key),
@@ -107,12 +118,20 @@ angular.module('xiaomaiApp').controller('searchrecordCtrl', [
 
     //请求Cookie信息
     $scope.cleancookie = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      //清除历史按钮
+      xiaomaiLog('m_b_32searchcleanhistory');
+
       if (confirm('确定要清除搜索历史吗?')) {
         searchcookieManager.cleanCookies();
         $scope.cookies = [];
+
+        //确定清除搜索历史统计
+        xiaomaiLog('m_b_32searchcleanbutton');
       }
-      $event.preventDefault();
-      $event.stopPropagation();
+
     };
 
     //选择某项Cookie
@@ -126,8 +145,9 @@ angular.module('xiaomaiApp').controller('searchsuggestCtrl', [
   'searchcookieManager',
   'xiaomaiMessageNotify',
   'xiaomaiService',
+  'xiaomaiLog',
   function($scope, $state, searchcookieManager, xiaomaiMessageNotify,
-    xiaomaiService) {
+    xiaomaiService, xiaomaiLog) {
     $scope.showSuggest = false;
     var subId = xiaomaiMessageNotify.sub('searchkeyupdate', function(key) {
       $scope.showSuggest = key.length ? true : false;
@@ -163,6 +183,9 @@ angular.module('xiaomaiApp').controller('searchsuggestCtrl', [
     };
 
     $scope.goresult = function($event, key) {
+      //搜索提示点击
+      xiaomaiLog('m_b_32searchsuggestion');
+
       searchcookieManager.writeCookie(key);
       $state.go('root.buy.searchresult', {
         key: encodeURIComponent(key),

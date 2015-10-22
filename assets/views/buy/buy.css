@@ -155,11 +155,11 @@
   bottom: 0rem;
 }
 .cartDetail.cartDetail-show, .goodDetail.goodDetail-show {
-  height: 25rem;
-  padding: 3rem 1.5rem 0;
+  height: 28rem;
+  padding:0 1.5rem;
 }
 .goodDetail.goodDetail-show {
-  height: 70%;
+  height: 85%;
 }
 .cartDetail .cartDetailWrap, .goodDetail .goodDetailWrap {
   position: absolute;
@@ -320,12 +320,12 @@
 }
 .shareModel {
   position: fixed;
-  left: 2em;
-  right: 2.4em;
+  left: 1rem;
+  right: 2.4rem;
   top: 0;
-  bottom: 80%;
+  bottom: 88%;
   z-index: 2;
-  background-image: url('http://xiaomai-p2p.qiniudn.com/0d470e003646a7180ac57526d74456f2');
+  background-image: url('http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=167714');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right top;

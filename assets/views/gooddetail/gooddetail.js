@@ -1,74 +1,3 @@
-//快速获取图片高度
-angular.module('xiaomaiApp').factory('quickGetImgHeight', [
-  '$q',
-  function($q) {
-    return function(url) {
-      var deferred = $q.defer();
-
-      var log = function() {};
-
-      var img = document.createElement('img');
-      img.src = url;
-      var loaded = false,
-        wait,
-        width, height;
-
-      img.addEventListener('load', function() {
-        if (loaded) {
-          return false;
-        }
-        loaded = true;
-        deferred.resolve({
-          width: img.width,
-          height: img.height
-        });
-      });
-
-      img.addEventListener('error', function() {
-        if (loaded) {
-          return false;
-        }
-        loaded = true;
-        deferred.resolve({
-          width: img.width,
-          height: img.height
-        });
-      });
-
-      wait = setInterval(function() {
-        //图片高度加载完成
-        if (img.height != 0 && img.height == height) {
-          clearInterval(wait);
-          loaded = true;
-          deferred.resolve({
-            width: img.width,
-            height: img.height
-          });
-          return false;
-        }
-        height = img.height;
-        log(img.width, log.height);
-      }, 50);
-
-      return deferred.promise;
-
-    }
-  }
-]);
-
-angular.module('xiaomaiApp').factory('safeApply', ['$rootScope', function(
-  $rootScope) {
-  return function(fn) {
-    var phase = $rootScope.$$phase;
-
-    if (phase == '$apply' || phase == '$digest') {
-      angular.isFunction(fn) && fn();
-    } else {
-      $rootScope.$apply(fn);
-    }
-  }
-}]);
-
 angular.module('xiaomaiApp').directive('goodDetail', [
   '$state',
   '$q',
@@ -104,7 +33,8 @@ angular.module('xiaomaiApp').directive('goodDetail', [
       $scope.swiper = {};
       $scope.swiperIndex = 0;
       $scope.onReadySwiper = function(swiper) {
-
+        swiper.update(true);
+        $scope.swiperIndex = 0;
         $scope.swiperSlider = function($event, arrow) {
 
           $event.preventDefault();
@@ -114,18 +44,18 @@ angular.module('xiaomaiApp').directive('goodDetail', [
         };
         swiper.on('slideChangeStart', function(swiper) {
 
-
           var args1 = Array.prototype.slice.call(arguments)[0];
           safeApply(function() {
             $scope.swiperIndex = args1.activeIndex;
 
+            //手动滑动多图统计
           });
+          xiaomaiLog('m_b_32productdetailinfomultipic');
+
 
         });
 
       };
-
-
 
       //监听goodId和sourceType
       var watches = $scope.$watch('goodsId+sourceType', function() {
@@ -152,7 +82,7 @@ angular.module('xiaomaiApp').directive('goodDetail', [
           angular.isArray(res.goodsDetailImageList) && angular.forEach(
             res.goodsDetailImageList,
             function(item) {
-              item.imageUrl += '&imageView2/0/w/410';
+              item.imageUrl += '&imageView2/0/w/410/q/100';
             });
 
           $scope.good = res;
@@ -171,16 +101,22 @@ angular.module('xiaomaiApp').directive('goodDetail', [
             $scope.skuInfo = false;
             $scope.checkedProperties = {};
             $scope.skuObject = createSkukvList($scope.good.skuList);
+            //非聚合品numInCart=0;
+            $scope.numInCart = 0;
             return false;
           } else {
             //非聚合类商品 查询numInCart
             $scope.skuInfo = $scope.good.skuList[0];
             var skuId = $scope.good.sourceType == 1 ? $scope.skuInfo
               .skuId : $scope.skuInfo.activitySkuId;
-            return cartManager.getnumInCart(skuId, $scope.good.sourceType)
+            return cartManager.getnumInCart(skuId, $scope.good.sourceType);
           }
         }).then(function(num) {
-          return angular.isNumber(num) && ($scope.numInCart = num);
+          if (angular.isNumber(num)) {
+            $scope.numInCart = num;
+            num == 1 && ($scope.good.killed = true);
+          }
+          return false;
         }).finally(function() {
           //通知parent controller数据创建成功
           angular.isFunction($scope.loadSuccess) && $scope.loadSuccess();
@@ -367,11 +303,11 @@ angular.module('xiaomaiApp').directive('goodDetail', [
 
         var options = $scope.sourceType == 2 ? {
           goodsId: $scope.good.activityGoodsId,
-          sourceType: 2,
+          sourceType: $scope.sourceType,
           skuId: $scope.skuInfo.activitySkuId,
           distributeType: $scope.skuInfo.distributeType,
           price: $scope.skuInfo.activityPrice,
-          propertyIds: ''
+          propertyIds: propertyIds
         } : {
           goodsId: $scope.good.goodsId,
           sourceType: $scope.sourceType,
@@ -392,7 +328,6 @@ angular.module('xiaomaiApp').directive('goodDetail', [
           )
           .then(function(numInCart) {
             //更新numInCart
-
             $scope.numInCart = numInCart;
 
             //购物车来源统计
@@ -406,7 +341,7 @@ angular.module('xiaomaiApp').directive('goodDetail', [
           }, function(msg) {
             alert(msg);
             return false;
-          }).then(function() {
+          }).finally(function() {
             $scope.good.isPaying = false;
           });
       };

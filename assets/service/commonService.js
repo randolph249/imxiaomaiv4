@@ -112,3 +112,77 @@ angular.module('xiaomaiApp').factory('getRouterTypeFromUrl', function() {
     return router;
   };
 });
+
+/**
+$apply升级版本
+**/
+angular.module('xiaomaiApp').factory('safeApply', ['$rootScope', function(
+  $rootScope) {
+  return function(fn) {
+    var phase = $rootScope.$$phase;
+
+    if (phase == '$apply' || phase == '$digest') {
+      angular.isFunction(fn) && fn();
+    } else {
+      $rootScope.$apply(fn);
+    }
+  }
+}]);
+
+//快速获取图片高度
+angular.module('xiaomaiApp').factory('quickGetImgHeight', [
+  '$q',
+  function($q) {
+    return function(url) {
+      var deferred = $q.defer();
+
+      var log = function() {};
+
+      var img = document.createElement('img');
+      img.src = url;
+      var loaded = false,
+        wait,
+        width, height;
+
+      img.addEventListener('load', function() {
+        if (loaded) {
+          return false;
+        }
+        loaded = true;
+        deferred.resolve({
+          width: img.width,
+          height: img.height
+        });
+      });
+
+      img.addEventListener('error', function() {
+        if (loaded) {
+          return false;
+        }
+        loaded = true;
+        deferred.resolve({
+          width: img.width,
+          height: img.height
+        });
+      });
+
+      wait = setInterval(function() {
+        //图片高度加载完成
+        if (img.height != 0 && img.height == height) {
+          clearInterval(wait);
+          loaded = true;
+          deferred.resolve({
+            width: img.width,
+            height: img.height
+          });
+          return false;
+        }
+        height = img.height;
+        log(img.width, log.height);
+      }, 50);
+
+      return deferred.promise;
+
+    }
+  }
+]);

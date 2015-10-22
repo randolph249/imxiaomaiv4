@@ -5,14 +5,14 @@
   <div class="loading" ng-if="isloading">
     正在加载......
   </div>
-  <div class="" ng-repeat="item in categorys">
+  <div class="" ng-repeat="item in categorys track by $index">
     <div class="recommendCateTitle">
       <h3>{{item.category.categoryName}}</h3>
       <span class="iconfont icon-yfmore" ng-click="gotocategory(item);"></span>
     </div>
     <div class="recommendCateColumn">
-      <div ng-repeat="goods in item.goods">
-        <div xiaomai-good-list-item goods="goods" detail-source-event="recommend" click-event="m_b_31homepagetabrecadd" source-event="m_r_31cartfromrecommend"></div>
+      <div ng-repeat="goods in item.goods track by $index">
+        <div xiaomai-good-list-item goods="goods" detail-source-event="recommend" click-event="m_b_31homepagetabrecadd+dataid{{goods.goodsId}}+category{{$parent.$index+1}}+good{{$index+1}}" source-event="m_r_31cartfromrecommend+dataid{{goods.goodsId}}+category{{$parent.$index+1}}+good{{$index+1}}"></div>
       </div>
     </div>
   </div>

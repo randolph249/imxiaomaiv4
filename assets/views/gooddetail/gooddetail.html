@@ -13,7 +13,7 @@
   <div class="gooddetail-swiper-next-btn iconfont icon-yfmore" ng-class="{disabled:swiperIndex==good.goodsImageList.length-1}" ng-click="swiperSlider($event,'next')">
 
   </div>
-  <ks-swiper-container on-ready="onReadySwiper(swiper)" swiper="swiper">
+  <ks-swiper-container on-ready="onReadySwiper(swiper)" swiper="swiper" initial-slide="0">
     <ks-swiper-slide class="swiper-slide" ng-repeat="goodsImage in good.goodsImageList">
       <div class="gooddetail-swiper-item" style="background-image:url({{goodsImage.imageUrl}});"></div>
     </ks-swiper-slide>
@@ -58,7 +58,7 @@
       <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.timeBeforeStart}}" timeid="{{good.activityBgGoodsId}}"></span>
     </p>
 <!-- 活动已开始同时没有被抢空-->
-    <p class="countdown" ng-if="good.killStarted==1 && good.goodsStatusDisplay!=3">
+    <p class="countdown" ng-if="good.killStarted==1 && good.goodsStatusDisplay!=3 &&!good.killed">
       距结束
       <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.buyLeftTime}}" timeid="{{good.activityBgGoodsId}}"></span>
     </p>
