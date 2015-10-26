@@ -38,7 +38,21 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
     $scope.goSettlement = function() {
 
       //去结算按钮的点击统计
-      xiaomaiLog('m_b_31shoppingsettle')
+      xiaomaiLog('m_b_31shoppingsettle');
+
+      //判断用户是否绑定
+      xiaomaiService.fetchOne('verifyUserStatus', 'GET').then(function() {
+        $state.go('root.order');
+
+      }, function() {
+        $state.go('root.binduser', {
+          redirect: 'root.order'
+        });
+      })
+      debugger;
+
+      return false;
+
       var statename = $state.current.name;
       var namereg =
         /root\.buy(\.nav)?\.(\w+)/;

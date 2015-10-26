@@ -329,9 +329,9 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                '/views/search/search.js',
+                'views/search/search.js',
                 window.__SYS_CONF.resourceUrl +
-                '/views/search/search.css'
+                'views/search/search.css'
               ]
             })
           }]
@@ -348,14 +348,85 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl +
-                '/views/search/searchresult.js',
+                'views/search/searchresult.js',
                 window.__SYS_CONF.resourceUrl +
-                '/views/search/search.css'
+                'views/search/search.css'
               ]
             })
           }]
         }
       })
+      //确认订单
+      .state('root.confirmorder', {
+        url: 'confirmorder/',
+        templateUrl: '../assets/views/confirmorder/confirmorder.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.js',
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.css'
+              ]
+            })
+          }],
+          loadService: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'service/orderService.js'
+              ]
+            })
+          }]
+        }
+      })
+      //用户信息绑定
+      .state('root.binduser', {
+        url: 'binduser?redirect',
+        templateUrl: '../assets/views/binduser/binduser.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/binduser/binduser.js',
+                window.__SYS_CONF.resourceUrl + 'views/binduser/binduser.css'
+              ]
+            })
+          }]
+        }
+      })
+      //订单地址管理列表
+      .state('root.orderaddr', {
+        url: 'orderaddr/',
+        templateUrl: '../assets/views/orderAddr/orderAddr.html'
+      })
+      //订单地址新增
+      .state('root.orderaddr.add', {
+        url: 'add/',
+        templateUrl: '../assets/views/orderAddr/add.html'
+      })
+      .state('root.orderaddr.edit', {
+        url: 'add/',
+        templateUrl: '../assets/views/orderAddr/edit.html'
+      })
+      //用户中心
+      .state('root.user', {
+        url: 'user/',
+        templateUrl: '../assets/views/user/user.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/user/user.js',
+                window.__SYS_CONF.resourceUrl + 'views/user/user.css'
+              ]
+            })
+          }]
+        }
+      })
+      //订单地址编辑
       .state('root.notfound', {
         url: '404/',
         templateUrl: '../assets/views/notfound/notfound.html'

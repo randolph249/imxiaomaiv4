@@ -121,6 +121,21 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       "searchsuggest": {
         url: "/wap/goods/suggest",
         type: "GET"
+      },
+      //发送验证码
+      "sendCode": {
+        url: "/wap/user/sendCode",
+        type: "POST"
+      },
+      //验证验证码
+      "verifyCode": {
+        url: "/wap/user/bind",
+        type: "POST"
+      },
+      //验证用户登录状态
+      "verifyUserStatus": {
+        url: "/wap/user/verifyUserStatus",
+        type: "GET"
       }
     },
     getModel = function() {

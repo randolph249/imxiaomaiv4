@@ -1,0 +1,14 @@
+<div class="bindUserWrap">
+  <p class="note">为了验证您的身份，请绑定您的手机号</p>
+  <div class="block_tel">
+    <input type="number" ng-model="tel" placeholder="请输入您的手机号">
+    <input type="number" ng-model="code" placeholder="请输入您的手机验证码" />
+    <span class="sendCodeBtn disabled">获取验证码</span>
+  </div>
+  <span class="confirmbutton disabled">确定</span>
+  <div class="pos_checkP" ng-init="agreedeal=true;">
+    <input type="checkbox" ng-checked="agreedeal"/>
+    <span>已阅读并同意</span>
+    <a href="http://open.imxiaomai.com/app/user.html">小麦公社协议</a>
+  </div>
+</div>

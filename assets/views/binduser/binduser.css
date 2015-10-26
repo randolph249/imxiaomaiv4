@@ -1,0 +1,59 @@
+.bindUserWrap {
+  /* text-align: center; */
+}
+.bindUserWrap .note {
+  font-size: 1.2rem;
+  line-height: 4.5rem;
+  text-align: center;
+  white-space: nowrap;
+  color: #adadad;
+}
+.bindUserWrap .block_tel {
+  background: #fff;
+  padding: 2rem 2rem 1.5rem;
+  position: relative;
+}
+.bindUserWrap .block_tel input[type="text"], .bindUserWrap .block_tel input[type="number"] {
+  display: block;
+  height: 3.7rem;
+  line-height: 3.7rem;
+  box-sizing: border-box;
+  width: 100%;
+  border: 0 none;
+}
+.bindUserWrap .block_tel input[type="number"]:first-child {
+  border-bottom: #eee solid 1px;
+}
+.bindUserWrap .block_tel .sendCodeBtn {
+  position: absolute;
+  display: inline-block;
+  right: 2rem;
+  background: #FE9402;
+  color: #444;
+  font-size: 1.2rem;
+  height: 3rem;
+  line-height: 3rem;
+  width: 9rem;
+  text-align: center;
+  top: 2rem;
+}
+.bindUserWrap .confirmbutton {
+  width: 100%;
+  position: relative;
+  margin: 2rem 0;
+  display: inline-block;
+  height: 4rem;
+  background: #FE9402;
+  color: #444;
+  line-height: 4rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+.pos_checkP input {
+  width: 1.6rem;
+  height: 1.6rem;
+  appearance: button;
+  -moz-appearance: button;
+  /* Firefox */
+  -webkit-appearance: button;
+}
