@@ -51,6 +51,7 @@ angular.module('xiaomaiApp').factory('xiaomaiCacheManager', [
     var caches = [], //缓存容器
       cacheMaxlen = 20, //缓存数据最大长度
       readCache = function(cachename, params) {
+
         var $index = hasCache(cachename);
         if ($index === false) {
           return false;

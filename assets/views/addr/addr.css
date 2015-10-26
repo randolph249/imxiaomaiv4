@@ -1,0 +1,139 @@
+.addAddrCont {
+  position: absolute;
+  background-color: #fff;
+  color: #333;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  height: 5.5rem;
+  text-align: center;
+}
+.addrListCont {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4.4rem;
+  bottom: 5.5rem;
+  padding-bottom: 1rem;
+  overflow: hidden;
+}
+.addAddrBtn {
+  display: inline-block;
+  width: 82.67%;
+  height: 4rem;
+  line-height: 4rem;
+  margin-top: 0.7rem;
+  background-color: #ff5300;
+  color: #fff;
+  font-size: 1.6rem;
+  border-radius: 0.3rem;
+}
+.defaultAddr {}
+.addrItem {
+  padding: 1rem 0 1rem 2rem;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  height: 4.8rem;
+  position: relative;
+  margin-top: 1rem;
+}
+.addrItem span {
+  height: 2.4rem;
+  display: inline-block;
+  font-size: 1.2rem;
+  line-height: 2.4rem;
+}
+.addrItem .telephone {
+  padding-left: 1.8rem;
+  color: #999;
+}
+.addrItem p {
+  height: 2.4rem;
+  font-size: 1.2rem;
+  line-height: 2.4rem;
+}
+.addrItem .iconfont {
+  position: absolute;
+  font-size: 2rem;
+  top: 0;
+  right: 2rem;
+  line-height: 6.8rem;
+  color: #999;
+  font-size: 3.6rem;
+}
+.addrHandlers {
+  padding: 0 2rem;
+  text-align: right;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  background: #fff;
+}
+.addrHandlers span {
+  position: relative;
+  display: inline-block;
+  width: 6rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  border: 1px solid #999;
+  text-align: center;
+  margin-left: 1rem;
+  border-radius: 0.3rem;
+  color: #999;
+  font-size: 1.2rem;
+}
+.addrItemCont {
+  background-color: #fff;
+  padding-left: 2rem;
+  margin-top: 5.4rem;
+}
+.addrItemCont p {
+  position: relative;
+  height: 5rem;
+  line-height: 5rem;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.addrItemCont p:last-child {
+  border-bottom: 0 none;
+}
+.addrItem-key {
+  width: 10rem;
+  display: inline-block;
+}
+.addrItem-value {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10rem;
+  right: 0;
+}
+.addrItem-value input {
+  width: 100%;
+  height: 100%;
+  line-height: 100%;
+  color: #333;
+  border: 0 none;
+  float: left;
+}
+.addrItemCont .iconfont {
+  color: #999;
+  position: absolute;
+  right: 2rem;
+  top: 0;
+  line-height: 5rem;
+  font-size: 1.8rem;
+}
+.addrHanlderBtnCont {
+  text-align: center;
+  padding-top: 2.5rem;
+}
+.addrHanlderBtnCont span{
+  display: inline-block;
+  width: 82%;
+  height: 4rem;
+  line-height: 4rem;
+  color: #fff;
+  font-size: 1.6rem;
+  background-color: #ff5300;
+  border-radius: 0.3rem;
+}

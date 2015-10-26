@@ -6,8 +6,9 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
   '$timeout',
   'xiaomaiMessageNotify',
   'xiaomaiLog',
+  'cookie_openid',
   function($state, $scope, xiaomaiService, cartManager, $timeout,
-    xiaomaiMessageNotify, xiaomaiLog) {
+    xiaomaiMessageNotify, xiaomaiLog, cookie_openid) {
     cartManager.query(function(res) {
       $scope.totalCount = res.totalCount;
       $scope.totalPrice = res.totalPrice;
@@ -33,26 +34,7 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
       $scope.isShowDetail = status == 'show';
     });
 
-
-    //跳转到结算界面
-    $scope.goSettlement = function() {
-
-      //去结算按钮的点击统计
-      xiaomaiLog('m_b_31shoppingsettle');
-
-      //判断用户是否绑定
-      xiaomaiService.fetchOne('verifyUserStatus', 'GET').then(function() {
-        $state.go('root.order');
-
-      }, function() {
-        $state.go('root.binduser', {
-          redirect: 'root.order'
-        });
-      })
-      debugger;
-
-      return false;
-
+    var getRefer = function() {
       var statename = $state.current.name;
       var namereg =
         /root\.buy(\.nav)?\.(\w+)/;
@@ -61,22 +43,41 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
         case 'all':
           refer = 'homepage';
           break;
-        case 'recommend':
-          refer = 'recommend'
-          break;
         case 'category':
-          refer = 'category&categoryId=' + $state.params.categoryId;
+          refer = 'category+' + $state.params.categoryId;
           break;
         case 'active':
-          refer = 'active&activityId=' + $state.params.activityId;
+          refer = 'active+' + $state.params.activityId;
           break;
         default:
           refer = statename.match(namereg)[2];
           break;
       }
+      return refer;
+    };
 
-      var host = window.location.protocol + '//' + window.location.host;
-      window.location.href = host + "/order/create?r=" + refer;
+    //跳转到结算界面
+    $scope.goSettlement = function($event) {
+      $event.stopPropagation();
+      $event.preventDefault();
+
+      //去结算按钮的点击统计
+      xiaomaiLog('m_b_31shoppingsettle');
+
+      //判断用户是否绑定
+      var refer = getRefer();
+      xiaomaiService.save('checkUser', {
+        openid: cookie_openid
+      }).then(function() {
+        $state.go('root.confirmorder', {
+          r: refer
+        });
+
+      }, function() {
+        $state.go('root.binduser', {
+          redirect: 'root.confirmorder'
+        });
+      });
     };
 
     //打开详情页面

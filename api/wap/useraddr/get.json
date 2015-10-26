@@ -1,0 +1,12 @@
+{
+  "msg": "success",
+  "code": 0,
+  "data": {
+    "userAddrId": 1,
+    "receiverName": "小麦公社1",
+    "receiverPhone": "12345678901",
+    "receiverAddr": "小麦总部1",
+    "receiverCollegeId": 11,
+    "receiverCollegeName": "北京大学1"
+  }
+}

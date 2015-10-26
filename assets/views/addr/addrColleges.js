@@ -1,4 +1,4 @@
-angular.module('xiaomaiApp').controller('collegesCtrl', [
+angular.module('xiaomaiApp').controller('addrCollegesCtrl', [
   '$state',
   '$scope',
   'xiaomaiService',
@@ -34,22 +34,32 @@ angular.module('xiaomaiApp').controller('collegesCtrl', [
         $scope.isloading = false;
       });
     };
+    //从两个定位结果中选择一个
+    var redirectname = $state.params.r;
+    var userId = $state.params.userId;
+    var userAddrId = $state.params.userAddrId;
+    $scope.checkCollege = function($event, college, $index) {
 
-    //选择学校
-    $scope.checkCollege = function($event, college) {
-      xiaomaiLog('m_b_31manuallyselectsch', college.collegeId);
+      xiaomaiCacheManager.writeCache('addrCollegeInfo', college);
+      $event.preventDefault();
+      $event.stopPropagation();
 
-      schoolManager.set(college).then(function() {
-        xiaomaiCacheManager.clean('navgatorlist');
-        return true;
-      }).then(function() {
-        $state.go('root.buy.nav.all');
+      //跳回到编辑页或者新增页
+      $state.go(redirectname, {
+        userId: userId,
+        userAddrId: userAddrId,
+        chosenCollege: true
       });
     };
 
-    //返回列表页
-    $scope.goback = function() {
-      $state.go('root.locate');
+    //返回首页
+    $scope.goback = function($event) {
+      //跳回到编辑页或者新增页
+      $state.go('root.addrLocate', {
+        r: redirectname,
+        userId: userId,
+        userAddrId: userAddrId
+      });
     };
   }
 ])

@@ -15,7 +15,7 @@ angular.module('xiaomaiApp').controller('feedbackCtrl', [
     $scope.feedback = "";
     $scope.mobile = "";
 
-    var mobilereg = /^(\+86)?1[3|4|5|8][0-9]\d{4,8}$/g;
+    var mobilereg = /^(\+86)?1[3|4|5|8][0-9]\d{4,8}$/;
 
     $scope.submit = function() {
       //提交点击次数日志统计

@@ -127,15 +127,40 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: "/wap/user/sendCode",
         type: "POST"
       },
-      //验证验证码
-      "verifyCode": {
-        url: "/wap/user/bind",
+      //用户绑定信息
+      "bindUser": {
+        url: "/wap/userBind/bind",
         type: "POST"
       },
       //验证用户登录状态
-      "verifyUserStatus": {
-        url: "/wap/user/verifyUserStatus",
+      "checkUser": {
+        url: "/wap/userBind/check",
+        type: "POST"
+      },
+      //获取用户收货地址列表
+      "addrList": {
+        url: "/wap/useraddr/query",
+        type: "GET" //?
+      },
+      //删除某条用户收货地址信息
+      "addrDel": {
+        url: "/wap/useraddr/delete",
+        type: "POST" //?
+      },
+      //查询某条用户收货地址信息
+      "getAddr": {
+        url: "/wap/useraddr/get",
         type: "GET"
+      },
+      //更新某条用户收货地址信息
+      "setAddr": {
+        url: "/wap/useraddr/set",
+        type: "POST"
+      },
+      //新增一套用户收货地址信息
+      "addAddr": {
+        url: "/wap/useraddr/add",
+        type: "POST"
       }
     },
     getModel = function() {
@@ -259,6 +284,10 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
             // v: Math.random().toString().replace(/\./, '')
           }, params)
         }).success(function(res) {
+
+          if (name == "addrDel") {
+            debugger;
+          }
           //如果返回结果有异常 reject
           if (handlerResult(res) === false) {
             deferred.reject(res.msg);

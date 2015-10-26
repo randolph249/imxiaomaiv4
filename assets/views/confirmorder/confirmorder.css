@@ -1,0 +1,151 @@
+.order_contents {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4.4em;
+  bottom: 0;
+  overflow: hidden;
+}
+.order_contents .block_bg {
+  margin-top: 1.5rem;
+  background: #fff;
+}
+.order_contents .block_bg .title {
+  padding-left: 2rem;
+  font-size: 1.6rem;
+  line-height: 5rem;
+  height: 4rem;
+  overflow: hidden;
+  color: #15acf3;
+  border-bottom: 0.1rem solid #15acf3;
+  border-left: 0.5rem solid #15acf3;
+}
+.order_contents .block_bg .contents {
+  padding: 0 2.5rem;
+}
+.order_contents .block_bg .content_column {
+  height: 5rem;
+  line-height: 5rem;
+  border-bottom: #ccc solid 1px;
+  position: relative;
+}
+.order_contents .block_bg .content_column:last-child {
+  border-bottom: 0 none;
+}
+.order_contents .block_bg .content_column .iconfont {
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 5rem;
+  font-size: 3.6rem;
+}
+.order_contents .block_bg .content_column .iconfont.icon-weixin {
+  color: rgb(0, 204, 13);
+}
+.order_contents .block_bg .content_column .iconfont.icon-zhifubao {
+  color: rgb(0, 170, 238);
+  font-size:4.2rem;
+}
+.order_contents .block_bg .content_column .payCheckeBox{
+    display: inline-block;
+    box-sizing: border-box;
+    width:2.5rem;
+    height:2.5rem;
+    border:#ccc solid 1px;
+    border-radius: 2.5rem;
+    background:#fff;
+    position: absolute;
+    right:0;
+    top:1.2rem;
+}
+.order_contents .block_bg .content_column .payCheckeBox.checked:after{
+  content:'';
+  width:1.2rem;
+  height:1.2rem;
+  background:#ff5300;
+  border-radius: 1.2rem;
+  position: absolute;
+  left:50%;
+  top:50%;
+  margin-left: -0.6rem;
+  margin-top:-0.6rem;
+}
+.order_contents .block_bg .content_column .payTypeNote {
+  padding-left: 4.5rem;
+  line-height: 5rem;
+  color: #333;
+  font-size: 1.4rem;
+}
+.order_contents .block_bg .title.rdcTitle, .order_contents .block_bg .title.payTypeTitle {
+  border-bottom-color: #00cb0d;
+  border-left-color: #00cb0d;
+  color: #00cb0d;
+}
+.order_contents .block_bg .title.ldcTitle {
+  border-bottom-color: #00abf6;
+  border-left-color: #00abf6;
+  color: #00abf6;
+}
+.order_contents .block_bg .title.thirdsellerTitle, .order_contents .block_bg .title.couponTitle {
+  border-bottom-color: #ff5330;
+  border-left-color: #ff5330;
+  color: #ff5330;
+}
+.order_contents .addrInfo {
+  padding: 1rem 2.5rem;
+  position: relative;
+}
+.order_contents .addrInfo span {
+  line-height: 2.4rem;
+  display: inline-block;
+  font-size: 1.2rem;
+}
+.order_contents .addrInfo .telephone {
+  padding-left: 1.8rem;
+}
+.order_contents .iconfont {
+  position: absolute;
+  font-size: 2rem;
+  top: 0;
+  right: 1rem;
+  line-height: 6.8rem;
+  color: #999;
+}
+.order_contents .addrInfo p {
+  line-height: 2.4rem;
+  font-size: 1.2rem;
+  color: #999;
+}
+.fixOrderFooter {
+  position: absolute;
+  background-color: #fff;
+  color: #333;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  height: 4.4rem;
+}
+.fixOrderFooter .thumbInfo {
+  padding-top: 0.4rem;
+  padding-left: 1rem;
+}
+.fixOrderFooter .thumbInfo p {
+  line-height: 1.8rem;
+  color: #999;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+.fixOrderFooter .confirmBtn {
+  background-color: #ff5300;
+  color: #fff;
+  text-align: center;
+  width: 16rem;
+  height: 4.4rem;
+  line-height: 4.4rem;
+  font-size: 1.8rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}

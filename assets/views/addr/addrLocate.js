@@ -1,7 +1,7 @@
 /**
  *进行定位
  **/
-angular.module('xiaomaiApp').controller('positionCtrl', [
+angular.module('xiaomaiApp').controller('addrLocateCtrl', [
   '$scope',
   'locationManager',
   '$state',
@@ -22,9 +22,6 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
   ) {
     $scope.locationResult = [];
 
-    //选择学校PV统计
-    xiaomaiLog('m_p_31selectsch');
-
     //如果有缓存结果
     if (xiaomaiCacheManager.readCache('locate')) {
       $scope.locationResult = xiaomaiCacheManager.readCache('locate')[
@@ -42,8 +39,6 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
       }).then(function(res) {
         $scope.haserror = false;
         $scope.locationResult = res.colleges;
-        //写入缓存
-        xiaomaiCacheManager.writeCache('locate', res);
       }, function(msg) {
         //定位失败 发送Log
         xiaomaiLog('m_b_31manuallyselectcity', '');
@@ -57,9 +52,8 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
     //获取所有城市列表
     $scope.citylist = [];
     $scope.isloading = true;
-    xiaomaiService.fetchOne('citylist', {}, true).then(function(res) {
+    xiaomaiService.fetchOne('citylist', {}).then(function(res) {
       $scope.citylist = res.cities;
-
       xiaomaiCacheManager.writeCache('citylist', res);
       $scope.haserror = false;
     }, function() {
@@ -74,38 +68,40 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
     //选择当前城市
     $scope.showCollegeList = function(city) {
       //日志 统计当前当即城市
-      xiaomaiLog('m_b_31manuallyselectcity', '');
-      $state.go('root.colleges', {
-        cityid: city.cityId
+      $state.go('root.addrColleges', {
+        cityid: city.cityId,
+        userId: userId,
+        userAddrId: userId,
+        r: redirectname
       });
     };
 
-    //监听路由参数中的cityId变化
-    $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
-      $scope.curcityid = toParam.cityid;
-      //获取当前城市学校列表
-    });
 
     //从两个定位结果中选择一个
+    var redirectname = $state.params.r;
+    var userId = $state.params.userId;
+    var userAddrId = $state.params.userAddrId;
     $scope.checkCollege = function($event, college, $index) {
-      //
-      xiaomaiLog($index == 0 ? 'm_b_31autoselectsch1' :
-        'm_b_31autoselectsch2', college.collegeId);
 
-      schoolManager.set(college).then(function() {
-        xiaomaiCacheManager.clean('navgatorlist');
-        return true;
-      }).then(function() {
-        $state.go('root.buy.nav.all');
-      });
-
+      xiaomaiCacheManager.writeCache('addrCollegeInfo', college);
       $event.preventDefault();
       $event.stopPropagation();
+
+      //跳回到编辑页或者新增页
+      $state.go(redirectname, {
+        userId: userId,
+        userAddrId: userAddrId,
+        chosenCollege: true
+      });
     };
 
     //返回首页
     $scope.goback = function() {
-      $state.go('root.buy.nav.all');
+      //跳回到编辑页或者新增页
+      $state.go(redirectname, {
+        userId: userId,
+        userAddrId: userAddrId
+      });
     }
   }
 ]);

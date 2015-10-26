@@ -37,6 +37,9 @@
   text-align: center;
   top: 2rem;
 }
+.bindUserWrap .block_tel .sendCodeBtn.disabled{
+  background:#e3e3e3;
+}
 .bindUserWrap .confirmbutton {
   width: 100%;
   position: relative;
@@ -49,11 +52,11 @@
   font-size: 1.8rem;
   text-align: center;
 }
-.pos_checkP input {
+.pos_checkP .iconfont{
   width: 1.6rem;
   height: 1.6rem;
-  appearance: button;
-  -moz-appearance: button;
-  /* Firefox */
-  -webkit-appearance: button;
+  color:#3b98fc;
+}
+.pos_checkP a{
+  color:#3b98fc;
 }
