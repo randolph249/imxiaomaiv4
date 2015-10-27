@@ -156,6 +156,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       "usercenter": {
         url: "/wap/usercenter/index",
         type: "GET"
+      },
       //更新某条用户收货地址信息
       "setAddr": {
         url: "/wap/useraddr/set",
