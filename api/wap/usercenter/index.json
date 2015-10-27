@@ -1,0 +1,15 @@
+{
+    "msg": "success",
+    "code": 0,
+    "data": {
+        "userInfo": {
+            "userId": 0,
+            "userName": "张晶",
+            "phone": 18810541193,
+            "collegeId": 0,
+            "createTime": null,
+            "isPre": 0
+        }
+    },
+    "serverTime": "2015-10-26 10:20:56"
+}

@@ -136,7 +136,13 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       "verifyUserStatus": {
         url: "/wap/user/verifyUserStatus",
         type: "GET"
+      },
+      //用户中心获取用户信息
+      "usercenter": {
+        url: "/wap/usercenter/index",
+        type: "GET"
       }
+
     },
     getModel = function() {
       var args = Array.prototype.slice.call(arguments, 0),

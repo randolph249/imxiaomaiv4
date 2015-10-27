@@ -413,6 +413,7 @@ angular.module('xiaomaiApp').config([
       //用户中心
       .state('root.user', {
         url: 'user/',
+        controller: 'userCtrl',
         templateUrl: '../assets/views/user/user.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {

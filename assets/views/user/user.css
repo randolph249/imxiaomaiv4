@@ -1,0 +1,145 @@
+.pub-header .icon-home {
+    font-size: 2rem;
+    color: #ff5300;
+}
+
+.user-main {
+    position: absolute;
+    top: 4.4rem;
+    left: 0;
+    right: 0;
+}
+
+.user-main .user-Info {
+    padding: 3.8rem 0;
+    background-image: url('http://xiaomai-p2p.qiniudn.com/be030ae26a2dc036af7ce9dc8765eabe');
+    background-size: 100% auto;
+    text-align: center;
+}
+
+.user-main .user-Info .user-name {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.user-main .user-Info .user-phone {
+    font-size: 1.6rem;
+    color: #ffff8b;
+}
+
+.user-list,
+.user-public {
+    position: relative;
+    margin-top: 1.5rem;
+    font-size: 1.6rem;
+    color: #333;
+    background-color: #fff;
+}
+
+.user-list li,
+.user-public li {
+    position: relative;
+    height: 5.5rem;
+    line-height: 5.3rem;
+}
+
+.user-list li:last-child:after,
+.user-public li:last-child:after {
+    width: 0;
+}
+
+.user-list:after,
+.user-list li:after,
+.user-public:after,
+.user-public li:after {
+    position: absolute;
+    bottom: 0;
+    left: 5rem;
+    right: 0;
+    content: '';
+    display: inline-block;
+    transform: scaleY(0.5);
+}
+
+.user-list:before,
+.user-public:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #ddd;
+    content: '';
+    display: inline-block;
+    transform: scaleY(0.5);
+}
+
+.user-list:after,
+.user-public:after {
+    border-bottom: 1px solid #ddd;
+    left: 0;
+}
+
+.user-list li:after,
+.user-public li:after {
+    border-bottom: 1px solid #ddd;
+}
+
+.user-list li i:first-child,
+.user-public li i:first-child {
+    padding-left: 1.2rem;
+    width: 3.8rem;
+    text-align: center;
+    display: inline-block;
+}
+
+.user-list li a{
+    display: block;
+    width: 100%;
+}
+
+.user-list-detail,
+.user-public-detail {
+    position: absolute;
+    right: 4rem;
+    font-size: 1.4rem;
+}
+
+.user-list-detail {
+    color: #999;
+}
+
+.user-public-detail a {
+    color: #ffba00 !important;
+}
+
+.icon-order {
+    font-size: 2.6rem;
+    color: #2fa4ff;
+}
+
+.icon-credit {
+    font-size: 2rem;
+    color: #ffba00;
+}
+
+.icon-coupon {
+    font-size: 2.4rem;
+    color: #ff5021;
+}
+
+.icon-feedback {
+    font-size: 2.6rem;
+    color: #00c403;
+}
+
+.icon-contactUs {
+    font-size: 1.8rem;
+    color: #ffba00;
+}
+
+.icon-yfmore {
+    position: absolute;
+    right: 2rem;
+    color: #999;
+}
