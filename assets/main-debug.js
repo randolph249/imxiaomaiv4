@@ -358,7 +358,7 @@ angular.module('xiaomaiApp').config([
       })
       //确认订单
       .state('root.confirmorder', {
-        url: 'confirmorder/',
+        url: 'confirmorder/?r',
         templateUrl: '../assets/views/confirmorder/confirmorder.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -375,6 +375,70 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl + 'service/orderService.js'
+              ]
+            })
+          }]
+        }
+      })
+      //跳转到微信预支付页面
+      .state('root.wechartprepay', {
+        url: 'wechartprepay/',
+        templateUrl: '../assets/views/wechartprepay/wechartprepay.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/wechartprepay/wechartprepay.js',
+                window.__SYS_CONF.resourceUrl + 'views/wechartprepay/wechartprepay.css'
+              ]
+            })
+          }]
+        }
+      })
+      //支付宝预支付页面
+      .state('root.alipayprepay', {
+        url: 'alipayprepay/',
+        templateUrl: '../assets/views/alipayprepay/alipayprepay.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/alipayprepay/alipayprepay.js',
+                window.__SYS_CONF.resourceUrl + 'views/alipayprepay/alipayprepay.css'
+              ]
+            })
+          }]
+        }
+      })
+      //支付成功页面
+      .state('root.paySuccess', {
+        url: 'paySuccess/',
+        templateUrl: '../assets/views/paySuccess/paySuccess.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/paySuccess/paySuccess.js',
+                window.__SYS_CONF.resourceUrl + 'views/paySuccess/paySuccess.css'
+              ]
+            })
+          }]
+        }
+      })
+      //支付失败页面
+      .state('root.payFail', {
+        url: 'payFail/',
+        templateUrl: '../assets/views/payFail/payFail.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/payFail/payFail.js',
+                window.__SYS_CONF.resourceUrl + 'views/payFail/payFail.css'
               ]
             })
           }]
@@ -397,18 +461,92 @@ angular.module('xiaomaiApp').config([
         }
       })
       //订单地址管理列表
-      .state('root.orderaddr', {
-        url: 'orderaddr/',
-        templateUrl: '../assets/views/orderAddr/orderAddr.html'
+      .state('root.addr', {
+        url: 'orderaddr/?userId',
+        templateUrl: '../assets/views/addr/addr.html',
+        controller: 'addrListCtrl',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/addr/addr.js',
+                window.__SYS_CONF.resourceUrl + 'views/addr/addr.css'
+              ]
+            })
+          }]
+        }
       })
       //订单地址新增
-      .state('root.orderaddr.add', {
-        url: 'add/',
-        templateUrl: '../assets/views/orderAddr/add.html'
+      .state('root.addrAdd', {
+        url: 'addrAdd/?userId&chosenCollege',
+        templateUrl: '../assets/views/addr/add.html',
+        controller: 'addrAddCtrl',
+
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/addr/add.js',
+                window.__SYS_CONF.resourceUrl + 'views/addr/addr.css'
+              ]
+            })
+          }]
+        }
       })
-      .state('root.orderaddr.edit', {
-        url: 'add/',
-        templateUrl: '../assets/views/orderAddr/edit.html'
+      //订单地址编辑
+      .state('root.addrEdit', {
+        url: 'addrEdit/?userId&userAddrId&chosenCollege',
+        controller: 'addrEditCtrl',
+        templateUrl: '../assets/views/addr/edit.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/addr/edit.js',
+                window.__SYS_CONF.resourceUrl + 'views/addr/addr.css'
+              ]
+            })
+          }]
+        }
+      })
+      //订单地址学校信息选择
+      .state('root.addrLocate', {
+        url: 'addrLocate/?r&userId&userAddrId',
+        controller: 'addrLocateCtrl',
+        templateUrl: '../assets/views/addr/addrLocate.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/addr/addrLocate.js',
+                window.__SYS_CONF.resourceUrl + 'views/addr/addr.css',
+                window.__SYS_CONF.resourceUrl + 'views/locate/locate.css'
+              ]
+            })
+          }]
+        }
+      })
+      //订单地址学校信息选择
+      .state('root.addrColleges', {
+        url: 'addrColleges/?r&userId&userAddrId&cityId',
+        controller: 'addrCollegesCtrl',
+        templateUrl: '../assets/views/addr/addrColleges.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/addr/addrColleges.js',
+                window.__SYS_CONF.resourceUrl + 'views/addr/addr.css',
+                window.__SYS_CONF.resourceUrl + 'views/colleges/colleges.css'
+              ]
+            })
+          }]
+        }
       })
       //用户中心
       .state('root.user', {

@@ -1,0 +1,33 @@
+{
+  "msg": "success",
+  "code": 0,
+  "data": {
+    "defaultUserAddr": {
+      "userAddrId": 0,
+      "receiverName": "小麦公社1",
+      "receiverPhone": "12345678901",
+      "receiverAddr": "小麦总部1",
+      "receiverCollegeId": 11,
+      "receiverCollegeName": "北京大学1"
+    },
+    "addrList": [{
+      "userAddrId": 1,
+      "receiverName": "小麦公社1",
+      "receiverPhone": "12345678901",
+      "receiverAddr": "小麦总部1",
+      "receiverCollegeId": 2896
+    }, {
+      "userAddrId": 3,
+      "receiverName": "小麦公社1",
+      "receiverPhone": "12345678901",
+      "receiverAddr": "小麦总部1",
+      "receiverCollegeId": 2896
+    }, {
+      "userAddrId": 2,
+      "receiverName": "小麦公社2",
+      "receiverPhone": "12345678902",
+      "receiverAddr": "小麦总部2",
+      "receiverCollegeId": 12
+    }]
+  }
+}

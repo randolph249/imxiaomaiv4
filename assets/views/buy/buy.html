@@ -9,7 +9,7 @@
 
     <p class="totalPrice" ng-show="totalCount && totalCount!=0">共计<em>&yen;</em>
       <span>{{totalPrice|xiaomaiprice}}</span></p>
-    <div class="gotoPay" ng-click="goSettlement();" ng-show="totalCount && totalCount!=0">选好了</div>
+    <div class="gotoPay" ng-click="goSettlement($event);" ng-show="totalCount && totalCount!=0">选好了</div>
     <p class="emptyTip" ng-show="!totalCount || totalCount==0">购物车是空的,快快选购吧~</p>
   </div>
   <div class="cartDetail" ng-class="{'cartDetail-show':showcart}" ng-controller="buy.cartDetailCtrl">

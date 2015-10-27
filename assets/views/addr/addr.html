@@ -1,0 +1,39 @@
+<div class="pub-header">
+  <div class="lefticon iconfont icon-fanhui" ng-click="goBack();"></div>
+  <div class="location-info icon-school middlearea">选择收货人</div>
+</div>
+<div class="addrListCont">
+  <div>
+<!--默认收货-->
+    <div class="defaultAddr addrItem">
+      <span class="name">{{defaultUserAddr.receiverCollegeName}}</span>
+      <span class="telephone">{{defaultUserAddr.receiverPhone}}</span>
+      <div class="colleges">{{defaultUserAddr.receiverCollegeName}}</div>
+      <i class="iconfont icon-ok"></i>
+    </div>
+<!-- 可选地址列表 -->
+    <ul ng-repeat="addr in addrList track by $index">
+      <li>
+        <div class="addrItem">
+          <span class="name">{{addr.receiverName}}</span>
+          <span class="telephone">{{addr.receiverPhone}}</span>
+          <div class="colleges">{{addr.receiverAddr}}</div>
+          <i class="iconfont icon-ok"></i>
+        </div>
+        <div class="addrHandlers">
+            <span ng-click="gotoEdit($event,addr.receiverCollegeId);">
+              <i class="iconfont"></i>
+              编辑
+            </span>
+            <span ng-click="delOneAddr($event,addr.receiverCollegeId,$index);">
+              <i class="iconfont"></i>
+              删除
+            </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<footer class="addAddrCont">
+  <span class="addAddrBtn" ng-click="gotoAdd($event);">新增收货地址</span>
+</footer>
