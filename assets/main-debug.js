@@ -383,6 +383,7 @@ angular.module('xiaomaiApp').config([
       //跳转到微信预支付页面
       .state('root.wechartprepay', {
         url: 'wechartprepay/',
+        controller: 'wechartprepayCtrl',
         templateUrl: '../assets/views/wechartprepay/wechartprepay.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {

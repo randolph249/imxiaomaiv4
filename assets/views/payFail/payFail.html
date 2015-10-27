@@ -1,1 +1,38 @@
-支付失败页面
+<div class="container" id="payFailPage">
+    <header class="fixHeader">
+        <div class="wrap_title">
+            <!-- <i class="i_back canBack"></i> -->
+            <i class="btn_close">关闭</i>
+            <h2 class="tx_pos">支付信息</h2>
+        </div>
+    </header>
+    <form class="orderForm" onsubmit="return false;">
+        <div id="list_order" class="pos_order">
+            <div id="orderScroller">
+                <div class="wrapForm f14">
+                    <div class="block_bg" id="payFailBlock">
+                        <div class="wrapLeftInfo fl">
+                            <span>
+										<i class="fl i_fail"></i>
+										<strong class="fl">支付失败</strong>
+									</span>
+                            <span>如果您已付款，请稍后查看订单。<br />或检查您的支付账户。</span>
+                        </div>
+                        <div class="wrapRtImg fr">
+                            <i class="i_failImgBox"></i>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="rePayWrap">
+                    <span class="btn_bg_pos btn_bg_on js_repay btn_cart" disabled="false" data-stag="pay_continue">重新支付</span>
+                </div>
+                <div class="cancelOrderWrap">
+                    <span class="btn_bg_pos btn_bg_normal cancelOrder">
+								取消订单
+							</span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

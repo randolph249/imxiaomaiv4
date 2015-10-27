@@ -166,7 +166,12 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       "addAddr": {
         url: "/wap/useraddr/add",
         type: "POST"
-      }
+      },
+      //微信预支付获取订单详情
+      "queryOrder": {
+        url: "/wap/order/query",
+        type: "GET"
+      },
 
     },
     getModel = function() {

@@ -15,6 +15,12 @@ ol, ul {
 ul, li {
   list-style-type: none;
 }
+.inblock, address{
+  display: inline-block;
+}
+.tx_center{
+  text-align: center;
+}
 a {
   text-decoration: none;
   color: #1a1a1a;
@@ -25,6 +31,9 @@ a:active, a:focus, a:hover {
 }
 a:active {
   color: #aaa;
+}
+em, address, i {
+  font-style: normal;
 }
 img {
   vertical-align: middle;
@@ -79,6 +88,17 @@ input, textarea, button {
 }
 input, textarea, button, a, a:hover, a:active {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+div, header, .list_cate, .list_pro, img, i, .cartListUl, .dt_all .wrap_dtImg {
+  box-sizing: border-box;
+}
+.fl {
+  float: left;
+}
+.clear {
+  clear: both;
+  display: block;
 }
 .cf:after, .cf:before, .clearfix:after, .clearfix:before {
   display: table;
