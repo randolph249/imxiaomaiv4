@@ -27,6 +27,7 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
+                window.__SYS_CONF.resourceUrl + 'service/orderService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'service/notifyService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
@@ -64,7 +65,6 @@ angular.module('xiaomaiApp').config([
                 window.__SYS_CONF.resourceUrl +
                 'views/root/swiper.min.css?v=' + (+
                   new Date)
-
               ]
             })
           }],
@@ -462,7 +462,7 @@ angular.module('xiaomaiApp').config([
       })
       //订单地址管理列表
       .state('root.addr', {
-        url: 'orderaddr/?userId',
+        url: 'orderaddr/?addrId&userId',
         templateUrl: '../assets/views/addr/addr.html',
         controller: 'addrListCtrl',
         resolve: {
@@ -479,7 +479,7 @@ angular.module('xiaomaiApp').config([
       })
       //订单地址新增
       .state('root.addrAdd', {
-        url: 'addrAdd/?userId&chosenCollege',
+        url: 'addrAdd/?userId&addrId',
         templateUrl: '../assets/views/addr/add.html',
         controller: 'addrAddCtrl',
 
@@ -497,7 +497,7 @@ angular.module('xiaomaiApp').config([
       })
       //订单地址编辑
       .state('root.addrEdit', {
-        url: 'addrEdit/?userId&userAddrId&chosenCollege',
+        url: 'addrEdit/?userId&userAddrId&addrId',
         controller: 'addrEditCtrl',
         templateUrl: '../assets/views/addr/edit.html',
         resolve: {

@@ -61,6 +61,9 @@
   color: #999;
   font-size: 3.6rem;
 }
+.addrItem .iconfont.checked{
+  color:#ff5300;
+}
 .addrHandlers {
   padding: 0 2rem;
   text-align: right;

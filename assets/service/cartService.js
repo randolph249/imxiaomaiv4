@@ -211,8 +211,6 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
     //默认可以购买 添加到购物车过程中 不允许继续操作
     var lock = false;
 
-
-
     /**
      *@param {Object} param 购买提交的参数
      *@param  {string} type 购买操作类型 {minus|plus}

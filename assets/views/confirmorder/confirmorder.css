@@ -20,8 +20,87 @@
   border-bottom: 0.1rem solid #15acf3;
   border-left: 0.5rem solid #15acf3;
 }
-.order_contents .block_bg .contents {
-  padding: 0 2.5rem;
+.order_contents .block_bg .contents {}
+.order_contents .block_bg .orderDistribute {
+  line-height: 5rem;
+  height: 5rem;
+  margin: 0 2.5rem;
+  position: relative;
+  font-size: 1.4rem;
+  color: #333;
+  border-bottom: #ccc solid 0.1rem;
+  position: relative;
+}
+.order_contents .block_bg .orderDistribute .orderDistribute-key{
+  display: inline-block;
+  float: left;
+  width: 24%;
+  color: #333;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+}
+.order_contents .block_bg .orderDistribute .orderDistribute-values{
+  display: inline-block;
+  float: right;
+  width: 76%;
+  color: #333;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+}
+.order_contents .block_bg .orderDistribute .deliveryRadio{
+    width:50%;
+    text-align: center;
+    float:left;
+    display: table;
+}
+.order_contents .block_bg .orderDistribute .deliveryRadio>.deliveryRadioBtn{
+  vertical-align: middle;
+
+}
+.order_contents .block_bg .subTitle {
+  line-height: 4.5rem;
+  height: 4rem;
+  margin-left: 2.5rem;
+  position: relative;
+  font-size: 1.6rem;
+  color: #15acf3;
+  border-bottom: #15acf3 solid 0.1rem;
+}
+.order_contents .block_bg .orderChildGoods {
+  line-height: 3rem;
+  height: 3rem;
+  padding:0 2.5rem;
+  font-size: 1.4rem;
+  overflow: hidden;
+}
+.order_contents .block_bg .showMore{
+    text-align: center;
+    line-height: 4rem;
+    height:4rem;
+    color:#ccc;
+}
+.order_contents .block_bg .showMore .iconfont{
+    font-size:1.6rem;
+}
+.order_contents .block_bg .showMore .text{
+
+}
+.order_contents .block_bg .orderChildGoods .goodname {
+  width: 68%;
+  float: left;
+  color: #333;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.order_contents .block_bg .orderChildGoods .price {
+  float: left;
+  color: #ff5300;
+}
+.order_contents .block_bg .orderChildGoods .count {
+  float: right;
+  color: #ff5300;
 }
 .order_contents .block_bg .content_column {
   height: 5rem;
@@ -44,31 +123,34 @@
 }
 .order_contents .block_bg .content_column .iconfont.icon-zhifubao {
   color: rgb(0, 170, 238);
-  font-size:4.2rem;
+  font-size: 4.2rem;
 }
-.order_contents .block_bg .content_column .payCheckeBox{
-    display: inline-block;
-    box-sizing: border-box;
-    width:2.5rem;
-    height:2.5rem;
-    border:#ccc solid 1px;
-    border-radius: 2.5rem;
-    background:#fff;
-    position: absolute;
-    right:0;
-    top:1.2rem;
+.deliveryRadioBtn {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: #ccc solid 1px;
+  border-radius: 2.5rem;
+  background: #fff;
+  position: relative;
 }
-.order_contents .block_bg .content_column .payCheckeBox.checked:after{
-  content:'';
-  width:1.2rem;
-  height:1.2rem;
-  background:#ff5300;
+.payCheckeBox{
+  position: absolute;
+  right: 0;
+  top: 1.2rem;
+}
+.deliveryRadioBtn.checked:after {
+  content: '';
+  width: 1.2rem;
+  height: 1.2rem;
+  background: #ff5300;
   border-radius: 1.2rem;
   position: absolute;
-  left:50%;
-  top:50%;
+  left: 50%;
+  top: 50%;
   margin-left: -0.6rem;
-  margin-top:-0.6rem;
+  margin-top: -0.6rem;
 }
 .order_contents .block_bg .content_column .payTypeNote {
   padding-left: 4.5rem;
@@ -94,6 +176,7 @@
 .order_contents .addrInfo {
   padding: 1rem 2.5rem;
   position: relative;
+  height:4.8rem;
 }
 .order_contents .addrInfo span {
   line-height: 2.4rem;
@@ -103,7 +186,7 @@
 .order_contents .addrInfo .telephone {
   padding-left: 1.8rem;
 }
-.order_contents .iconfont {
+.order_contents .addrsLink {
   position: absolute;
   font-size: 2rem;
   top: 0;

@@ -8,24 +8,90 @@
     <div class="block_bg" ng-controller="addrCtrl">
       <p class="title addrTitle">收货信息</p>
       <div class="addrInfo">
-        <span class="username">123</span>
-        <span class="telephone">456</span>
-        <p class="college">xuexiaoxinxi</p>
-        <i class="iconfont icon-yfmore" ng-click="gotoAddr($event);"></i>
+        <span class="username" ng-bind="addrInfo.receiverName"></span>
+        <span class="telephone" ng-bind="addrInfo.receiverPhone"></span>
+        <p class="college" ng-bind="addrInfo.receiverCollegeName||addrInfo.receiverAddr"></p>
+        <i class="iconfont icon-yfmore addrsLink" ng-click="gotoAddr($event,addrInfo.userAddrId);"></i>
       </div>
     </div>
-    <!-- 次日达订单-->
-    <!-- <div class="block_bg">
+<!-- 次日达订单-->
+    <div class="block_bg" ng-controller="rdcOrderCtrl" ng-init="initGoodShowLength=3;initGoodShowStatus=false;" ng-show="showOrder">
       <p class="title rdcTitle">次日达订单</p>
-    </div> -->
-    <!-- 次日达订单-->
-    <!-- <div class="block_bg">
+      <div class="contents">
+        <p class="orderDistribute">门店自提</p>
+        <p class="subTitle rdcSubTitle">小麦特供</p>
+        <p class="orderChildGoods" ng-repeat="orderItem in childOrderDetailList" ng-show="initGoodShowStatus||$index<initGoodShowLength">
+          <span class="goodname">{{orderItem.skuName}}</span>
+          <span class="price">{{orderItem.skuPrice}}</span>
+          <span class="count">{{orderItem.skuNum}}</span>
+        </p>
+        <p class="showMore" ng-click="initGoodShowStatus=!initGoodShowStatus;" ng-show="childOrderDetailList.length>initGoodShowLength">
+          <i class="iconfont icon-unfold"></i>
+          <span class="text">{{initGoodShowStatus?'点击收起':'点击查看全部'}}</span>
+        </p>
+      </div>
+    </div>
+<!-- 当日达订单-->
+    <div class="block_bg" ng-controller="ldcOrderCtrl" ng-init="initGoodShowLength=3;initGoodShowStatus=false;" ng-show="showOrder">
       <p class="title ldcTitle">当日达订单</p>
-    </div> -->
-    <!-- 次日达订单-->
-    <!-- <div class="block_bg">
+      <div class="contents">
+        <div class="orderDistribute">
+          <span class="orderDistribute-key">配送方式</span>
+          <p class="orderDistribute-values">
+            <span class="deliveryRadio" ng-if="deliveryType==0">
+              门店自提
+            </span>
+            <span class="deliveryRadio" ng-if="deliveryType==1">
+              送货上门
+            </span>
+            <span class="deliveryRadio" ng-if="deliveryType==2">
+              <i class="deliveryRadioBtn checked"></i>
+              门店自提
+            </span>
+            <span class="deliveryRadio" ng-if="deliveryType==2">
+              <i class="deliveryRadioBtn"></i>
+              送货上门
+            </span>
+          </p>
+        </div>
+        <p class="subTitle rdcSubTitle">小麦特供</p>
+        <p class="orderChildGoods" ng-repeat="orderItem in childOrderDetailList" ng-show="initGoodShowStatus||$index<initGoodShowLength">
+          <span class="goodname">{{orderItem.skuName}}</span>
+          <span class="price">{{orderItem.skuPrice}}</span>
+          <span class="count">{{orderItem.skuNum}}</span>
+        </p>
+        <p class="showMore" ng-click="initGoodShowStatus=!initGoodShowStatus;" ng-show="childOrderDetailList.length>initGoodShowLength">
+          <i class="iconfont icon-unfold"></i>
+          <span class="text">{{initGoodShowStatus?'点击收起':'点击查看全部'}}</span>
+        </p>
+      </div>
+    </div>
+<!-- 第三方订单-->
+    <div class="block_bg" ng-controller="thirdOrderCtrl" ng-init="initGoodShowLength=3;initGoodShowStatus=false;" ng-show="showOrder">
       <p class="title thirdsellerTitle">第三方卖家商品订单</p>
-    </div> -->
+      <div class="contents">
+        <p class="orderDistribute">
+          <span class="orderDistribute-key">配送地址</span>
+          <span class="orderDistribute-values">{{collegeAddr}}</span>
+        </p>
+        <p class="orderDistribute">
+          <span class="orderDistribute-key">配送服务费</span>
+          <span class="orderDistribute-values">配送地址</span>
+        </p>
+        <div ng-repeat="thirdOrder in thirdChildOrderList">
+          <p class="subTitle rdcSubTitle">{{thirdOrder.storageName}}</p>
+          <p class="orderChildGoods" ng-repeat="orderItem in thirdOrder.childOrderDetailList" ng-show="initGoodShowStatus||$index<initGoodShowLength">
+            <span class="goodname">{{orderItem.skuName}}</span>
+            <span class="price">{{orderItem.skuPrice}}</span>
+            <span class="count">{{orderItem.skuNum}}</span>
+          </p>
+          <p class="showMore" ng-click="initGoodShowStatus=!initGoodShowStatus;" ng-show="thirdOrder.childOrderDetailList.length>initGoodShowLength">
+            <i class="iconfont icon-unfold"></i>
+            <span class="text">{{initGoodShowStatus?'点击收起':'点击查看全部'}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
 <!-- 优惠劵信息-->
     <div class="block_bg">
       <p class="title couponTitle">优惠信息</p>
@@ -34,16 +100,16 @@
     <div class="block_bg">
       <p class="title payTypeTitle">支付方式</p>
       <div class="contents">
-          <div class="content_column">
-            <i class="iconfont icon-weixin"></i>
-            <span class="payTypeNote">微信支付</span>
-            <i class="payCheckeBox"></i>
-          </div>
-          <div class="content_column">
-            <i class="iconfont icon-zhifubao"></i>
-            <span class="payTypeNote">支付宝支付</span>
-            <i class="payCheckeBox checked"></i>
-          </div>
+        <div class="content_column">
+          <i class="iconfont icon-weixin"></i>
+          <span class="payTypeNote">微信支付</span>
+          <i class="payCheckeBox deliveryRadioBtn"></i>
+        </div>
+        <div class="content_column">
+          <i class="iconfont icon-zhifubao"></i>
+          <span class="payTypeNote">支付宝支付</span>
+          <i class="payCheckeBox deliveryRadioBtn checked"></i>
+        </div>
       </div>
     </div>
   </div>

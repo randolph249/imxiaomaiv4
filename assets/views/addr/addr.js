@@ -4,12 +4,17 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
   'xiaomaiService',
   'schoolManager',
   'xiaomaiCacheManager',
-  function($scope, $state, xiaomaiService, schoolManager, xiaomaiCacheManager) {
+  'addrMananger',
+  '$q',
+  'orderManager',
+  function($scope, $state, xiaomaiService, schoolManager, xiaomaiCacheManager, addrMananger, $q, orderManager) {
     //获取地址列表信息
     var collegeId,
       userId = $state.params.userId;
+    $scope.addrId = $state.params.addrId;
+    //获取地址列表
     schoolManager.get().then(function(res) {
-      var collegeId = res.collegeId;
+      collegeId = res.collegeId;
       return xiaomaiService.fetchOne('addrList', {
         userId: userId,
         collegeId: collegeId
@@ -19,10 +24,47 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
       $scope.defaultUserAddr = res.defaultUserAddr;
     });
 
+    //是否可以选择其他学校
+    var isChooseOtherCollege = true;
+    //判断当前选中订单是否有LDC或者rdc
+    orderManager.getLdcOrder().then(function(res) {
+      isChooseOtherCollege = false;
+    }, function() {
+      return orderManager.getRdcOrder();
+    }).then(function() {
+      isChooseOtherCollege = false;
+    });
+
+
+    //选取某个地址作为默认地址
+    $scope.choosenAddr = function($event, addrInfo) {
+      if (addrInfo.userAddrId == $scope.addrId) {
+        return false;
+      }
+
+
+      if (isChooseOtherCollege == false && collegeId != addrInfo.receiverCollegeId) {
+        alert('次日达订单和29分钟达订单只能送到本校，不能送到其他学校哦')
+        return false;
+      }
+
+      //更新当前选中地址
+      $scope.addrId = addrInfo.userAddrId;
+      addrMananger.setAddr(addrInfo);
+      $state.go('root.confirmorder');
+    };
+
     //删除某条学校信息
     $scope.delOneAddr = function($event, userAddrId, $index) {
       $event.preventDefault();
       $event.stopPropagation();
+
+      if (userAddrId == $scope.addrId) {
+        alert('该收货人信息正在使用,无法删除');
+        return false;
+      }
+
+
       if (!confirm('确定要删除当前收货人信息？')) {
         return false;
       }
@@ -55,7 +97,8 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
       $event.preventDefault();
       $event.stopPropagation();
       $state.go('root.addrAdd', {
-        userId: userId
+        userId: userId,
+        addrId: $scope.addrId
       });
     };
 

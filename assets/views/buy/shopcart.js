@@ -7,8 +7,11 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
   'xiaomaiMessageNotify',
   'xiaomaiLog',
   'cookie_openid',
+  'orderManager',
   function($state, $scope, xiaomaiService, cartManager, $timeout,
-    xiaomaiMessageNotify, xiaomaiLog, cookie_openid) {
+    xiaomaiMessageNotify, xiaomaiLog, cookie_openid, orderManager) {
+
+    //查询购物车信息
     cartManager.query(function(res) {
       $scope.totalCount = res.totalCount;
       $scope.totalPrice = res.totalPrice;
@@ -57,12 +60,51 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
     };
 
     //跳转到结算界面
+    $scope.lockSettle = false;
     $scope.goSettlement = function($event) {
       $event.stopPropagation();
       $event.preventDefault();
 
-      //去结算按钮的点击统计
+      //防止重复点击
+      if ($scope.lockSettle) {
+        return false;
+      }
+      $scope.lockSettle = true;
+      //点击结算按钮的统计
       xiaomaiLog('m_b_31shoppingsettle');
+
+      //创建订单
+      orderManager.createOrder().then(function(res) {
+        //创建订单成功
+        $state.go('root.confirmorder');
+      }, function(error) {
+        //创建订单失败
+        switch (error.code) {
+          //商品缺货
+          case -1:
+            break;
+            //购物车异常
+          case 1:
+            alert(error.msg);
+            break;
+            //用户没有绑定
+          case 2:
+
+            break;
+            //购物车被清空
+          case 3:
+            break;
+          default:
+            break;
+
+        }
+      }).finally(function() {
+        //解锁
+        $scope.lockSettle = false;
+      });
+
+
+      return false;
 
       //判断用户是否绑定
       var refer = getRefer();
@@ -94,7 +136,6 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
     $scope.$on('$destroy', function() {
       cartManager.store(false);
     });
-
   }
 ])
 

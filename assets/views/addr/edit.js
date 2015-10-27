@@ -5,8 +5,8 @@ angular.module('xiaomaiApp').controller('addrEditCtrl', [
   'xiaomaiCacheManager',
   function($scope, $state, xiaomaiService, xiaomaiCacheManager) {
     var userId = $state.params.userId,
-      userAddrId = $state.params.userAddrId,
-      chosenCollege = $state.params.chosenCollege === 'true';
+      addrId = $state.params.addrId,
+      userAddrId = $state.params.userAddrId;
 
     //获取当前收货地址信息
     xiaomaiService.fetchOne('getAddr', {
@@ -16,25 +16,53 @@ angular.module('xiaomaiApp').controller('addrEditCtrl', [
 
       $scope.receiverName = res.receiverName;
       $scope.receiverPhone = res.receiverPhone;
-      !chosenCollege && ($scope.receiverCollegeId = res.receiverCollegeId);
-      !chosenCollege && ($scope.receiverCollegeName = res.receiverCollegeName);
+      return res;
+
+    }).then(function(res) {
+      var checkedCollegeCaches = xiaomaiCacheManager.readCache('addrCollegeInfo');
+      //更新缓存学校时候候要判断使用页面旧数据还是选中的新学校数据
+      if (checkedCollegeCaches) {
+        $scope.receiverCollegeId = checkedCollegeCaches.collegeId;
+        $scope.receiverCollegeName = checkedCollegeCaches.collegeName;
+      } else {
+        $scope.receiverCollegeId = res.receiverCollegeId;
+        $scope.receiverCollegeName = res.receiverCollegeName;
+      }
+    });
+
+
+    //缓存当前地址信息
+    $scope.$on('$destroy', function() {
+      xiaomaiCacheManager.writeCache('getAddr', {
+        receiverName: $scope.receiverName,
+        receiverPhone: $scope.receiverPhone,
+        receiverCollegeId: $scope.receiverCollegeId,
+        receiverCollegeName: $scope.receiverCollegeName
+      }, {
+        userId: userId,
+        userAddrId: userAddrId
+      });
+
+      //这个数据只是要做为编辑页面和学校学校列表的一个临时数据交换 用完删除
+      xiaomaiCacheManager.clean('addrCollegeInfo');
     });
 
 
     //从缓存中读取数据
-    if (chosenCollege) {
-      var cache = xiaomaiCacheManager.readCache('addrCollegeInfo');
-      $scope.receiverCollegeId = cache.collegeId;
-      $scope.receiverCollegeName = cache.collegeName;
-    }
+    // if (chosenCollege) {
+    //   var cache = xiaomaiCacheManager.readCache('addrCollegeInfo');
+    //   $scope.receiverCollegeId = cache.collegeId;
+    //   $scope.receiverCollegeName = cache.collegeName;
+    // }
 
     //返回
     $scope.goBack = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
       $state.go('root.addr', {
-        userId: userId
-      });
+        userId: userId,
+        addrId: addrId
+      })
     };
 
     //跳转到城市列表页
@@ -70,7 +98,8 @@ angular.module('xiaomaiApp').controller('addrEditCtrl', [
         receiverCollegeId: $scope.receiverCollegeId
       }).then(function() {
         $state.go('root.addr', {
-          userId: userId
+          userId: userId,
+          addrId: addrId
         });
       });
     }

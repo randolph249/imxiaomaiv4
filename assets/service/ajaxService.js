@@ -161,6 +161,16 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       "addAddr": {
         url: "/wap/useraddr/add",
         type: "POST"
+      },
+      //创建订单
+      "createOrder": {
+        url: "/wap/order/createOrder",
+        type: 'POST'
+      },
+      //获取订单
+      "queryOrder": {
+        url: "/wap/order/refer",
+        type: "GET"
       }
     },
     getModel = function() {
@@ -344,15 +354,15 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           }
         })).success(function(res) {
 
-
           if (res.code == 0) {
             deferred.resolve(res.data);
           } else {
-            deferred.reject(res.msg);
+            deferred.reject(res);
           }
         }).error(function() {
-
-          deferred.reject('接口异常');
+          deferred.reject({
+            msg: '接口异常'
+          });
         });
         return deferred.promise;
       };
@@ -412,8 +422,5 @@ angular.module('xiaomaiApp').factory('httpRequstParam', [function() {
     return query.length ? query.substr(0, query.length - 1) :
       query;
   };
-
   return param;
-
-
 }])
