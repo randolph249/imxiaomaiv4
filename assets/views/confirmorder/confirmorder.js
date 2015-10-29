@@ -1,79 +1,101 @@
-//收货人信息
-angular.module('xiaomaiApp').controller('addrCtrl', [
+angular.module('xiaomaiApp').controller('orderCtrl', [
+  '$scope',
+  '$state',
+  'xiaomaiLog',
+  'orderManager',
+  'xiaomaiMessageNotify',
+  function($scope, $state, xiaomaiLog, orderManager, xiaomaiMessageNotify) {
+    $scope.goBack = function() {
+      $state.go('root.buy.nav.all');
+    };
+
+    //监听refer参数
+    var $watcher = $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
+      sendLog(toParam.r);
+      verifyOrder();
+      $watcher();
+    });
+
+    //验证订单状态
+    var verifyOrder = function() {
+      //判断订单是否失效如果失效直接跳回到首页
+      var orderStatus = orderManager.queryOrderStatus();
+      if (orderStatus == false) {
+        alert('当前订单已经不存在,\n将回到首页');
+        $state.go('root.buy.nav.all');
+      }
+    };
+
+    orderManager.getOrderInfo('order').then(function() {
+      setTimeout(function() {
+        xiaomaiMessageNotify.pub('confirmoderHeightUpdate', 'up', 'ready', '', '');
+      }, 200);
+    });
+
+    //统计日志
+    var sendLog = function(refer) {
+      //确认订单页面PV统计
+      xiaomaiLog('m_b_31confirmorder');
+      //来源统计
+      xiaomaiLog('m_r_31confirorderfrom' + refer);
+    };
+  }
+]);
+
+//订单倒计时
+angular.module('xiaomaiApp').controller('orderCountdownCtrl', [
   '$scope',
   '$state',
   'orderManager',
-  'addrMananger',
-  function($scope, $state, orderManager, addrMananger) {
+  '$interval',
+  function($scope, $state, orderManager, $interval) {
+    //订单剩余时间信息
+    var remaintimeInfo = orderManager.getRemaintime();
+    var currentTime = (+new Date);
+    var consumetime = currentTime - remaintimeInfo.createTime;
+    var realremaintime = remaintimeInfo.limitTime * 60 * 1000 - consumetime;
 
-    //获取收货地址
-    addrMananger.getAddr().then(function(addrInfo) {
-      $scope.addrInfo = addrInfo;
-    });
+    $scope.realremaintime = Math.floor(realremaintime / 1000);
 
+    //倒计时
+    var $t = $interval(function() {
+      $scope.realremaintime = $scope.realremaintime - 1;
+      //订单支付超时
+      if ($scope.realremaintime <= 0) {
+        $interval.cancel($t);
+        orderPayTimeend();
+      }
+    }, 1000);
 
-    var userId = orderManager.getUserId();
-    //跳转到地址列表页
-    $scope.gotoAddr = function($event) {
-      $state.go('root.addr', {
-        addrId: $scope.addrInfo.userAddrId,
-        userId: userId
-      });
+    //订单超时处理
+    var orderPayTimeend = function() {
+      orderManager.deleteOrder();
+      alert('当前订单已经失效,\n去商城重新下单吧');
+      $state.go('root.buy.nav.all');
+    }
+
+  }
+]);
+
+//付款方式Ctrl
+angular.module('xiaomaiApp').controller('orderOnlinepayCtrl', [
+  '$scope',
+  'xiaomaiMessageNotify',
+  '$timeout',
+  function($scope, xiaomaiMessageNotify, $timeout) {
+    //type:1微信 2支付宝
+    var pubOnlinePayType = function(type) {
+      xiaomaiMessageNotify.pub('updateOnlinePayType', type);
     };
-
-    //页面销毁之前 置空addrInfo
-    //防止用户下次下单的时候
-    $scope.$on('$destroy', function() {
-      addrMananger.setAddr({});
-    });
-
-    //跳转到预支付页面
-  }
-]);
-
-//次日达订单ctrl
-angular.module('xiaomaiApp').controller('rdcOrderCtrl', [
-  '$scope',
-  'orderManager',
-  function($scope, orderManager) {
-    $scope.showOrder = false;
-
-    orderManager.getRdcOrder().then(function(res) {
-      $scope.childOrderDetailList = res.childOrderDetailList;
-      // $scope.showOrder = true;
-    });
-  }
-]);
-
-//当日达订单ctrl
-angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
-  '$scope',
-  'orderManager',
-  function($scope, orderManager) {
-    $scope.showOrder = false;
-
-    orderManager.getLdcOrder().then(function(res) {
-      // $scope.showOrder = true;
-      $scope.deliveryType = res.deliveryType;
-      $scope.childOrderDetailList = res.childOrderDetailList;
-    });
-  }
-]);
-
-//第三方订单ctrl
-angular.module('xiaomaiApp').controller('thirdOrderCtrl', [
-  '$scope',
-  'orderManager',
-  function($scope, orderManager) {
-    $scope.showOrder = false;
-    orderManager.getLogistics().then(function(res) {
-      $scope.collegeAddr = res.collegeAddr;
-      return orderManager.getThirdOrder()
-    }).then(function(res) {
-      // $scope.showOrder = true;
-      $scope.thirdFreight = res.thirdFreight;
-      $scope.thirdFreightSub = res.thirdFreightSub;
-      $scope.thirdChildOrderList = res.thirdChildOrderList;
-    });
+    $scope.payType = 1;
+    $timeout(function() {
+      pubOnlinePayType($scope.payType);
+    }, 10);
+    $scope.choosePaytype = function($event, type) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.payType = type;
+      pubOnlinePayType(type);
+    }
   }
 ]);

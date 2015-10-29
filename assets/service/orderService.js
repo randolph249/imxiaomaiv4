@@ -51,17 +51,23 @@ angular.module('xiaomaiApp').factory('orderManager', [
         orderInfo = angular.extend({}, res.orderInfo);
         deferred.resolve();
         //创建缓存
+        //设置Cookie的失效时间15min
         ipCookie('xiaomaiv4_order', {
           userId: orderInfo.order.userId,
-          orderId: orderInfo.order.orderId
+          orderId: orderInfo.order.orderId,
+          limitTime: orderInfo.limitTime,
+          createTime: +new Date
+        }, {
+          expirationUnit: 'minutes',
+          expires: orderInfo.limitTime
         });
+      }, function(err) {
+        deferred.reject(err);
       });
 
       return deferred.promise;
     };
 
-    //错误状态处理
-    var errorHandler = function() {};
 
     //删除本地订单信息
     //表示支付完成或者要求重新下单
@@ -69,8 +75,10 @@ angular.module('xiaomaiApp').factory('orderManager', [
     //购物车出现任何变更 删除本地订单
     //支付完成 删除本地订单
     //支付失败 手动删除本地订单
+    //订单超时删除订单
     var deleteOrder = function() {
-
+      ipCookie.remove('xiaomaiv4_order');
+      orderInfo = {};
     };
 
     //Cookie中订单信息仅仅缓存orderId和UserId
@@ -93,6 +101,14 @@ angular.module('xiaomaiApp').factory('orderManager', [
         userId = getUserId(),
         orderId = getOrderId();
 
+      //如果订单已经不存在
+      if (!userId || !getOrderId) {
+        deferred.reject();
+        //处理队列中的其他请求
+        queue.length && queryOrder(queue.shift());
+        return false;
+      }
+
       schoolManager.get().then(function(res) {
         collegeId = res.collegeId;
         return xiaomaiService.fetchOne('queryOrder', {
@@ -110,6 +126,15 @@ angular.module('xiaomaiApp').factory('orderManager', [
       });
     };
 
+    //查询订单状态 查看订单是否失效
+    var queryOrderStatus = function() {
+      var userId = getUserId();
+      if (userId === false) {
+        return false;
+      }
+      return true;
+    };
+
     //获取订单详情
     var getOrder = function() {
       var deferred = $q.defer();
@@ -124,96 +149,51 @@ angular.module('xiaomaiApp').factory('orderManager', [
 
     //获取userId信息
     var getUserId = function() {
-      return ipCookie('xiaomaiv4_order')['userId'];
+      var caches = ipCookie('xiaomaiv4_order');
+      return angular.isObject(caches) ? caches['userId'] : false;
     };
 
     //获取orderId信息
     var getOrderId = function() {
-      return ipCookie('xiaomaiv4_order')['orderId'];
+      var caches = ipCookie('xiaomaiv4_order');
+      return angular.isObject(caches) ? caches['orderId'] : false;
     };
 
-    //获取ldc订单
-    var getLdcOrder = function() {
-      var ldcOrder = {};
-      var deferred = $q.defer();
-      getOrder().then(function(res) {
-        var totalOrderList = res.order.childOrderList;
-        angular.forEach(totalOrderList, function(item) {
-          if (item.distributeType == 1) {
-            ldcOrder = item;
-          }
-        });
-        deferred[isEmptyObject(ldcOrder) ? 'reject' : 'resolve'](ldcOrder);
-
-      });
-      return deferred.promise;
-    };
-
-    //获取RDC订单
-    var getRdcOrder = function() {
-      var rdcOrder = [];
-      var deferred = $q.defer();
-      getOrder().then(function(res) {
-        var totalOrderList = res.order.childOrderList;
-        angular.forEach(totalOrderList, function(item) {
-          if (item.distributeType == 0) {
-            rdcOrder = item;
-          }
-        });
-        deferred[isEmptyObject(rdcOrder) ? 'reject' : 'resolve'](rdcOrder);
-      });
-      return deferred.promise;
-    };
-
-
-    //获取第三方订单
-    var getThirdOrder = function() {
-      var thirdOrder = [];
-      var deferred = $q.defer();
-      getOrder().then(function(res) {
-        var thirdOrder = res.order.thirdChildOrderList;
-
-        deferred[!thirdOrder || isEmptyObject(thirdOrder) ? 'reject' : 'resolve']({
-          thirdChildOrderList: thirdOrder,
-          thirdFreight: res.order.thirdFreight,
-          thirdFreightSub: res.order.thirdFreightSub
-        });
-      });
-      return deferred.promise;
-    };
 
     //获取剩余时间
-    var getRemaintime = function() {};
+    var getRemaintime = function() {
+      return queryOrderStatus() ? {
+        createTime: ipCookie('xiaomaiv4_order')['createTime'],
+        limitTime: ipCookie('xiaomaiv4_order')['limitTime']
+      } : {
+        createTime: 0,
+        limitTime: 0
+      };
+    };
 
-    //获取订单信息中默认订单地址信息
-    var getDefaultAddr = function() {
+
+    //获取订单中的相关信息
+    var getOrderInfo = function(querystring) {
       var deferred = $q.defer();
       getOrder().then(function(res) {
-        deferred.resolve(res.defaultUserAddr);
+
+        try {
+          deferred.resolve(eval('res.' + querystring));
+        } catch (e) {
+          deferred.reject();
+        }
       });
       return deferred.promise;
     }
-
-    //返回给当前学校的物流信息
-    var getLogistics = function() {
-      var deferred = $q.defer();
-      getOrder().then(function(res) {
-        deferred.resolve(res.college);
-      });
-      return deferred.promise;
-    }
-
 
     return {
       createOrder: createOrder,
-      getAddrInfo: getDefaultAddr,
+      getOrderInfo: getOrderInfo,
       getUserId: getUserId,
-      getLdcOrder: getLdcOrder,
-      getRdcOrder: getRdcOrder,
-      getThirdOrder: getThirdOrder,
-      getLogistics: getLogistics
+      getRemaintime: getRemaintime,
+      deleteOrder: deleteOrder,
+      queryOrderStatus: queryOrderStatus
     }
-
   }
 ]);
 
@@ -232,7 +212,8 @@ angular.module('xiaomaiApp').factory('addrMananger', [
         deferred.resolve(addrInfo)
         return deferred.promise;
       }
-      orderManager.getAddrInfo().then(function(res) {
+
+      orderManager.getOrderInfo('defaultUserAddr').then(function(res) {
         deferred.resolve(res);
       });
       return deferred.promise;
@@ -245,4 +226,4 @@ angular.module('xiaomaiApp').factory('addrMananger', [
       setAddr: setAddr
     }
   }
-])
+]);

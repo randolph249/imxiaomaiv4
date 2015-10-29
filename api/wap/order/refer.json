@@ -39,7 +39,7 @@
       "addressType": "new node",
       "addresses": []
     }],
-    "firstCoupon": 0,
+    "firstCoupon": 100,
     "ldcFreight": {
       "freight": 0,
       "total": 1000,
@@ -48,7 +48,7 @@
     "wxPayMsg": "",
     "defaultUserAddr": {
       "userAddrId": 0,
-      "receiverName": "",
+      "receiverName": "郭超做数据测试",
       "receiverPhone": "18612244032",
       "receiverCollegeName": "小麦总部",
       "receiverAddr": "小麦总部第三方商品营业厅",
@@ -160,7 +160,34 @@
       "total": 0,
       "sub": 0
     },
-    "couponList": [],
+    "couponList": [{
+      "couponId": 1442541439658009,
+      "couponName": "优惠券",
+      "couponDesc": "满12元可用\r\n每日鲜果可用\r\n进口商品可用\r\n奶饮酒水可用",
+      "status": 2,
+      "curTime": 1442747646000,
+      "startTime": 1442246400000,
+      "endTime": 1442851199000,
+      "money": 500
+    }, {
+      "couponId": 1441868517109007,
+      "couponName": "优惠券",
+      "couponDesc": "全平台通用\r\n满20元可用",
+      "status": 3,
+      "curTime": 1442747646000,
+      "startTime": 1441555200000,
+      "endTime": 1442246399000,
+      "money": 300
+    }, {
+      "couponId": 1441940187272005,
+      "couponName": "优惠券",
+      "couponDesc": "全平台通用\r\n满10元可用",
+      "status": 3,
+      "curTime": 1442747646000,
+      "startTime": 1441555200000,
+      "endTime": 1442246399000,
+      "money": 100
+    }],
     "aliPayMsg": "",
     "order": {
       "orderId": 411938,
@@ -168,7 +195,7 @@
       "collegeId": 1,
       "receiverName": "",
       "receiverPhone": "18612244032",
-      "totalPay": 35,
+      "totalPay": 3500,
       "onlinePay": 0,
       "onlinePayId": "",
       "onlinePayType": 0,
@@ -609,8 +636,8 @@
         "59": 2,
         "76": 9
       }],
-      "thirdFreight": 0,
-      "thirdFreightSub": 0,
+      "thirdFreight": 1000,
+      "thirdFreightSub": 500,
       "thirdChildOrderList": [{
         "childOrderId": 411941,
         "orderId": 411938,

@@ -1,0 +1,65 @@
+{
+  "code": "",
+  "msg": "",
+  "data": {
+    "order": {
+      "orderId": 200,
+      "userId": 1001211234,
+      "collegeId": 15,
+      "createTime": "2015-07-8 13:04:57",
+      "receiverName": "冰城四少",
+      "receiverPhone": 13366668888,
+      "totalPay": 1314,
+      "onlinePay": 0,
+      "firstSub": 0,
+      "fullSub": 0,
+      "freight": 100,
+      "childOrders": [{
+        "childOrderId": 1001211234,
+        "type": 0,
+        "deliveryType": 1,
+        "receiverTime": "2015-07-08",
+        "receiverAddress": "清华自提点",
+        "deliveryBeginTime": "",
+        "deliveryEndTime": "",
+        "deliveryAddress": "",
+        "childOrderDetails": [{
+          "skuId": 1000,
+          "skuName": "哇哈哈",
+          "orignPrice": 120,
+          "appPrice": 100,
+          "wapPrice": 110,
+          "num": 1,
+          "imageUrl": "http://img3.dobuan.com/33434343"
+        }]
+      }, {
+        "childOrderId": 1001211234,
+        "type": 1,
+        "deliveryType": 0,
+        "receiverTime": "",
+        "receiverAddress": "",
+        "deliveryBeginTime": "2015-07-08 12:15",
+        "deliveryEndTime": "2015-07-08 12:30",
+        "deliveryAddress": "清华蒙伟明楼",
+        "childOrderDetails": [{
+          "skuId": 1001,
+          "skuName": "味全",
+          "orignPrice": 140,
+          "appPrice": 100,
+          "wapPrice": 110,
+          "price": 120,
+          "num": 1,
+          "imageUrl": "http://img3.dobuan.com/33434343"
+        }]
+      }]
+    },
+    "prepayData": {
+      "appId": "wx35a8b3f8507f4ea6",
+      "nonceStr": "0df78f24264710c58e81a19d14d3e291",
+      "paySign": "40A8D9BE6C7F52A8909FA6D9562627B4",
+      "signType": "MD5",
+      "timeStamp": "1438072122",
+      "package": "prepay_id=wx20150728162842faa93b7e240385154146"
+    }
+  }
+}

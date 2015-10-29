@@ -171,6 +171,15 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       "queryOrder": {
         url: "/wap/order/refer",
         type: "GET"
+      },
+      //微信授权初始化
+      "userAuth": {
+        url: "/userBind/auth",
+        type: "GET"
+      },
+      "confirmOrder": {
+        url: "/wap/order/confirm",
+        type: "POST"
       }
     },
     getModel = function() {
@@ -353,7 +362,6 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           }
         })).success(function(res) {
-
           if (res.code == 0) {
             deferred.resolve(res.data);
           } else {

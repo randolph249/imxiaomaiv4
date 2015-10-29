@@ -16,6 +16,7 @@
   bottom: 5.5rem;
   padding-bottom: 1rem;
   overflow: hidden;
+  font-size:1.4rem;
 }
 .addAddrBtn {
   display: inline-block;
@@ -40,7 +41,7 @@
 .addrItem span {
   height: 2.4rem;
   display: inline-block;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   line-height: 2.4rem;
 }
 .addrItem .telephone {
@@ -49,7 +50,7 @@
 }
 .addrItem p {
   height: 2.4rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   line-height: 2.4rem;
 }
 .addrItem .iconfont {
@@ -84,6 +85,9 @@
   color: #999;
   font-size: 1.2rem;
 }
+.addrHandlers span .iconfont{
+  font-size:1.4rem;
+}
 .addrItemCont {
   background-color: #fff;
   padding-left: 2rem;
@@ -102,6 +106,7 @@
 .addrItem-key {
   width: 10rem;
   display: inline-block;
+  font-size:1.4rem;
 }
 .addrItem-value {
   position: absolute;
@@ -109,6 +114,7 @@
   bottom: 0;
   left: 10rem;
   right: 0;
+  font-size:1.4rem;
 }
 .addrItem-value input {
   width: 100%;

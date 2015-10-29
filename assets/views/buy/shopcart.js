@@ -76,23 +76,31 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
       //创建订单
       orderManager.createOrder().then(function(res) {
         //创建订单成功
-        $state.go('root.confirmorder');
+        var refer = getRefer();
+        $state.go('root.confirmorder', {
+          r: refer
+        });
       }, function(error) {
         //创建订单失败
+        /**
+         *code状态:
+         *-1 商品缺货
+         *1 购物车异常
+         *2用户没有绑定（新用户）
+         *3购物车被清空
+         **/
         switch (error.code) {
-          //商品缺货
           case -1:
+            stockoutHanlder(error.data.items);
             break;
-            //购物车异常
           case 1:
             alert(error.msg);
             break;
-            //用户没有绑定
           case 2:
-
+            initUser();
             break;
-            //购物车被清空
           case 3:
+            alert(error.msg);
             break;
           default:
             break;
@@ -105,21 +113,29 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
 
 
       return false;
+    };
 
-      //判断用户是否绑定
-      var refer = getRefer();
-      xiaomaiService.save('checkUser', {
-        openid: cookie_openid
-      }).then(function() {
-        $state.go('root.confirmorder', {
-          r: refer
-        });
+    //绑定用户信息
+    //将跳转到微信授权认证页面
+    var initUser = function() {
+      xiaomaiService.fetchOne('userAuth');
+    };
 
-      }, function() {
-        $state.go('root.binduser', {
-          redirect: 'root.confirmorder'
+    //缺货情况处理
+    var stockoutHanlder = function(stockoutGoods) {
+      var alertMsgs = ['很遗憾，由于商品缺货，创建订单失败:'];
+      angular.forEach(stockoutGoods, function(goods) {
+        angular.forEach(goods.goodsList, function(good) {
+          alertMsgs.push(good.goodsName);
         });
+        alertMsgs.push(goods.title);
       });
+      alert(alertMsgs.join('\n'));
+
+      //更新购物车数据
+      cartManager.update();
+      //给购物车详情发送通知
+      xiaomaiMessageNotify.pub('createOrderFail', stockoutGoods);
     };
 
     //打开详情页面
@@ -136,160 +152,5 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
     $scope.$on('$destroy', function() {
       cartManager.store(false);
     });
-  }
-])
-
-//购物车详情页面
-angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
-  '$state',
-  '$scope',
-  'xiaomaiService',
-  'cookie_openid',
-  'buyProcessManager',
-  'xiaomaiMessageNotify',
-  'cartManager',
-  'env',
-  'xiaomaiCacheManager',
-  'xiaomaiLog',
-  function($state, $scope, xiaomaiService, cookie_openid, buyProcessManager,
-    xiaomaiMessageNotify, cartManager, env, xiaomaiCacheManager, xiaomaiLog
-  ) {
-    //显示或者隐藏购物车
-    var cartDetailSubId = xiaomaiMessageNotify.sub('cartGuiManager',
-      function(status) {
-        if (status == 'show') {
-          //购物车PV统计
-          xiaomaiLog('m_p_31shoppingcart');
-
-          //获取购物车详情
-          $scope.isloading = true;
-          loadDetail().then(function(res) {
-            $scope.goods = res['goods'];
-            $scope.ldcFreight = res['ldcFreight'];
-            $scope.haserror = false;
-            return loadCouponCount();
-          }, function() {
-            $scope.haserror = true;
-          }).then(function(coupons) {
-            //获取优惠劵
-            xiaomaiCacheManager.writeCache('mycoupon', coupons);
-            var availableCoupons = [];
-            angular.forEach(coupons.couponInfo, function(item) {
-              item.status === 0 && (availableCoupons.push(
-                availableCoupons));
-            });
-            $scope.coupons = availableCoupons;
-          }).finally(function() {
-            $scope.isloading = false;
-            setTimeout(function() {
-              //因为 购物车弹起有延时效果（0.5S） 所以通知必须在购物车动画播放结束以后再放
-              xiaomaiMessageNotify.pub(
-                'shopcartdetailheightupdate',
-                'up', 'ready', '', '');
-            }, 600);
-
-          });
-        };
-
-        $scope.showcart = status == 'show' ? true : false;
-        //通知遮罩层做掉对应的
-        xiaomaiMessageNotify.pub('maskManager', status);
-      });
-
-    $scope.$on('destory', function() {
-      xiaomaiMessageNotify.removeOne('cartGuiManager', cartDetailSubId);
-    });
-
-
-    //跳转到优惠劵
-    $scope.gotoCoupon = function() {
-      //优惠劵点击次数统计
-      xiaomaiLog('m_b_31shoppingcartcoupons');
-      var host = env == 'online' ? 'http://h5.imxiaomai.com' :
-        'http://wap.tmall.imxiaomai.com';
-      window.location.href = host + '/couponwap/myCouponList/webwiew';
-      return false;
-    };
-
-    //继续购物
-    $scope.continueShop = function($event) {
-      xiaomaiMessageNotify.pub('cartGuiManager', 'hide');
-      $event.preventDefault();
-      //继续购物点击次数统计
-      xiaomaiLog('m_b_31shoppingcartclose');
-    };
-
-    $scope.goHomepage = function() {
-      $state.go('root.buy.nav.all', {
-        showCart: false
-      });
-    };
-
-    //返回购物车详情
-    var loadDetail = function() {
-      return cartManager.queryCartDetail();
-    };
-
-    //获取用户优惠劵数量
-    var loadCouponCount = function() {
-      return xiaomaiService.fetchOne('mycoupon', {
-        openId: cookie_openid,
-        type: 1
-      });
-    };
-
-    //执行购买操作
-    $scope.buyHandler = function($event, type, $index) {
-      //点击+/-日志统计次数
-      xiaomaiLog(type == 'plus' ? 'm_b_31shoppingcartadd' :
-        'm_b_31shoppingcartless');
-
-      var good = $scope.goods[$index],
-        sourceType = good.sourceType,
-        skuInfo = good.skuList[0],
-        options = sourceType == 2 ? {
-          goodsId: good.activityGoodsId,
-          sourceType: 2,
-          skuId: skuInfo.activitySkuId,
-          distributeType: skuInfo.distributeType,
-          price: skuInfo.activityPrice,
-          propertyIds: skuInfo.skuPropertyValueIdList || '',
-        } : {
-          goodsId: good.goodsId,
-          sourceType: good.sourceType,
-          distributeType: skuInfo.distributeType,
-          skuId: skuInfo.skuId,
-          price: skuInfo.wapPrice,
-          propertyIds: skuInfo.skuPropertyValueIdList || '',
-        };
-
-      var good = $scope.goods[$index];
-
-      $scope.goods[$index].isPaying = true;
-      buyProcessManager(options, type, Math.min(good.maxNum, good.skuList[
-          0].stock), good.skuList[0].numInCart)
-        .then(function(
-          numInCart) {
-
-          //购物车来源统计
-          type == 'plus' && xiaomaiLog('m_r_31cartfromcart');
-
-          good.skuList[0]['numInCart'] = numInCart;
-          //如果这个数据的numInCart==0 删除这条数据
-          if (good.skuList[0]['numInCart'] == 0) {
-            $scope.goods.splice($index, 1);
-            xiaomaiMessageNotify.pub('shopcartdetailheightupdate',
-              'up', 'ready', '', '');
-          }
-
-        }, function(msg) {
-          alert(msg);
-        }).finally(function() {
-          $scope.goods[$index] && ($scope.goods[$index].isPaying =
-            false);
-        });
-      $event.stopPropagation();
-      $event.preventDefault();
-    };
   }
 ]);

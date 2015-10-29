@@ -2,7 +2,49 @@
   "msg": "success",
   "code": 0,
   "data": {
-    "item": {},
+    "items": [{
+      "status": 2,
+      "title": "商品库存不足",
+      "msg": "十分抱歉，此商品库存不足了",
+      "goodsList": [{
+        "goodsId": 1001,
+        "goodsName": "衣服-黑-X",
+        "skuId": 2001,
+        "propertyIds": "2001_1002_3004",
+        "num": 2,
+        "distributeType": 0,
+        "sourceType": 0
+      }, {
+        "goodsId": 1002,
+        "goodsName": "衣服-白-XL",
+        "skuId": 2002,
+        "propertyIds": "2001_1002_3004",
+        "num": 3,
+        "distributeType": 1,
+        "sourceType": 0
+      }]
+    }, {
+      "status": 3,
+      "title": "超过购买限制",
+      "msg": "十分抱歉，您已超过了此商品的购买数量限制",
+      "goodsList": [{
+        "goodsId": 1001,
+        "goodsName": "衣服-黑-X",
+        "skuId": 2001,
+        "propertyIds": "2001_1002_3004",
+        "num": 2,
+        "distributeType": 0,
+        "sourceType": 0
+      }, {
+        "goodsId": 1002,
+        "goodsName": "衣服-白-XL",
+        "skuId": 2002,
+        "propertyIds": "2001_1002_3004",
+        "num": 3,
+        "distributeType": 1,
+        "sourceType": 0
+      }]
+    }],
     "orderInfo": {
       "college": {
         "collegeId": 2,
@@ -112,6 +154,7 @@
         "receiverCollegeId": 11,
         "receiverCollegeName": "北京大学1"
       },
+      "limitTime": 150,
       "order": {
         "orderId": 4,
         "userId": 10,

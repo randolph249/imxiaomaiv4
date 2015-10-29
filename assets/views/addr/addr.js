@@ -24,25 +24,20 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
       $scope.defaultUserAddr = res.defaultUserAddr;
     });
 
+
+
     //是否可以选择其他学校
     var isChooseOtherCollege = true;
     //判断当前选中订单是否有LDC或者rdc
-    orderManager.getLdcOrder().then(function(res) {
-      isChooseOtherCollege = false;
-    }, function() {
-      return orderManager.getRdcOrder();
-    }).then(function() {
-      isChooseOtherCollege = false;
+    orderManager.getOrderInfo('order.childOrderList').then(function(res) {
+      res && res.length && (isChooseOtherCollege = false);
     });
-
 
     //选取某个地址作为默认地址
     $scope.choosenAddr = function($event, addrInfo) {
       if (addrInfo.userAddrId == $scope.addrId) {
         return false;
       }
-
-
       if (isChooseOtherCollege == false && collegeId != addrInfo.receiverCollegeId) {
         alert('次日达订单和29分钟达订单只能送到本校，不能送到其他学校哦')
         return false;
@@ -64,7 +59,6 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
         return false;
       }
 
-
       if (!confirm('确定要删除当前收货人信息？')) {
         return false;
       }
@@ -77,7 +71,6 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
         //删除缓存
         xiaomaiCacheManager.clean('addrList');
       }, function(msg) {
-        debugger;
         alert('删除用户地址失败，请再试一次~');
       })
     };
