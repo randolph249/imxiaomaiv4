@@ -30,9 +30,7 @@ angular.module('xiaomaiApp').factory('cartManager', [
   '$q',
   'xiaomaiService',
   'xiaomaiCacheManager',
-  'env',
-  '$timeout',
-  function($q, xiaomaiService, xiaomaiCacheManager, env, $timeout) {
+  function($q, xiaomaiService, xiaomaiCacheManager) {
     //监听最后操作时间
     var updateQueryResult = function(res) {
       xiaomaiCacheManager.writeCache('queryCart', res);
@@ -50,15 +48,8 @@ angular.module('xiaomaiApp').factory('cartManager', [
       var deferred = createPromise();
       xiaomaiService.save('addCart', param).then(function(res) {
 
-        if (env == 'develop') {
-          $timeout(function() {
-            updateQueryResult(res);
-            deferred.resolve(res);
-          }, 2000);
-        } else {
-          updateQueryResult(res);
-          deferred.resolve(res);
-        }
+        updateQueryResult(res);
+        deferred.resolve(res);
 
       }, function(msg) {
         deferred.reject(msg);

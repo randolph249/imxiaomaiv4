@@ -50,15 +50,28 @@ angular.module('xiaomaiApp').factory('xiaomaiCacheManager', [
   function(xiaomaiQuicksort) {
     var caches = [], //缓存容器
       cacheMaxlen = 20, //缓存数据最大长度
-      readCache = function(cachename) {
+      readCache = function(cachename, params) {
 
         var $index = hasCache(cachename);
         if ($index === false) {
           return false;
         }
+        //如果传递了缓存参数 逐个比较参数 有一个return  false
+        if (params && angular.isObject(params) && angular.isObject(caches[
+            $index]['params'])) {
+          var flag = true;
+          angular.forEach(params, function(param, key) {
+            if (param != caches[$index]['params'][key]) {
+              flag = false;
+            }
+          });
+
+          if (flag == false) {
+            return false;
+          }
+        }
 
         //刷新缓存最后更新时间
-        caches[$index]['timestamp'] = (+new Date);
         return angular.extend({}, caches[$index]['result']);
       },
       hasCache = function(cachename) {
@@ -77,17 +90,19 @@ angular.module('xiaomaiApp').factory('xiaomaiCacheManager', [
 
         return $index === -1 ? false : $index;
       },
-      writeCache = function(cachename, result) {
+      writeCache = function(cachename, result, params) {
         //如果caches长度为0 直接写入
         var sameCacheIndex = hasCache(cachename);
         //如果存在同名缓存
         if (sameCacheIndex !== false) {
-          caches[sameCacheIndex] = {
+
+          var cache = caches.splice(sameCacheIndex, 1)[0];
+
+          caches.push({
             name: cachename,
             result: result,
-            timestamp: +new Date
-          };
-
+            params: params
+          });
           return false;
           //如果缓存长度超出最大限制
         }
@@ -95,7 +110,6 @@ angular.module('xiaomaiApp').factory('xiaomaiCacheManager', [
 
         //如果缓存满了 经过排序之后删除时间最长的缓存(第一个元素)
         if (caches.length == cacheMaxlen) {
-          caches = xiaomaiQuicksort(caches, 'object', timestamp);
           caches.shift();
         }
 
@@ -103,7 +117,7 @@ angular.module('xiaomaiApp').factory('xiaomaiCacheManager', [
         caches.push({
           name: cachename,
           result: result,
-          timestamp: +new Date
+          params: params
         });
 
       },

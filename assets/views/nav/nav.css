@@ -1,72 +1,12 @@
 @charset "UTF-8";
-
-/* 头部导航 */
-
-.pub-header {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 4.4rem;
-    font-size: 1.5rem;
-    color: #3a404b;
-    z-index: 2;
-    border-bottom: solid 1px #ddd;
-    justify-content: space-around;
-    background-color: #fff;
-}
-
-.pub-header .icon-feedback,
-.pub-header .icon-user {
-    width: 60px;
-    text-align: center;
+.pub-header .icon-fankui,.pub-header .icon-sousuo{
     color: #5f646e;
-}
-
-.pub-header .icon-user {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.pub-header .icon-feedback:before,
-.pub-header .icon-user:before {
-    font-size: 2.4rem;
-    line-height: 4.4rem;
-}
-
-.pub-header .location-info {
-    text-align: center;
-    /* flex-grow: 1; */
-    line-height: 4.4rem;
-    position: absolute;
-    top: 0;
-    left: 44px;
-    right: 44px;
-}
-.pub-header .icon-back, .pub-header .icon-locate-right {
-  width: 45px;
-  text-align: center;
-  float: left;
-}
-.pub-header .icon-locate-right {
-  float: right;
-}
-.pub-header .icon-back:before, .pub-header .icon-locate-right:before {
-  font-size: 2.4rem;
-  line-height: 4.4rem;
+    font-size:2.4rem;
 }
 .pub-header .location-info {
-  text-align: center;
-  line-height: 4.4rem;
-  position: absolute;
-  top: 0;
-  left: 45px;
-  right: 45px;
 }
-.pub-header .location-info.icon-school:before{
+.location-info .locate{
     color: #ccc;
-    content: '\e613';
     font-size: 2rem;
 }
 
@@ -86,17 +26,18 @@
 .list-main .list-category {
     position: absolute;
     top: 4.4rem;
-    bottom: 6.5rem;
+    bottom: 4.5rem;
     left: 0;
-    overflow: auto;
+    overflow: hidden;
     float: left;
     width: 26%;
     border-right: #ddd solid 1px;
     font-size: 1.3rem;
+    background:#fff;
 }
 
 
-.list-main .list-category .nav-super {
+.list-main .list-category .nav-super,.list-main .list-category .nav-parent{
     overflow: hidden;
     line-height: 4.9rem;
     color: #3a404b;
@@ -105,6 +46,11 @@
     border-bottom: solid 1px #ddd;
     white-space: nowrap;
     text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+
+.list-main .list-category .nav-super{
+  height:4.9rem;
 }
 
 .list-main .list-category .nav-super:last-child {
@@ -114,15 +60,15 @@
 .list-main .list-category .nav-super.nav-checked {
     color: #ff5300;
     font-size: 1.5rem;
-    border-bottom: #ff5300 solid 0.3rem;
+    border-bottom: #ff5300 solid 3px;
     background-color: #fff;
 }
 
-.list-main .list-category .nav-super p.arrow-down {
+.list-main .list-category .nav-parent p.arrow-down {
     position: relative;
 }
 
-.list-main .list-category .nav-super p.arrow-down:after {
+.list-main .list-category .nav-parent p.arrow-down:after {
     position: absolute;
     content: '';
     width: 0;
@@ -134,7 +80,7 @@
     top: 2rem;
 }
 
-.list-main .list-category .nav-super p.arrow-down.arrow-up:after {
+.list-main .list-category .nav-parent p.arrow-down.arrow-up:after {
     position: absolute;
     content: '';
     width: 0;
@@ -156,6 +102,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    box-sizing: border-box;
 }
 
 .list-main .list-category .nav-sub.nav-checked {
@@ -217,17 +164,17 @@
 
 .navmain-uptip{
   position: absolute;
-  line-height: 30px;
-  height:30px;
+  line-height: 3rem;
+  height:3rem;
   font-size:1.2em;
   text-align: center;
-  top:-30px;
+  top:-3rem;
   width:100%;
 }
-.navmain-uptip.pending{
+.navmain-uptip.pending,.navmain-downtip.pending{
   position: static;
 }
-.navmain-downtip,.skactive-downtip{
+.navmain-downtip{
   position: absolute;
   height:3rem;
   font-size:1.2em;
@@ -235,9 +182,7 @@
   line-height: 3rem;
   color: #3a404b;
   text-align: center;
-}
-.navmain-downtip.pending{
-  position: static;
+  bottom: -3rem;
 }
 
 /* 小屏兼容 */

@@ -9,7 +9,9 @@ angular.module('xiaomaiApp').factory('schoolManager', [
   'xiaomaiCacheManager',
   function($q, xiaomaiService, env, xiaomaiCacheManager) {
 
+
     var queryQueue = [];
+    //切换学校之后清除这些数据缓存
     var lock = false; //多个请求过来 先锁住其他请求
     var hanlderQuerys = function() {
       lock = false; //上一个请求完成 解锁
@@ -41,34 +43,16 @@ angular.module('xiaomaiApp').factory('schoolManager', [
       var schoolInfo;
       xiaomaiService.fetchOne('getSchool').then(function(res) {
         //缓存到本地
+
         xiaomaiCacheManager.writeCache('getSchool', res)
           //吐给用户备份数据 防止原数据被修改
         schoolInfo = res;
-        console.log(schoolInfo.collegeName + '的ID是:' + schoolInfo.collegeId);
-        // deferred.resolve(res);
-        // hanlderQuerys();
-        return xiaomaiService.fetchOne('whitelist');
-      }).then(function(whitelist) {
-        console.log('白名单是:' + whitelist.collegeWhiteList);
 
-        var reg = new RegExp(",?(" + schoolInfo.collegeId + "),?");
-        //缓存学校白名单
-        xiaomaiCacheManager.writeCache('whitelist', whitelist);
-        /**回头注释掉
         deferred.resolve(schoolInfo);
         hanlderQuerys();
-        **/
-
-        //如果当前学校不在白名单里面 就不用继续处理队列了
-        if (reg.test(whitelist.collegeWhiteList)) {
-          deferred.resolve(schoolInfo);
-          hanlderQuerys();
-        } else {
-          // alert('当前学校不在商城V4的白名单,将跳到旧版商城!');
-
-          window.location.href = 'http://' + window.location.host;
-        }
-
+      }, function() {
+        deferred.reject();
+        hanlderQuerys();
 
       });
     }
@@ -95,21 +79,13 @@ angular.module('xiaomaiApp').factory('schoolManager', [
       xiaomaiService.save('saveSchool', {
         collegeId: info.collegeId
       }).then(function(res) {
-        xiaomaiCacheManager.writeCache('getSchool', res);
-        return xiaomaiService.fetchOne('whitelist');
-      }).then(function(whitelist) {
-        var reg = new RegExp(",?(" + schoolInfo.collegeId + "),?");
-        //缓存学校白名单
-        xiaomaiCacheManager.writeCache('whitelist', whitelist);
-        //如果当前学校不在白名单里面 就不用继续处理队列了
-        if (reg.test(whitelist.collegeWhiteList)) {
+        if (res.hasOwnProperty('collegeId')) {
+
+          xiaomaiCacheManager.writeCache('getSchool', res);
           deferred.resolve(schoolInfo);
         } else {
-
-          // alert('当前学校不在商城V4的白名单,将跳到旧版商城!');
-          window.location.href = 'http://' + window.location.host;
+          deferred.reject(msg);
         }
-        return false;
       }, function(msg) {
         deferred.reject(msg)
 

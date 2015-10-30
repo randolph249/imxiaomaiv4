@@ -58,8 +58,6 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
       var maxScrollY;
 
       myScroll.on('scroll', function() {
-
-
         if ($scope.scrollstatus !== 'ready') {
           return false;
         }
@@ -91,6 +89,10 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
 
             $scope.scrollstatus = 'ready';
 
+            upTip.className = upTip.className.replace(
+              /\s?pending\s?/, '');
+
+
             refreshTimeout && clearTimeout(refreshTimeout);
             refreshTimeout = null;
             setTimeout(function() {
@@ -112,6 +114,9 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
             $scope.scrollstatus = 'ready';
             refreshTimeout && clearTimeout(refreshTimeout);
             refreshTimeout = null;
+            downTip.className = downTip.className.replace(
+              /\s?pending\s?/, '');
+
 
             setTimeout(function() {
 
@@ -132,7 +137,6 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
       });
 
       $scope.$on('$destroy', function() {
-
         myScroll && myScroll.destroy();
         $timeout.cancel($t);
         myScroll = null;

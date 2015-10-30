@@ -4,7 +4,7 @@
     font-size: 1.4rem;
     color: #999;
 }
-.countrylist li .errortip, 
+.countrylist li .errortip,
 .countrylist li .loading{
     margin-top:40%;
 }
@@ -34,4 +34,5 @@
   top: 4.4em;
   bottom: 0;
   overflow: hidden;
+  background:#fff;
 }

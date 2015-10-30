@@ -5,8 +5,12 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
   'buyProcessManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
+  'wxshare',
+  'getRouterTypeFromUrl',
+  'xiaomaiLog',
   function($scope, $state, xiaomaiService, buyProcessManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify) {
+    xiaomaiCacheManager, xiaomaiMessageNotify, wxshare,
+    getRouterTypeFromUrl, xiaomaiLog) {
     var collegeId, activityId, page;
     //监听路由参数变化
 
@@ -16,7 +20,16 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
         collegeId: collegeId,
         activityId: activityId
       });
-    }
+    };
+
+    //微信分享配置
+    var wxshareConfig = function() {
+      wxshare({
+        title: '小麦特供-' + $scope.activityShowName,
+        imgUrl: 'http://xiaomai-p2p.qiniudn.com/2b7ef2e2c2ce364303283bf49131a40f',
+        desc: '小麦特供,便宜有好货,赶快点进来看看吧!'
+      });
+    };
 
     //获取活动商品列表数据
     var loadSku = function() {
@@ -32,6 +45,11 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     activityId = $state.params.activityId;
     page = $state.params.page || 1;
 
+    $scope.activityId = activityId;
+    //独立活动页面PV统计
+    xiaomaiLog('m_p_31singleactivity+' + activityId);
+    //页面来源统计
+    xiaomaiLog('m_r_31activefrom' + $state.params.refer);
 
     //初始化数据请求
     $scope.isloading = true;
@@ -51,8 +69,22 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
 
       xiaomaiMessageNotify.pub('activeheightstatus', 'up', 'ready',
         '', hasNextPage ? '请求下一页数据' : '');
+
+      wxshareConfig();
     });
 
+    //订阅detailGuiManager 如果详情页面关闭 重新修改微信分享配置
+    var subDetailGuiId = xiaomaiMessageNotify.sub('detailGuiManager',
+      function(status) {
+        if (status == 'hide') {
+          setTimeout(function() {
+            wxshareConfig();
+          }, 100)
+        }
+      });
+
+
+    //订阅滚轮滑动
     var iscrollSubId = xiaomaiMessageNotify.sub('activeiscrollupdate',
       function(arrow) {
         if (arrow == 'down' && $scope.paginationInfo.currentPage !=
@@ -77,9 +109,13 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
       //删除订阅
       xiaomaiMessageNotify.removeOne('activeiscrollupdate',
         iscrollSubId);
+      xiaomaiMessageNotify.removeOne('detailGuiManager', subDetailGuiId)
     });
 
     loadBanner().then(function(res) {
+      angular.forEach(res.banners, function(banner) {
+        banner.imageUrl += '&imageView2/0/w/600';
+      });
       $scope.banners = res.banners;
       return res;
     });
@@ -96,35 +132,10 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
       $state.go('root.buy.nav.all');
     };
 
-    //根据URl解析Router参数
-    var getRouterTypeFromUrl = function(url) {
-      var router = {};
-      if (url.match(/[\?&]m=([^\?&]+)/)) {
-        router.name = 'root.buy.nav.category';
-        router.params = {
-          categoryId: url.match(/[\?&]id=([^\?&]+)/)[1],
-          collegeId: collegeId
-        }
-      } else if (url.match(/skActivity/)) {
-        router.name = 'root.buy.skactive';
-        router.params = {
-          collegeId: collegeId,
-          activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
-        }
-      } else if (url.match(/activity/)) {
-        router.name = 'root.buy.skactive';
-        router.params = {
-          collegeId: collegeId,
-          activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1]
-        }
-      } else {
-        router.path = url;
-      }
-      return router;
-    };
     //跳转到对应的活动
     $scope.gotoActive = function(banner) {
-      var router = getRouterTypeFromUrl(banner.hrefUrl);
+      var router = getRouterTypeFromUrl(banner.hrefUrl, collegeId,
+        'activebanner+' + activityId);
 
       if (router.hasOwnProperty('path')) {
         window.location.href = router.path;
@@ -135,39 +146,10 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     }
 
     //跳转到详情页
-    $scope.gotoDetail = function(good) {
+    $scope.gotoDetail = function($event, good) {
       xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.activityGoodsId,
-        good.sourceType);
+        good.sourceType, 'active' + activityId);
       return false;
-    };
-
-    //执行购买
-    $scope.buyHandler = function(good, $index) {
-
-      if (good.goodsType == 3) {
-        $scope.gotoDetail(good);
-        return false;
-      }
-
-      $scope.goods[$index]['isPaying'] = true;
-      buyProcessManager({
-        distributeType: good.skuList[0].distributeType,
-        goodsId: good.activityGoodsId,
-        sourceType: good.sourceType,
-        skuId: good.skuList[0].activitySkuId,
-        price: good.skuList[0].activityPrice,
-        propertyIds: ''
-      }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
-        function() {
-
-        },
-        function(msg) {
-          alert(msg);
-          return false;
-        }).finally(function() {
-        $scope.goods[$index]['isPaying'] = false;
-
-      });
     };
 
     //翻页
@@ -203,8 +185,11 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
   'buyProcessManager',
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
+  'getRouterTypeFromUrl',
+  'xiaomaiLog',
   function($scope, $state, xiaomaiService, buyProcessManager,
-    xiaomaiCacheManager, xiaomaiMessageNotify) {
+    xiaomaiCacheManager, xiaomaiMessageNotify, getRouterTypeFromUrl,
+    xiaomaiLog) {
     var collegeId, activityId, page;
     //监听路由参数变化
     //抓取Banner信息
@@ -230,16 +215,19 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
     activityId = $state.params.activityId;
     page = $state.params.page || 1;
 
+    $scope.activityId = activityId;
+
+    //左侧导航活动页面PV统计
+    xiaomaiLog('m_p_31tabactivity' + activityId);
+
     //初始化数据请求
     $scope.isloading = true;
-
 
     var preRouter, nextRouter;
 
     loadSku().then(function(res) {
       $scope.haserror = res.goods.length ? false : true;
       $scope.goods = res.goods;
-      //
       $scope.paginationInfo = res.paginationInfo;
     }, function() {
       $scope.haserror = true;
@@ -262,9 +250,9 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
 
 
     //跳转到详情页
-    $scope.gotoDetail = function(good) {
+    $scope.gotoDetail = function($event, good) {
       xiaomaiMessageNotify.pub('detailGuiManager', 'show', good.activityGoodsId,
-        good.sourceType);
+        good.sourceType, 'active' + activityId);
       return false;
     };
 
@@ -327,39 +315,5 @@ angular.module('xiaomaiApp').controller('nav.activeCtrl', [
       xiaomaiMessageNotify.removeOne('navmainscrollupdate',
         iscrollSubId);
     });
-
-
-
-    //执行购买
-    $scope.buyHandler = function(good, $index) {
-      if (good.goodsType == 3) {
-        $scope.gotoDetail(good);
-        return false;
-      }
-
-
-      $scope.goods[$index]['isPaying'] = true;
-
-      buyProcessManager({
-        distributeType: good.skuList[0].distributeType,
-        goodsId: good.activityGoodsId,
-        sourceType: good.sourceType,
-        skuId: good.skuList[0].activitySkuId,
-        price: good.skuList[0].activityPrice,
-        propertyIds: ''
-      }, 'plus', Math.min(good.maxNum, good.skuList[0].stock)).then(
-        function() {
-
-        },
-        function(msg) {
-          alert(msg);
-          return false;
-        }).finally(function() {
-        $scope.goods[$index]['isPaying'] = false;
-      });
-    };
-
-    //翻页
-    $scope.pagination = function(page) {}
   }
 ]);

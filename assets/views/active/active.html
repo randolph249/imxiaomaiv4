@@ -1,10 +1,10 @@
 <div class="pub-header">
-  <div back-icon class="iconfont icon-back" ng-click="goback();"></div>
-  <div class="location-info">{{activityShowName}}</div>
-  <div class="iconfont   icon-share icon-locate-right" ng-click="showShareModel();"></div>
+  <div back-icon class="iconfont icon-fanhui lefticon" ng-click="goback();"></div>
+  <div class="location-info middlearea">{{activityShowName}}</div>
+  <div class="iconfont active-share icon-fenxiang icon-locate-right righticon" ng-click="showShareModel();"></div>
 </div>
 
-<div class="activeWrap" down-tip-cls="{{'skactive-downtip'}}" xiaomai-iscroll subname="{{'activeheightstatus'}}" pubname="{{'activeiscrollupdate'}}">
+<div class="activeWrap" down-tip-cls="{{'navmain-downtip'}}" xiaomai-iscroll subname="{{'activeheightstatus'}}" pubname="{{'activeiscrollupdate'}}">
   <div>
     <div class="banner">
       <ks-swiper-container on-ready="onReadySwiper(swiper)" swiper="swiper">
@@ -13,37 +13,14 @@
         </ks-swiper-slide>
       </ks-swiper-container>
     </div>
-    <ul class="activeGoodList">
-      <li class="errortip" ng-if="haserror">
-        活动已经结束,去其他活动看看吧
-      </li>
-      <li class="loading" ng-if="isloading">
-        正在加载活动商品列表...
-      </li>
+    <div  class="errortip" ng-if="haserror" class="">活动已经结束,去其他活动看看吧</div>
+    <div class="loading" ng-if="isloading">正在加载活动商品列表...</div>
+    <ul ng-class="{'skactiveGoodList':goods[0].isSeckill==1,'activeGoodList':goods[0].isSeckill!=1}">
       <li ng-repeat="good in goods">
-        <div class="goodItem">
-          <div class="imgCont" ng-click="gotoDetail(good);" ng-style='{"background-image":"url("+good.imageUrl+")"}'>
-            <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay" ng-show="label.length">{{label}}</label>
-          </div>
-          <div class="details">
-<!-- 输出标签29分钟达/次日达 -->
-            <p class="goodname" ng-click="gotoDetail(good);">{{good.activityGoodsName}}</p>
-            <p class="priceCont">
-<!-- 单品或者组合最高价-->
-              <span class="new-price" ng-if="good.goodsType==1||good.goodsType==2">
-                &yen;<i>{{good.skuList[0].activityPrice|xiaomaiprice}}</i>
-              </span>
-              <span class="old-price" ng-if="good.goodsType==1||good.goodsType==2">
-                &yen;{{good.skuList[0].originPrice|xiaomaiprice}}</span>
-<!-- 聚合 -->
-              <span class="aggregate-price" ng-if="good.goodsType==3">
-                &yen;{{good.minWapPrice|xiaomaiprice}} ~ &yen;{{good.maxWapPrice|xiaomaiprice}}
-              </span>
-            </p>
-            <p class="buy-icon iconfont icon-plus" ng-class="{paying:good.isPaying}" ng-click="buyHandler(good,$index);" ng-if="good.goodsStatusDisplay!=3"></p>
-            <p class="sold-out" ng-if="good.goodsStatusDisplay==3">补货中</p>
-          </div>
+        <div class="goodItem"  ng-if="good.isSeckill!=1" >
+          <div xiaomai-good-list-item goods="good" detail-source-event="active+{{activityId}}" click-event="m_b_31singleactivityadd+{{activityId}}" source-event="m_r_31cartfromactive+{{activityId}}"  column="{{true}}" ></div>
         </div>
+        <div ng-if="good.isSeckill==1" xiaomai-good-list-item-sk goods="good"></div>
       </li>
     </ul>
   </div>

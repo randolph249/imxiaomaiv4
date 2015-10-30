@@ -1,0 +1,22 @@
+<div class="pub-header search-handler">
+  <div class="lefticon iconfont icon-fanhui" ng-click="goback();"></div>
+  <div class="middlearea">
+    <input autofocus tabindex="1" ng-change="updateSearchKey($event)" maxlength="20" ng-keypress="updatesearch($event,searchkey);" class="searchtext" ng-model="searchkey" type="text"/>
+  </div>
+  <div class="righticon searchbtn" ng-class="{disabled:!searchkey || searchkey.length==0}" ng-click="gotosearch($event,searchkey);">搜索</div>
+</div>
+<div class="searchhistory" ng-controller="searchrecordCtrl" ng-show="showCookie">
+    <p class="searchhistory-tip">搜索历史</p>
+    <ul class="searchhistory-list" ng-show="cookies.length">
+      <li ng-click="goresult($event,cookie.name);"  ng-repeat="cookie in cookies track by $index">{{cookie.name}}</li>
+    </ul>
+    <p class="searchhistory-norecord" ng-show="!cookies.length">暂无搜索记录</p>
+    <p class="searchhistory-clean" ng-show="cookies.length" ng-click="cleancookie($event);">清除历史</p>
+</div>
+<!--搜索提示列表-->
+<div ng-controller="searchsuggestCtrl" ng-show="showSuggest" class=searchsuggests>
+  <ul class="searchtiplist">
+      <li  ng-repeat="suggest in suggests" ng-click="goresult($event,suggest);">{{suggest}}</li>
+  </ul>
+  <p class="searchsuggest-loading" ng-if="isloading">正在请求数据</p>
+</div>

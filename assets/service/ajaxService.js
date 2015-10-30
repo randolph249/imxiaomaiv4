@@ -26,6 +26,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/wap/college/detail',
         type: 'GET'
       },
+      //保存学校信息
       'saveSchool': {
         url: '/wap/college/detail',
         type: 'POST'
@@ -70,6 +71,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/wap/cart/remove',
         type: 'POST'
       },
+      //新版本学校白名单
       'whitelist': {
         type: 'GET',
         url: '/wap/college/whitelist'
@@ -94,14 +96,83 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/couponwap/myCouponList',
         type: 'GET'
       },
+      //获取微信配置
       "getWxConfig": {
         url: "/wap/getWxConfig",
         type: "GET"
       },
+      //提交反馈
       "feedback": {
         url: "/wap/feedback/detail",
         type: "POST"
-      }
+      },
+      //日志统计
+      "log": {
+        // url: "/wap/log",
+        url: "http://logger.imxiaomai.com/client/event",
+        type: "GET"
+      },
+      //搜索结果页
+      "searchresult": {
+        url: "/wap/goods/search",
+        type: "GET"
+      },
+      //搜索提示
+      "searchsuggest": {
+        url: "/wap/goods/suggest",
+        type: "GET"
+      },
+      //发送验证码
+      "sendCode": {
+        url: "/wap/user/sendCode",
+        type: "POST"
+      },
+      //用户绑定信息
+      "bindUser": {
+        url: "/wap/userBind/bind",
+        type: "POST"
+      },
+      //验证用户登录状态
+      "checkUser": {
+        url: "/wap/userBind/check",
+        type: "POST"
+      },
+      //获取用户收货地址列表
+      "addrList": {
+        url: "/wap/useraddr/query",
+        type: "GET" //?
+      },
+      //删除某条用户收货地址信息
+      "addrDel": {
+        url: "/wap/useraddr/delete",
+        type: "POST" //?
+      },
+      //查询某条用户收货地址信息
+      "getAddr": {
+        url: "/wap/useraddr/get",
+        type: "GET"
+      },
+      //用户中心获取用户信息
+      "usercenter": {
+        url: "/wap/usercenter/index",
+        type: "GET"
+      },
+      //更新某条用户收货地址信息
+      "setAddr": {
+        url: "/wap/useraddr/set",
+        type: "POST"
+      },
+      //新增一套用户收货地址信息
+      "addAddr": {
+        url: "/wap/useraddr/add",
+        type: "POST"
+      },
+      //微信预支付获取订单详情
+      "queryOrder": {
+        url: "/wap/order/query",
+        type: "GET"
+      },
+
     },
     getModel = function() {
       var args = Array.prototype.slice.call(arguments, 0),
@@ -119,6 +190,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
 
 
 /**
+
  *url拦截器
  *如果是当前环境是线下环境 拦截URL转成对应的JS文件
  **/
@@ -128,7 +200,6 @@ angular.module('xiaomaiApp').factory('urlInterceptor', ['env', function(env) {
       return url;
     }
     return '/api' + url + '.json';
-    return url + '.json';
 
   };
   return interceptor;
@@ -200,7 +271,6 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           params = args[1];
         }
 
-
         //判断接口是否已经在modelManager中定义
         url = getUrl(name, 'GET');
         //如果当前开发环境是线下环境 将接口转成本地文件地址
@@ -211,8 +281,9 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
         }
 
         //从页面缓存中查找
-        if (xiaomaiCacheManager.readCache(name)) {
-          deferred.resolve(xiaomaiCacheManager.readCache(name));
+        var cacheResult = xiaomaiCacheManager.readCache(name, params);
+        if (cacheResult) {
+          deferred.resolve(cacheResult);
           return deferred.promise;
         }
 
@@ -221,9 +292,13 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           url: url,
           method: 'GET',
           params: angular.extend({
-            v: Math.random().toString().replace(/\./, '')
+            // v: Math.random().toString().replace(/\./, '')
           }, params)
         }).success(function(res) {
+
+          if (name == "addrDel") {
+            debugger;
+          }
           //如果返回结果有异常 reject
           if (handlerResult(res) === false) {
             deferred.reject(res.msg);

@@ -32,14 +32,13 @@ angular.module('xiaomaiApp').factory('systemInfo', ['$window', function(
     model, //手机型号
     androidReg = /(android)\s+([\d\.]+)/i,
     iphoneReg = /(iphone|ipad).+(os\s[\d_]+)/i,
-    wechartReg = /micromessenger/,
+    wechartReg = /micromessenger\/[\d\.]+/i,
     result;
-
   if (UA.match(androidReg) && UA.match(androidReg).length) {
     result = UA.match(androidReg);
     platform = result[1];
     version = UA.match(androidReg)[2];
-  } else if (UA.match(iphoneReg) && UA.match(androidReg).length) {
+  } else if (UA.match(iphoneReg) && UA.match(iphoneReg).length) {
     result = UA.match(iphoneReg);
     platform = result[1];
     version = result[2];
@@ -48,8 +47,9 @@ angular.module('xiaomaiApp').factory('systemInfo', ['$window', function(
     version = 'unknown';
   }
 
-  if (wechartReg.test(UA)) {
-    browser = 'wechart';
+
+  if (UA.match(wechartReg) && UA.match(wechartReg).length) {
+    browser = UA.match(wechartReg)[0];
   } else {
     browser = 'other';
   }
@@ -78,3 +78,111 @@ angular.module('xiaomaiApp').factory('parseUrlParams', [function() {
     return result && result.length ? result[1] : false;
   }
 }])
+
+
+//点击Banner的时候执行解析
+angular.module('xiaomaiApp').factory('getRouterTypeFromUrl', function() {
+  //根据URl解析Router参数
+  return function(url, collegeId, refer) {
+    var router = {};
+    if (url.match(/[\?&]m=([^\?&]+)/)) {
+      router.name = 'root.buy.nav.category';
+      router.params = {
+        categoryId: url.match(/[\?&]id=([^\?&]+)/)[1],
+        collegeId: collegeId,
+        refer: refer
+      }
+    } else if (url.match(/skActivity/)) {
+      router.name = 'root.buy.active';
+      router.params = {
+        collegeId: collegeId,
+        activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1],
+        refer: refer,
+      }
+    } else if (url.match(/activity/)) {
+      router.name = 'root.buy.active';
+      router.params = {
+        collegeId: collegeId,
+        activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1],
+        refer: refer
+      }
+    } else {
+      router.path = url;
+    }
+    return router;
+  };
+});
+
+/**
+$apply升级版本
+**/
+angular.module('xiaomaiApp').factory('safeApply', ['$rootScope', function(
+  $rootScope) {
+  return function(fn) {
+    var phase = $rootScope.$$phase;
+
+    if (phase == '$apply' || phase == '$digest') {
+      angular.isFunction(fn) && fn();
+    } else {
+      $rootScope.$apply(fn);
+    }
+  }
+}]);
+
+//快速获取图片高度
+angular.module('xiaomaiApp').factory('quickGetImgHeight', [
+  '$q',
+  function($q) {
+    return function(url) {
+      var deferred = $q.defer();
+
+      var log = function() {};
+
+      var img = document.createElement('img');
+      img.src = url;
+      var loaded = false,
+        wait,
+        width, height;
+
+      img.addEventListener('load', function() {
+        if (loaded) {
+          return false;
+        }
+        loaded = true;
+        deferred.resolve({
+          width: img.width,
+          height: img.height
+        });
+      });
+
+      img.addEventListener('error', function() {
+        if (loaded) {
+          return false;
+        }
+        loaded = true;
+        deferred.resolve({
+          width: img.width,
+          height: img.height
+        });
+      });
+
+      wait = setInterval(function() {
+        //图片高度加载完成
+        if (img.height != 0 && img.height == height) {
+          clearInterval(wait);
+          loaded = true;
+          deferred.resolve({
+            width: img.width,
+            height: img.height
+          });
+          return false;
+        }
+        height = img.height;
+        log(img.width, log.height);
+      }, 50);
+
+      return deferred.promise;
+
+    }
+  }
+]);

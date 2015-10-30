@@ -1,0 +1,121 @@
+<!-- 聚合类商品选中了最小单元-->
+<div class="imgCont" ng-if="skuInfo&&good.goodsType==3" ng-style="{'background-image':'url('+(skuInfo&&skuInfo.imageUrl?skuInfo.imageUrl:good.imageUrl)+')'}"></div>
+<!--非聚合类商品或者聚合类商品没有选中最小单元-->
+
+<div class="imgCont" ng-if="(!skuInfo || good.goodsType!=3) && good.goodsImageList.length==1" ng-style="{'background-image':'url('+good.goodsImageList[0].imageUrl+')'}"></div>
+
+<div class="gooddetail-swiper" ng-if="(!skuInfo || good.goodsType!=3) && good.goodsImageList.length>1">
+  <div class="gooddetail-swiper-nums">
+    <i class="gooddetail-swiper-num" ng-class="{active:swiperIndex==$index}" ng-repeat="goodsImage in good.goodsImageList"></i>
+  </div>
+  <div class="gooddetail-swiper-prev-btn iconfont icon-fanhui" ng-class="{disabled:swiperIndex==0}" ng-click="swiperSlider($event,'prev')">
+  </div>
+  <div class="gooddetail-swiper-next-btn iconfont icon-yfmore" ng-class="{disabled:swiperIndex==good.goodsImageList.length-1}" ng-click="swiperSlider($event,'next')">
+
+  </div>
+  <ks-swiper-container on-ready="onReadySwiper(swiper)" swiper="swiper" initial-slide="0">
+    <ks-swiper-slide class="swiper-slide" ng-repeat="goodsImage in good.goodsImageList">
+      <div class="gooddetail-swiper-item" style="background-image:url({{goodsImage.imageUrl}});"></div>
+    </ks-swiper-slide>
+  </ks-swiper-container>
+</div>
+
+<div class="good-normal-info">
+  <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in good.distributeTypeDisplay track by $index" ng-show="label.length">{{label}}</label>
+<!--产品名称-->
+  <p class="title">{{good.sourceType==2?good.activityGoodsName:good.bgGoodsName}}</p>
+<!--产品价格-->
+  <p class="priceCont" ng-if="skuInfo">
+    <span class="new-price">&yen;<i>{{good.sourceType==2?skuInfo.activityPrice:skuInfo.wapPrice|xiaomaiprice}}</i></span>
+    <span class="old-price">&yen;{{skuInfo.originPrice|xiaomaiprice}}</span>
+  </p>
+  <p class="priceCont" ng-if="!skuInfo">
+    <span class="aggregate-price">&yen;{{good.minWapPrice|xiaomaiprice}}</span>
+    <span class="f14 aggregate-price">
+      ~&yen;{{good.maxWapPrice|xiaomaiprice}}
+    </span>
+  </p>
+<!--普通类活动-->
+  <div ng-if="good.isSeckill!=1">
+<!--如果没有货 显示补货中-->
+    <p class="skicon cantsnap sk-snap iconfont icon-buhuozhong" ng-if="good.goodsStatusDisplay==3"></p>
+    <!--下架-->
+    <p class="skicon cantsnap sk-snap iconfont icon-buhuozhong" ng-if="good.goodsStatusDisplay==4"></p>
+    <p class="skicon cantsnap sk-snap iconfont icon-dayangle" ng-if="good.goodsStatusDisplay==5"></p>
+<!--进行数量选择-->
+    <p class="buy-handler-cont " ng-if="good.goodsStatusDisplay==2">
+      <span class="buy-handler iconfont icon-jianqugouwuche" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'minus');" ng-hide="!skuInfo||!numInCart||numInCart==0"></span>
+<!--当前已经购买的数量 -->
+      <span class="buy-result">{{numInCart}}</span>
+      <span class="buy-handler iconfont icon-tianjiagouwuche buy-icon" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'plus');"></span>
+    </p>
+  </div>
+<!--秒杀类产品-->
+  <div ng-if="good.isSeckill==1">
+<!--倒计时-->
+    <p class="countdown" ng-if="good.killStarted==0">
+      距开始
+      <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.timeBeforeStart}}" timeid="{{good.activityBgGoodsId}}"></span>
+    </p>
+<!-- 活动已开始同时没有被抢空-->
+    <p class="countdown" ng-if="good.killStarted==1 && good.goodsStatusDisplay!=3 &&!good.killed">
+      距结束
+      <span count-dead-call="timecountdown(timeid);" countdown counttime="{{good.buyLeftTime}}" timeid="{{good.activityBgGoodsId}}"></span>
+    </p>
+    <p class="skicon sk-snap iconfont icon-qianggou disabled" ng-if="good.killStarted==0"></p>
+<!-- 已结束-->
+    <p class="skicon cantsnap iconfont icon-yijieshu" ng-if="good.killStarted==2"></p>
+<!-- 已经售空-->
+    <p class="skicon cantsnap sold-out iconfont icon-buhuozhong" ng-if="good.killStarted==1 && good.goodsStatusDisplay==3"></p>
+    <p class="skicon cantsnap sold-out iconfont icon-buhuozhong" ng-if="good.killStarted==1 && good.goodsStatusDisplay==4"></p>
+
+<!-- 已经抢过了 -->
+    <p class="skicon cantsnap sk-geted iconfont icon-yiqianggou" ng-if="good.killStarted==1 && good.killed"></p>
+<!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
+    <p class="skicon sk-snap iconfont icon-qianggou" ng-class="{paying:good.isPaying}" ng-click="buyHandler($event,'plus',true);" ng-if="good.killStarted==1 && !good.killed && good.goodsStatusDisplay==2"></p>
+<!--打烊了-->
+    <p class="skicon cantsnap sk-snap iconfont icon-dayangle" ng-if="good.killStarted==1 && good.goodsStatusDisplay==5"></p>
+  </div>
+</div>
+
+<!-- 如果是第三方卖家-->
+<p class="thirdsellertip" ng-if="good.storageName&&good.storageName.length">本商品由<span>{{good.storageName}}</span>提供服务</p>
+
+<!--如果是聚合类产品-->
+<div class="complex-properties" ng-if="good.goodsType==3">
+  <div class="complex-property" ng-repeat="goodProperty in good.skuGoodsPropertyList">
+    <p class="complex-property-name">{{goodProperty.propertyName}}</p>
+    <div class="complex-property-values">
+      <span ng-class="{disabled:valueItem.disabled,checked:checkedProperties[goodProperty.propertyNameId]==valueItem.propertyValueId}" ng-click="complexCheckProperty($event,goodProperty.propertyNameId,valueItem)" ng-repeat="valueItem in goodProperty.propertyValues">{{valueItem.propertyValue}}</span>
+    </div>
+  </div>
+</div>
+
+<!-- 产品描述-->
+<div class="detail-info" ng-if="good.saleSpec && good.saleSpec.length">
+  <div class="detail-info-key">产品规格:</div>
+  <div class="detail-info-main">{{good.saleSpec}}/{{good.unit}}</div>
+</div>
+<div class="detail-info" ng-if="good.originPlace && good.originPlace.length">
+  <div class="detail-info-key">产地:</div>
+  <div class="detail-info-main">{{good.originPlace}}</div>
+</div>
+<div class="detail-info" ng-if="good.packageSpec && good.packageSpec.length">
+  <div class="detail-info-key">产品包装:</div>
+  <div class="detail-info-main">{{good.packageSpec}}</div>
+</div>
+<div class="detail-info" ng-if="good.brand && good.brand.length">
+  <div class="detail-info-key">品牌:</div>
+  <div class="detail-info-main">{{good.brand}}</div>
+</div>
+<div class="detail-info" ng-if="good.shelfLife && good.shelfLife.length">
+  <div class="detail-info-key">保质期:</div>
+  <div class="detail-info-main">{{good.shelfLife}}</div>
+</div>
+<div class="detail-desc" ng-if="good.goodsDesc && good.goodsDesc.length">{{good.goodsDesc}}</div>
+<div class="detail-desc" ng-if="good.activityGoodsDesc && good.activityGoodsDesc.length">{{good.activityGoodsDesc}}</div>
+
+<!-- 图文详情-->
+<div class="detail-graphics" ng-if="good.goodsDetailImageList && good.goodsDetailImageList.length">
+  <img ng-src="{{goodsDetailImage.imageUrl}}" class="detail-graphic" ng-repeat="goodsDetailImage in good.goodsDetailImageList track by $index"/>
+</div>

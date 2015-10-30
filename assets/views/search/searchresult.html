@@ -1,0 +1,18 @@
+<div class="pub-header search-handler">
+  <div class="lefticon iconfont icon-fanhui" ng-click="gohomepage($event);"></div>
+  <div class="middlearea">
+    <p class="searchtext" ng-click="gotosearch($event,searchkey)">{{searchkey}}</p>
+    <i class="iconfont icon-guanbi1 delsearchkey" ng-click="gotosearch($event);"></i>
+  </div>
+  <div class="righticon searchbtn" ng-click="gotosearch($event);">取消</div>
+</div>
+<div class="search-result-cont" down-tip-cls="{{'navmain-downtip'}}" pubname="{{'searchresultscrollupdate'}}" subname="{{'searchresultheightupdate'}}" up-tip-cls="{{'navmain-uptip'}}" xiaomai-iscroll>
+    <div class="loadingAnimation" ng-if="loading"></div>
+    <div class="loadText" ng-if="isloading">小麦麦正在努力搜索中...</div>
+    <div class="haserror errorip" ng-if="haserror">小麦没有找到与"{{searchkey}}"相关的商品<br/>试试搜索其他商品吧~~</div>
+    <ul>
+        <li ng-repeat="good in goods track by $index" ng-if="good">
+          <div xiaomai-good-list-item goods="good" detail-source-event="search" click-event="m_b_31searchadd" source-event="m_r_31cartfromsearch"></div>
+        </li>
+    </ul>
+</div>

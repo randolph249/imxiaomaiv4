@@ -1,0 +1,39 @@
+<div class="goodItem goodlistitem-row" ng-click="gotoDetail($event);">
+  <div class="imgCont" ng-style='{"background-image":"url("+goods.imageUrl+")"}'>
+<!--如果活动未开始-->
+    <p class="countdown" ng-if="goods.killStarted==0">
+      距开始
+      <span count-dead-call="timecountdown(timeid);" countdown counttime="{{goods.timeBeforeStart}}" timeid="{{goods.activityBgGoodsId}}"></span>
+    </p>
+    <!-- 活动已开始且没有被抢空-->
+    <p class="countdown" ng-if="goods.killStarted==1 && !goods.killed && goods.goodsStatusDisplay==2">
+      距结束
+      <span count-dead-call="timecountdown();" countdown counttime="{{goods.buyLeftTime}}"></span>
+    </p>
+  </div>
+  <div class="details">
+    <p class="goodname">{{goods.activityGoodsName}}</p>
+<!-- 输出标签29分钟达/次日达 -->
+    <label class="label" ng-class="{'ldc':$index==0,'rdc':$index===1}" ng-repeat="label in goods.distributeTypeDisplay track by $index" ng-show="label.length">{{label}}</label>
+    <p class="priceCont">
+<!-- 单品或者组合最高价-->
+      <span class="new-price">
+        &yen;<i>{{goods.skuList[0].activityPrice|xiaomaiprice}}</i>
+      </span>
+      <span class="old-price">
+        &yen;{{goods.skuList[0].originPrice|xiaomaiprice}}</span>
+    </p>
+<!-- 未开始-->
+    <p class="skicon sk-snap iconfont icon-qianggou disabled" ng-if="goods.killStarted==0"></p>
+<!-- 已结束-->
+    <p class="skicon cantsnap iconfont icon-yijieshu" ng-if="goods.killStarted==2"></p>
+<!-- 已经售空-->
+    <p class="skicon cantsnap sold-out iconfont icon-buhuozhong" ng-if="goods.killStarted==1 && goods.goodsStatusDisplay==3"></p>
+<!-- 已经抢过了 -->
+    <p class="skicon cantsnap sk-geted iconfont icon-yiqianggou" ng-if="goods.killStarted==1 && goods.killed"></p>
+<!-- 抢购开始 & 没抢购过 & 商品上架状态 -->
+    <p class="skicon sk-snap iconfont icon-qianggou" ng-class="{paying:goods.isPaying}" ng-click="buyHandler($event,good,$index);" ng-if="goods.killStarted==1 && !goods.killed && goods.goodsStatusDisplay==2"></p>
+<!--打烊了-->
+    <p class="skicon cantsnap sk-snap iconfont icon-dayangle" ng-if="goods.killStarted==1 && goods.goodsStatusDisplay==5"></p>
+  </div>
+</div>

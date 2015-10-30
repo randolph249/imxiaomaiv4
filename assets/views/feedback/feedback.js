@@ -2,20 +2,27 @@ angular.module('xiaomaiApp').controller('feedbackCtrl', [
   '$scope',
   '$state',
   'xiaomaiService',
-  function($scope, $state, xiaomaiService) {
+  'xiaomaiLog',
+  function($scope, $state, xiaomaiService, xiaomaiLog) {
 
     $scope.goBack = function() {
       $state.go('root.buy.nav.all');
     };
 
+    //feedback页面LOG统计
+    xiaomaiLog('m_p_31feedback');
+
     $scope.feedback = "";
     $scope.mobile = "";
 
-    var mobilereg = /^(\+86)?1[3|4|5|8][0-9]\d{4,8}$/g;
+    var mobilereg = /^(\+86)?1[3|4|5|8][0-9]\d{4,8}$/;
 
     $scope.submit = function() {
+      //提交点击次数日志统计
+      xiaomaiLog('m_b_31feedbacksubmit');
+
       var feedback = $scope.feedback,
-        mobile = $scope.mobile;
+        mobile = '' + $scope.mobile;
 
       feedback = feedback.trim && feedback.trim();
 

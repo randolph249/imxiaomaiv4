@@ -5,9 +5,13 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
   'schoolManager',
   'xiaomaiMessageNotify',
   'xiaomaiCacheManager',
-  'siblingsNav',
+  'xiaomaiLog',
   function($scope, $state, xiaomaiService, schoolManager,
-    xiaomaiMessageNotify, xiaomaiCacheManager, siblingsNav) {
+    xiaomaiMessageNotify, xiaomaiCacheManager, xiaomaiLog) {
+
+
+    //导航栏homepagePV统计
+    xiaomaiLog('m_p_31tabhome');
 
     $scope.activities = [];
 
@@ -19,11 +23,18 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
     schoolManager.get().then(function(res) {
       collegeId = res.collegeId;
       //根据学校信息获取当前活动列表
+
       return xiaomaiService.fetchOne('activities', {
         collegeId: collegeId
       });
     }).then(function(res) {
       $scope.haserror = false;
+      angular.forEach(res.activities, function(item) {
+        item.hasOwnProperty('wapImageUrl') && (item.wapImageUrl =
+          item.wapImageUrl +
+          '&imageView2/0/w/400/q/100');
+      });
+
       $scope.activities = res.activities;
       // return siblingsNav('down', collegeId, 0);
     }, function(msg) {
@@ -35,9 +46,11 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
     });
 
     //缓存页面数据
-    $scope.$on('$destory', function() {
+    $scope.$on('$destroy', function() {
       xiaomaiCacheManager.writeCache('activities', {
         activities: $scope.activities
+      }, {
+        collegeId: collegeId
       });
     });
 
@@ -50,20 +63,12 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
         return false;
       }
 
-      var tostate = '';
-      switch (active.activityType) {
-        case 1:
-          tostate = 'root.buy.active';
-          break;
-        default:
-          tostate = 'root.buy.skactive';
-          break;
-      }
       //跳转到对应的活动页面
-      $state.go(tostate, {
+      $state.go('root.buy.active', {
         //编译活动名会不会导致活动名过长
         collegeId: collegeId,
-        activityId: active.activityId
+        activityId: active.activityId,
+        refer: 'homepage'
       });
     }
   }

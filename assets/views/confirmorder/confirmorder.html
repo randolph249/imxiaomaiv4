@@ -1,0 +1,63 @@
+<div class="pub-header">
+  <div class="lefticon iconfont icon-fanhui" ng-click="goBack();"></div>
+  <div class="location-info icon-school middlearea">确认订单</div>
+</div>
+<div class="order_contents">
+  <div>
+<!--收货信息-->
+    <div class="block_bg" ng-controller="addrCtrl">
+      <p class="title addrTitle">收货信息</p>
+      <div class="addrInfo">
+        <span class="username">123</span>
+        <span class="telephone">456</span>
+        <p class="college">xuexiaoxinxi</p>
+        <i class="iconfont icon-yfmore" ng-click="gotoAddr($event);"></i>
+      </div>
+    </div>
+    <!-- 次日达订单-->
+    <!-- <div class="block_bg">
+      <p class="title rdcTitle">次日达订单</p>
+    </div> -->
+    <!-- 次日达订单-->
+    <!-- <div class="block_bg">
+      <p class="title ldcTitle">当日达订单</p>
+    </div> -->
+    <!-- 次日达订单-->
+    <!-- <div class="block_bg">
+      <p class="title thirdsellerTitle">第三方卖家商品订单</p>
+    </div> -->
+<!-- 优惠劵信息-->
+    <div class="block_bg">
+      <p class="title couponTitle">优惠信息</p>
+    </div>
+<!-- 支付信息-->
+    <div class="block_bg">
+      <p class="title payTypeTitle">支付方式</p>
+      <div class="contents">
+          <div class="content_column">
+            <i class="iconfont icon-weixin"></i>
+            <span class="payTypeNote">微信支付</span>
+            <i class="payCheckeBox"></i>
+          </div>
+          <div class="content_column">
+            <i class="iconfont icon-zhifubao"></i>
+            <span class="payTypeNote">支付宝支付</span>
+            <i class="payCheckeBox checked"></i>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--倒计时-->
+<footer class="fixOrderFooter clear">
+  <div class="pos_a pos_tab info f12 moveL">
+    <div class="thumbInfo">
+      <p>
+        合计:
+        <i class="f18" id="totalPrice"></i>
+      </p>
+      <p class="js_countdown_info">请在15分00秒内支付否则订单自动失效</p>
+    </div>
+  </div>
+  <span class="confirmBtn disabled">去支付</span>
+</footer>

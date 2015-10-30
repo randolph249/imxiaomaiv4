@@ -127,15 +127,15 @@ $nowPriceColor: #fc541f;
       line-height: 24px;
     }
   }
-  .detail-desc {
+  .detail-info {
     display: flex;
-    .detail-desc-key {
+    .detail-info-key {
       width: 24%;
       font-size: 14px;
       color: #333;
       line-height: 28px;
     }
-    .detail-desc-main {
+    .detail-info-main {
       flex-grow: 1;
       font-size: 14px;
       line-height: 28px;
