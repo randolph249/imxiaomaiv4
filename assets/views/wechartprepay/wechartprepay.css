@@ -1,52 +1,53 @@
 .fix {
-  position: absolute;
-  bottom: 0px;
-  box-shadow: 0px 1px 1px -1px #FFC151 inset;
-  z-index: 10003;
-  background-color: #Fe9402;
-  width: 100%;
-  height: 44px;
-  color: #fff;
+    position: absolute;
+    bottom: 0px;
+    box-shadow: 0px 1px 1px -1px #FFC151 inset;
+    z-index: 10003;
+    background-color: #Fe9402;
+    width: 100%;
+    height: 44px;
+    color: #fff;
 }
 
 .clear {
-  clear: both;
-  display: block;
+    clear: both;
+    display: block;
 }
 
 .moveL {
-  left: 2%;
-  width: 66.75%;
+    left: 2%;
+    width: 66.75%;
 }
 
 .pos_tab {
-  display: table!important;
+    display: table!important;
 }
 
 .info {
-  left: 21%;
-  right: 90px;
-  line-height: 18px;
-  height: 100%;
-  width: 48%;
+    left: 21%;
+    right: 90px;
+    line-height: 18px;
+    height: 100%;
+    width: 48%;
 }
 
 .pos_a {
-  position: absolute;
+    position: absolute;
 }
+
 .f12 {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 }
 
 .btn_cart {
-  right: 0;
-  top: 0;
+    right: 0;
+    top: 0;
 }
 
 .pos_tabC {
-  display: table-cell;
-  vertical-align: middle;
-  top: 50%;
+    display: table-cell;
+    vertical-align: middle;
+    top: 50%;
 }
 
 .lightGray {
@@ -59,7 +60,7 @@
 
 .fixHeader {
     /* position: fixed; */
-    position:absolute;
+    position: absolute;
     display: block;
     top: 0px;
     width: 100%;
@@ -69,7 +70,7 @@
 .wrap_title {
     position: absolute;
     top: 0px;
-    z-index:11111;
+    z-index: 11111;
     width: 100%;
     height: 50px;
     text-align: center;
@@ -88,7 +89,6 @@
     left: 5.3%;
 }
 
-
 .fixOrderFooter {
     position: absolute;
     bottom: 0px;
@@ -99,7 +99,7 @@
     height: 50px;
 }
 
-.fixOrderFooter #totalPrice{
+.fixOrderFooter #totalPrice {
     color: #ff5300;
 }
 
@@ -112,6 +112,7 @@
     line-height: 5rem;
     text-align: center;
 }
+
 .btn_bg {
     cursor: pointer;
     background-color: #ff5300;
@@ -122,7 +123,6 @@
     line-height: 50px;
     font-size: 1.8rem;
 }
-
 
 .js_countdown_info {
     color: #999;
@@ -146,14 +146,14 @@ hr {
     border-top: 1px solid #888;
 }
 
-
 #LDCBlock,
 #RDCBlock {
     display: none;
 }
-.tip_warning{
-	display:none;
-	background-color: rgba(0,0,0,.6);
+
+.tip_warning {
+    display: none;
+    background-color: rgba(0, 0, 0, .6);
     border-radius: 3px;
     /* min-height: 4rem; */
     line-height: 1.5;
@@ -185,12 +185,8 @@ hr {
     background-color: #eee;
     -webkit-overflow-scrolling: touch;
     -moz-overflow-scrolling: touch;
-
 }
 
-#confirmOrderPage .pos_order,
-#payFailPage .pos_order,
-#paySucPage .pos_order,
 #orderDetailPage .pos_order {
     top: 4.4rem;
 }
@@ -204,7 +200,8 @@ hr {
     display: block;
     background-size: cover;
 }
-.thirdDeliveryBlock{
+
+.thirdDeliveryBlock {
     background-color: #fff;
 }
 
@@ -212,10 +209,10 @@ hr {
     border-bottom: 1px solid #ddd;
 }
 
-.title{
-	text-indent:-5px;
-	border-bottom:1px solid #15acf3;
-	border-left:5px solid #15acf3;
+.title {
+    text-indent: -5px;
+    border-bottom: 1px solid #15acf3;
+    border-left: 5px solid #15acf3;
 }
 
 .orderForm h4.LDCTitle {
@@ -232,10 +229,12 @@ hr {
     border-left: 5px solid #00cb0d;
     color: #00cb0d;
 }
+
 .orderForm h4.RDCProTitle {
     border-bottom: 1px solid #00cb0d;
     color: #00cb0d;
 }
+
 .orderForm h4.LDCProTitle {
     border-bottom: 1px solid #00abf6;
     color: #00abf6;
@@ -247,20 +246,22 @@ hr {
     text-indent: -5px;
     border-bottom: 1px solid #ff5330;
     border-left: 5px solid #ff5330;
-    color:#ff5330;
+    color: #ff5330;
 }
 
-.wrapForm h4.specialTitle{
+.wrapForm h4.specialTitle {
     margin-left: 5.3%;
-    padding-left:0; 
+    padding-left: 0;
 }
-.wrapForm .thirdDeliveryBlock  h4.specialTitle{
-    color:#ff5330;
-    border-bottom:1px solid #ff5330; 
+
+.wrapForm .thirdDeliveryBlock h4.specialTitle {
+    color: #ff5330;
+    border-bottom: 1px solid #ff5330;
 }
+
 .block_bg {
     padding: 0px;
-    margin-top: 15px; 
+    margin-top: 15px;
     background: #fff;
 }
 
@@ -272,20 +273,18 @@ hr {
     font-size: 1.4rem;
 }
 
-.block_bg em.feight_price{
+.block_bg em.feight_price {
     display: inline-block;
     width: 68.65%;
 }
-.thirdDeliveryBlock .block_bg em.feight_price{
+
+.thirdDeliveryBlock .block_bg em.feight_price {
     width: 64.6%;
 }
 
-.block_bg hr,.thirdDeliveryBlock hr{
+.block_bg hr,
+.thirdDeliveryBlock hr {
     width: 106%;
-    margin: 0;
-}
-#confirmOrderPage .block_bg hr,#confirmOrderPage .thirdDeliveryBlock hr {
-    width: 100%;
     margin: 0;
 }
 
@@ -295,22 +294,26 @@ hr {
     -webkit-transform: scaleY(0);
     -moz-transform: scaleY(0);
 }
-#confirmOrderPage .deliveryInfo li:first-child ,#confirmOrderPage .payRetInfo li:first-child{
-    margin-top: 0px;
-}
-.deliveryInfo li:first-child ,.payRetInfo li:first-child{
+
+.deliveryInfo li:first-child,
+.payRetInfo li:first-child {
     margin-top: 10px;
 }
-#orderDetailPage .forRdcAddr, #orderDetailPage .freightShow {
+
+#orderDetailPage .forRdcAddr,
+#orderDetailPage .freightShow {
     margin-bottom: 8px;
 }
+
 .payRetInfo hr {
     margin-top: 10px;
 }
+
 .payRetInfo li.tx_right {
     line-height: 52px;
     height: 52px;
 }
+
 .deliveryInfo,
 .proListInfo,
 .couponInfo,
@@ -319,13 +322,9 @@ hr {
     padding: 0 5.3%;
 }
 
-.orderInfo{
+.orderInfo {
     padding: 1.5rem 5.3%;
     position: relative;
-}
-
-#confirmOrderPage .orderInfo{
-    padding: 1rem 5.3%;
 }
 
 .LDCInfo {
@@ -336,81 +335,48 @@ hr {
     border-bottom: 1px solid #94db9e;
 }
 
-.thirdDeliveryBlock .proListInfo:after{
-  width: 100%;
-  height: 5px;
-  background-image: url(../img/sliceLine.png);
-  background-repeat: repeat;
-  content: '';
-  display: block;
-  /* background-size: cover; */
-  position: absolute;
-  left: 0;
-  right:0;
+.thirdDeliveryBlock .proListInfo:after {
+    width: 100%;
+    height: 5px;
+    background-image: url(../img/sliceLine.png);
+    background-repeat: repeat;
+    content: '';
+    display: block;
+    /* background-size: cover; */
+    position: absolute;
+    left: 0;
+    right: 0;
 }
 
 .thirdDeliveryBlock .proListInfo:last-child:after {
-    background-image:none;
+    background-image: none;
 }
+
 .deliveryInfo li,
 .couponInfo li,
 .payInfo li,
 .payRetInfo li {
-    /*line-height: 30px;*/
-    /*height: 30px;*/
-    /*height: auto;*/
     line-height: 1.6;
 }
 
 .proListInfo li {
     overflow: hidden;
 }
-#confirmOrderPage .deliveryInfo li,
-#confirmOrderPage .couponInfo li,
-#confirmOrderPage .payInfo li,
-#confirmOrderPage .payRetInfo li {
-    line-height: 50px;
-    height: 50px;
-    /*height: auto;*/
-}
 
-
-.orderInfo li{
+.orderInfo li {
     line-height: 1.4;
     height: auto;
 }
 
-#confirmOrderPage .orderInfo li{
+.orderInfo li .js_college {
+    color: #999;
+}
+
+.deliveryInfo li.specialLiBot {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
     line-height: 2.4rem;
-}
-
-.orderInfo li .js_college{
-    color:#999;
-}
-
-#confirmOrderPage .deliveryInfo li.specialLiBot{
-    padding-bottom: 10px;
-    border-bottom:1px solid #ddd; 
-    line-height:2.4rem ;
-    height:2.4rem;
-}
-#confirmOrderPage .deliveryInfo li.specialLiTop{
-    padding-top: 10px;
-    line-height:2.4rem;
-    height:2.4rem;
-}
-
-.deliveryInfo li.specialLiBot{
-    padding-bottom: 10px;
-    border-bottom:1px solid #ddd; 
-    line-height:2.4rem ;
-    height:2.4rem;
-}
-
-#confirmOrderPage .deliveryInfo li.specialLiTop{
-    padding-top: 10px;
-    line-height:2.4rem;
-    height:2.4rem;
+    height: 2.4rem;
 }
 
 .orderInfo button {
@@ -424,15 +390,16 @@ hr {
     display: inline-block;
 }
 
-.orderInfo .js_telephone{
+.orderInfo .js_telephone {
     margin-left: 1.8rem;
 }
 
-.orderInfo .arr_right{
+.orderInfo .arr_right {
     position: absolute;
     right: 5.3%;
     top: 27px;
 }
+
 .couponInfo li {
     position: relative;
 }
@@ -443,24 +410,20 @@ hr {
     top: 17px;
 }
 
-.thirdDeliveryInfo{
+.thirdDeliveryInfo {
     padding: 1rem 0;
     line-height: 2.4rem;
     border-bottom: 1px solid #ddd;
     margin-left: 5.3%;
 }
+
 .js_address,
-.deliveryTD{
-	width:70.15%;
+.deliveryTD {
+    width: 70.15%;
 }
-#confirmOrderPage .js_address{
-	margin-top:-5px;
-	height:auto;
-	line-height:17px;
-	vertical-align: middle;
-}
-.deliveryRadio{
-	width:50%;
+
+.deliveryRadio {
+    width: 50%;
 }
 
 .orderInfo address {
@@ -502,7 +465,6 @@ hr {
     padding: 5px 0;
 }
 
-
 .payInfo em {
     display: inline-block;
     width: 86%;
@@ -524,6 +486,7 @@ hr {
 #orderDetailPage #list_order .wrapForm {
     margin-bottom: 0;
 }
+
 .btn_bg_pos {
     cursor: pointer;
     text-align: center;
@@ -535,21 +498,26 @@ hr {
     margin-left: 8.7%;
     color: #fff;
 }
+
 .btn_bg_normal {
     background-color: #FFA000;
 }
+
 .btn_bg_on {
     background-color: #FF5300;
 }
+
 .wrapLeftInfo {
     display: inline-block;
     margin-left: 20px;
 }
+
 .wrapLeftInfo span {
     display: block;
     text-align: left;
     line-height: 1.5;
 }
+
 .wrapLeftInfo span i {
     display: inline-block;
     width: 40px;
@@ -564,100 +532,127 @@ hr {
     font-size: 4rem;
     font-weight: normal;
 }
+
 .wrapRtImg {
     display: inline-block;
     margin: 21px 20px 0 20px;
     position: absolute;
     right: 0;
 }
+
 .btn_close {
     color: #FF5200;
     font-size: 1.6rem;
     left: 5.3%;
     position: absolute;
 }
+
 .tx_pos {
     display: inline-flex;
 }
+
 .tagColor {
     border-bottom: 1px solid #97c0ee;
 }
+
 .th3orderOne_ul {
     padding: 0 5.3%;
     position: relative;
 }
+
 .th3orderOne_ul li {
     margin: 10px 0px;
 }
+
 .th3orderOne_ul li span {
     max-width: 70%;
 }
+
 .arrRight {
     position: absolute;
     right: 5.3%;
     top: 24px;
-    -webkit-transform:rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
 }
-.forTh3OrderHr:last-child{
+
+.forTh3OrderHr:last-child {
     display: none;
 }
+
 .forTh3OrderHr {
     background: url('../img/bg_hr.png') repeat-x transparent scroll center center;
     height: 5px;
     -webkit-transform: initial;
     border: 0 none;
 }
+
 .wrapForm h4.payRetTitle {
     color: #ff5300;
     border-bottom: 1px solid #ff5300;
     border-left: 5px solid #ff5300;
 }
+
 hr.tagHrForAll {
     border-top: 1px solid #15acf3;
     -webkit-transform: scaleY(.5);
 }
+
 .wrapForm h4.tagForTh3Order {
     color: #ff5300;
     border-bottom: 1px solid #ff5300;
     border-left: 5px solid #ff5300;
 }
+
 hr.tagHrForTh3 {
     border-top: 1px solid #ff5300;
     -webkit-transform: scaleY(.5);
 }
-.wrapForm h4.tagH4ForTh3,.tagH4ForTh3,.tagH4ForTh3 em {
+
+.wrapForm h4.tagH4ForTh3,
+.tagH4ForTh3,
+.tagH4ForTh3 em {
     color: #ff5300;
 }
+
 .wrapForm h4.orderTitle {
     color: #333;
     margin-left: 5.3%;
     padding-left: 0;
 }
-.block_bg em.js_username,.block_bg span.js_telephone {
+
+.block_bg em.js_username,
+.block_bg span.js_telephone {
     max-width: 50%;
 }
+
 .block_bg span.js_collg {
     width: 100%;
     max-width: 100%;
 }
+
 .wrapForm h4.tagH4ForRdc {
     color: #00cb0d;
     border-bottom: 1px solid #00cb0d;
     border-left: 5px solid #00cb0d;
 }
+
 .wrapForm h4.tagH4ColForRdc {
-    color: #00cb0d; 
+    color: #00cb0d;
 }
+
 hr.tagHrColForRdc {
     border-top: 1px solid #00cb0d;
 }
+
 .freightShow del {
     color: #999;
     margin-left: 10px;
 }
+
 .tx_gray9 {
     color: #999;
 }
+
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
     .wrapRtImg {
         margin: 21px -10px 0 20px;
