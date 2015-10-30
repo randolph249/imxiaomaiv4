@@ -3,7 +3,7 @@
         <header class="fixHeader">
             <div class="wrap_title">
                 <!-- <i class="i_back canBack"></i> -->
-                <i class="btn_close">关闭</i>
+                <i class="btn_close" ng-click="closeWindow()">关闭</i>
                 <h2 class="tx_pos">支付信息</h2>
             </div>
         </header>
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="rePayWrap">
-                        <span id="goIndex" class="btn_bg_pos btn_bg_on js_repay btn_cart" disabled="false" data-stag="pay_continue">返回首页</span>
+                        <span id="goIndex" class="btn_bg_pos btn_bg_on js_repay btn_cart" data-stag="pay_continue" ng-click="gotoIndex()">返回首页</span>
                     </div>
                     <div class="showOrderWrap">
                         <span class="btn_bg_pos btn_bg_normal checkDetail">

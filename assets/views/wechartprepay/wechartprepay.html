@@ -8,7 +8,7 @@
             <div id="orderScroller">
                 <div class="wrapForm f14">
                     <!--收貨信息-->
-                    <div class="block_bg" id="orderBlock">
+                    <div class="block_bg" id="orderBlock" >
                         <h4 class="f16 orderTitle">收货信息</h4>
                         <ul class="orderInfo">
                             <li class="li_username">
@@ -21,10 +21,11 @@
                         </ul>
                     </div>
                     <div class="deliveryTypeBlock">
-                        <div class="block_bg deliveryBlock" ng-repeat="childOrder in childOrders">
-                            <h4 class="f16 title" ng-if="childOrder.distributeType === 0">次日达订单</h4>
-                            <h4 class="f16 title" ng-if="childOrder.distributeType === 1">当日达订单</h4>
-                            <ul class="deliveryInfo" ng-if="childOrder.distributeType != 2">
+                        <div class="block_bg deliveryBlock" ng-repeat="childOrder in childOrders" >
+                            <h4 class="f16 title" ng-if="childOrder.distributeType === 0" >次日达订单</h4>
+                            <h4 class="f16 title" ng-if="childOrder.distributeType === 1" >当日达订单</h4>
+                            <!-- 当日达，次日达订单 -->
+                            <ul class="deliveryInfo" ng-if="childOrder.distributeType === 0 || childOrder.distributeType === 1" >
                                 <li>
                                     <em>订单号</em>
                                     <span class="orderId">{{childOrder.childOrderCode}}</span>
@@ -48,9 +49,11 @@
                                 </li>
                                 <hr>
                             </ul>
-                            <h4 class="f16 tagH4" ng-if="childOrder.distributeType === 0 || childOrder.distributeType === 1">小麦特供</h4>
-                            <ul class="proListInfo" ng-if="childOrder.distributeType === 0 || childOrder.distributeType === 1">
+                            <!-- 商品清单 -->
+                            <h4 class="f16 tagH4" ng-if="childOrder.distributeType === 0 || childOrder.distributeType === 1" >小麦特供</h4>
+                            <ul class="proListInfo" ng-if="childOrder.distributeType === 0 || childOrder.distributeType === 1" >
                                 <hr class='tagHrForAll tagHrColForRdc' ng-if="childOrder.distributeType === 0">
+                                <!-- 控制显示前两条和最后一条 -->
                                 <li ng-repeat="childOrderDetail in childOrder.childOrderDetailList" ng-show="{{$index}} < 2 || {{$index}} === childOrder.childOrderDetailList.length-1">
                                     <em class="ellipsis">{{childOrderDetail.skuName}}</em>
                                     <span class="ellipsis colorOrg pos_price">￥{{childOrderDetail.skuPrice | xiaomaiprice}}</span>
@@ -63,9 +66,9 @@
                                     </label>
                                 </li>
                             </ul>
-
-                            //第三方买家订单
+                            <!-- 第三方买家订单 -->
                             <h4 class="f16 title tagForTh3Order" ng-if="childOrder.distributeType === 2">第三方卖家商品订单</h4>
+                            <!-- 第三方买家订单配送地址、配送费 -->
                             <ul class="deliveryInfo" ng-if="childOrder.distributeType === 2">
                                 <li class="shipAddress shipDelivery">
                                     <em>配送地址</em>
@@ -77,19 +80,38 @@
                                 </li>
                                 <hr>
                             </ul>
+                            <!-- 第三方买家订单商品清单 -->
                             <ul class="wrapth3OrderList" ng-if="childOrder.distributeType === 2">
-                            	<li class="th3orderOne" ng-repeat="th3ChildOrderDetail in childOrder.th3ChildOrderList">
-									<h4 class="f16 tagH4ForTh3">{{th3ChildOrderDetail.storageName}}
+                                <li class="th3orderOne" ng-repeat="th3ChildOrderDetail in childOrder.th3ChildOrderList">
+                                    <h4 class="f16 tagH4ForTh3">{{th3ChildOrderDetail.storageName}}
 									</h4>
-
-
-
-
-									<ul id="proListInfo_'+k+'" class="proListInfo">
-									OrderDetailsStr
-									</ul>
-								</li>
-								<hr class="forTh3OrderHr"/>
+                                    <ul class="th3orderOne_ul bindClickForShowInfo" ng-click="bindClickForShowInfo({{th3ChildOrderDetail.storageId}})">
+                                        <hr class="tagHrForTh3" />
+                                        <li>
+                                            <em>订单号</em>
+                                            <span class="orderId">{{th3ChildOrderDetail.storageId}}</span>
+                                        </li>
+                                        <li class="tagH4ForTh3" ng-if="th3ChildOrderDetail.deliveryInfo">
+                                            <em>物流状态</em>
+                                            <span class="ellipsis">{{th3ChildOrderDetail.deliveryInfo.deliveryData[0].deliveryInfo}}</span>
+                                        </li>
+                                        <span class="arr_down arrRight" ng-if="th3ChildOrderDetail.deliveryInfo"></span>
+                                    </ul>
+                                    <ul id="proListInfo_'+k+'" class="proListInfo">
+                                        <li ng-repeat="th3ChildOrderitem in th3ChildOrderDetail.childOrderDetailList" ng-show="{{$index}} < 2 || {{$index}} === th3ChildOrderDetail.childOrderDetailList.length-1">
+                                            <em class="ellipsis">{{th3ChildOrderitem.skuName}}</em>
+                                            <span class="ellipsis colorOrg pos_price">￥{{th3ChildOrderitem.skuPrice | xiaomaiprice}}</span>
+                                            <span class="ellipsis fr pos_num">×&nbsp;<i>{{th3ChildOrderitem.skuNum}}</i></span>
+                                        </li>
+                                        <hr ng-show="th3ChildOrderDetail.childOrderDetailList.length>3">
+                                        <li ng-show="th3ChildOrderDetail.childOrderDetailList.length>3" id="showMore_btn" class="controlBtn tx_center"><i name="showMore" class="arr_down"></i>
+                                            <label for="showMore" class="showMore">
+                                                <address class="lightGray">点击查看全部</address>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <hr class="forTh3OrderHr" />
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -101,7 +123,7 @@
                 <div class="pos_tabC">
                     <p>
                         共计:&nbsp;
-                        <i id="totalPrice" class="f18"></i>元
+                        <i id="totalPrice" class="f18">{{order.onlinePay | xiaomaiprice}}</i>元
                     </p>
                 </div>
             </div>

@@ -119,17 +119,14 @@
     </div>
 </div>
 <div class="J-weixin-tip-img weixin-tip-img"></div>
-<script type="text/javascript" src="../../js/module/order/ap.js"></script>
-<script type="application/javascript" src="../../js/lib/jquery-1.10.1.min.js"></script>
-<script type="application/javascript" src="../../js/lib/jquery.cookie.js"></script>
-<script type="application/javascript" src="../../js/components/maLog.js?v=20150819"></script>
+
 <script>
-var openId=$.cookie("xiaomai_open_id");
-//页面埋点
-var orderId = getQueryString(location.href, 'orderId') || '';
-var obj = "~~"+openId+"~~"+orderId+"~^data~tag~~~^";
-var event = "m_p_zhifubaoprepay";
-mallLog(event, obj);
+// var openId=$.cookie("xiaomai_open_id");
+// //页面埋点
+// var orderId = getQueryString(location.href, 'orderId') || '';
+// var obj = "~~"+openId+"~~"+orderId+"~^data~tag~~~^";
+// var event = "m_p_zhifubaoprepay";
+// mallLog(event, obj);
 
     if (location.hash.indexOf('error') != -1) {
         alert('参数错误，请检查');
@@ -155,17 +152,17 @@ mallLog(event, obj);
         if (reg.test(url)) return RegExp.$2.replace(/\+/g, " ");
     };
     function orderComplete() {
-        var orderId = getQueryString(location.href, 'orderId') || '';
-        var userId = getQueryString(location.href, 'userId') || ''; 
-        console.log("orderId", orderId);
-        console.log("userId", userId);
-      //点击“已按上述步骤完成支付”按钮埋点
-        var obj = "~~"+openId+"~~"+orderId+"~^data~tag~~~^";
-        var event = "m_b_zhifubaofinishpay";
-        mallLog(event, obj);
-        if (orderId) {
-            window.location.href = "/order/paySuccess?orderId="+orderId+"&userId="+userId;
-        }
+      //   var orderId = getQueryString(location.href, 'orderId') || '';
+      //   var userId = getQueryString(location.href, 'userId') || ''; 
+      //   console.log("orderId", orderId);
+      //   console.log("userId", userId);
+      // //点击“已按上述步骤完成支付”按钮埋点
+      //   var obj = "~~"+openId+"~~"+orderId+"~^data~tag~~~^";
+      //   var event = "m_b_zhifubaofinishpay";
+      //   mallLog(event, obj);
+      //   if (orderId) {
+      //       window.location.href = "/order/paySuccess?orderId="+orderId+"&userId="+userId;
+      //   }
     }
 </script>
 <div style="background-color:#ffb838; margin: 100px auto;width: 80%;height: 40px; line-height: 40px; color: #444">

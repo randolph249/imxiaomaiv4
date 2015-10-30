@@ -172,6 +172,11 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: "/wap/order/query",
         type: "GET"
       },
+      //删除购物车
+      "delete":{
+        url: "/wap/cart/delete",
+        type: "GET"
+      },
 
     },
     getModel = function() {

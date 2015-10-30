@@ -416,6 +416,7 @@ angular.module('xiaomaiApp').config([
       //支付成功页面
       .state('root.paySuccess', {
         url: 'paySuccess/',
+        controller:'paySuccessCtrl',
         templateUrl: '../assets/views/paySuccess/paySuccess.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -432,6 +433,7 @@ angular.module('xiaomaiApp').config([
       //支付失败页面
       .state('root.payFail', {
         url: 'payFail/',
+        controller:'payFailCtrl',
         templateUrl: '../assets/views/payFail/payFail.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {

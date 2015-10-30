@@ -305,11 +305,11 @@ a.pos_tel {
     margin-right: 10px;
 }
 .i_succ {
-    background: url('../img/i_paySucc@2x.png') no-repeat scroll center center;
+    background: url('http://xiaomai-p2p.qiniudn.com/806e6efaddeb654e7c2ffe95a5b542d7') no-repeat scroll center center;
     background-size: 40px 40px;
 }
 .i_fail {
-    background: url('../img/i_payFail@2x.png') no-repeat scroll center center;
+    background: url('http://xiaomai-p2p.qiniudn.com/a04970c50249424eef5e6835104ce998') no-repeat scroll center center;
     background-size: 40px 40px;
 }
 .wrapLeftInfo span strong {
@@ -323,13 +323,14 @@ a.pos_tel {
     right: 0;
 }
 .i_succImgBox {
-    background: url('../img/i_succBox@2x.png') no-repeat scroll center center;
+    background: url('http://xiaomai-p2p.qiniudn.com/9c041f5e437c4f2d1f816dd553ad90f9') no-repeat scroll center center;
     background-size: contain;
     width: 100px;
     height: 58px;
+    display: inline-block;
 }
 .i_failImgBox {
-    background: url('../img/i_failBox@2x.png') no-repeat scroll center center;
+    background: url('http://xiaomai-p2p.qiniudn.com/a464c6605628a3f3721f97d736cb8487') no-repeat scroll center center;
     background-size: contain;
     width: 104px;
     height: 65px;

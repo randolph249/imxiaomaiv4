@@ -14,7 +14,12 @@ angular.module('xiaomaiApp').controller('wechartprepayCtrl', [
             $scope.order = res.order;
             $scope.childOrders = res.order.childOrderList;
             $scope.th3orders = res.order.th3ChildOrderList;
-            
+            $scope.bindClickForShowInfo = function(d){
+                var host = env == 'online' ? 'http://h5.imxiaomai.com' :
+                'http://wap.tmall.imxiaomai.com';
+                window.location.href = host + '/deliveryDetail?orderId='+d;
+                return false;
+            }
         }, function() {}).finally(function() {});
 
 

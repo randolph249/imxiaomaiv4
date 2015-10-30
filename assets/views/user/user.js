@@ -42,6 +42,10 @@ angular.module('xiaomaiApp').controller('userCtrl', [
             window.location.href = host + '/order/myOrder';
             return false;
         };
+        //点击跳转意见反馈
+        $scope.gotofeedback = function() {
+           $state.go('root.feedback');
+        };
 
     }
 ]);

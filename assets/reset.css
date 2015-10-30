@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 body, button, dd, dl, dt, footer, h1, h2, h3, h4, h5, h6, input, li, nav, ol, p, td, textarea, tr, ul {
   margin: 0;
   padding: 0;
@@ -80,7 +80,8 @@ html {
   user-select: none;
 }
 ::-webkit-scrollbar {
-  display: none;
+display:none;
+
 }
 input, textarea, button {
   outline: none;
@@ -95,6 +96,9 @@ div, header, .list_cate, .list_pro, img, i, .cartListUl, .dt_all .wrap_dtImg {
 }
 .fl {
   float: left;
+}
+.fr {
+  float: right;
 }
 .clear {
   clear: both;
