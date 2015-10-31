@@ -29,7 +29,7 @@ angular.module('xiaomaiApp').controller('orderCtrl', [
     orderManager.getOrderInfo('order').then(function() {
       setTimeout(function() {
         xiaomaiMessageNotify.pub('confirmoderHeightUpdate', 'up', 'ready', '', '');
-      }, 200);
+      }, 100);
     });
 
     //统计日志
@@ -66,6 +66,12 @@ angular.module('xiaomaiApp').controller('orderCountdownCtrl', [
         orderPayTimeend();
       }
     }, 1000);
+
+    //避免用户回退操作给出提示
+    //订单支付完成失效 而不是超时失效
+    $scope.$on('$destroy', function() {
+      $interval.cancel($t);
+    });
 
     //订单超时处理
     var orderPayTimeend = function() {

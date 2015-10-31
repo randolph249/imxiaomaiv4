@@ -464,3 +464,13 @@
   font-size: 1.8rem;
   color: #999
 }
+
+.fixOrderFooter.fixwechartpayFooter{
+  background-color: #Fe9402;
+}
+.fixwechartpayFooter .prepayprice{
+  line-height: 4.4rem;
+  padding:0 1rem;
+  color:#fff;
+  font-size:1.4rem;
+}

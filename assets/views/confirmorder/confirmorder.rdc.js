@@ -9,7 +9,7 @@ angular.module('xiaomaiApp').controller('rdcOrderCtrl', [
     orderManager.getOrderInfo('order.childOrderList').then(function(res) {
       angular.forEach(res, function(item) {
         if (item.distributeType == 0) {
-          $scope.showOrder = true;
+          // $scope.showOrder = true;
           $scope.childOrderDetailList = item.childOrderDetailList
         }
       });

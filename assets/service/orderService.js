@@ -111,7 +111,7 @@ angular.module('xiaomaiApp').factory('orderManager', [
 
       schoolManager.get().then(function(res) {
         collegeId = res.collegeId;
-        return xiaomaiService.fetchOne('queryOrder', {
+        return xiaomaiService.fetchOne('queryReferOrder', {
           userId: userId,
           orderId: orderId,
           collegeId: collegeId
@@ -176,7 +176,6 @@ angular.module('xiaomaiApp').factory('orderManager', [
     var getOrderInfo = function(querystring) {
       var deferred = $q.defer();
       getOrder().then(function(res) {
-
         try {
           deferred.resolve(eval('res.' + querystring));
         } catch (e) {

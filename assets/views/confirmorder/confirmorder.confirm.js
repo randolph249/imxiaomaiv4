@@ -48,14 +48,16 @@ angular.module('xiaomaiApp').controller('orderConfirmCtrl', [
       }
       //如果是微信支付 跳转到微信预支付页面
       if (payType === 1) {
-        $state.go('root.wechartprepay');
         xiaomaiCacheManager.writeCache('prepayData', res.prepayData);
+        $state.go('root.wechartprepay', {
+          userId: res.order.userId,
+          orderId: res.order.orderId
+        });
+
       } else if (payType == 2) {
         try {
           _AP.pay(_data.prepayData.payUrl, res.order.orderId, res.order.userId);
-        } catch (e) {
-          console.log('AP插件没有加载？');
-        }
+        } catch (e) {}
         xiaomaiCacheManager.writeCache('prepayData', res.prepayData);
       }
     };
@@ -91,7 +93,7 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
   function(xiaomaiMessageNotify, orderManager, addrMananger, xiaomaiService, $q) {
 
     var requireParamList = {};
-    var subLdcDeliveryType, subLdcDeliveryAddress, subOnlinePayType;
+    var subLdcDeliveryType, subLdcDeliveryAddress, subOnlinePayType, subLdcDeliveryTime;
     var resetParam = function() {
       requireParamList = {
         userId: '',
@@ -108,6 +110,8 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
         ldcDeliveryType: -1,
         ldcSelfPickUpAddress: '',
         ldcDeliveryAddress: '',
+        ldcDeliveryBeginTime: '',
+        ldcDeliveryEndTime: '',
         onlinePayType: '',
         couponId: '',
         couponPay: '',
@@ -161,6 +165,11 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
         });
       });
 
+      //监听LDC送货时间
+      subLdcDeliveryTime = xiaomaiMessageNotify.sub('updateLdcDeliveryTime', function(timeObj) {
+        requireParamList = angular.extend(requireParamList, timeObj);
+      });
+
       //获取用户优惠劵信息
       subCouponupdateId = xiaomaiMessageNotify.sub('updateOrderCouponInfo', function(couponInfo) {
         switch (couponInfo.couponType) {
@@ -205,6 +214,8 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
       xiaomaiMessageNotify.removeOne('updateOrderCouponInfo', subCouponupdateId);
       xiaomaiMessageNotify.removeOne('updateLdcDeliveryAddress', subLdcDeliveryAddress);
       xiaomaiMessageNotify.removeOne('updateOnlinePayType', subOnlinePayType);
+      xiaomaiMessageNotify.removeOne('updateLdcDeliveryTime', subLdcDeliveryTime);
+
     };
 
     //执行confirm

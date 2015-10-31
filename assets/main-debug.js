@@ -404,7 +404,8 @@ angular.module('xiaomaiApp').config([
       })
       //跳转到微信预支付页面
       .state('root.wechartprepay', {
-        url: 'wechartprepay/',
+        url: 'wechartprepay/?userId&orderId',
+        controller: 'wechartprepayCtrl',
         templateUrl: '../assets/views/wechartprepay/wechartprepay.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -412,6 +413,20 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl + 'views/wechartprepay/wechartprepay.js',
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.css'
+              ]
+            })
+          }]
+        }
+      })
+      .state('root.wechartprepay1', {
+        url: 'wechartprepay1/?userId&orderId',
+        templateUrl: '../assets/views/wechartprepay/wechartprepay1.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
                 window.__SYS_CONF.resourceUrl + 'views/wechartprepay/wechartprepay.css'
               ]
             })
@@ -428,7 +443,8 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl + 'views/alipayprepay/alipayprepay.js',
-                window.__SYS_CONF.resourceUrl + 'views/alipayprepay/alipayprepay.css'
+                window.__SYS_CONF.resourceUrl + 'views/alipayprepay/alipayprepay.css',
+                window.__SYS_CONF.resourceUrl + 'lib/AP.js'
               ]
             })
           }]
@@ -436,7 +452,7 @@ angular.module('xiaomaiApp').config([
       })
       //支付成功页面
       .state('root.paySuccess', {
-        url: 'paySuccess/',
+        url: 'paySuccess/?userId&orderId',
         templateUrl: '../assets/views/paySuccess/paySuccess.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -452,7 +468,7 @@ angular.module('xiaomaiApp').config([
       })
       //支付失败页面
       .state('root.payFail', {
-        url: 'payFail/',
+        url: 'payFail/?userId&orderId',
         templateUrl: '../assets/views/payFail/payFail.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {

@@ -168,7 +168,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         type: 'POST'
       },
       //获取订单
-      "queryOrder": {
+      "queryReferOrder": {
         url: "/wap/order/refer",
         type: "GET"
       },
@@ -177,9 +177,25 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: "/userBind/auth",
         type: "GET"
       },
+      //订单确认提交
       "confirmOrder": {
         url: "/wap/order/confirm",
         type: "POST"
+      },
+      //订单查询
+      "queryOrder": {
+        url: "/wap/order/query",
+        type: "GET"
+      },
+      //支付状态校验
+      "payStatusCheck": {
+        url: "/wap/order/pay/check",
+        type: "GET"
+      },
+      //送货时间表
+      "ldcDeliveryTime": {
+        url: "/wap/get/ldc/deliveryTime",
+        type: "GET"
       }
     },
     getModel = function() {
@@ -304,9 +320,6 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           }, params)
         }).success(function(res) {
 
-          if (name == "addrDel") {
-            debugger;
-          }
           //如果返回结果有异常 reject
           if (handlerResult(res) === false) {
             deferred.reject(res.msg);

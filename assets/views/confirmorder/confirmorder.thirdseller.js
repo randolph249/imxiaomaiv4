@@ -14,7 +14,7 @@ angular.module('xiaomaiApp').controller('thirdOrderCtrl', [
       if (!res || !res.length) {
         return false;
       }
-      $scope.showOrder = true;
+      // $scope.showOrder = true;
       $scope.thirdChildOrderList = res;
     });
 
