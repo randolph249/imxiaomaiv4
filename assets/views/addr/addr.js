@@ -35,6 +35,9 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
 
     //选取某个地址作为默认地址
     $scope.choosenAddr = function($event, addrInfo) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
       if (addrInfo.userAddrId == $scope.addrId) {
         return false;
       }

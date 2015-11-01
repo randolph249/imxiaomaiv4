@@ -20,13 +20,14 @@ angular.module('xiaomaiApp').controller('orderCtrl', [
     var verifyOrder = function() {
       //判断订单是否失效如果失效直接跳回到首页
       var orderStatus = orderManager.queryOrderStatus();
+
       if (orderStatus == false) {
         alert('当前订单已经不存在,\n将回到首页');
         $state.go('root.buy.nav.all');
       }
     };
 
-    orderManager.getOrderInfo('order').then(function() {
+    orderManager.getOrderInfo('order').then(function(res) {
       setTimeout(function() {
         xiaomaiMessageNotify.pub('confirmoderHeightUpdate', 'up', 'ready', '', '');
       }, 100);

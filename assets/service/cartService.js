@@ -59,7 +59,6 @@ angular.module('xiaomaiApp').factory('cartManager', [
     //添加到购物车
     var add = function(param) {
       var deferred = createPromise();
-      debugger;
       xiaomaiService.save('addCart', param).then(function(res) {
 
         updateQueryResult(res);
@@ -106,9 +105,19 @@ angular.module('xiaomaiApp').factory('cartManager', [
     };
     var readCartCache = function() {
       return xiaomaiCacheManager.readCache('queryCart');
-    }
+    };
+    //清空购物车
     var clear = function() {
+      //读取购物车详情
+      var deferred = $q.defer();
+      xiaomaiService.save('emptyCart').then(function(res) {
+        deferred.resolve(res);
+        //写入到缓存中
+        xiaomaiCacheManager.clean('queryCart');
+        xiaomaiCacheManager.clean('queryCartDetail');
 
+      });
+      return deferred.promise;
     };
     //读取购物车详情
     var queryCartDetail = function() {
@@ -286,10 +295,12 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
         }
         //执行提交
         cartManager[eventName](param).then(function() {
+
+          numInCart = type == "plus" ? (numInCart + 1) : (numInCart - 1);
           successHandler(numInCart);
 
-        }, function(msg) {
-          deferred.reject(msg);
+        }, function(error) {
+          deferred.reject(error.msg);
         });
 
       } else {

@@ -36,16 +36,18 @@ angular.module('xiaomaiApp').controller('orderConfirmCtrl', [
       }).finally(function() {
         $scope.lock = false;
         //订单是否是在这里失效的
-        orderManager.deleteOrder();
       })
     };
 
     //支付成功以后的处理逻辑
     var confirmSuccessedHanlder = function(res) {
+      alert('payTypeis:' + payType);
       if (res.order.status == 5) {
         alert("您已经支付了，请勿重复提交支付请求。");
         return;
       }
+
+      orderManager.deleteOrder();
       //如果是微信支付 跳转到微信预支付页面
       if (payType === 1) {
         xiaomaiCacheManager.writeCache('prepayData', res.prepayData);
@@ -56,21 +58,32 @@ angular.module('xiaomaiApp').controller('orderConfirmCtrl', [
 
       } else if (payType == 2) {
         try {
-          _AP.pay(_data.prepayData.payUrl, res.order.orderId, res.order.userId);
-        } catch (e) {}
+          _AP.pay(res.prepayData.payUrl, res.order.orderId, res.order.userId);
+        } catch (e) {
+
+        }
         xiaomaiCacheManager.writeCache('prepayData', res.prepayData);
       }
     };
 
     //支付失败之后的逻辑处理
     var confirmFailedHanlder = function(error) {
+
+      $state.go('root.paySuccess', {
+        orderId: 100,
+        userId: 101
+      });
+      return false;
       if (error.code === 1) {
         alert(error.msg);
         //跳转到支付成功页面
         $state.go('root.paySuccess', {
           orderId: error.data.order.userId,
           userId: error.data.order.orderId
-        })
+        });
+        orderManager.deleteOrder();
+      } else if (error.code == 'none') {
+        alert(error.msg);
       } else {
         alert(error.msg);
         //跳转到支付失败页面
@@ -78,6 +91,7 @@ angular.module('xiaomaiApp').controller('orderConfirmCtrl', [
           orderId: error.data.order.userId,
           userId: error.data.order.orderId
         });
+        orderManager.deleteOrder();
       }
     };
 
@@ -90,12 +104,14 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
   'addrMananger',
   'xiaomaiService',
   '$q',
-  function(xiaomaiMessageNotify, orderManager, addrMananger, xiaomaiService, $q) {
+  'cookie_openid',
+  function(xiaomaiMessageNotify, orderManager, addrMananger, xiaomaiService, $q, cookie_openid) {
 
     var requireParamList = {};
     var subLdcDeliveryType, subLdcDeliveryAddress, subOnlinePayType, subLdcDeliveryTime;
     var resetParam = function() {
       requireParamList = {
+        opend_id: cookie_openid,
         userId: '',
         orderId: '',
         collegeId: '',
@@ -221,7 +237,16 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
     //执行confirm
     var doConfirm = function() {
       var deferred = $q.defer();
-      xiaomaiService.save('confirmOrder', requireParamList).then(function(res) {
+
+      if (!requireParamList.receiverName || !requireParamList.receiverName.length) {
+        deferred.reject({
+          code: 'none',
+          msg: '请完善收货人信息'
+        });
+        return deferred.promise;
+      }
+
+      xiaomaiService.save('confirmOrder', requireParamList, true).then(function(res) {
         deferred.resolve(res);
       }, function(error) {
         deferred.reject(error);

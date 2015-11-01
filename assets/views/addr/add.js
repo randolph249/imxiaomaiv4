@@ -7,6 +7,12 @@ angular.module('xiaomaiApp').controller('addrAddCtrl', [
     var userId = $state.params.userId,
       addrId = $state.params.addrId;
 
+    if (xiaomaiCacheManager.readCache('addrCollegeInfo')) {
+      var checkedCollegeCache = xiaomaiCacheManager.readCache('addrCollegeInfo');
+      $scope.receiverCollegeId = checkedCollegeCache.collegeId;
+      $scope.receiverCollegeName = checkedCollegeCache.collegeName;
+    }
+
     //查看是否有页面旧数据
     if (xiaomaiCacheManager.readCache('addraddInfo')) {
       var caches = xiaomaiCacheManager.readCache('addraddInfo');
@@ -14,11 +20,7 @@ angular.module('xiaomaiApp').controller('addrAddCtrl', [
       $scope.receiverPhone = caches.receiverPhone;
 
       //更新缓存学校时候候要判断使用页面旧数据还是选中的新学校数据
-      if (xiaomaiCacheManager.readCache('addrCollegeInfo')) {
-        var checkedCollegeCache = xiaomaiCacheManager.readCache('addrCollegeInfo');
-        $scope.receiverCollegeId = checkedCollegeCache.collegeId;
-        $scope.receiverCollegeName = checkedCollegeCache.collegeName;
-      } else {
+      if (!xiaomaiCacheManager.readCache('addrCollegeInfo')) {
         $scope.receiverCollegeId = caches.receiverCollegeId;
         $scope.receiverCollegeName = caches.receiverCollegeName;
       }

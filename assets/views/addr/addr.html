@@ -5,20 +5,20 @@
 <div class="addrListCont">
   <div>
 <!--默认收货-->
-    <div class="defaultAddr addrItem">
-      <span class="name">{{defaultUserAddr.receiverCollegeName}}</span>
+    <div class="defaultAddr addrItem" ng-click="choosenAddr($event,defaultUserAddr);">
+      <span class="name">{{defaultUserAddr.receiverName}}</span>
       <span class="telephone">{{defaultUserAddr.receiverPhone}}</span>
       <div class="colleges">{{defaultUserAddr.receiverCollegeName}}</div>
-      <i class="iconfont icon-ok" ng-class="{checked:defaultUserAddr.userAddrId==addrId}" ng-click="choosenAddr($event,defaultUserAddr);"></i>
+      <i class="iconfont icon-ok" ng-class="{checked:defaultUserAddr.userAddrId==addrId}"></i>
     </div>
 <!-- 可选地址列表 -->
     <ul ng-repeat="addr in addrList track by $index">
       <li>
-        <div class="addrItem">
+        <div class="addrItem" ng-click="choosenAddr($event,addr);">
           <span class="name">{{addr.receiverName}}</span>
           <span class="telephone">{{addr.receiverPhone}}</span>
           <div class="colleges">{{addr.receiverAddr}}</div>
-          <i class="iconfont icon-ok" ng-class="{checked:addr.userAddrId==addrId}" ng-click="choosenAddr($event,addr);"></i>
+          <i class="iconfont icon-ok" ng-class="{checked:addr.userAddrId==addrId}"></i>
         </div>
         <div class="addrHandlers">
             <span ng-click="gotoEdit($event,addr.receiverCollegeId);">

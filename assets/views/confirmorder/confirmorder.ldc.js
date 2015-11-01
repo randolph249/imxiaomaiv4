@@ -1,6 +1,6 @@
 angular.module('xiaomaiApp').filter('ldcdeliverytime', function() {
   var switchDate = function(datestr) {
-    var dateReg = /\d{4}[-\/]\d{2}[-\/]\d{2}/;
+    var dateReg = /\d{2}[-\/]\d{2}/;
     var timeReg = /\d{2}:\d{2}/;
 
     var newTimestr = datestr.match(dateReg)[0].replace(/-\//, '');
@@ -8,10 +8,9 @@ angular.module('xiaomaiApp').filter('ldcdeliverytime', function() {
     var nowMonth = now.getMonth() + 1;
     var nowDay = now.getDate();
 
-    nowMonth = nowMonth < 10 ? ('0' + nowMonth) : nowMonth;
-    nowDay = nowDay < 10 ? ('0' + nowDay) : nowDay;
+    nowMonth = nowMonth < 10 ? ('0' + nowMonth) : ('' + nowMonth);
+    nowDay = nowDay < 10 ? ('0' + nowDay) : ('' + nowDay);
     nowDate = nowMonth + nowDay;
-
     if (nowDate == newTimestr) {
       return datestr.match(timeReg)[0];
     } else {
@@ -29,17 +28,20 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
   'xiaomaiMessageNotify',
   '$q',
   'xiaomaiService',
-  function($scope, orderManager, xiaomaiMessageNotify, $q, xiaomaiService) {
+  'schoolManager',
+  function($scope, orderManager, xiaomaiMessageNotify, $q, xiaomaiService, schoolManager) {
     $scope.showOrder = false;
 
     //获取LDC订单
     orderManager.getOrderInfo('order.childOrderList').then(function(res) {
+
       angular.forEach(res, function(item) {
         if (item.distributeType == 1) {
           $scope.showOrder = true;
 
           $scope.ldcAddressTime = item.isFixDeliveryTime ? (item.ldcFixBeginTime + '~' + item.ldcFixEndTime) :
-            item.deliveryTimeStr;
+            '29分钟达';
+          $scope.ldcAddressTime = '29分钟达';
 
           //向后台发送送货时间
           $scope.chooseTime($scope.ldcAddressTime);
@@ -70,9 +72,14 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
       }
     };
     //获取送货时间列表
-
-    xiaomaiService.fetchOne('ldcDeliveryTime').then(function(res) {
+    orderManager.getOrderInfo('college').then(function(res) {
+      var collegeId = res.collegeId;
+      return xiaomaiService.fetchOne('ldcDeliveryTime', {
+        collegeId: collegeId
+      });
+    }).then(function(res) {
       $scope.deliveryTimes = res.ldcTimeList;
+
     });
 
     $q.all([

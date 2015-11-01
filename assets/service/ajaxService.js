@@ -71,6 +71,11 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/wap/cart/remove',
         type: 'POST'
       },
+      //清空购物车
+      'emptyCart': {
+        url: '/wap/cart/delete',
+        type: 'POST'
+      },
       //新版本学校白名单
       'whitelist': {
         type: 'GET',
@@ -174,7 +179,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       },
       //微信授权初始化
       "userAuth": {
-        url: "/userBind/auth",
+        url: "/wap/userBind/auth",
         type: "GET"
       },
       //订单确认提交
@@ -346,8 +351,9 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
        *@向后台提交操作
        *@param {String} name 接口名称 在modelManager中定义
        *@param {Object} name 响应操作
+       *@param isForm 因为后台POST接口不太一致 所以手动设置提交方式
        **/
-      save = function(name, params) {
+      save = function(name, params, isJSON) {
         var deferred = createPromise();
 
         //判断接口是否已经在modelManager中定义
@@ -359,13 +365,12 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           return deferred.promise;
         }
 
-
         var defaulOptions = env == 'develop' ? {
           method: 'GET',
           params: params
         } : {
           method: 'POST',
-          data: httpRequstParam(params)
+          data: isJSON ? params : httpRequstParam(params)
         };
 
 

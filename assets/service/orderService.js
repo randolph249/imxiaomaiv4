@@ -176,6 +176,7 @@ angular.module('xiaomaiApp').factory('orderManager', [
     var getOrderInfo = function(querystring) {
       var deferred = $q.defer();
       getOrder().then(function(res) {
+
         try {
           deferred.resolve(eval('res.' + querystring));
         } catch (e) {

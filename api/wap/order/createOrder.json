@@ -2,456 +2,360 @@
   "msg": "success",
   "code": 0,
   "data": {
-    "items": [{
-      "status": 2,
-      "title": "商品库存不足",
-      "msg": "十分抱歉，此商品库存不足了",
-      "goodsList": [{
-        "goodsId": 1001,
-        "goodsName": "衣服-黑-X",
-        "skuId": 2001,
-        "propertyIds": "2001_1002_3004",
-        "num": 2,
-        "distributeType": 0,
-        "sourceType": 0
-      }, {
-        "goodsId": 1002,
-        "goodsName": "衣服-白-XL",
-        "skuId": 2002,
-        "propertyIds": "2001_1002_3004",
-        "num": 3,
-        "distributeType": 1,
-        "sourceType": 0
-      }]
-    }, {
-      "status": 3,
-      "title": "超过购买限制",
-      "msg": "十分抱歉，您已超过了此商品的购买数量限制",
-      "goodsList": [{
-        "goodsId": 1001,
-        "goodsName": "衣服-黑-X",
-        "skuId": 2001,
-        "propertyIds": "2001_1002_3004",
-        "num": 2,
-        "distributeType": 0,
-        "sourceType": 0
-      }, {
-        "goodsId": 1002,
-        "goodsName": "衣服-白-XL",
-        "skuId": 2002,
-        "propertyIds": "2001_1002_3004",
-        "num": 3,
-        "distributeType": 1,
-        "sourceType": 0
-      }]
-    }],
     "orderInfo": {
       "college": {
-        "collegeId": 2,
-        "collegeName": "浙江大学",
-        "cityId": 6,
-        "areaId": 2,
-        "ldcStorageId": 23,
-        "rdcStorageId": 1,
+        "collegeId": 1,
+        "collegeName": "小麦总部",
+        "cityId": 2,
+        "areaId": 3,
+        "ldcStorageId": 794387644,
+        "rdcStorageId": 794387643,
         "weight": 0,
         "isDel": 0,
         "isShow": 1,
-        "isOpen": 0,
-        "longitude": 2,
-        "latitude": 2,
+        "isOpen": 1,
+        "longitude": 116.285854,
+        "latitude": 39.986342,
         "ldcDeliveryType": 2,
-        "ldcDeliveryAddress": null,
+        "ldcSelfPickUpAddress": "小麦总部营业厅",
         "rdcDeliveryType": 0,
-        "rdcDeliveryAddress": null
+        "rdcSelfPickUpAddress": "小麦总部营业厅",
+        "storeId": 1,
+        "collegeAddr": "小麦总部第三方商品营业厅",
+        "notValid": false
       },
       "ldcAddressList": [{
+        "addressType": "学生公寓",
+        "addresses": ["学一", "学二", "学三", "学四", "学五", "学六", "学八", "学九", "学十", "学十一", "学十三", "学二十九", "留学生公寓", "青年公寓"]
+      }, {
         "addressType": "教学楼",
-        "addresses": [
-          "中央主楼",
-          "理科楼",
-          "舜德楼",
-          "明理楼",
-          "信息科学技术楼",
-          "伟伦楼",
-          "何添楼"
-        ]
+        "addresses": ["第一教学楼", "第二教学楼", "第三教学楼", "第四教学楼", "主教学楼"]
       }, {
-        "addressType": "行政楼",
-        "addresses": [
-          "中央主楼",
-          "东主楼",
-          "西主楼",
-          "伟清楼"
-        ]
+        "addressType": "科研大楼",
+        "addresses": ["科研大楼"]
+      }, {
+        "addressType": "图书馆",
+        "addresses": ["图书馆"]
+      }, {
+        "addressType": "new node",
+        "addresses": []
       }],
-      "ldcDeliveryType": 0,
-      "rdcDeliveryType": 2,
-      "rdcSelfPickUpAddress": "清华自提点RDC",
-      "ldcSelfPickUpAddress": "清华自提点LDC",
+      "firstCoupon": 0,
       "ldcFreight": {
-        "freight": 100,
+        "freight": 0,
         "total": 1000,
-        "sub": 100
+        "sub": 0
       },
-      "ldcTimeList": [{
-        "begin": "09:30",
-        "end": "09:45"
-      }, {
-        "begin": "09:45",
-        "end": "10:00"
-      }],
-      "rdcAddressList": [{
-        "addressType": "教学楼rdc",
-        "addresses": [
-          "中央主楼",
-          "理科楼",
-          "舜德楼",
-          "明理楼",
-          "信息科学技术楼",
-          "伟伦楼",
-          "何添楼"
-        ]
-      }, {
-        "addressType": "行政楼rdc",
-        "addresses": [
-          "中央主楼",
-          "东主楼",
-          "西主楼",
-          "伟清楼"
-        ]
-      }],
-      "rdcFreight": {
-        "freight": 20,
-        "total": 20,
-        "sub": 10
-      },
-      "user": {
-        "id": 10,
-        "userId": 0,
-        "realName": "张亚",
-        "mobilePhone": "18612081583",
-        "stat": {
-          "userId": 10,
-          "headImgUrl": "http://wx.qlogo.cn/mmopen/ajNVdqHZLLCk8UvRbqRYyNJicGgeIFL14vaIlGn6X3UUPLeIoN0uqMnricdqe000kjSHBvwBlmmQicv75ML8PFnBw/0"
-        }
-      },
-      "couponList": [{
-        "couponId": 1110,
-        "money": 200,
-        "couponDesc": "n限app可用\n限iOS可用",
-        "startTime": 1436709784000
-      }, {
-        "couponId": 1111,
-        "money": 200,
-        "couponDesc": "\n限app可用\n限iOS可用",
-        "startTime": 1436709784000
-      }],
+      "wxPayMsg": "",
       "defaultUserAddr": {
         "userAddrId": 0,
-        "receiverName": "小麦公社1",
-        "receiverPhone": "12345678901",
-        "receiverAddr": "小麦总部1",
-        "receiverCollegeId": 11,
-        "receiverCollegeName": "北京大学1"
+        "receiverName": "",
+        "receiverPhone": "18612244032",
+        "receiverCollegeName": "小麦总部",
+        "receiverAddr": "小麦总部第三方商品营业厅",
+        "receiverCollegeId": 1
       },
-      "limitTime": 150,
+      "limitTime": 15,
+      "ldcTimeList": [{
+        "begin": "00:30",
+        "end": "00:45"
+      }, {
+        "begin": "00:15",
+        "end": "00:30"
+      }, {
+        "begin": "00:01",
+        "end": "00:15"
+      }, {
+        "begin": "11:30",
+        "end": "12:00"
+      }, {
+        "begin": "11:00",
+        "end": "11:30"
+      }, {
+        "begin": "12:00",
+        "end": "15:00"
+      }, {
+        "begin": "15:00",
+        "end": "16:00"
+      }, {
+        "begin": "16:00",
+        "end": "17:00"
+      }, {
+        "begin": "16:45",
+        "end": "17:00"
+      }, {
+        "begin": "17:00",
+        "end": "17:15"
+      }, {
+        "begin": "17:15",
+        "end": "17:30"
+      }, {
+        "begin": "17:45",
+        "end": "18:00"
+      }, {
+        "begin": "17:30",
+        "end": "17:45"
+      }, {
+        "begin": "18:30",
+        "end": "18:45"
+      }, {
+        "begin": "18:15",
+        "end": "18:30"
+      }, {
+        "begin": "18:00",
+        "end": "18:15"
+      }, {
+        "begin": "18:45",
+        "end": "19:00"
+      }, {
+        "begin": "19:00",
+        "end": "20:00"
+      }, {
+        "begin": "20:00",
+        "end": "22:00"
+      }, {
+        "begin": "22:15",
+        "end": "22:30"
+      }, {
+        "begin": "22:00",
+        "end": "23:59"
+      }, {
+        "begin": "22:00",
+        "end": "22:15"
+      }, {
+        "begin": "22:45",
+        "end": "23:00"
+      }, {
+        "begin": "22:30",
+        "end": "22:45"
+      }, {
+        "begin": "23:15",
+        "end": "23:30"
+      }, {
+        "begin": "23:00",
+        "end": "23:15"
+      }, {
+        "begin": "23:50",
+        "end": "23:59"
+      }, {
+        "begin": "23:31",
+        "end": "23:58"
+      }],
+      "rdcAddressList": [{
+        "addressType": "学生公寓",
+        "addresses": ["学一", "学二", "学三", "学四", "学五", "学六", "学八", "学九", "学十", "学十一", "学十三", "学二十九", "留学生公寓", "青年公寓"]
+      }, {
+        "addressType": "教学楼",
+        "addresses": ["第一教学楼", "第二教学楼", "第三教学楼", "第四教学楼", "主教学楼"]
+      }, {
+        "addressType": "科研大楼",
+        "addresses": ["科研大楼"]
+      }, {
+        "addressType": "图书馆",
+        "addresses": ["图书馆"]
+      }, {
+        "addressType": "new node",
+        "addresses": []
+      }],
+      "rdcFreight": {
+        "freight": 0,
+        "total": 0,
+        "sub": 0
+      },
+      "couponList": [],
+      "aliPayMsg": "",
       "order": {
-        "orderId": 4,
-        "userId": 10,
+        "orderId": 422189,
+        "userId": 377,
         "collegeId": 1,
-        "collegeName": "北京理工大学本部",
-        "receiverName": "柚子",
-        "receiverPhone": "18810541193",
-        "receiverAddress": "需要地址的",
-        "totalPay": 20,
-        "onlinePay": 5,
-        "onlinePayId": "2",
-        "onlinePayType": 2,
-        "couponId": 1,
-        "couponPay": 10,
-        "firstSub": 5,
-        "fullSub": 5,
-        "freight": 5,
-        "freightSub": 2,
-        "fillPay": 1,
-        "orderCode": "XM00100000004",
-        "remark": "",
-        "status": 0,
-        "device": 0,
-        "createTime": 1438845024000,
-        "updateTime": 1438845139000,
+        "receiverName": "",
+        "receiverPhone": "18612244032",
+        "totalPay": 1,
+        "onlinePay": 0,
+        "onlinePayId": null,
+        "onlinePayType": 0,
+        "couponId": 0,
+        "couponPay": 0,
+        "firstSub": 0,
+        "fullSub": 0,
+        "freight": 0,
+        "freightSub": 0,
+        "fillPay": 0,
+        "orderCode": "XM00100422189",
+        "remark": null,
+        "status": 1,
+        "device": 1,
+        "createTime": null,
+        "updateTime": null,
+        "payTime": null,
         "childOrderList": [{
-          "childOrderId": 3,
-          "orderId": 4,
-          "userId": 10,
+          "childOrderId": 422190,
+          "orderId": 422189,
+          "userId": 377,
           "collegeId": 1,
+          "collegeName": null,
           "receiverName": "",
-          "receiverPhone": "",
-          "totalPay": 0,
+          "receiverPhone": "18612244032",
+          "totalPay": 1,
           "freight": 0,
           "freightSub": 0,
-          "orderCode": "",
-          "childOrderCode": "XM00500000003",
-          "remark": "",
-          "distributeType": 0,
-          "status": 0,
-          "deliveryType": 0,
-          "deliveryBeginTime": 1438754976000,
-          "deliveryEndTime": 1438754978000,
-          "deliveryAddress": "北京市海淀区一号院",
-          "selfPickUpTime": null,
-          "selfPickUpAddress": "",
-          "createTime": 1438748184000,
-          "updateTime": 1438756983000,
-          "childOrderDetailList": [{
-            "childOrderDetailId": 1,
-            "orderId": 4,
-            "childOrderId": 3,
-            "userId": 10,
-            "collegeId": 1,
-            "goodsId": 1,
-            "bgSkuId": 2,
-            "skuId": 1,
-            "skuName": "康师傅方便面",
-            "skuSubName": "",
-            "skuNum": 3,
-            "skuOriginPrice": 0,
-            "skuPrice": 0,
-            "status": 2,
-            "createTime": 1438748185000,
-            "updateTime": null,
-            "storageId": 1,
-            "storageType": 0,
-            "isActivity": 0,
-            "imageUrl": ""
-          }, {
-            "childOrderDetailId": 1,
-            "orderId": 4,
-            "childOrderId": 3,
-            "userId": 10,
-            "collegeId": 1,
-            "goodsId": 1,
-            "bgSkuId": 2,
-            "skuId": 1,
-            "skuName": "康师傅方便面",
-            "skuSubName": "",
-            "skuNum": 3,
-            "skuOriginPrice": 0,
-            "skuPrice": 0,
-            "status": 2,
-            "createTime": 1438748185000,
-            "updateTime": null,
-            "storageId": 1,
-            "storageType": 0,
-            "isActivity": 0,
-            "imageUrl": ""
-          }, {
-            "childOrderDetailId": 1,
-            "orderId": 4,
-            "childOrderId": 3,
-            "userId": 10,
-            "collegeId": 1,
-            "goodsId": 1,
-            "bgSkuId": 2,
-            "skuId": 1,
-            "skuName": "康师傅方便面",
-            "skuSubName": "",
-            "skuNum": 3,
-            "skuOriginPrice": 0,
-            "skuPrice": 0,
-            "status": 2,
-            "createTime": 1438748185000,
-            "updateTime": null,
-            "storageId": 1,
-            "storageType": 0,
-            "isActivity": 0,
-            "imageUrl": ""
-          }, {
-            "childOrderDetailId": 1,
-            "orderId": 4,
-            "childOrderId": 3,
-            "userId": 10,
-            "collegeId": 1,
-            "goodsId": 1,
-            "bgSkuId": 2,
-            "skuId": 1,
-            "skuName": "康师傅方便面",
-            "skuSubName": "",
-            "skuNum": 3,
-            "skuOriginPrice": 0,
-            "skuPrice": 0,
-            "status": 2,
-            "createTime": 1438748185000,
-            "updateTime": null,
-            "storageId": 1,
-            "storageType": 0,
-            "isActivity": 0,
-            "imageUrl": ""
-          }, {
-            "childOrderDetailId": 2,
-            "orderId": 4,
-            "childOrderId": 3,
-            "userId": 10,
-            "collegeId": 1,
-            "goodsId": 2,
-            "bgSkuId": 3,
-            "skuId": 2,
-            "skuName": "方便面",
-            "skuSubName": "",
-            "skuNum": 2,
-            "skuOriginPrice": 0,
-            "skuPrice": 0,
-            "status": 2,
-            "createTime": 1438748185000,
-            "updateTime": null,
-            "storageId": 1,
-            "storageType": 0,
-            "isActivity": 0,
-            "imageUrl": ""
-          }]
-        }, {
-          "childOrderId": 4,
-          "orderId": 4,
-          "userId": 10,
-          "collegeId": 1,
-          "receiverName": "",
-          "receiverPhone": "",
-          "totalPay": 0,
-          "freight": 0,
-          "freightSub": 0,
-          "orderCode": "",
-          "childOrderCode": "XM00500000004",
-          "remark": "",
+          "orderCode": "XM00100422189",
+          "childOrderCode": "XM00300422190",
+          "remark": null,
           "distributeType": 1,
-          "status": 0,
+          "status": 1,
           "deliveryType": 0,
+          "ldcFixBeginTime": null,
+          "ldcFixEndTime": null,
           "deliveryBeginTime": null,
           "deliveryEndTime": null,
-          "deliveryAddress": "",
-          "selfPickUpTime": 1438411383000,
-          "selfPickUpAddress": "",
-          "createTime": 1438748184000,
-          "updateTime": 1438756983000,
-          "childOrderDetailList": [
-
-          ]
+          "deliveryAddress": null,
+          "selfPickUpTime": null,
+          "selfPickUpAddress": null,
+          "createTime": null,
+          "updateTime": null,
+          "childOrderDetailList": [{
+            "childOrderDetailId": 79193,
+            "orderId": 422189,
+            "childOrderId": 422190,
+            "userId": 377,
+            "collegeId": 1,
+            "goodsId": 4168,
+            "bgSkuId": 412,
+            "skuId": 6790,
+            "skuName": "回归测试",
+            "skuSubName": "",
+            "skuNum": 1,
+            "skuOriginPrice": 1,
+            "skuPrice": 1,
+            "status": 1,
+            "createTime": null,
+            "updateTime": null,
+            "storageId": 794387644,
+            "distributeType": 1,
+            "sourceType": 1,
+            "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=156460",
+            "categoryId": 57,
+            "ratio": 0,
+            "propertyIds": "null",
+            "wmsGoodsIds": ""
+          }],
+          "deliverCompanyCode": null,
+          "deliverSheetCode": null,
+          "deliverCompanyName": null,
+          "deliveryInfo": null,
+          "storageName": null,
+          "storageId": 794387644,
+          "h5DeliveryPageUrl": null,
+          "deliveryTimeStr": "29分钟达",
+          "isFixDeliveryTime": false
         }],
-        "thirddeliveryAddress": "北京大学",
+        "categoryIdList": null,
         "thirdFreight": 0,
         "thirdFreightSub": 0,
-        "thirdChildOrderList": [{
-          "childOrderId": 3,
-          "orderId": 4,
-          "userId": 10,
-          "collegeId": 1,
-          "receiverName": "",
-          "receiverPhone": "",
-          "totalPay": 0,
-          "freight": 0,
-          "freightSub": 0,
-          "orderCode": "",
-          "childOrderCode": "XM00500000003",
-          "remark": "",
-          "distributeType": 2,
-          "status": 0,
-          "deliveryAddress": "北京市海淀区一号院",
-          "createTime": 1438748184000,
-          "updateTime": 1438756983000,
-          "expressType": 1,
-          "expressCode": "8986001234567",
-          "storageId": 89,
-          "storageName": "绝味",
-          "childOrderDetailList": [{
-            "childOrderDetailId": 1,
-            "orderId": 4,
-            "childOrderId": 3,
-            "userId": 10,
-            "collegeId": 1,
-            "goodsId": 1,
-            "bgSkuId": 2,
-            "skuId": 1,
-            "skuName": "康师傅方便面",
-            "skuSubName": "",
-            "skuNum": 3,
-            "skuOriginPrice": 0,
-            "skuPrice": 0,
-            "status": 2,
-            "createTime": 1438748185000,
-            "updateTime": null,
-            "storageId": 1,
-            "storageType": 0,
-            "isActivity": 0,
-            "imageUrl": ""
-          }, {
-            "childOrderDetailId": 2,
-            "orderId": 4,
-            "childOrderId": 3,
-            "userId": 10,
-            "collegeId": 1,
-            "goodsId": 2,
-            "bgSkuId": 3,
-            "skuId": 2,
-            "skuName": "方便面",
-            "skuSubName": "",
-            "skuNum": 2,
-            "skuOriginPrice": 0,
-            "skuPrice": 0,
-            "status": 2,
-            "createTime": 1438748185000,
-            "updateTime": null,
-            "storageId": 1,
-            "storageType": 0,
-            "isActivity": 0,
-            "imageUrl": ""
-          }]
-        }, {
-          "childOrderId": 4,
-          "orderId": 4,
-          "userId": 10,
-          "collegeId": 1,
-          "receiverName": "",
-          "receiverPhone": "",
-          "totalPay": 0,
-          "freight": 0,
-          "freightSub": 0,
-          "orderCode": "",
-          "childOrderCode": "XM00500000004",
-          "remark": "",
-          "distributeType": 1,
-          "status": 0,
-          "deliveryAddress": "",
-          "createTime": 1438748184000,
-          "updateTime": 1438756983000,
-          "expressType": 1,
-          "expressCode": "8986001234567",
-          "storageId": 89,
-          "storageName": "绝味",
-          "childOrderDetailList": [
-
-          ]
-        }]
+        "thirdChildOrderList": []
       },
       "rdcTimeList": [{
-        "begin": "09:30",
-        "end": "09:45"
+        "begin": "00:30",
+        "end": "00:45"
       }, {
-        "begin": "09:45",
-        "end": "10:00"
+        "begin": "00:15",
+        "end": "00:30"
       }, {
-        "begin": "19:30",
-        "end": "19:45"
+        "begin": "00:01",
+        "end": "00:15"
       }, {
-        "begin": "05:45",
-        "end": "60:00"
-      }],
-      "prepayData": {
-        "appId": "wx35a8b3f8507f4ea6",
-        "nonceStr": "0df78f24264710c58e81a19d14d3e291",
-        "paySign": "40A8D9BE6C7F52A8909FA6D9562627B4",
-        "signType": "MD5",
-        "timeStamp": "1438072122",
-        "package": "prepay_id=wx20150728162842faa93b7e240385154146"
-      }
-    }
-  }
+        "begin": "11:30",
+        "end": "12:00"
+      }, {
+        "begin": "11:00",
+        "end": "11:30"
+      }, {
+        "begin": "12:00",
+        "end": "15:00"
+      }, {
+        "begin": "15:00",
+        "end": "16:00"
+      }, {
+        "begin": "16:00",
+        "end": "17:00"
+      }, {
+        "begin": "16:45",
+        "end": "17:00"
+      }, {
+        "begin": "17:00",
+        "end": "17:15"
+      }, {
+        "begin": "17:15",
+        "end": "17:30"
+      }, {
+        "begin": "17:45",
+        "end": "18:00"
+      }, {
+        "begin": "17:30",
+        "end": "17:45"
+      }, {
+        "begin": "18:30",
+        "end": "18:45"
+      }, {
+        "begin": "18:15",
+        "end": "18:30"
+      }, {
+        "begin": "18:00",
+        "end": "18:15"
+      }, {
+        "begin": "18:45",
+        "end": "19:00"
+      }, {
+        "begin": "19:00",
+        "end": "20:00"
+      }, {
+        "begin": "20:00",
+        "end": "22:00"
+      }, {
+        "begin": "22:15",
+        "end": "22:30"
+      }, {
+        "begin": "22:00",
+        "end": "23:59"
+      }, {
+        "begin": "22:00",
+        "end": "22:15"
+      }, {
+        "begin": "22:45",
+        "end": "23:00"
+      }, {
+        "begin": "22:30",
+        "end": "22:45"
+      }, {
+        "begin": "23:15",
+        "end": "23:30"
+      }, {
+        "begin": "23:00",
+        "end": "23:15"
+      }, {
+        "begin": "23:50",
+        "end": "23:59"
+      }, {
+        "begin": "23:31",
+        "end": "23:58"
+      }]
+    },
+    "items": [{
+      "status": 1,
+      "title": "",
+      "message": "",
+      "goodsList": [{
+        "goodsId": 4168,
+        "goodsName": "回归测试",
+        "skuId": 6790,
+        "num": 1,
+        "distributeType": 1,
+        "sourceType": 1,
+        "status": 1,
+        "propertyIds": "null"
+      }]
+    }]
+  },
+  "serverTime": "2015-10-31 18:07:30"
 }
