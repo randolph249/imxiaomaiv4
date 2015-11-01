@@ -102,6 +102,82 @@ angular.module('xiaomaiApp').config([
         controller: 'searchresultCtrl',
         templateUrl: '../assets/views/search/searchresult.html'
       })
+      //确认订单
+      .state('root.confirmorder', {
+        url: 'confirmorder/?r',
+        controller: 'orderCtrl',
+        templateUrl: '../assets/views/confirmorder/confirmorder.html'
+      })
+      //在确认单页面下选择优惠劵信息
+      .state('root.confirmorder.couponlist', {
+        url: 'couponlist/?couponid',
+        controller: 'confirmorder.couponListCtrl',
+        templateUrl: '../assets/views/confirmorder/confirmorder.couponlist.html'
+      })
+      //跳转到微信预支付页面
+      .state('root.wechartprepay', {
+        url: 'wechartprepay/?userId&orderId',
+        controller: 'wechartprepayCtrl',
+        templateUrl: '../assets/views/wechartprepay/wechartprepay.html'
+      })
+      //支付宝预支付页面
+      .state('root.alipayprepay', {
+        url: 'alipayprepay/',
+        templateUrl: '../assets/views/alipayprepay/alipayprepay.html'
+
+      })
+      //支付成功页面
+      .state('root.paySuccess', {
+        url: 'paySuccess/?userId&orderId',
+        controller: 'paySuccessCtrl',
+        templateUrl: '../assets/views/paySuccess/paySuccess.html'
+      })
+      //支付失败页面
+      .state('root.payFail', {
+        url: 'payFail/?userId&orderId',
+        controller: 'payFailCtrl',
+        templateUrl: '../assets/views/payFail/payFail.html'
+      })
+      //用户信息绑定
+      .state('root.binduser', {
+        url: 'binduser?redirect',
+        templateUrl: '../assets/views/binduser/binduser.html'
+      })
+      //订单地址管理列表
+      .state('root.addr', {
+        url: 'orderaddr/?addrId&userId',
+        templateUrl: '../assets/views/addr/addr.html',
+        controller: 'addrListCtrl',
+      })
+      //订单地址新增
+      .state('root.addrAdd', {
+        url: 'addrAdd/?userId&addrId',
+        templateUrl: '../assets/views/addr/add.html',
+        controller: 'addrAddCtrl'
+      })
+      //订单地址编辑
+      .state('root.addrEdit', {
+        url: 'addrEdit/?userId&userAddrId&addrId',
+        controller: 'addrEditCtrl',
+        templateUrl: '../assets/views/addr/edit.html'
+      })
+      //订单地址学校信息选择
+      .state('root.addrLocate', {
+        url: 'addrLocate/?r&userId&userAddrId',
+        controller: 'addrLocateCtrl',
+        templateUrl: '../assets/views/addr/addrLocate.html'
+      })
+      //订单地址学校信息选择
+      .state('root.addrColleges', {
+        url: 'addrColleges/?r&userId&userAddrId&cityId',
+        controller: 'addrCollegesCtrl',
+        templateUrl: '../assets/views/addr/addrColleges.html'
+      })
+      //用户中心
+      .state('root.user', {
+        url: 'user/',
+        templateUrl: '../assets/views/user/user.html'
+      })
       .state('root.notfound', {
         url: '404/',
         templateUrl: '../assets/views/notfound/notfound.html'

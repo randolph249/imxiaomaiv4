@@ -420,20 +420,6 @@ angular.module('xiaomaiApp').config([
           }]
         }
       })
-      .state('root.wechartprepay1', {
-        url: 'wechartprepay1/?userId&orderId',
-        templateUrl: '../assets/views/wechartprepay/wechartprepay1.html',
-        resolve: {
-          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'xiaomaiApp',
-              files: [
-                window.__SYS_CONF.resourceUrl + 'views/wechartprepay/wechartprepay.css'
-              ]
-            })
-          }]
-        }
-      })
       //支付宝预支付页面
       .state('root.alipayprepay', {
         url: 'alipayprepay/',
