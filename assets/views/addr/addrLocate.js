@@ -66,10 +66,12 @@ angular.module('xiaomaiApp').controller('addrLocateCtrl', [
 
 
     //选择当前城市
-    $scope.showCollegeList = function(city) {
+    $scope.showCollegeList = function($event, city) {
+      $event.preventDefault();
+      $event.stopPropagation();
       //日志 统计当前当即城市
       $state.go('root.addrColleges', {
-        cityid: city.cityId,
+        cityId: city.cityId,
         userId: userId,
         userAddrId: userId,
         r: redirectname
@@ -82,10 +84,10 @@ angular.module('xiaomaiApp').controller('addrLocateCtrl', [
     var userId = $state.params.userId;
     var userAddrId = $state.params.userAddrId;
     $scope.checkCollege = function($event, college, $index) {
-
-      xiaomaiCacheManager.writeCache('addrCollegeInfo', college);
       $event.preventDefault();
       $event.stopPropagation();
+
+      xiaomaiCacheManager.writeCache('addrCollegeInfo', college);
 
       //跳回到编辑页或者新增页
       $state.go(redirectname, {
@@ -96,7 +98,10 @@ angular.module('xiaomaiApp').controller('addrLocateCtrl', [
     };
 
     //返回首页
-    $scope.goback = function() {
+    $scope.goback = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
       //跳回到编辑页或者新增页
       $state.go(redirectname, {
         userId: userId,

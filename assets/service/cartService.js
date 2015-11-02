@@ -43,17 +43,30 @@ angular.module('xiaomaiApp').factory('cartManager', [
       return $q.defer();
     };
 
+    //更新购物车
+    //更新购物车操作和查询购物不一样
+    //update相当于一个短连接
+    //query是保持一个长连接
+    var update = function() {
+      //先清除缓存
+      xiaomaiCacheManager.clean('queryCart');
+      xiaomaiService.fetchOne('queryCart').then(function(res) {
+        //写入到缓存中
+        updateQueryResult(res);
+      });
+    };
+
     //添加到购物车
     var add = function(param) {
       var deferred = createPromise();
       xiaomaiService.save('addCart', param).then(function(res) {
 
         updateQueryResult(res);
-        deferred.resolve(res);
 
+        deferred.resolve(res);
       }, function(msg) {
         deferred.reject(msg);
-      })
+      });
 
       return deferred.promise;
     };
@@ -92,9 +105,19 @@ angular.module('xiaomaiApp').factory('cartManager', [
     };
     var readCartCache = function() {
       return xiaomaiCacheManager.readCache('queryCart');
-    }
+    };
+    //清空购物车
     var clear = function() {
+      //读取购物车详情
+      var deferred = $q.defer();
+      xiaomaiService.save('emptyCart').then(function(res) {
+        deferred.resolve(res);
+        //写入到缓存中
+        xiaomaiCacheManager.clean('queryCart');
+        xiaomaiCacheManager.clean('queryCartDetail');
 
+      });
+      return deferred.promise;
     };
     //读取购物车详情
     var queryCartDetail = function() {
@@ -103,11 +126,9 @@ angular.module('xiaomaiApp').factory('cartManager', [
       var deferred = $q.defer();
       xiaomaiService.fetchOne('queryCartDetail').then(function(res) {
         deferred.resolve(res);
-
         //写入到缓存中
         xiaomaiCacheManager.writeCache('queryCartDetail', res);
       });
-
       return deferred.promise;
     };
 
@@ -131,8 +152,6 @@ angular.module('xiaomaiApp').factory('cartManager', [
             $index = i;
           }
         });
-
-
         //如果从skulist中查询不到 说明购物车没有添加
         deferred.resolve($index == -1 ? 0 : carts[$index]['skuList'][
             0
@@ -153,7 +172,8 @@ angular.module('xiaomaiApp').factory('cartManager', [
       clear: clear,
       store: store,
       readCartCache: readCartCache,
-      queryCartDetail: queryCartDetail
+      queryCartDetail: queryCartDetail,
+      update: update
     }
   }
 ]);
@@ -207,11 +227,10 @@ angular.module('xiaomaiApp').factory('getSkuInfo', [function() {
 angular.module('xiaomaiApp').factory('buyProcessManager', [
   '$q',
   'cartManager',
-  function($q, cartManager) {
+  'orderManager',
+  function($q, cartManager, orderManager) {
     //默认可以购买 添加到购物车过程中 不允许继续操作
     var lock = false;
-
-
 
     /**
      *@param {Object} param 购买提交的参数
@@ -237,6 +256,15 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
       var skuId = param.skuId;
       var sourceType = param.sourceType;
       var eventName = type == 'plus' ? 'add' : 'remove';
+
+
+      var successHandler = function(numIncart) {
+        numIncart = type == 'plus' ? (numIncart + 1) : (numIncart -
+          1);
+
+        deferred.resolve(numInCart);
+        orderManager.deleteOrder();
+      }
 
 
       //判断当前购买流程 如果正在购买 禁止发生购买行为
@@ -265,15 +293,14 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
           deferred.reject('该商品购买数量超上限了哦~');
           return deferred.promise;
         }
-
-
         //执行提交
         cartManager[eventName](param).then(function() {
 
-          deferred.resolve(type == 'plus' ? (numInCart + 1) : (
-            numInCart - 1));
-        }, function(msg) {
-          deferred.reject(msg);
+          numInCart = type == "plus" ? (numInCart + 1) : (numInCart - 1);
+          successHandler(numInCart);
+
+        }, function(error) {
+          deferred.reject(error.msg);
         });
 
       } else {
@@ -288,11 +315,8 @@ angular.module('xiaomaiApp').factory('buyProcessManager', [
           }
 
         }).then(function(res) {
+          successHandler(numInCart);
 
-          numIncart = type == 'plus' ? (numIncart + 1) : (numIncart -
-            1);
-
-          deferred.resolve(numInCart);
         }, function() {
           deferred.reject('操作失败');
         })

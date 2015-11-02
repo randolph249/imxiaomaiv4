@@ -2,6 +2,15 @@
   "msg": "success",
   "code": 0,
   "data": {
+<<<<<<< HEAD
   },
   "serverTime": "2015-09-20 19:08:34"
+=======
+    "priceChange": 0,
+    "totalPrice": 1900,
+    "tagChange": 0,
+    "totalCount": 2
+  },
+  "serverTime": "2015-09-20 19:12:30"
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 }

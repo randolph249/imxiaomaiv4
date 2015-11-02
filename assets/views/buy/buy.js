@@ -51,25 +51,26 @@ angular.module('xiaomaiApp').controller('buyCtrl', [
       cartGuiStatus = status;
     });
 
-    var sharModelId = xiaomaiMessageNotify.sub('shareModelManager',
-      function(status) {
+    var sharModelId = xiaomaiMessageNotify.sub('shareModelManager', function(status) {
+      $scope.shareIsShow = status == 'show' ? true : false;
+    });
 
-        $scope.shareIsShow = status == 'show' ? true : false;
-      });
-
-
+    //删除订阅
     $scope.$on('$destroy', function() {
       xiaomaiMessageNotify.removeOne('cartGuiManager', cartGuiId);
       xiaomaiMessageNotify.removeOne('detailGuiManager', detailGuiId);
       xiaomaiMessageNotify.removeOne('shareModelManager', sharModelId);
     });
 
-
+    //如果目标地址下这个数组中的地址 对浏览器默认行为不阻止(往这个目标上跳转);
+    var preventRouterWhiteList = ['root.confirmorder'];
 
     //监听路由变化前 如果详情页 或者购物车打开 组织默认行为 关闭对话框
     $scope.$on('$stateChangeStart', function(e, toState, toParam, fromState,
       fromParam) {
-      if (detailGuiStatus == 'show' || cartGuiStatus == 'show') {
+
+      if ((detailGuiStatus == 'show' || cartGuiStatus == 'show') &&
+        preventRouterWhiteList.join(',').indexOf(toState.name) == -1) {
         xiaomaiMessageNotify.pub('detailGuiManager', 'hide');
         xiaomaiMessageNotify.pub('cartGuiManager', 'hide');
         e.preventDefault();

@@ -114,6 +114,9 @@
   font-size: 1.8rem;
   color: #fff;
 }
+.cartThumb .gotoPay.disabled{
+  background:#bbb;
+}
 .cartThumb .totalPrice {
   line-height: 4.5rem;
   padding-left: 9rem;

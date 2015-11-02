@@ -1,10 +1,11 @@
 
 @font-face {font-family: "iconfont";
-  src: url('//at.alicdn.com/t/font_1445867268_1784604.eot'); /* IE9*/
-  src: url('//at.alicdn.com/t/font_1445867268_1784604.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('//at.alicdn.com/t/font_1445867268_1784604.woff') format('woff'), /* chrome、firefox */
-  url('//at.alicdn.com/t/font_1445867268_1784604.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-  url('//at.alicdn.com/t/font_1445867268_1784604.svg#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('//at.alicdn.com/t/font_1446117854_414187.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/font_1446117854_414187.svg#iconfont') format('svg'),/* iOS 4.1- */
+  url('//at.alicdn.com/t/font_1446117854_414187.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/font_1446117854_414187.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/font_1446117854_414187.ttf') format('truetype'); /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+
 }
    
 
@@ -23,11 +24,14 @@
 .icon-checkbox-checked:before { content: "\e608"; }
 .icon-checkbox:before { content: "\e609"; }
 .icon-fanhui:before { content: "\e61d"; }
+.icon-cuo:before { content: "\e60d"; }
+.icon-bianji:before { content: "\e60c"; }
 .icon-zhifubao:before { content: "\e607"; }
 .icon-yfmore:before { content: "\e614"; }
 .icon-sousuo:before { content: "\e61e"; }
 .icon-gerenzhongxin:before { content: "\e628"; }
 .icon-gouwuche:before { content: "\e61f"; }
+.icon-gengduo:before { content: "\e60f"; }
 .icon-unfold:before { content: "\e615"; }
 .icon-locate:before { content: "\e613"; }
 .icon-guanbi1:before { content: "\e629"; }
@@ -48,7 +52,7 @@
 .icon-jianqugouwuche:before { content: "\e627"; }
 .icon-weixin:before { content: "\e60a"; }
 .icon-dingdan:before { content: "\e603"; }
-.icon-bianji:before { content: "\e604"; }
+.icon-bianji1:before { content: "\e604"; }
 .icon-youhuiquan:before { content: "\e605"; }
 .icon-fankui1:before { content: "\e606"; }
 .icon-home:before { content: "\e600"; }

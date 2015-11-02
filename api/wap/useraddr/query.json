@@ -5,7 +5,7 @@
     "defaultUserAddr": {
       "userAddrId": 0,
       "receiverName": "小麦公社1",
-      "receiverPhone": "12345678901",
+      "receiverPhone": "18612244032",
       "receiverAddr": "小麦总部1",
       "receiverCollegeId": 11,
       "receiverCollegeName": "北京大学1"
@@ -13,19 +13,19 @@
     "addrList": [{
       "userAddrId": 1,
       "receiverName": "小麦公社1",
-      "receiverPhone": "12345678901",
+      "receiverPhone": "18612244032",
       "receiverAddr": "小麦总部1",
       "receiverCollegeId": 2896
     }, {
       "userAddrId": 3,
-      "receiverName": "小麦公社1",
-      "receiverPhone": "12345678901",
+      "receiverName": "北京大学地铁站旁",
+      "receiverPhone": "18612244032",
       "receiverAddr": "小麦总部1",
-      "receiverCollegeId": 2896
+      "receiverCollegeId": 3270
     }, {
       "userAddrId": 2,
       "receiverName": "小麦公社2",
-      "receiverPhone": "12345678902",
+      "receiverPhone": "15900000000",
       "receiverAddr": "小麦总部2",
       "receiverCollegeId": 12
     }]

@@ -27,6 +27,7 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
+                window.__SYS_CONF.resourceUrl + 'service/orderService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'service/notifyService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
@@ -61,9 +62,8 @@ angular.module('xiaomaiApp').config([
                 window.__SYS_CONF.resourceUrl +
                 'views/gooddetail/gooddetail.css?v=' + (+
                   new Date),
-                window.__SYS_CONF.resourceUrl +
-                'views/root/swiper.min.css?v=' + (+
-                  new Date)
+                window.__SYS_CONF.resourceUrl + 'views/root/swiper.min.css?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl + '/lib/mobiscroll.custom-2.17.0.min.css?v=' + (+new Date)
 
               ]
             })
@@ -73,8 +73,9 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl +
-                'filters/price.js?v=' + (+new Date)
+                window.__SYS_CONF.resourceUrl + 'filters/price.js?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl + 'filters/moment.js?v=' + (+new Date)
+
               ]
             })
           }],
@@ -100,14 +101,11 @@ angular.module('xiaomaiApp').config([
             return $ocLazyLoad.load({
               name: 'xiaomaiApp',
               files: [
-                window.__SYS_CONF.resourceUrl +
-                'views/buy/buy.js?v=' + (+new Date),
-                window.__SYS_CONF.resourceUrl +
-                'views/buy/buy.css',
-                window.__SYS_CONF.resourceUrl +
-                'views/buy/detail.js?v=' + (+new Date),
-                window.__SYS_CONF.resourceUrl +
-                'views/buy/shopcart.js?v=' + (+new Date)
+                window.__SYS_CONF.resourceUrl + 'views/buy/buy.js?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl + 'views/buy/buy.css',
+                window.__SYS_CONF.resourceUrl + 'views/buy/detail.js?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl + 'views/buy/shopcart.js?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl + 'views/buy/cartdetail.js?v=' + (+new Date)
               ]
             })
           }]
@@ -359,6 +357,7 @@ angular.module('xiaomaiApp').config([
       //确认订单
       .state('root.confirmorder', {
         url: 'confirmorder/?r',
+        controller: 'orderCtrl',
         templateUrl: '../assets/views/confirmorder/confirmorder.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -366,7 +365,15 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.js',
-                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.css'
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.addr.js',
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.rdc.js',
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.ldc.js',
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.thirdseller.js',
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.coupon.js',
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.amount.js',
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.confirm.js',
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.css',
+                window.__SYS_CONF.resourceUrl + 'lib/AP.js'
               ]
             })
           }],
@@ -380,9 +387,29 @@ angular.module('xiaomaiApp').config([
           }]
         }
       })
+      //在确认单页面下选择优惠劵信息
+      .state('root.confirmorder.couponlist', {
+        url: 'couponlist/?couponid',
+        controller: 'confirmorder.couponListCtrl',
+        templateUrl: '../assets/views/confirmorder/confirmorder.couponlist.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.couponlist.js',
+              ]
+            })
+          }],
+        }
+      })
       //跳转到微信预支付页面
       .state('root.wechartprepay', {
+<<<<<<< HEAD
         url: 'wechartprepay/',
+=======
+        url: 'wechartprepay/?userId&orderId',
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
         controller: 'wechartprepayCtrl',
         templateUrl: '../assets/views/wechartprepay/wechartprepay.html',
         resolve: {
@@ -391,7 +418,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl + 'views/wechartprepay/wechartprepay.js',
-                window.__SYS_CONF.resourceUrl + 'views/wechartprepay/wechartprepay.css'
+                window.__SYS_CONF.resourceUrl + 'views/confirmorder/confirmorder.css'
               ]
             })
           }]
@@ -407,7 +434,8 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl + 'views/alipayprepay/alipayprepay.js',
-                window.__SYS_CONF.resourceUrl + 'views/alipayprepay/alipayprepay.css'
+                window.__SYS_CONF.resourceUrl + 'views/alipayprepay/alipayprepay.css',
+                window.__SYS_CONF.resourceUrl + 'lib/AP.js'
               ]
             })
           }]
@@ -415,8 +443,13 @@ angular.module('xiaomaiApp').config([
       })
       //支付成功页面
       .state('root.paySuccess', {
+<<<<<<< HEAD
         url: 'paySuccess/',
         controller:'paySuccessCtrl',
+=======
+        url: 'paySuccess/?userId&orderId',
+        controller: 'paySuccessCtrl',
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
         templateUrl: '../assets/views/paySuccess/paySuccess.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -432,8 +465,13 @@ angular.module('xiaomaiApp').config([
       })
       //支付失败页面
       .state('root.payFail', {
+<<<<<<< HEAD
         url: 'payFail/',
         controller:'payFailCtrl',
+=======
+        url: 'payFail/?userId&orderId',
+        controller: 'payFailCtrl',
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
         templateUrl: '../assets/views/payFail/payFail.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -465,7 +503,7 @@ angular.module('xiaomaiApp').config([
       })
       //订单地址管理列表
       .state('root.addr', {
-        url: 'orderaddr/?userId',
+        url: 'orderaddr/?addrId&userId',
         templateUrl: '../assets/views/addr/addr.html',
         controller: 'addrListCtrl',
         resolve: {
@@ -482,7 +520,7 @@ angular.module('xiaomaiApp').config([
       })
       //订单地址新增
       .state('root.addrAdd', {
-        url: 'addrAdd/?userId&chosenCollege',
+        url: 'addrAdd/?userId&addrId',
         templateUrl: '../assets/views/addr/add.html',
         controller: 'addrAddCtrl',
 
@@ -500,7 +538,7 @@ angular.module('xiaomaiApp').config([
       })
       //订单地址编辑
       .state('root.addrEdit', {
-        url: 'addrEdit/?userId&userAddrId&chosenCollege',
+        url: 'addrEdit/?userId&userAddrId&addrId',
         controller: 'addrEditCtrl',
         templateUrl: '../assets/views/addr/edit.html',
         resolve: {

@@ -77,8 +77,8 @@ angular.module('xiaomaiApp').controller('bindUserCtrl', [
       }).then(function(res) {
         alert('绑定成功');
         $state.go($state.params.redirect);
-      }, function(msg) {
-        alert(msg);
+      }, function(err) {
+        alert(erro.msg);
       });
     }
   }

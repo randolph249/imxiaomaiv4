@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container" id="orderDetailPage">
     <div class="pub-header">
         <div class="lefticon iconfont icon-fanhui" ng-click="goBack();"></div>
@@ -131,3 +132,107 @@
         </footer>
     </form>
 </div>
+=======
+<div class="pub-header">
+  <div class="lefticon iconfont icon-fanhui" style="display:none;"></div>
+  <div class="location-info icon-school middlearea">订单详情</div>
+</div>
+<div class="order_contents" subname="{{'wechartPayHeightUpdate'}}" xiaomai-iscroll>
+  <div style="overflow:auto;">
+<!--收货信息-->
+    <div class="block_bg">
+      <p class="title addrTitle">收货信息</p>
+      <div class="addrInfo">
+        <span class="username">{{order.receiverName}}</span>
+        <span class="telephone">{{order.receiverPhone}}</span>
+        <p class="college">{{order.receiverAddress}}</p>
+      </div>
+    </div>
+<!-- 第三方订单-->
+    <div class="block_bg" ng-repeat="orderInfo in order.childOrderList" ng-if="orderInfo.distributeType==2">
+      <p class="title thirdsellerTitle">第三方卖家商品订单</p>
+      <div class="contents">
+        <p class="orderDistribute">
+          <span class="orderDistribute-key">配送地址</span>
+          <span class="orderDistribute-values">{{orderInfo.deliveryAddress}}</span>
+        </p>
+        <div class="orderDistribute">
+          <span class="orderDistribute-key">配送服务费</span>
+          <p class="orderDistribute-values">
+            <span class="ldcOrderFreight orderfreight">&yen;{{orderInfo.freight|xiaomaiprice}}</span>
+          </p>
+        </div>
+        <div ng-repeat="thirdOrder in orderInfo.th3ChildOrderList">
+          <p class="subTitle rdcSubTitle">{{thirdOrder.storageName}}</p>
+          <p class="orderChildGoods" ng-repeat="orderItem in thirdOrder.childOrderDetailList">
+            <span class="goodname">{{orderItem.skuName}}</span>
+            <span class="price">&yen;{{orderItem.skuPrice|xiaomaiprice}}</span>
+            <span class="count">{{orderItem.skuNum}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+<!-- 次日达订单-->
+    <div class="block_bg" ng-repeat="orderInfo in order.childOrderList" ng-if="orderInfo.distributeType==0">
+      <p class="title rdcTitle">次日达订单</p>
+      <div class="contents">
+        <div class="orderDistribute">
+          <span class="orderDistribute-key">门店自提</span>
+          <p class="orderDistribute-values">{{orderInfo.deliveryAddress}}</p>
+        </div>
+        <p class="subTitle rdcSubTitle">小麦特供</p>
+        <p class="orderChildGoods" ng-repeat="orderItem in orderInfo.childOrderDetailList">
+          <span class="goodname">{{orderItem.skuName}}</span>
+          <span class="price">&yen;{{orderItem.skuPrice|xiaomaiprice}}</span>
+          <span class="count">*{{orderItem.skuNum}}</span>
+        </p>
+      </div>
+    </div>
+<!-- 当日达订单-->
+    <div class="block_bg" ng-repeat="orderInfo in order.childOrderList" ng-if="orderInfo.distributeType==1">
+      <p class="title ldcTitle">当日达订单</p>
+      <div class="contents">
+        <div class="orderDistribute">
+          <span class="orderDistribute-key">配送方式</span>
+          <p class="orderDistribute-values">
+            <span class="deliveryRadio" ng-if="orderInfo.deliveryType==0">
+              门店自提
+            </span>
+            <span class="deliveryRadio" ng-if="orderInfo.deliveryType==1">
+              送货上门
+            </span>
+          </p>
+        </div>
+        <div class="orderDistribute" ng-if="orderInfo.deliveryType==0">
+          <span class="orderDistribute-key">自提地址</span>
+          <p class="orderDistribute-values">{{orderInfo.selfPickUpAddress}}</p>
+        </div>
+        <div class="orderDistribute" ng-if="orderInfo.deliveryType==1">
+          <span class="orderDistribute-key">配送地址</span>
+          <p class="orderDistribute-values">{{orderInfo.deliveryAddress}}</p>
+        </div>
+        <div class="orderDistribute orderDistributeTime" ng-if="ldcDeliveryType==1">
+          <span class="orderDistribute-key">配送时间</span>
+          <p class="orderDistribute-values">29分钟达</p>
+        </div>
+        <div class="orderDistribute orderDistributeFreight" ng-if="ldcDeliveryType==1">
+          <span class="orderDistribute-key">配送服务费</span>
+          <p class="orderDistribute-values">
+            <span class="ldcOrderFreight orderfreight">{{orderInfo.freight|xiaomaiprice}}</span>
+          </p>
+        </div>
+        <p class="subTitle ldcSubTitle">小麦特供</p>
+        <p class="orderChildGoods" ng-repeat="orderItem in orderInfo.childOrderDetailList">
+          <span class="goodname">{{orderItem.skuName}}</span>
+          <span class="price">&yen;{{orderItem.skuPrice|xiaomaiprice}}</span>
+          <span class="count">*{{orderItem.skuNum}}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="fixOrderFooter fixwechartpayFooter clear">
+  <div class="prepayprice">合计:<span>&yen;{{order.totalPay|xiaomaiprice}}</span></div>
+  <span class="confirmBtn" ng-class="{disabled:lock}" ng-click="toPay($event);">去支付</span>
+</footer>
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18

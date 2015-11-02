@@ -1,5 +1,5 @@
 <div class="pub-header">
-  <div class="iconfont icon-fanhui lefticon" ng-click="goback();"></div>
+  <div class="iconfont icon-fanhui lefticon" ng-click="goback($event);"></div>
   <div class="middlearea">选择学校</div>
 </div>
 <div class="colleges_content" xiaomai-iscroll subname="{{'locateheightupdate'}}">
@@ -13,7 +13,7 @@
     <p class="title">手动选择</p>
     <div class="allSchools">
       <ul class="citylist">
-        <li ng-class="{checked:item.cityId==curcityid}" ng-click="showCollegeList(item);" ng-repeat="item in citylist">
+        <li ng-class="{checked:item.cityId==curcityid}" ng-click="showCollegeList($event,item);" ng-repeat="item in citylist">
           {{item.cityName}}
           <i class="iconfont icon-yfmore"></i>
         </li>

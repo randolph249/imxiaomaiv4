@@ -11,7 +11,11 @@
 
 .fixHeader {
     /* position: fixed; */
+<<<<<<< HEAD
     position: absolute;
+=======
+    position:absolute;
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
     display: block;
     top: 0px;
     width: 100%;
@@ -21,7 +25,11 @@
 .wrap_title {
     position: absolute;
     top: 0px;
+<<<<<<< HEAD
     z-index: 11111;
+=======
+    z-index:11111;
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
     width: 100%;
     height: 50px;
     text-align: center;
@@ -31,6 +39,10 @@
     border: 1px solid #eee;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .wrapForm h4 {
     padding: 15px 5.3% 8px;
     color: #15acf3;
@@ -49,10 +61,19 @@
     -moz-overflow-scrolling: touch;
 }
 
+<<<<<<< HEAD
 #payFailPage .pos_order {
     top: 50px;
 }
 
+=======
+#payFailPage .pos_order,
+#paySucPage .pos_order {
+    top: 50px;
+}
+
+
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .block_bg {
     padding: 0px;
     margin-top: 15px;
@@ -60,6 +81,7 @@
 }
 
 
+<<<<<<< HEAD
 /*****************pay result style**********************/
 
 #payFailBlock {
@@ -71,12 +93,34 @@
 }
 
 #payFailBlock h1 {
+=======
+
+/*****************pay result style**********************/
+
+#payFailBlock,
+#paySucBlock {
+    padding: 20px 0;
+    text-align: center;
+    /*background-color: #FFD803;*/
+    position:relative;
+    border-bottom: 1px solid #ddd;
+}
+
+#payFailBlock h1,
+#paySucBlock h1 {
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
     color: #333;
     margin: 10px 0 0;
 }
 
 #payFailPage .LDCInfo,
+<<<<<<< HEAD
 #payFailPage .RDCInfo {
+=======
+#payFailPage .RDCInfo,
+#paySucPage .LDCInfo,
+#paySucPage .RDCInfo {
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
     border: none;
 }
 
@@ -84,12 +128,32 @@
     background: #ddd;
 }
 
+<<<<<<< HEAD
+=======
+#payFailPage .cancelOrderWrap,
+#payFailPage .js_repay,
+#paySucPage .checkOrder,
+#paySucPage .goIndex {
+    /*width: 50%;*/
+}
+
+#paySucPage .checkOrder {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 a.pos_tel {
     text-align: center;
     color: #002FFF;
     text-decoration: underline;
 }
 
+<<<<<<< HEAD
+=======
+.ico_succ,
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .ico_payFailed {
     border-radius: 93px;
     background-color: #fff;
@@ -129,11 +193,28 @@ a.pos_tel {
     text-decoration: underline;
 }
 
+<<<<<<< HEAD
 #payFailPage .deliveryInfo li {
     padding: 16px 0;
     line-height: 1.6rem;
 }
 
+=======
+#paySucPage .deliveryInfo li,
+#payFailPage .deliveryInfo li
+{
+  padding:16px 0;
+  line-height:1.6rem;
+
+}
+
+#paySucPage .fix a:link,
+#paySucPage .fix a:visited,
+#paySucPage .fix a:hover,
+#paySucPage .fix a:active {
+    color: #fff;
+}
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 
 /****iphone 6 *********/
 
@@ -145,10 +226,104 @@ a.pos_tel {
         width: 88%;
     }
 }
+<<<<<<< HEAD
 
 
 /*支付状态页(成功、失败)新添加样式*/
 
+=======
+/***绾㈠寘***/
+
+.toBonus {
+  position: absolute;
+    top: 64px;
+    right: 5.3%;
+    display: block;
+    float: right;
+    width: 50px;
+    height: 51.5px;
+    background-size: contain;
+}
+
+.sucBonus {
+    margin-right: -65px;
+}
+
+#paySucBlock .payBonus {
+    margin-left: 65px;
+}
+
+.share_mask {
+    z-index: 10006;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: .45;
+    width: 100%;
+    height: 100%;
+}
+
+.share_box {
+    position: absolute;
+    z-index: 11111;
+    top: 50%;
+    left: 10%;
+    text-align: center;
+    margin-top: -90px;
+    width: 80%;
+    height: 180px;
+    color: #333;
+    font-size: 16px;
+    background-color: #fff;
+    border-radius: 6px;
+}
+
+.share_box h2 {
+    text-align: center;
+    line-height: 21px;
+}
+
+.share_pic {
+    width: 103px;
+    height: 83px;
+    background-size: contain;
+    margin: -41px auto 14px;
+}
+
+.left_button {
+    display: inline-block;
+    float: left;
+    margin-top: 31px;
+    width: 50%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-top: 1px solid #cccccc;
+}
+
+.right_button {
+    display: inline-block;
+    float: right;
+    margin-top: 31px;
+    width: 50%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: #ff5330;
+    border-top: 1px solid #ff5330;
+    border-bottom-right-radius: 6px;
+}
+
+.share_box .right_button{
+    color: #fff;
+}
+
+
+/*支付状态页(成功、失败)新添加样式*/
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .btn_bg_pos {
     display: block;
     cursor: pointer;
@@ -160,6 +335,7 @@ a.pos_tel {
     margin-top: 15px;
     margin-left: 8.7%;
     color: #fff;
+<<<<<<< HEAD
 }
 
 .btn_bg_normal {
@@ -170,17 +346,33 @@ a.pos_tel {
     background-color: #FF5300;
 }
 
+=======
+
+}
+.btn_bg_normal {
+    background-color: #FFA000;
+}
+.btn_bg_on {
+    background-color: #FF5300;
+}
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .wrapLeftInfo {
     display: inline-block;
     margin-left: 20px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .wrapLeftInfo span {
     display: block;
     text-align: left;
     line-height: 1.5;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .wrapLeftInfo span i {
     display: inline-block;
     width: 40px;
@@ -190,24 +382,47 @@ a.pos_tel {
     margin-top: 10px;
     margin-right: 10px;
 }
+<<<<<<< HEAD
 
+=======
+.i_succ {
+    background: url('http://xiaomai-p2p.qiniudn.com/806e6efaddeb654e7c2ffe95a5b542d7') no-repeat scroll center center;
+    background-size: 40px 40px;
+}
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .i_fail {
     background: url('http://xiaomai-p2p.qiniudn.com/a04970c50249424eef5e6835104ce998') no-repeat scroll center center;
     background-size: 40px 40px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .wrapLeftInfo span strong {
     font-size: 4rem;
     font-weight: normal;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .wrapRtImg {
     display: inline-block;
     margin: 21px 20px 0 20px;
     position: absolute;
     right: 0;
 }
+<<<<<<< HEAD
 
+=======
+.i_succImgBox {
+    display: inline-block;
+    width: 100px;
+    height: 58px;
+    background: url('http://xiaomai-p2p.qiniudn.com/9c041f5e437c4f2d1f816dd553ad90f9') no-repeat scroll center center;
+    background-size: contain;
+}
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .i_failImgBox {
     display: inline-block;
     width: 104px;
@@ -215,13 +430,17 @@ a.pos_tel {
     background: url('http://xiaomai-p2p.qiniudn.com/a464c6605628a3f3721f97d736cb8487') no-repeat scroll center center;
     background-size: contain;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .btn_close {
     color: #FF5200;
     font-size: 1.6rem;
     left: 5.3%;
     position: absolute;
 }
+<<<<<<< HEAD
 
 .tx_pos {
     font-size: 1.8rem;
@@ -233,10 +452,21 @@ a.pos_tel {
     border-bottom: 1px solid #97c0ee;
 }
 
+=======
+.tx_pos {
+  font-size: 1.8rem;
+  font-weight: normal;
+  display: inline-flex;
+}
+.tagColor {
+    border-bottom: 1px solid #97c0ee;
+}
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .th3orderOne_ul {
     padding: 0 5.3%;
     position: relative;
 }
+<<<<<<< HEAD
 
 .th3orderOne_ul li {
     margin: 10px 0px;
@@ -246,13 +476,86 @@ a.pos_tel {
     max-width: 70%;
 }
 
+=======
+.th3orderOne_ul li {
+    margin: 10px 0px;
+}
+.th3orderOne_ul li span {
+    max-width: 70%;
+}
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 .arrRight {
     position: absolute;
     right: 5.3%;
     top: 24px;
+<<<<<<< HEAD
     -webkit-transform: rotate(-90deg);
 }
 
+=======
+    -webkit-transform:rotate(-90deg);
+}
+.forTh3OrderHr:last-child{
+    display: none;
+}
+.forTh3OrderHr {
+    background: url('../img/bg_hr.png') repeat-x transparent scroll center center;
+    height: 5px;
+    -webkit-transform: initial;
+    border: 0 none;
+}
+.wrapForm h4.payRetTitle {
+    color: #ff5300;
+    border-bottom: 1px solid #ff5300;
+    border-left: 5px solid #ff5300;
+}
+hr.tagHrForAll {
+    border-top: 1px solid #15acf3;
+    -webkit-transform: scaleY(.5);
+}
+.wrapForm h4.tagForTh3Order {
+    color: #ff5300;
+    border-bottom: 1px solid #ff5300;
+    border-left: 5px solid #ff5300;
+}
+hr.tagHrForTh3 {
+    border-top: 1px solid #ff5300;
+    -webkit-transform: scaleY(.5);
+}
+.wrapForm h4.tagH4ForTh3,.tagH4ForTh3,.tagH4ForTh3 em {
+    color: #ff5300;
+}
+.wrapForm h4.orderTitle {
+    color: #333;
+    margin-left: 5.3%;
+    padding-left: 0;
+}
+.block_bg em.js_username,.block_bg span.js_telephone {
+    max-width: 50%;
+}
+.block_bg span.js_collg {
+    width: 100%;
+    max-width: 100%;
+}
+.wrapForm h4.tagH4ForRdc {
+    color: #00cb0d;
+    border-bottom: 1px solid #00cb0d;
+    border-left: 5px solid #00cb0d;
+}
+.wrapForm h4.tagH4ColForRdc {
+    color: #00cb0d;
+}
+hr.tagHrColForRdc {
+    border-top: 1px solid #00cb0d;
+}
+.freightShow del {
+    color: #999;
+    margin-left: 10px;
+}
+.tx_gray9 {
+    color: #999;
+}
+>>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
     .wrapRtImg {
         margin: 21px -10px 0 20px;
