@@ -172,9 +172,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: "/wap/useraddr/add",
         type: "POST"
       },
-<<<<<<< HEAD
-      //微信预支付获取订单详情
-=======
+
       //创建订单
       "createOrder": {
         url: "/wap/order/createOrder",
@@ -196,19 +194,16 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         type: "POST"
       },
       //订单查询
->>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
       "queryOrder": {
         url: "/wap/order/query",
         type: "GET"
       },
-<<<<<<< HEAD
       //删除购物车
       "delete":{
         url: "/wap/cart/delete",
         type: "GET"
       },
 
-=======
       //支付状态校验
       "payStatusCheck": {
         url: "/wap/order/pay/check",
@@ -219,7 +214,6 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: "/wap/get/ldc/deliveryTime",
         type: "GET"
       }
->>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
     },
     getModel = function() {
       var args = Array.prototype.slice.call(arguments, 0),

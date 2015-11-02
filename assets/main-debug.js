@@ -405,11 +405,7 @@ angular.module('xiaomaiApp').config([
       })
       //跳转到微信预支付页面
       .state('root.wechartprepay', {
-<<<<<<< HEAD
-        url: 'wechartprepay/',
-=======
         url: 'wechartprepay/?userId&orderId',
->>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
         controller: 'wechartprepayCtrl',
         templateUrl: '../assets/views/wechartprepay/wechartprepay.html',
         resolve: {
@@ -443,13 +439,8 @@ angular.module('xiaomaiApp').config([
       })
       //支付成功页面
       .state('root.paySuccess', {
-<<<<<<< HEAD
-        url: 'paySuccess/',
-        controller:'paySuccessCtrl',
-=======
         url: 'paySuccess/?userId&orderId',
         controller: 'paySuccessCtrl',
->>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
         templateUrl: '../assets/views/paySuccess/paySuccess.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -465,13 +456,8 @@ angular.module('xiaomaiApp').config([
       })
       //支付失败页面
       .state('root.payFail', {
-<<<<<<< HEAD
-        url: 'payFail/',
-        controller:'payFailCtrl',
-=======
         url: 'payFail/?userId&orderId',
         controller: 'payFailCtrl',
->>>>>>> b4a0b90bf99b308d4d3902a190d9a7be66f1dc18
         templateUrl: '../assets/views/payFail/payFail.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
