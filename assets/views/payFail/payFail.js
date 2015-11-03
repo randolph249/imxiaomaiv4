@@ -1,5 +1,4 @@
 angular.module('xiaomaiApp').controller('payFailCtrl', [
-
   '$scope',
   '$state',
   'cartManager',

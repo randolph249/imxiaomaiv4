@@ -8,16 +8,18 @@
   </head>
   <body>
     <div ng-app="xiaomaiApp" class="mod-wrap" ui-view></div>
-    <script type="text/javascript" src="http://192.168.1.106:3030/assets/lib/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://172.16.101.27:8000/assets/lib/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="http://172.16.101.27:8000/assets/lib/angular.min.js"></script>
     <script type="text/javascript">
       window.__SYS_CONF = {
         dependent_modules: [
           'oc.lazyLoad', 'ui.router','ipCookie','ksSwiper','ngTouch','mobiscroll-select'
         ],
-        'resourceUrl':'http://192.168.1.106:3030/assets/'
+        'resourceUrl':'http://172.16.101.27:8000/assets/'
+      };
       var xiaomaiApp = angular.module('xiaomaiApp', window.__SYS_CONF[
         'dependent_modules']);
+    
     </script>
     <!--
 
