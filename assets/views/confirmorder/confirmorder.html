@@ -22,13 +22,6 @@
           <span class="orderDistribute-key">配送地址</span>
           <span class="orderDistribute-values" ng-bind="collegeAddr"></span>
         </p>
-        <div class="orderDistribute">
-          <span class="orderDistribute-key">配送服务费</span>
-          <p class="orderDistribute-values">
-            <span class="ldcOrderFreight orderfreight" ng-bind="'&yen;'+(thirdFreight|xiaomaiprice)"></span>
-            <span class="ldcOrderFreightSub orderfreightsub" ng-bind="'&yen;'+(thirdFreightSub|xiaomaiprice)"></span>
-          </p>
-        </div>
         <div ng-repeat="thirdOrder in thirdChildOrderList">
           <p class="subTitle rdcSubTitle">{{thirdOrder.storageName}}</p>
           <p class="orderChildGoods" ng-repeat="orderItem in thirdOrder.childOrderDetailList" ng-show="initGoodShowStatus||$index<initGoodShowLength">
@@ -36,6 +29,13 @@
             <span class="price" ng-bind="'&yen;'+(orderItem.skuPrice|xiaomaiprice)"></span>
             <span class="count" ng-bind="'*'+orderItem.skuNum"></span>
           </p>
+          <div class="orderDistribute">
+            <span class="orderDistribute-key">配送服务费</span>
+            <p class="orderDistribute-values">
+              <span class="ldcOrderFreight orderfreight" ng-bind="'&yen;'+(thirdOrder.freight-thirdOrder.freightSub|xiaomaiprice)"></span>
+              <span class="ldcOrderFreightSub orderfreightsub" ng-bind="'&yen;'+(thirdOrder.freight|xiaomaiprice)"></span>
+            </p>
+          </div>
           <p class="showMore" ng-click="triggerShowStatus($event);" ng-show="childOrderDetailList.length>initGoodShowLength">
             <i class="iconfont icon-unfold"></i>
             <span class="text">{{initGoodShowStatus?'点击收起':'点击查看全部'}}</span>
@@ -91,7 +91,7 @@
           <p class="orderDistribute-values">
             <select mobiscroll-options="{onSelect:chooseAddress,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressName" style="display:none;">
               <optgroup label="{{ldcAddress.addressType}}" ng-repeat="ldcAddress in ldcAddressList">
-                <option ng-repeat="address in ldcAddress.addresses" value="{{address}}">{{address}}</option>
+                <option ng-repeat="address in ldcAddress.addresses" value="{{ldcAddress.addressType}}-{{address}}">{{ldcAddress.addressType}}-{{address}}</option>
               </optgroup>
             </select>
             <i class="iconfont icon-unfold showLdcAddressList"></i>
@@ -100,24 +100,32 @@
 
         <div class="orderDistribute" ng-if="ldcDeliveryType==1">
           <span class="orderDistribute-key">配送时间</span>
-          <p class="orderDistribute-values">
-            <select mobiscroll-options="{onSelect:chooseTime,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressTime" style="display:none;">
-              <optgroup lable="29分钟达">
-                  <option value="29分钟达" ng-disabled="orderInfo.deliveryTimeType!==0">29分钟达</option>
+          <p class="orderDistribute-values" ng-if="ldcTimeSwitch">
+            <select  mobiscroll-options="{onSelect:chooseTime,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressTime" style="display:none;">
+              <optgroup label="{{ldcAddressTime}}" ng-if="ldcTimeIsOpen">
+                  <option value="{{ldcAddressTime}}">{{ldcAddressTime}}</option>
               </optgroup>
               <optgroup label="定时达">
-                <option ng-repeat="deliveryTime in deliveryTimes" value="{{deliveryTime.startTime+'~'+deliveryTime.endTime}}">{{deliveryTime.isTomorrow?"明天":""}}{{deliveryTime.startHour}}:{{deliveryTime.isTomorrow?"明天":""}}{{deliveryTime.startMin}}~{{deliveryTime.endHour}}:{{deliveryTime.endMin}}</option>
+                <option ng-if="deliveryTime.startTime" ng-repeat="deliveryTime in deliveryTimes" value="{{deliveryTime.startTime+'~'+deliveryTime.endTime}}">{{deliveryTime.startTime|filterldctomorrow}}~{{deliveryTime.endTime|filterldctomorrow}}</option>
               </optgroup>
             </select>
             <i class="iconfont icon-unfold showLdcAddressList"></i>
           </p>
+          <p class="orderDistribute-values" ng-if="!ldcTimeSwitch">{{ldcAddressTime}}</p>
         </div>
         <div class="orderDistribute" ng-if="ldcDeliveryType==1">
           <span class="orderDistribute-key">配送服务费</span>
           <p class="orderDistribute-values">
-            <span class="ldcOrderFreight orderfreight" ng-bind="'&yen;'+(freight|xiaomaiprice)"></span>
-            <span class="ldcOrderFreightSub orderfreightsub" ng-bind="'&yen;'+(freightSub|xiaomaiprice)"></span>
+            <span class="ldcOrderFreight orderfreight" ng-bind="'&yen;'+(freight-freightSub|xiaomaiprice)"></span>
+            <span class="ldcOrderFreightSub orderfreightsub" ng-bind="'&yen;'+(freight|xiaomaiprice)"></span>
           </p>
+        </div>
+        <div class="orderDistribute" ng-if="ldcDeliveryType==1" ng-init="remarkMultiple=1;" ng-style="{'height':5+(remarkMultiple-1)*3+'rem'}">
+          <span class="orderDistribute-key">备注</span>
+          <p class="orderDistribute-values">
+            <textarea  class="ldcUserRemark" ng-focus="remarkMultiple=3;" ng-blur="remarkMultiple=1;" ng-style="{'height':3+(remarkMultiple-1)*3+'rem'}" ng-model="ldcRemark" ng-change="updateLdcRemark($event,ldcRemark);" maxlength="50"/></textarea>
+          </p>
+
         </div>
         <p class="subTitle ldcSubTitle">小麦特供</p>
         <p class="orderChildGoods" ng-repeat="orderItem in childOrderDetailList" ng-show="initGoodShowStatus||$index<initGoodShowLength">
@@ -177,3 +185,4 @@
   <span class="confirmBtn" ng-class="{disabled:lock}" ng-click="confirm($event);" ng-controller="orderConfirmCtrl">去支付</span>
 </footer>
 <div ui-view></div>
+<div class="confirorderloading" ng-if="isloading">正在加载......</div>

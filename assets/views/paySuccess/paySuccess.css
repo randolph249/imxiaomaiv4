@@ -1,324 +1,278 @@
-.pub-header .righticon.closeWindow{
+.pub-header .righticon.closeWindow {
   color: #ff5300;
   font-size: 1.4rem;
   text-align: center;
   display: inline-block;
 }
+
 /* public style */
 
 .container {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    background-color: #eee;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: #eee;
 }
-
 .pos_order {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 50px;
-    width: 100%;
-    overflow-y: scroll;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    -moz-overflow-scrolling: touch;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 50px;
+  width: 100%;
+  overflow-y: scroll;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -moz-overflow-scrolling: touch;
 }
-
-#payFailPage .pos_order,
-#paySucPage .pos_order {
-    top: 50px;
+#payFailPage .pos_order, #paySucPage .pos_order {
+  top: 50px;
 }
-
-
 .block_bg {
-    padding: 0px;
-    margin-top: 15px;
-    background: #fff;
+  padding: 0px;
+  margin-top: 15px;
+  background: #fff;
 }
-
-
 
 /*****************pay result style**********************/
 
-#payFailBlock,
-#paySucBlock {
-    padding: 20px 0;
-    text-align: center;
-    /*background-color: #FFD803;*/
-    position:relative;
-    border-bottom: 1px solid #ddd;
+#payFailBlock, #paySucBlock {
+  padding: 20px 0;
+  text-align: center;
+  /*background-color: #FFD803;*/
+  position: relative;
+  border-bottom: 1px solid #ddd;
 }
-
-#payFailBlock h1,
-#paySucBlock h1 {
-    color: #333;
-    margin: 10px 0 0;
+#payFailBlock h1, #paySucBlock h1 {
+  color: #333;
+  margin: 10px 0 0;
 }
-
-#payFailPage .LDCInfo,
-#payFailPage .RDCInfo,
-#paySucPage .LDCInfo,
-#paySucPage .RDCInfo {
-    border: none;
+#payFailPage .LDCInfo, #payFailPage .RDCInfo, #paySucPage .LDCInfo, #paySucPage .RDCInfo {
+  border: none;
 }
-
 #payFailPage .fix {
-    background: #ddd;
+  background: #ddd;
 }
-
-#payFailPage .cancelOrderWrap,
-#payFailPage .js_repay,
-#paySucPage .checkOrder,
-#paySucPage .goIndex {
-    /*width: 50%;*/
+#payFailPage .cancelOrderWrap, #payFailPage .js_repay, #paySucPage .checkOrder, #paySucPage .goIndex {
+  /*width: 50%;*/
 }
-
 #paySucPage .checkOrder {
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
 }
-
 a.pos_tel {
-    text-align: center;
-    color: #002FFF;
-    text-decoration: underline;
+  text-align: center;
+  color: #002FFF;
+  text-decoration: underline;
 }
-
-.ico_succ,
-.ico_payFailed {
-    border-radius: 93px;
-    background-color: #fff;
-    border: 1px solid #FFB838;
-    width: 93px;
-    height: 93px;
-    display: block;
-    margin: 42px auto 15px auto;
+.ico_succ, .ico_payFailed {
+  border-radius: 93px;
+  background-color: #fff;
+  border: 1px solid #FFB838;
+  width: 93px;
+  height: 93px;
+  display: block;
+  margin: 42px auto 15px auto;
 }
-
 .ico_error {
-    background: url(../img/i_error.png) no-repeat center transparent;
-    background-size: 88px;
-    width: 88px;
-    height: 88px;
-    margin: 42px auto 30px auto;
+  background: url(../img/i_error.png) no-repeat center transparent;
+  background-size: 88px;
+  width: 88px;
+  height: 88px;
+  margin: 42px auto 30px auto;
 }
-
 .tip_tx {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
-
 .tip_geo {
-    margin: 20px auto;
-    line-height: 1.6rem;
-    text-align: left;
+  margin: 20px auto;
+  line-height: 1.6rem;
+  text-align: left;
 }
-
 .tip_timer {
-    margin: -20px auto 49px auto;
-    line-height: 1.6rem;
-    color: #a9a9a9;
+  margin: -20px auto 49px auto;
+  line-height: 1.6rem;
+  color: #a9a9a9;
 }
-
 .underline {
-    display: inline;
-    text-decoration: underline;
+  display: inline;
+  text-decoration: underline;
 }
-
-#paySucPage .deliveryInfo li,
-#payFailPage .deliveryInfo li
-{
-  padding:16px 0;
-  line-height:1.6rem;
-
+#paySucPage .deliveryInfo li, #payFailPage .deliveryInfo li {
+  padding: 16px 0;
+  line-height: 1.6rem;
 }
-
-#paySucPage .fix a:link,
-#paySucPage .fix a:visited,
-#paySucPage .fix a:hover,
-#paySucPage .fix a:active {
-    color: #fff;
+#paySucPage .fix a:link, #paySucPage .fix a:visited, #paySucPage .fix a:hover, #paySucPage .fix a:active {
+  color: #fff;
 }
 
 /****iphone 6 *********/
 
 @media only screen and (min-width: 375px) and (-webkit-min-device-pixel-ratio: 2) {
-    #showCoupon_btn .arr_down {
-        margin-right: 10.2%;
-    }
-    .payInfo em {
-        width: 88%;
-    }
+  #showCoupon_btn .arr_down {
+    margin-right: 10.2%;
+  }
+  .payInfo em {
+    width: 88%;
+  }
 }
+
 /***绾㈠寘***/
 
 .toBonus {
   position: absolute;
-    top: 64px;
-    right: 5.3%;
-    display: block;
-    float: right;
-    width: 50px;
-    height: 51.5px;
-    background-size: contain;
+  top: 64px;
+  right: 5.3%;
+  display: block;
+  float: right;
+  width: 50px;
+  height: 51.5px;
+  background-size: contain;
 }
-
 .sucBonus {
-    margin-right: -65px;
+  margin-right: -65px;
 }
-
 #paySucBlock .payBonus {
-    margin-left: 6.5rem;
+  margin-left: 6.5rem;
 }
-
 .share_mask {
-    z-index: 2;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #000;
-    opacity: .45;
-    width: 100%;
-    height: 100%;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: .45;
+  width: 100%;
+  height: 100%;
 }
-
 .share_box {
-    position: absolute;
-    z-index: 3;
-    top: 50%;
-    left: 10%;
-    text-align: center;
-    margin-top: -90px;
-    width: 80%;
-    height: 180px;
-    color: #333;
-    font-size: 1.6rem;
-    background-color: #fff;
-    border-radius: 0.6rem;
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 10%;
+  text-align: center;
+  margin-top: -90px;
+  width: 80%;
+  height: 180px;
+  color: #333;
+  font-size: 1.6rem;
+  background-color: #fff;
+  border-radius: 0.6rem;
 }
-
 .share_box h2 {
-    text-align: center;
-    line-height: 2.1rem;
+  text-align: center;
+  line-height: 2.1rem;
 }
-
 .share_pic {
-    width: 10.3rem;
-    height: 8.3rem;
-    background-size: contain;
-    margin: -4.1rem auto 1.4rem;
+  width: 10.3rem;
+  height: 8.3rem;
+  background-size: contain;
+  margin: -4.1rem auto 1.4rem;
 }
-
 .left_button {
-    display: inline-block;
-    float: left;
-    margin-top: 3.1rem;
-    width: 50%;
-    height: 5rem;
-    line-height: 5rem;
-    text-align: center;
-    border-top: 1px solid #cccccc;
-    background-color:#fff;
-    border-bottom-left-radius: 0.6rem;
+  display: inline-block;
+  float: left;
+  margin-top: 3.1rem;
+  width: 50%;
+  height: 5rem;
+  line-height: 5rem;
+  text-align: center;
+  border-top: 1px solid #cccccc;
+  background-color: #fff;
+  border-bottom-left-radius: 0.6rem;
 }
-
 .right_button {
-    display: inline-block;
-    float: right;
-    margin-top: 3.1rem;
-    width: 50%;
-    height: 5rem;
-    text-align: center;
-    line-height: 5rem;
-    background-color: #ff5330;
-    border-top: 1px solid #ff5330;
-    border-bottom-right-radius: 0.6rem;
+  display: inline-block;
+  float: right;
+  margin-top: 3.1rem;
+  width: 50%;
+  height: 5rem;
+  text-align: center;
+  line-height: 5rem;
+  background-color: #ff5330;
+  border-top: 1px solid #ff5330;
+  border-bottom-right-radius: 0.6rem;
 }
-
-.share_box .right_button{
-    color: #fff;
+.share_box .right_button {
+  color: #fff;
 }
-
 
 /*支付状态页(成功、失败)新添加样式*/
-.btn_bg_pos {
-    display: block;
-    cursor: pointer;
-    text-align: center;
-    width: 82.6%;
-    height: 4rem;
-    line-height: 4rem;
-    font-size: 1.6rem;
-    margin-top: 1.5rem;
-    margin-left: 8.7%;
-    color: #fff;
 
+.btn_bg_pos {
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  width: 82.6%;
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 1.6rem;
+  margin-top: 1.5rem;
+  margin-left: 8.7%;
+  color: #fff;
 }
 .btn_bg_normal {
-    background-color: #FFA000;
+  background-color: #FFA000;
 }
 .btn_bg_on {
-    background-color: #FF5300;
+  background-color: #FF5300;
 }
 .wrapLeftInfo {
-    display: inline-block;
-    margin-left: 2rem;
+  display: inline-block;
+  margin-left: 2rem;
+  position: relative;
 }
 .wrapLeftInfo span {
-    display: block;
-    text-align: left;
-    line-height: 1.5;
+  display: block;
+  text-align: left;
+  line-height: 1.5;
 }
-.wrapLeftInfo span i {
-    display: inline-block;
-    width: 4rem;
-    height: 4rem;
-    background-color: #fff;
-    border-radius: 4rem;
-    margin-top: 1rem;
-    margin-right: 1rem;
+.wrapLeftInfo span .iconfont {
+
+  font-size: 4rem;
+  position: absolute;
+  left: -4rem;
 }
-.i_succ {
-    background: url('http://xiaomai-p2p.qiniudn.com/806e6efaddeb654e7c2ffe95a5b542d7') no-repeat scroll center center;
-    background-size: 4rem 4rem;
+.wrapLeftInfo span .iconfont.icon-ok1{
+  color: #8fd397;
 }
-.i_fail {
-    background: url('http://xiaomai-p2p.qiniudn.com/a04970c50249424eef5e6835104ce998') no-repeat scroll center center;
-    background-size: 4rem 4rem;
+.wrapLeftInfo span .iconfont.icon-jinggao{
+  color: #f9a99f;
+  font-size:4.4rem;
 }
+
 .wrapLeftInfo span strong {
-    font-size: 4rem;
-    font-weight: normal;
+  font-size: 4rem;
+  font-weight: normal;
 }
 .wrapRtImg {
-    display: inline-block;
-    margin: 2rem 2rem 0 2rem;
-    position: absolute;
-    right: 0;
+  display: inline-block;
+  margin: 2rem 2rem 0 2rem;
+  position: absolute;
+  right: 0;
 }
 .i_succImgBox {
-    background: url('http://xiaomai-p2p.qiniudn.com/9c041f5e437c4f2d1f816dd553ad90f9') no-repeat scroll center center;
-    background-size: contain;
-    width: 10rem;
-    height: 5.8rem;
-    display: inline-block;
+  background: url('http://xiaomai-p2p.qiniudn.com/9c041f5e437c4f2d1f816dd553ad90f9') no-repeat scroll center center;
+  background-size: contain;
+  width: 10rem;
+  height: 5.8rem;
+  display: inline-block;
 }
 .i_failImgBox {
-    background: url('http://xiaomai-p2p.qiniudn.com/a464c6605628a3f3721f97d736cb8487') no-repeat scroll center center;
-    background-size: contain;
-    width: 10.4rem;
-    height: 6.5rem;
+  background: url('http://xiaomai-p2p.qiniudn.com/a464c6605628a3f3721f97d736cb8487') no-repeat scroll center center;
+  background-size: contain;
+  width: 10.4rem;
+  height: 6.5rem;
 }
 .btn_close {
-    color: #FF5200;
-    font-size: 1.6rem;
-    left: 5.3%;
-    position: absolute;
+  color: #FF5200;
+  font-size: 1.6rem;
+  left: 5.3%;
+  position: absolute;
 }
 .tx_pos {
   font-size: 1.8rem;
@@ -326,86 +280,86 @@ a.pos_tel {
   display: inline-flex;
 }
 .tagColor {
-    border-bottom: 1px solid #97c0ee;
+  border-bottom: 1px solid #97c0ee;
 }
 .th3orderOne_ul {
-    padding: 0 5.3%;
-    position: relative;
+  padding: 0 5.3%;
+  position: relative;
 }
 .th3orderOne_ul li {
-    margin: 1rem 0px;
+  margin: 1rem 0px;
 }
 .th3orderOne_ul li span {
-    max-width: 70%;
+  max-width: 70%;
 }
 .arrRight {
-    position: absolute;
-    right: 5.3%;
-    top: 2.4rem;
-    -webkit-transform:rotate(-90deg);
+  position: absolute;
+  right: 5.3%;
+  top: 2.4rem;
+  -webkit-transform: rotate(-90deg);
 }
-.forTh3OrderHr:last-child{
-    display: none;
+.forTh3OrderHr:last-child {
+  display: none;
 }
 .forTh3OrderHr {
-    background: url('../img/bg_hr.png') repeat-x transparent scroll center center;
-    height: 5px;
-    -webkit-transform: initial;
-    border: 0 none;
+  background: url('../img/bg_hr.png') repeat-x transparent scroll center center;
+  height: 5px;
+  -webkit-transform: initial;
+  border: 0 none;
 }
 .wrapForm h4.payRetTitle {
-    color: #ff5300;
-    border-bottom: 1px solid #ff5300;
-    border-left: 5px solid #ff5300;
+  color: #ff5300;
+  border-bottom: 1px solid #ff5300;
+  border-left: 5px solid #ff5300;
 }
 hr.tagHrForAll {
-    border-top: 1px solid #15acf3;
-    -webkit-transform: scaleY(.5);
+  border-top: 1px solid #15acf3;
+  -webkit-transform: scaleY(.5);
 }
 .wrapForm h4.tagForTh3Order {
-    color: #ff5300;
-    border-bottom: 1px solid #ff5300;
-    border-left: 5px solid #ff5300;
+  color: #ff5300;
+  border-bottom: 1px solid #ff5300;
+  border-left: 5px solid #ff5300;
 }
 hr.tagHrForTh3 {
-    border-top: 1px solid #ff5300;
-    -webkit-transform: scaleY(.5);
+  border-top: 1px solid #ff5300;
+  -webkit-transform: scaleY(.5);
 }
-.wrapForm h4.tagH4ForTh3,.tagH4ForTh3,.tagH4ForTh3 em {
-    color: #ff5300;
+.wrapForm h4.tagH4ForTh3, .tagH4ForTh3, .tagH4ForTh3 em {
+  color: #ff5300;
 }
 .wrapForm h4.orderTitle {
-    color: #333;
-    margin-left: 5.3%;
-    padding-left: 0;
+  color: #333;
+  margin-left: 5.3%;
+  padding-left: 0;
 }
-.block_bg em.js_username,.block_bg span.js_telephone {
-    max-width: 50%;
+.block_bg em.js_username, .block_bg span.js_telephone {
+  max-width: 50%;
 }
 .block_bg span.js_collg {
-    width: 100%;
-    max-width: 100%;
+  width: 100%;
+  max-width: 100%;
 }
 .wrapForm h4.tagH4ForRdc {
-    color: #00cb0d;
-    border-bottom: 1px solid #00cb0d;
-    border-left: 5px solid #00cb0d;
+  color: #00cb0d;
+  border-bottom: 1px solid #00cb0d;
+  border-left: 5px solid #00cb0d;
 }
 .wrapForm h4.tagH4ColForRdc {
-    color: #00cb0d;
+  color: #00cb0d;
 }
 hr.tagHrColForRdc {
-    border-top: 1px solid #00cb0d;
+  border-top: 1px solid #00cb0d;
 }
 .freightShow del {
-    color: #999;
-    margin-left: 10px;
+  color: #999;
+  margin-left: 10px;
 }
 .tx_gray9 {
-    color: #999;
+  color: #999;
 }
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
-    .wrapRtImg {
-        margin: 21px -10px 0 20px;
-    }
+  .wrapRtImg {
+    margin: 21px -10px 0 20px;
+  }
 }

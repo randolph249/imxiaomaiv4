@@ -64,6 +64,8 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
     $scope.goSettlement = function($event) {
       $event.stopPropagation();
       $event.preventDefault();
+      window.location.href = '/order/create';
+      return false;
 
       //防止重复点击
       if ($scope.lockSettle) {
@@ -110,14 +112,15 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
         //解锁
         $scope.lockSettle = false;
       });
-
-
       return false;
     };
 
     //绑定用户信息
+    //继续上锁 防止用户点击
     //将跳转到微信授权认证页面
     var initUser = function() {
+      window.location.href = "/wap/userBind/auth";
+      return false;
       xiaomaiService.fetchOne('userAuth');
     };
 

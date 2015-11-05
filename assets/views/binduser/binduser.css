@@ -15,11 +15,12 @@
 }
 .bindUserWrap .block_tel input[type="text"], .bindUserWrap .block_tel input[type="number"] {
   display: block;
-  height: 3.7rem;
-  line-height: 3.7rem;
+  height: 3.8rem;
+  line-height: 3.8rem;
   box-sizing: border-box;
   width: 100%;
   border: 0 none;
+  font-size:1.6rem;
 }
 .bindUserWrap .block_tel input[type="number"]:first-child {
   border-bottom: #eee solid 1px;
@@ -35,16 +36,16 @@
   line-height: 3rem;
   width: 9rem;
   text-align: center;
-  top: 2rem;
+  top: 2.3rem;
 }
 .bindUserWrap .block_tel .sendCodeBtn.disabled{
   background:#e3e3e3;
 }
 .bindUserWrap .confirmbutton {
-  width: 100%;
+  width: 86%;
   position: relative;
-  margin: 2rem 0;
-  display: inline-block;
+  margin: 2rem auto;
+  display: block;
   height: 4rem;
   background: #FE9402;
   color: #444;

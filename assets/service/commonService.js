@@ -7,16 +7,16 @@
  **/
 angular.module('xiaomaiApp').factory('env', ['$window', function($window) {
   var onlineReg = /h5\.imxiaomai\.com/,
-    testReg =
-    /(wap\.tmall\.imxiaomai\.com)|(qa\.wap\.test\.imxiaomai\.com)/,
-    host = $window.location.host;
+    testReg = /(wap\.tmall\.imxiaomai\.com)|(qa\.wap\.test\.imxiaomai\.com)/,
+    localReg = /127\.0\.0\.1|localhost|172\.16\.110\.188/
+  host = $window.location.host;
 
   if (onlineReg.test(host)) {
     return 'online';
-  } else if (testReg.test(host)) {
-    return 'test';
-  } else {
+  } else if (localReg.test(host)) {
     return 'develop';
+  } else {
+    return 'test';
   }
 }]);
 
@@ -68,7 +68,7 @@ angular.module('xiaomaiApp').factory('getDataType', [function() {
       reg = /\s(\w+)/;
     return type.match(reg)[1].toLowerCase()
   }
-}])
+}]);
 
 //解析URL参数
 angular.module('xiaomaiApp').factory('parseUrlParams', [function() {
@@ -83,28 +83,25 @@ angular.module('xiaomaiApp').factory('parseUrlParams', [function() {
 //点击Banner的时候执行解析
 angular.module('xiaomaiApp').factory('getRouterTypeFromUrl', function() {
   //根据URl解析Router参数
-  return function(url, collegeId, refer) {
+  return function(url, collegeId) {
     var router = {};
     if (url.match(/[\?&]m=([^\?&]+)/)) {
       router.name = 'root.buy.nav.category';
       router.params = {
         categoryId: url.match(/[\?&]id=([^\?&]+)/)[1],
         collegeId: collegeId,
-        refer: refer
       }
     } else if (url.match(/skActivity/)) {
       router.name = 'root.buy.active';
       router.params = {
         collegeId: collegeId,
         activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1],
-        refer: refer,
       }
     } else if (url.match(/activity/)) {
       router.name = 'root.buy.active';
       router.params = {
         collegeId: collegeId,
         activityId: url.match(/[\?&]activityId=([^\?&]+)/)[1],
-        refer: refer
       }
     } else {
       router.path = url;

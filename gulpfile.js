@@ -23,9 +23,13 @@ var handlerError = function() {
 
 
 var templateCache = require('gulp-angular-templatecache');
+var htmlmin = require('gulp-htmlmin');
 
 gulp.task('html2string', function() {
   return gulp.src(['assets/**/*.html'])
+    .pipe(htmlmin({
+      collapseWhitespace: true
+    }))
     .pipe(templateCache({
       module: 'xiaomaiApp',
       transformUrl: function(url) {
@@ -62,7 +66,7 @@ gulp.task('JsIndexBuild', function() {
 });
 
 gulp.task('JsLibBuild', function() {
-  return gulp.src(['assets/lib/angular.min.js', 'assets/lib/**.js',
+  return gulp.src(['assets/lib/jquery-1.11.1.min.js', 'assets/lib/angular.min.js', 'assets/lib/**.js',
       '!assets/lib/ocLazyLoad.min.js'
     ])
     .pipe(concat('index.base.js'))

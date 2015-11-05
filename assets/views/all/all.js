@@ -45,16 +45,6 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
         'ready', '', '');
     });
 
-    //缓存页面数据
-    $scope.$on('$destroy', function() {
-      xiaomaiCacheManager.writeCache('activities', {
-        activities: $scope.activities
-      }, {
-        collegeId: collegeId
-      });
-    });
-
-
     //链接跳转
     $scope.goto = function(active) {
 

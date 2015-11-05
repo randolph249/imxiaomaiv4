@@ -3,8 +3,10 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
   'xiaomaiMessageNotify',
   '$timeout',
   '$state',
-  function(xiaomaiMessageNotify, $timeout, $state) {
+  'systemInfo',
+  function(xiaomaiMessageNotify, $timeout, $state, systemInfo) {
     var link = function($scope, ele, attrs) {
+      systemInfo;
 
       //创建两个提示
       var upTip = document.createElement('p');
@@ -19,9 +21,9 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
       var myScroll = new IScroll(ele[0], {
         click: true,
         tap: true,
-        probeType: 2
+        probeType: 2,
+        bounce: systemInfo.platform.toLowerCase() == 'android' ? false : true
       });
-
 
       //更新提示文案
       var updateTip = function(uptiptext, downtiptext) {
@@ -56,28 +58,37 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
 
       //区域高度
       var maxScrollY;
+      //
+      // myScroll.on('scroll', function() {
+      //   if ($scope.scrollstatus !== 'ready') {
+      //     return false;
+      //   }
+      //   //10ms延时 100ms太长可能会触发多次
+      //   if (this.y > 40) {
+      //     $scrolltimeout && clearTimeout($scrolltimeout);
+      //     $scrolltimeout = setTimeout(function() {
+      //       xiaomaiMessageNotify.pub($scope.pubname, 'up');
+      //       $scope.scrollstatus = 'pending';
+      //     }, 10);
+      //   } else if (Math.abs(this.y) == maxScrollY) {
+      //     $scrolltimeout && clearTimeout($scrolltimeout);
+      //     $scrolltimeout = setTimeout(function() {
+      //       xiaomaiMessageNotify.pub($scope.pubname, 'down');
+      //       $scope.scrollstatus = 'pending';
+      //     }, 10);
+      //   }
+      //
+      // });
 
-      myScroll.on('scroll', function() {
-        if ($scope.scrollstatus !== 'ready') {
-          return false;
-        }
-        //10ms延时 100ms太长可能会触发多次
-        if (this.y > 40) {
-          $scrolltimeout && clearTimeout($scrolltimeout);
-          $scrolltimeout = setTimeout(function() {
-            xiaomaiMessageNotify.pub($scope.pubname, 'up');
-            $scope.scrollstatus = 'pending';
-          }, 10);
-        } else if (Math.abs(this.y) > maxScrollY + 15) {
+      myScroll.on('scrollEnd', function() {
+        if (Math.abs(this.y) == maxScrollY) {
           $scrolltimeout && clearTimeout($scrolltimeout);
           $scrolltimeout = setTimeout(function() {
             xiaomaiMessageNotify.pub($scope.pubname, 'down');
             $scope.scrollstatus = 'pending';
           }, 10);
         }
-
       });
-
 
       $scope.subname && xiaomaiMessageNotify.sub($scope.subname, function(
         arrow, status,
@@ -108,6 +119,8 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
             $scope.scrollstatus = 'pending';
             upTip.className = upTip.className + ' pending';
             upTip.textContent = uptiptext;
+            myScroll && myScroll.refresh();
+
           }
         } else if (arrow == 'down') {
           if (status == 'ready') {
@@ -119,19 +132,16 @@ angular.module('xiaomaiApp').directive('xiaomaiIscroll', [
 
 
             setTimeout(function() {
-
               myScroll && myScroll.refresh();
               maxScrollY = childnode.offsetHeight - ele[0].offsetHeight;
               updateTip(uptiptext, downtiptext);
-              xiaomaiMessageNotify.pub('navmainscrollupdate',
-                'down');
-
-            }, 500);
+            }, 50);
 
           } else {
             $scope.scrollstatus = 'pending';
             downTip.className = downTip.className + ' pending';
             downTip.textContent = uptiptext;
+            myScroll && myScroll.refresh();
           }
         }
       });

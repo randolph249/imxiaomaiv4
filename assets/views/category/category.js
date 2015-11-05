@@ -6,27 +6,38 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
   'buyProcessManager',
   'xiaomaiMessageNotify',
   'getRouterTypeFromUrl',
+  'schoolManager',
+  'wxshare',
   'xiaomaiLog',
   function($state, xiaomaiService, $scope,
     xiaomaiCacheManager, buyProcessManager, xiaomaiMessageNotify,
-    getRouterTypeFromUrl, xiaomaiLog) {
-    var collegeId, categoryId;
-    $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
+    getRouterTypeFromUrl, schoolManager, wxshare, xiaomaiLog) {
+    var collegeId, categoryId = $state.params.categoryId;
 
-      collegeId = toParam.collegeId;
-      categoryId = toParam.categoryId;
-      $scope.categoryId = categoryId;
-      loadGoodList();
-      loadBanner();
-      //类目页面PV统计
-      xiaomaiLog('m_p_31tabcategory' + categoryId);
+    //PV统计
+    xiaomaiLog('m_p_31tabcategory' + categoryId);
+
+    //请求学校ID
+    //请求商品类目
+    //请求Banner数据
+    schoolManager.get().then(function(res) {
+      collegeId = res.collegeId;
+      return loadGoodList();
+    }).then(function(flag) {
+      return loadBanner(flag);
+    }).finally(function() {
+      $scope.isloading = false;
+      var isLastPage = $scope.paginationInfo.currentPage ==
+        $scope.paginationInfo.totalPage;
+      var downtip = isLastPage ? '' : '请求下一页数据';
+      xiaomaiMessageNotify.pub('navmainheightstatus', 'up', 'ready', '', downtip);
     });
 
     //下载商品列表
     var preRouter, nextRouter;
     $scope.isloading = true;
     var loadGoodList = function() {
-      xiaomaiService.fetchOne('goods', {
+      return xiaomaiService.fetchOne('goods', {
         collegeId: collegeId,
         categoryId: categoryId,
         recordPerPage: 10
@@ -34,26 +45,62 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
         $scope.goods = res.goods;
         $scope.paginationInfo = res.paginationInfo;
         $scope.haserror = false;
-        // return siblingsNav('up', collegeId, 3, categoryId);
+        //配置微信分享
+        wxshareConfig();
+        return true;
       }, function(tip) {
+
+        //错误状态跳转到首页
         $scope.haserror = true;
-        $scope.errortip = tip;
-      }).finally(function() {
-        $scope.isloading = false;
-        //发送提示;
-        var isLastPage = $scope.paginationInfo.currentPage ==
-          $scope.paginationInfo.totalPage;
-        var downtip = isLastPage ? '' : '请求下一页数据';
-        xiaomaiMessageNotify.pub('navmainheightstatus',
-          'up', 'ready', '', downtip);
-      }, function(msg) {
-        $scope.errorip = msg;
-        $scope.haserror = true;
+        $scope.errortip = '类目不存在,将跳转到首页';
+        setTimeout(function() {
+          $state.go('root.buy.nav.all');
+        }, 500);
+        return false;
       });
     };
 
-    var loadBanner = function() {
-      xiaomaiService.fetchOne('categoryBanners', {
+    //微信分享配置
+    var wxshareConfig = function() {
+      //先获取当前类目列表信息
+      var categoryName = '';
+      xiaomaiService.fetchOne('navgatorlist', {
+        collegeId: collegeId
+      }).then(function(res) {
+        var navigates = res.navigateItems;
+        angular.forEach(navigates, function(navigate) {
+          if (categoryId == navigate.categoryId) {
+            categoryName = navigate.navigateName
+            return false;
+          }
+        });
+        return categoryName
+      }).then(function(name) {
+        wxshare({
+          title: '小麦特供-' + name,
+          imgUrl: 'http://xiaomai-p2p.qiniudn.com/2b7ef2e2c2ce364303283bf49131a40f',
+          desc: '小麦特供,便宜有好货,赶快点进来看看吧!'
+        });
+      });
+    };
+
+    //订阅detailGuiManager 如果详情页面关闭 重新修改微信分享配置
+    var subDetailGuiId = xiaomaiMessageNotify.sub('detailGuiManager', function(status) {
+      if (status == 'hide') {
+        setTimeout(function() {
+          wxshareConfig();
+        }, 100);
+      }
+    });
+
+    //获取类目Banner数据
+    var loadBanner = function(flag) {
+      //如果类目数据获取失败 不需要执行获取Banner数据
+      if (!flag) {
+        return false;
+      }
+
+      return xiaomaiService.fetchOne('categoryBanners', {
         categoryId: categoryId,
         collegeId: collegeId
       }).then(function(res) {
@@ -66,13 +113,14 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
 
     //跳转到对应的活动
     $scope.gotoActive = function(banner) {
-      var router = getRouterTypeFromUrl(banner.hrefUrl, collegeId,
-        'categorybanner+' + categoryId);
+      var router = getRouterTypeFromUrl(banner.hrefUrl, collegeId);
 
       if (router.hasOwnProperty('path')) {
         window.location.href = router.path;
       } else {
-        $state.go(router.name, router.params);
+        $state.go(router.name, angular.extend(router.params, {
+          refer: 'categorybanner+' + categoryId
+        }));
       }
       return false;
     };
@@ -80,34 +128,19 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
     //接受directive指令
     //当上拉的时候跳到上一个导航页面
     //如果下拉 先查询是否分页 如果分页 如果分页 请求下一页数据
-
-
     var iscrollSubId = xiaomaiMessageNotify.sub('navmainscrollupdate',
       function(arrow) {
-        if (arrow == 'up') {
-          return false;
-          preRouter && $state.go(preRouter.name, preRouter.params);
-        } else if ($scope.paginationInfo.currentPage == $scope.paginationInfo
-          .totalPage) {
-          return false;
-
-          //$state.go(nextRouter.name, nextRouter.params);
-        } else {
-
+        if (arrow == 'down' && $scope.paginationInfo.currentPage != $scope.paginationInfo.totalPage) {
           //提示文案 下一页数据
           xiaomaiMessageNotify.pub('navmainheightstatus', 'down',
             'pending', '正在请求数据...');
           //发送下页数据请求
           !nextPageLock && getNextPageData().then(function(res) {
-            var isLastPage = $scope.paginationInfo.currentPage ==
-              $scope.paginationInfo.totalPage;
+            var isLastPage = $scope.paginationInfo.currentPage == $scope.paginationInfo.totalPage;
             var downtip = isLastPage ? '' : '请求下一页数据';
-            xiaomaiMessageNotify.pub('navmainheightstatus',
-              'down',
-              'ready', '', downtip);
+            xiaomaiMessageNotify.pub('navmainheightstatus', 'down', 'ready', '', downtip);
           });
         }
-
       });
 
     //请求下一页数据
@@ -132,9 +165,10 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
     };
 
     //删除订阅关于iscroll的订阅
+    //删除关于详情页的订阅
     $scope.$on('$destroy', function() {
-      xiaomaiMessageNotify.removeOne('navmainscrollupdate',
-        iscrollSubId);
+      xiaomaiMessageNotify.removeOne('navmainscrollupdate', iscrollSubId);
+      xiaomaiMessageNotify.removeOne('detailGuiManager', subDetailGuiId);
     });
   }
 ]);

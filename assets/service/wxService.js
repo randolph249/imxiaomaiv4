@@ -30,7 +30,6 @@ angular.module('xiaomaiApp').factory('registerWx', [
       });
 
       wx.ready(function() {
-
         deferred.resolve();
       });
 

@@ -16,7 +16,7 @@
   bottom: 5.5rem;
   padding-bottom: 1rem;
   overflow: hidden;
-  font-size:1.4rem;
+  font-size: 1.4rem;
 }
 .addAddrBtn {
   display: inline-block;
@@ -48,6 +48,13 @@
   padding-left: 1.8rem;
   color: #999;
 }
+.addrItem .colleges {
+  max-height: 3.2rem;
+  line-height: 1.6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 6rem;
+}
 .addrItem p {
   height: 2.4rem;
   font-size: 1.4rem;
@@ -62,8 +69,8 @@
   color: #999;
   font-size: 3.6rem;
 }
-.addrItem .iconfont.checked{
-  color:#ff5300;
+.addrItem .iconfont.checked {
+  color: #ff5300;
 }
 .addrHandlers {
   padding: 0 2rem;
@@ -85,8 +92,8 @@
   color: #999;
   font-size: 1.2rem;
 }
-.addrHandlers span .iconfont{
-  font-size:1.4rem;
+.addrHandlers span .iconfont {
+  font-size: 1.4rem;
 }
 .addrItemCont {
   background-color: #fff;
@@ -106,15 +113,18 @@
 .addrItem-key {
   width: 10rem;
   display: inline-block;
-  font-size:1.4rem;
+  font-size: 1.4rem;
 }
 .addrItem-value {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 10rem;
-  right: 0;
-  font-size:1.4rem;
+  right: 5rem;
+  font-size: 1.4rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .addrItem-value input {
   width: 100%;
@@ -136,7 +146,7 @@
   text-align: center;
   padding-top: 2.5rem;
 }
-.addrHanlderBtnCont span{
+.addrHanlderBtnCont span {
   display: inline-block;
   width: 82%;
   height: 4rem;

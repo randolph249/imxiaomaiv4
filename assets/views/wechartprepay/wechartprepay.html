@@ -21,12 +21,6 @@
           <span class="orderDistribute-key">配送地址</span>
           <span class="orderDistribute-values">{{orderInfo.deliveryAddress}}</span>
         </p>
-        <div class="orderDistribute">
-          <span class="orderDistribute-key">配送服务费</span>
-          <p class="orderDistribute-values">
-            <span class="ldcOrderFreight orderfreight">&yen;{{orderInfo.freight|xiaomaiprice}}</span>
-          </p>
-        </div>
         <div ng-repeat="thirdOrder in orderInfo.th3ChildOrderList">
           <p class="subTitle rdcSubTitle">{{thirdOrder.storageName}}</p>
           <p class="orderChildGoods" ng-repeat="orderItem in thirdOrder.childOrderDetailList">
@@ -34,6 +28,13 @@
             <span class="price">&yen;{{orderItem.skuPrice|xiaomaiprice}}</span>
             <span class="count">{{orderItem.skuNum}}</span>
           </p>
+          <div class="orderDistribute">
+            <span class="orderDistribute-key">配送服务费</span>
+            <p class="orderDistribute-values">
+              <span class="ldcOrderFreight orderfreight" ng-bind="'&yen;'+(thirdOrder.freight-thirdOrder.freightSub|xiaomaiprice)"></span>
+              <span class="ldcOrderFreightSub orderfreightsub" ng-bind="'&yen;'+(thirdOrder.freight|xiaomaiprice)"></span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -78,13 +79,17 @@
         </div>
         <div class="orderDistribute orderDistributeTime" ng-if="ldcDeliveryType==1">
           <span class="orderDistribute-key">配送时间</span>
-          <p class="orderDistribute-values">29分钟达</p>
+          <p class="orderDistribute-values">{{orderInfo.ldcFixBeginTime?(orderInfo.ldcFixBeginTime+'-'+orderInfo.ldcFixEndTime):orderInfo.deliveryTimeStr}}</p>
         </div>
         <div class="orderDistribute orderDistributeFreight" ng-if="ldcDeliveryType==1">
           <span class="orderDistribute-key">配送服务费</span>
           <p class="orderDistribute-values">
-            <span class="ldcOrderFreight orderfreight">{{orderInfo.freight|xiaomaiprice}}</span>
+            <span class="ldcOrderFreight orderfreight">{{orderInfo.freight-orderInfo.freightSub|xiaomaiprice}}</span>
           </p>
+        </div>
+        <div class="orderDistribute orderDistributeFreight" ng-if="ldcDeliveryType==1">
+          <span class="orderDistribute-key">备注</span>
+          <p class="orderDistribute-values">{{orderInfo.remark}}</p>
         </div>
         <p class="subTitle ldcSubTitle">小麦特供</p>
         <p class="orderChildGoods" ng-repeat="orderItem in orderInfo.childOrderDetailList">

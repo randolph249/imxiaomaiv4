@@ -29,16 +29,16 @@ angular.module('xiaomaiApp').controller('bindUserCtrl', [
         phone: $scope.tel
       }).then(function() {
         //倒计时60S
-        $scope.sendLeftTime = 5;
+        $scope.sendLeftTime = 60;
 
         var t = $interval(function() {
           $scope.sendLeftTime = $scope.sendLeftTime - 1;
 
-          $scope.sendLeftTime == 0 && $interval.cancel(t);
-        }, 1000)
+          $scope.sendLeftTime <= 0 && $interval.cancel(t);
+        }, 1000);
 
-      }, function(msg) {
-        alert(msg || '获取验证码失败');
+      }, function(error) {
+        alert(error.msg || '获取验证码失败');
       })
     };
 
@@ -61,7 +61,7 @@ angular.module('xiaomaiApp').controller('bindUserCtrl', [
       }
 
       //验证码
-      if (!/[a-zA-Z\d]{4,6}/.test($scope.smsCode)) {
+      if (!/\d{4,6}/.test('' + $scope.smsCode)) {
         alert('请输入正确验证码');
         return false;
       }
@@ -73,12 +73,12 @@ angular.module('xiaomaiApp').controller('bindUserCtrl', [
           "collegeId": collegeId,
           "smsCode": $scope.smsCode,
           "type": 0 //需要区分红包和商城 后期处理
-        })
+        });
       }).then(function(res) {
         alert('绑定成功');
-        $state.go($state.params.redirect);
+        $state.go('root.buy.nav.all');
       }, function(err) {
-        alert(erro.msg);
+        alert(err.msg);
       });
     }
   }

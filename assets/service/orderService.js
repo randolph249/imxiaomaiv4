@@ -37,6 +37,7 @@ angular.module('xiaomaiApp').factory('orderManager', [
         return deferred.promise;
       }
 
+
       //如果存在于Cookie中
       //根据Cookie中的orderId和userId去查询refer接口
       if (ipCookie('xiaomaiv4_order') && !isEmptyObject(ipCookie('xiaomaiv4_order'))) {
@@ -44,6 +45,7 @@ angular.module('xiaomaiApp').factory('orderManager', [
         deferred.resolve();
         return deferred.promise;
       }
+
 
       //创建订单
       xiaomaiService.save('createOrder').then(function(res) {
@@ -90,6 +92,7 @@ angular.module('xiaomaiApp').factory('orderManager', [
       //上锁
       queryLock = true;
       if (!isEmptyObject(orderInfo)) {
+
         deferred.resolve(orderInfo);
         queryLock = false;
         //处理队列中的其他请求
@@ -105,6 +108,7 @@ angular.module('xiaomaiApp').factory('orderManager', [
       if (!userId || !getOrderId) {
         deferred.reject();
         //处理队列中的其他请求
+        queryLock = false;
         queue.length && queryOrder(queue.shift());
         return false;
       }
@@ -138,9 +142,12 @@ angular.module('xiaomaiApp').factory('orderManager', [
     //获取订单详情
     var getOrder = function() {
       var deferred = $q.defer();
+
       if (queryLock) {
+
         queue.push(deferred);
       } else {
+
         queryOrder(deferred);
       }
 

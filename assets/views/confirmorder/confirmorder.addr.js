@@ -4,7 +4,8 @@ angular.module('xiaomaiApp').controller('addrCtrl', [
   '$state',
   'orderManager',
   'addrMananger',
-  function($scope, $state, orderManager, addrMananger) {
+  'xiaomaiLog',
+  function($scope, $state, orderManager, addrMananger, xiaomaiLog) {
 
     //获取收货地址
     addrMananger.getAddr().then(function(addrInfo) {
@@ -18,6 +19,9 @@ angular.module('xiaomaiApp').controller('addrCtrl', [
         addrId: $scope.addrInfo.userAddrId,
         userId: userId
       });
+      $event.preventDefault();
+      $event.stopPropagation();
+      xiaomaiLog('m_b_33confordereditcontact');
     };
 
     //页面销毁之前 置空addrInfo

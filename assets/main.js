@@ -120,12 +120,6 @@ angular.module('xiaomaiApp').config([
         controller: 'wechartprepayCtrl',
         templateUrl: '../assets/views/wechartprepay/wechartprepay.html'
       })
-      //支付宝预支付页面
-      .state('root.alipayprepay', {
-        url: 'alipayprepay/',
-        templateUrl: '../assets/views/alipayprepay/alipayprepay.html'
-
-      })
       //支付成功页面
       .state('root.paySuccess', {
         url: 'paySuccess/?userId&orderId',
@@ -147,7 +141,7 @@ angular.module('xiaomaiApp').config([
       .state('root.addr', {
         url: 'orderaddr/?addrId&userId',
         templateUrl: '../assets/views/addr/addr.html',
-        controller: 'addrListCtrl',
+        controller: 'addrListCtrl'
       })
       //订单地址新增
       .state('root.addrAdd', {
@@ -176,6 +170,7 @@ angular.module('xiaomaiApp').config([
       //用户中心
       .state('root.user', {
         url: 'user/',
+        controller: 'userCtrl',
         templateUrl: '../assets/views/user/user.html'
       })
       .state('root.notfound', {

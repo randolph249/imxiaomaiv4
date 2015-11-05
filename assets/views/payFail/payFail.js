@@ -14,9 +14,7 @@ angular.module('xiaomaiApp').controller('payFailCtrl', [
 
     };
     //清空购物车
-    cartManager.clear().then(function() {
 
-    });
 
 
     //返回首页
@@ -30,6 +28,9 @@ angular.module('xiaomaiApp').controller('payFailCtrl', [
     $scope.deleteOrder = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
+      cartManager.clear().then(function() {
+        $state.go('rooy.buy.nav.all');
+      });
     };
 
   }

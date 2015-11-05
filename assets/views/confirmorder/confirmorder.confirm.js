@@ -41,7 +41,7 @@ angular.module('xiaomaiApp').controller('orderConfirmCtrl', [
 
     //支付成功以后的处理逻辑
     var confirmSuccessedHanlder = function(res) {
-      alert('payTypeis:' + payType);
+
       if (res.order.status == 5) {
         alert("您已经支付了，请勿重复提交支付请求。");
         return;
@@ -62,20 +62,12 @@ angular.module('xiaomaiApp').controller('orderConfirmCtrl', [
         } catch (e) {
 
         }
-        xiaomaiCacheManager.writeCache('prepayData', res.prepayData);
       }
     };
 
     //支付失败之后的逻辑处理
     var confirmFailedHanlder = function(error) {
-
-      $state.go('root.paySuccess', {
-        orderId: 100,
-        userId: 101
-      });
-      return false;
       if (error.code === 1) {
-        alert(error.msg);
         //跳转到支付成功页面
         $state.go('root.paySuccess', {
           orderId: error.data.order.userId,
@@ -108,17 +100,17 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
   function(xiaomaiMessageNotify, orderManager, addrMananger, xiaomaiService, $q, cookie_openid) {
 
     var requireParamList = {};
-    var subLdcDeliveryType, subLdcDeliveryAddress, subOnlinePayType, subLdcDeliveryTime;
+    var subLdcDeliveryType, subLdcDeliveryAddress, subOnlinePayType, subLdcDeliveryTime, subLdcRemark;
     var resetParam = function() {
       requireParamList = {
-        opend_id: cookie_openid,
+        openId: cookie_openid,
         userId: '',
         orderId: '',
         collegeId: '',
         receiverCollegeId: '',
         receiverName: '',
         receiverPhone: '',
-        rdcDeliveryType: -1,
+        rdcDeliveryType: 0,
         rdcSelfPickUpAddress: '',
         rdcDeliveryAddress: '',
         rdcDeliveryBeginTime: '',
@@ -128,6 +120,7 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
         ldcDeliveryAddress: '',
         ldcDeliveryBeginTime: '',
         ldcDeliveryEndTime: '',
+        ldcRemark: '',
         onlinePayType: '',
         couponId: '',
         couponPay: '',
@@ -148,9 +141,9 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
         orderManager.getOrderInfo('order.fullSub')
       ]).then(function(reslist) {
         requireParamList = angular.extend(requireParamList, {
-          userId: reslist[0],
-          orderId: reslist[1],
-          collegeId: reslist[2],
+          userId: '' + reslist[0],
+          orderId: '' + reslist[1],
+          collegeId: '' + reslist[2],
           rdcSelfPickUpAddress: reslist[3],
           ldcSelfPickUpAddress: reslist[4],
           fullSub: reslist[5]
@@ -161,7 +154,7 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
       //获取收货地址信息
       addrMananger.getAddr().then(function(addrInfo) {
         requireParamList = angular.extend(requireParamList, {
-          receiverCollegeId: addrInfo.receiverCollegeId,
+          receiverCollegeId: '' + addrInfo.receiverCollegeId,
           receiverName: addrInfo.receiverName,
           receiverPhone: addrInfo.receiverPhone
         });
@@ -191,21 +184,21 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
         switch (couponInfo.couponType) {
           case 'none':
             requireParamList = angular.extend(requireParamList, {
-              couponId: -1,
+              couponId: "",
               couponPay: 0,
               firstSub: 0,
             });
             break;
           case 'firstsub':
             requireParamList = angular.extend(requireParamList, {
-              couponId: -1,
+              couponId: "",
               couponPay: 0,
               firstSub: couponInfo.firstsub,
             });
             break;
           case 'othercoupon':
             requireParamList = angular.extend(requireParamList, {
-              couponId: couponInfo.coupon.couponId,
+              couponId: "" + couponInfo.coupon.couponId,
               couponPay: couponInfo.coupon.money,
               firstSub: 0
             });
@@ -222,8 +215,18 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
         });
       });
 
+      subLdcRemark = xiaomaiMessageNotify.sub('updateLdcRemark', function(remark) {
+        remark = remark.replace(/[\s\n\r]+/gm, ',').replace(/^\s+|\s+$/gm, '');
+        if (remark.indexOf('script') != -1) {
+          return false;
+        }
+        requireParamList = angular.extend(requireParamList, {
+          ldcRemark: remark
+        });
+      });
 
     };
+
     //删除所有监听
     var destroyConfirm = function() {
       xiaomaiMessageNotify.removeOne('updateLdcDeliveryType', subLdcDeliveryAddress);
@@ -231,7 +234,7 @@ angular.module('xiaomaiApp').factory('orderSubmitManager', [
       xiaomaiMessageNotify.removeOne('updateLdcDeliveryAddress', subLdcDeliveryAddress);
       xiaomaiMessageNotify.removeOne('updateOnlinePayType', subOnlinePayType);
       xiaomaiMessageNotify.removeOne('updateLdcDeliveryTime', subLdcDeliveryTime);
-
+      xiaomaiMessageNotify.removeOne('updateLdcRemark', subLdcRemark);
     };
 
     //执行confirm

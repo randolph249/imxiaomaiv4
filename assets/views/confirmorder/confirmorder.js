@@ -9,28 +9,14 @@ angular.module('xiaomaiApp').controller('orderCtrl', [
       $state.go('root.buy.nav.all');
     };
 
-    //监听refer参数
-    var $watcher = $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
-      sendLog(toParam.r);
-      verifyOrder();
-      $watcher();
-    });
-
-    //验证订单状态
-    var verifyOrder = function() {
-      //判断订单是否失效如果失效直接跳回到首页
-      var orderStatus = orderManager.queryOrderStatus();
-
-      if (orderStatus == false) {
-        alert('当前订单已经不存在,\n将回到首页');
-        $state.go('root.buy.nav.all');
-      }
-    };
-
+    $scope.isloading = true;
     orderManager.getOrderInfo('order').then(function(res) {
-      setTimeout(function() {
-        xiaomaiMessageNotify.pub('confirmoderHeightUpdate', 'up', 'ready', '', '');
-      }, 100);
+      xiaomaiMessageNotify.pub('confirmoderHeightUpdate', 'up', 'ready', '', '');
+    }, function() {
+      alert('当前订单已经不存在,\n将回到首页');
+      $state.go('root.buy.nav.all');
+    }).finally(function() {
+      $scope.isloading = false;
     });
 
     //统计日志

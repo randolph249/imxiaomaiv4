@@ -187,7 +187,7 @@ angular.module('xiaomaiApp').config([
       })
       //普通活动 从首页进入一个新连接
       .state('root.buy.active', {
-        url: 'active/?collegeId&activityId&refer',
+        url: 'active/?activityId&refer',
         controller: 'buy.activeCtrl',
         templateUrl: '../assets/views/active/active.html',
         resolve: {
@@ -206,7 +206,7 @@ angular.module('xiaomaiApp').config([
       })
       //类目列表页
       .state('root.buy.nav.category', {
-        url: 'category/?collegeId&categoryId',
+        url: 'category/?categoryId',
         controller: 'nav.categoryCtrl',
         templateUrl: '../assets/views/category/category.html',
         resolve: {
@@ -465,7 +465,7 @@ angular.module('xiaomaiApp').config([
               name: 'xiaomaiApp',
               files: [
                 window.__SYS_CONF.resourceUrl + 'views/payFail/payFail.js',
-                window.__SYS_CONF.resourceUrl + 'views/payFail/payFail.css'
+                window.__SYS_CONF.resourceUrl + 'views/paySuccess/paySuccess.css'
               ]
             })
           }]
@@ -578,6 +578,7 @@ angular.module('xiaomaiApp').config([
       //用户中心
       .state('root.user', {
         url: 'user/',
+        controller: 'userCtrl',
         templateUrl: '../assets/views/user/user.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {

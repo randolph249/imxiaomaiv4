@@ -61,8 +61,6 @@ angular.module('xiaomaiApp').controller('buy.cartDetailCtrl', [
         openId: cookie_openid,
         type: 1
       }).then(function(coupons) {
-        //缓存购物车信息
-        xiaomaiCacheManager.writeCache('mycoupon', coupons);
         //不可用优惠劵过滤
         var availableCoupons = [];
         angular.forEach(coupons.couponInfo, function(item) {

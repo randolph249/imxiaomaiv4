@@ -31,16 +31,7 @@ angular.module('xiaomaiApp').controller('nav.recommendCtrl', [
       $scope.haserror = true;
     }).finally(function(flag) {
       $scope.isloading = false;
-      xiaomaiMessageNotify.pub('navmainheightstatus', 'up',
-        'ready', '', '');
-    });
-
-    $scope.$on('$destroy', function() {
-      //保存页面数据
-      xiaomaiCacheManager.writeCache('categoryGoods', $scope.categorys, {
-        collegeId: collegeId
-      });
-      //删除订阅
+      xiaomaiMessageNotify.pub('navmainheightstatus', 'up', 'ready', '', '');
     });
 
     //更多跳转

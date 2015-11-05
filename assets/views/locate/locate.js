@@ -42,8 +42,6 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
       }).then(function(res) {
         $scope.haserror = false;
         $scope.locationResult = res.colleges;
-        //写入缓存
-        xiaomaiCacheManager.writeCache('locate', res);
       }, function(msg) {
         //定位失败 发送Log
         xiaomaiLog('m_b_31manuallyselectcity', '');
@@ -59,8 +57,6 @@ angular.module('xiaomaiApp').controller('positionCtrl', [
     $scope.isloading = true;
     xiaomaiService.fetchOne('citylist', {}, true).then(function(res) {
       $scope.citylist = res.cities;
-
-      xiaomaiCacheManager.writeCache('citylist', res);
       $scope.haserror = false;
     }, function() {
       $scope.haserror = true;

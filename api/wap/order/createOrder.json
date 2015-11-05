@@ -49,98 +49,14 @@
       "wxPayMsg": "",
       "defaultUserAddr": {
         "userAddrId": 0,
-        "receiverName": "",
+        "receiverName": "郭超",
         "receiverPhone": "18612244032",
         "receiverCollegeName": "小麦总部",
         "receiverAddr": "小麦总部第三方商品营业厅",
         "receiverCollegeId": 1
       },
       "limitTime": 15,
-      "ldcTimeList": [{
-        "begin": "00:30",
-        "end": "00:45"
-      }, {
-        "begin": "00:15",
-        "end": "00:30"
-      }, {
-        "begin": "00:01",
-        "end": "00:15"
-      }, {
-        "begin": "11:30",
-        "end": "12:00"
-      }, {
-        "begin": "11:00",
-        "end": "11:30"
-      }, {
-        "begin": "12:00",
-        "end": "15:00"
-      }, {
-        "begin": "15:00",
-        "end": "16:00"
-      }, {
-        "begin": "16:00",
-        "end": "17:00"
-      }, {
-        "begin": "16:45",
-        "end": "17:00"
-      }, {
-        "begin": "17:00",
-        "end": "17:15"
-      }, {
-        "begin": "17:15",
-        "end": "17:30"
-      }, {
-        "begin": "17:45",
-        "end": "18:00"
-      }, {
-        "begin": "17:30",
-        "end": "17:45"
-      }, {
-        "begin": "18:30",
-        "end": "18:45"
-      }, {
-        "begin": "18:15",
-        "end": "18:30"
-      }, {
-        "begin": "18:00",
-        "end": "18:15"
-      }, {
-        "begin": "18:45",
-        "end": "19:00"
-      }, {
-        "begin": "19:00",
-        "end": "20:00"
-      }, {
-        "begin": "20:00",
-        "end": "22:00"
-      }, {
-        "begin": "22:15",
-        "end": "22:30"
-      }, {
-        "begin": "22:00",
-        "end": "23:59"
-      }, {
-        "begin": "22:00",
-        "end": "22:15"
-      }, {
-        "begin": "22:45",
-        "end": "23:00"
-      }, {
-        "begin": "22:30",
-        "end": "22:45"
-      }, {
-        "begin": "23:15",
-        "end": "23:30"
-      }, {
-        "begin": "23:00",
-        "end": "23:15"
-      }, {
-        "begin": "23:50",
-        "end": "23:59"
-      }, {
-        "begin": "23:31",
-        "end": "23:58"
-      }],
+      "ldcTimeSwitch": 0,
       "rdcAddressList": [{
         "addressType": "学生公寓",
         "addresses": ["学一", "学二", "学三", "学四", "学五", "学六", "学八", "学九", "学十", "学十一", "学十三", "学二十九", "留学生公寓", "青年公寓"]
@@ -165,12 +81,12 @@
       "couponList": [],
       "aliPayMsg": "",
       "order": {
-        "orderId": 422189,
-        "userId": 377,
+        "orderId": 425554,
+        "userId": 123456982,
         "collegeId": 1,
-        "receiverName": "",
+        "receiverName": "郭超",
         "receiverPhone": "18612244032",
-        "totalPay": 1,
+        "totalPay": 2,
         "onlinePay": 0,
         "onlinePayId": null,
         "onlinePayType": 0,
@@ -181,7 +97,7 @@
         "freight": 0,
         "freightSub": 0,
         "fillPay": 0,
-        "orderCode": "XM00100422189",
+        "orderCode": "XM00100425554",
         "remark": null,
         "status": 1,
         "device": 1,
@@ -189,18 +105,18 @@
         "updateTime": null,
         "payTime": null,
         "childOrderList": [{
-          "childOrderId": 422190,
-          "orderId": 422189,
-          "userId": 377,
+          "childOrderId": 425555,
+          "orderId": 425554,
+          "userId": 123456982,
           "collegeId": 1,
           "collegeName": null,
-          "receiverName": "",
+          "receiverName": "郭超",
           "receiverPhone": "18612244032",
-          "totalPay": 1,
+          "totalPay": 2,
           "freight": 0,
           "freightSub": 0,
-          "orderCode": "XM00100422189",
-          "childOrderCode": "XM00300422190",
+          "orderCode": "XM00100425554",
+          "childOrderCode": "XM00300425555",
           "remark": null,
           "distributeType": 1,
           "status": 1,
@@ -215,27 +131,27 @@
           "createTime": null,
           "updateTime": null,
           "childOrderDetailList": [{
-            "childOrderDetailId": 79193,
-            "orderId": 422189,
-            "childOrderId": 422190,
-            "userId": 377,
+            "childOrderDetailId": 81643,
+            "orderId": 425554,
+            "childOrderId": 425555,
+            "userId": 123456982,
             "collegeId": 1,
-            "goodsId": 4168,
-            "bgSkuId": 412,
-            "skuId": 6790,
-            "skuName": "回归测试",
+            "goodsId": 7359,
+            "bgSkuId": 463,
+            "skuId": 12224,
+            "skuName": "App-普通商品8",
             "skuSubName": "",
             "skuNum": 1,
-            "skuOriginPrice": 1,
-            "skuPrice": 1,
+            "skuOriginPrice": 100,
+            "skuPrice": 2,
             "status": 1,
             "createTime": null,
             "updateTime": null,
             "storageId": 794387644,
             "distributeType": 1,
             "sourceType": 1,
-            "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=156460",
-            "categoryId": 57,
+            "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=157515",
+            "categoryId": 58,
             "ratio": 0,
             "propertyIds": "null",
             "wmsGoodsIds": ""
@@ -248,7 +164,7 @@
           "storageId": 794387644,
           "h5DeliveryPageUrl": null,
           "deliveryTimeStr": "29分钟达",
-          "isFixDeliveryTime": false
+          "deliveryTimeType": 0
         }],
         "categoryIdList": null,
         "thirdFreight": 0,
@@ -256,44 +172,116 @@
         "thirdChildOrderList": []
       },
       "rdcTimeList": [{
-        "begin": "00:30",
-        "end": "00:45"
+        "begin": "09:00",
+        "end": "09:15"
       }, {
-        "begin": "00:15",
-        "end": "00:30"
+        "begin": "09:15",
+        "end": "09:30"
       }, {
-        "begin": "00:01",
-        "end": "00:15"
+        "begin": "09:30",
+        "end": "09:45"
       }, {
-        "begin": "11:30",
+        "begin": "09:45",
+        "end": "10:00"
+      }, {
+        "begin": "10:45",
+        "end": "11:00"
+      }, {
+        "begin": "10:30",
+        "end": "10:45"
+      }, {
+        "begin": "10:15",
+        "end": "10:30"
+      }, {
+        "begin": "10:00",
+        "end": "10:15"
+      }, {
+        "begin": "11:45",
         "end": "12:00"
       }, {
-        "begin": "11:00",
+        "begin": "11:30",
+        "end": "11:45"
+      }, {
+        "begin": "11:15",
         "end": "11:30"
       }, {
+        "begin": "11:00",
+        "end": "11:15"
+      }, {
         "begin": "12:00",
+        "end": "12:15"
+      }, {
+        "begin": "12:15",
+        "end": "12:30"
+      }, {
+        "begin": "12:30",
+        "end": "12:45"
+      }, {
+        "begin": "12:45",
+        "end": "13:00"
+      }, {
+        "begin": "13:45",
+        "end": "14:00"
+      }, {
+        "begin": "13:30",
+        "end": "13:45"
+      }, {
+        "begin": "13:15",
+        "end": "13:30"
+      }, {
+        "begin": "13:00",
+        "end": "13:15"
+      }, {
+        "begin": "14:45",
         "end": "15:00"
       }, {
-        "begin": "15:00",
-        "end": "16:00"
+        "begin": "14:30",
+        "end": "14:45"
       }, {
-        "begin": "16:00",
-        "end": "17:00"
+        "begin": "14:15",
+        "end": "14:30"
+      }, {
+        "begin": "14:00",
+        "end": "14:15"
+      }, {
+        "begin": "15:00",
+        "end": "15:15"
+      }, {
+        "begin": "15:15",
+        "end": "15:30"
+      }, {
+        "begin": "15:30",
+        "end": "15:45"
+      }, {
+        "begin": "15:45",
+        "end": "16:00"
       }, {
         "begin": "16:45",
         "end": "17:00"
       }, {
-        "begin": "17:00",
-        "end": "17:15"
+        "begin": "16:30",
+        "end": "16:45"
       }, {
-        "begin": "17:15",
-        "end": "17:30"
+        "begin": "16:15",
+        "end": "16:30"
+      }, {
+        "begin": "16:00",
+        "end": "16:15"
       }, {
         "begin": "17:45",
         "end": "18:00"
       }, {
         "begin": "17:30",
         "end": "17:45"
+      }, {
+        "begin": "17:15",
+        "end": "17:30"
+      }, {
+        "begin": "17:00",
+        "end": "17:15"
+      }, {
+        "begin": "18:45",
+        "end": "19:00"
       }, {
         "begin": "18:30",
         "end": "18:45"
@@ -304,41 +292,17 @@
         "begin": "18:00",
         "end": "18:15"
       }, {
-        "begin": "18:45",
-        "end": "19:00"
-      }, {
         "begin": "19:00",
+        "end": "19:15"
+      }, {
+        "begin": "19:15",
+        "end": "19:30"
+      }, {
+        "begin": "19:30",
+        "end": "19:45"
+      }, {
+        "begin": "19:45",
         "end": "20:00"
-      }, {
-        "begin": "20:00",
-        "end": "22:00"
-      }, {
-        "begin": "22:15",
-        "end": "22:30"
-      }, {
-        "begin": "22:00",
-        "end": "23:59"
-      }, {
-        "begin": "22:00",
-        "end": "22:15"
-      }, {
-        "begin": "22:45",
-        "end": "23:00"
-      }, {
-        "begin": "22:30",
-        "end": "22:45"
-      }, {
-        "begin": "23:15",
-        "end": "23:30"
-      }, {
-        "begin": "23:00",
-        "end": "23:15"
-      }, {
-        "begin": "23:50",
-        "end": "23:59"
-      }, {
-        "begin": "23:31",
-        "end": "23:58"
       }]
     },
     "items": [{
@@ -346,9 +310,9 @@
       "title": "",
       "message": "",
       "goodsList": [{
-        "goodsId": 4168,
-        "goodsName": "回归测试",
-        "skuId": 6790,
+        "goodsId": 7359,
+        "goodsName": "App-普通商品8",
+        "skuId": 12224,
         "num": 1,
         "distributeType": 1,
         "sourceType": 1,
@@ -357,5 +321,5 @@
       }]
     }]
   },
-  "serverTime": "2015-10-31 18:07:30"
+  "serverTime": "2015-11-04 17:58:13"
 }

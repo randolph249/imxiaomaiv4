@@ -29,6 +29,8 @@ angular.module('xiaomaiApp').controller('confirmorder.couponListCtrl', [
         item.remainDays = Math.floor(remainseconds / (1000 * 60 * 60 * 24));
       });
       $scope.couponlist = reslist[1];
+    }).finally(function() {
+      xiaomaiMessageNotify.pub('confirmCouponListHeightUpdate', 'up', 'ready', '', '');
     });
 
     //选择优惠劵

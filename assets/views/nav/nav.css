@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.pub-header .icon-fankui,.pub-header .icon-sousuo{
+.pub-header .usercenter,.pub-header .icon-sousuo{
     color: #5f646e;
     font-size:2.4rem;
 }
@@ -22,6 +22,7 @@
     border-style: solid;
     border-color: #ccc #fff #fff #fff;
 }
+
 
 .list-main .list-category {
     position: absolute;

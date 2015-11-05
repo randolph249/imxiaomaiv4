@@ -1,4 +1,10 @@
-//接口列表管理
+/**
+ *所有的接口信息都在这里配置管理
+ *GET请求可以配置三条信息
+ *URL地址
+ *请求method
+ *GET请求是否可以缓存 默认true
+ **/
 angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
   var urls = {
       //导航
@@ -39,7 +45,8 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       //普通活动下的商品列表
       'activeGoods': {
         url: '/wap/activity/goods',
-        type: 'GET'
+        type: 'GET',
+        canstore: false
       },
       //活动页面的Banner
       'activeBanner': {
@@ -59,7 +66,8 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       //普通类目下产品
       'goods': {
         url: '/wap/category/goods',
-        type: 'GET'
+        type: 'GET',
+        canstore: false
       },
       //产品详情
       'goodDetail': {
@@ -89,7 +97,8 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       //查询购物车
       'queryCart': {
         url: '/wap/cart/sync',
-        type: 'GET'
+        type: 'GET',
+        canstore: false
       },
       //购物车详情
       'queryCartDetail': {
@@ -129,7 +138,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       },
       //发送验证码
       "sendCode": {
-        url: "/wap/user/sendCode",
+        url: "/wap/userBind/sendCode",
         type: "POST"
       },
       //用户绑定信息
@@ -145,7 +154,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       //获取用户收货地址列表
       "addrList": {
         url: "/wap/useraddr/query",
-        type: "GET" //?
+        type: "GET"
       },
       //删除某条用户收货地址信息
       "addrDel": {
@@ -195,11 +204,17 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       //支付状态校验
       "payStatusCheck": {
         url: "/wap/order/pay/check",
-        type: "GET"
+        type: "GET",
+        canstore: false
       },
       //送货时间表
       "ldcDeliveryTime": {
         url: "/wap/get/ldc/deliveryTime",
+        type: "GET"
+      },
+      //用户中心
+      "usercenter": {
+        url: "/wap/usercenter/index",
         type: "GET"
       }
     },
@@ -209,7 +224,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         type = args[1] || 'GET';
 
       if (urls.hasOwnProperty(name) && urls[name].type === type) {
-        return urls[name]['url'];
+        return urls[name];
       } else {
         return false;
       }
@@ -282,60 +297,105 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
       createPromise = function() {
         return $q.defer();
       },
-      /**
-       *@请求后台数据
-       *@params {String} name 接口名，对应的接口地址在modelManager中定义
-       *@params {Object} [params] 请求参数
-       *@params {Boolean} isCached 是否读取缓存
-       **/
-      fetchOne = function(name) {
-        var deferred = createPromise();
+      fetchQueue = {},
+      handlerQueue = function(name) {
 
-        var args = Array.prototype.slice.call(arguments, 0),
-          name = args[0],
-          params = {},
-          url;
-
-        if (getDataType(args[1]) == 'object') {
-          params = args[1];
+        if (fetchQueue[name]['queue'].length) {
+          var queueItem = fetchQueue[name]['queue'].shift();
+          fetchQueue[name]['lock'] = true;
+          fetchQuery(queueItem.deferred, queueItem.name, queueItem.params);
+        } else {
+          delete fetchQueue[name];
+        }
+      },
+      fetchQuery = function(deferred, name, params) {
+        var urlModel = xiaomaimodelManage(name, 'GET'),
+          url, canstore, cacheResult;
+        if (urlModel === false) {
+          deferred.reject({
+            code: '404',
+            msg: '接口请求错误'
+          });
+          handlerQueue(name);
+          return false;
         }
 
-        //判断接口是否已经在modelManager中定义
-        url = getUrl(name, 'GET');
-        //如果当前开发环境是线下环境 将接口转成本地文件地址
-        url = urlInterceptor(url);
-        if (!url) {
-          deferred.reject('接口错误或接口请求方式错误');
-          return deferred.promise;
-        }
+
+        url = urlInterceptor(urlModel['url']);
+        canstore = urlModel['canstore'] !== false;
 
         //从页面缓存中查找
-        var cacheResult = xiaomaiCacheManager.readCache(name, params);
-        if (cacheResult) {
+        cacheResult = xiaomaiCacheManager.readCache(name, params);
+        if (canstore && cacheResult) {
           deferred.resolve(cacheResult);
-          return deferred.promise;
+          handlerQueue(name);
+          return false;
         }
+
 
         //向后台发送请求
         $http({
           url: url,
           method: 'GET',
           params: angular.extend({
-            // v: Math.random().toString().replace(/\./, '')
+            redirect: 'mall',
+            v: Math.random().toString().replace('.', '')
           }, params)
         }).success(function(res) {
-
           //如果返回结果有异常 reject
           if (handlerResult(res) === false) {
             deferred.reject(res.msg);
           } else {
             //写入缓存
-            deferred.resolve(res.hasOwnProperty('data') ? res.data :
-              res);
+            canstore && xiaomaiCacheManager.writeCache(name, res.data, params);
+            deferred.resolve(res.hasOwnProperty('data') ? res.data : res);
           }
         }).error(function(res) {
           deferred.reject('接口请求错误');
+        }).finally(function() {
+          fetchQueue[name]['lock'] = false;
+          handlerQueue(name);
         });
+      },
+      /**
+       *@请求后台数据
+       *@params {String} name 接口名，对应的接口地址在modelManager中定义
+       *@params {Object} [params] 请求参数
+       *@params {Boolean} isCached 是否读取缓存
+       **/
+
+      fetchOne = function(name) {
+        var deferred = $q.defer();
+        var args = Array.prototype.slice.call(arguments, 0),
+          name = args[0],
+          params = {},
+          urlModel,
+          url,
+          canstore; //是否使用缓存数据
+
+        if (getDataType(args[1]) == 'object') {
+          params = args[1];
+        }
+
+
+        //如果相同的请求同时发送过来 处理第一个请求 同时将其他请求打到待处理队列中
+        if (fetchQueue.hasOwnProperty(name) && fetchQueue[name].lock == true) {
+          fetchQueue[name].queue.push({
+            deferred: deferred,
+            name: name,
+            params: params
+          });
+        } else {
+          fetchQueue[name] = {
+            lock: true,
+            queue: []
+          };
+          fetchQuery(deferred, name, params);
+        }
+
+        return deferred.promise;
+
+
 
         return deferred.promise;
       },
@@ -354,16 +414,21 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
        *@param isForm 因为后台POST接口不太一致 所以手动设置提交方式
        **/
       save = function(name, params, isJSON) {
-        var deferred = createPromise();
+        var deferred = $q.defer();
+        var urlModel, url;
 
         //判断接口是否已经在modelManager中定义
-        url = getUrl(name, 'POST');
+        urlModel = getUrl(name, 'POST');
         //如果当前开发环境是线下环境 将接口转成本地文件地址
-        url = urlInterceptor(url);
-        if (!url) {
-          deferred.reject('接口错误或接口请求方式错误');
+        if (!urlModel) {
+          deferred.reject({
+            code: '404',
+            msg: '接口错误或接口请求方式错误'
+          });
           return deferred.promise;
         }
+
+        url = urlInterceptor(urlModel['url']);
 
         var defaulOptions = env == 'develop' ? {
           method: 'GET',
@@ -372,7 +437,6 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           method: 'POST',
           data: isJSON ? params : httpRequstParam(params)
         };
-
 
         $http(angular.extend(defaulOptions, {
           url: url,

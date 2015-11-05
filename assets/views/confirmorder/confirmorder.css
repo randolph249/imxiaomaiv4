@@ -6,6 +6,19 @@
   bottom: 4.3rem;
   overflow: hidden;
 }
+.confirorderloading {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4.4rem;
+  bottom: 0;
+  line-height: 20rem;
+  text-align: center;
+  font-size: 1.6rem;
+  color: #ff5300;
+  background: #f2f2f2;
+  z-index: 2;
+}
 .order_contents .block_bg {
   margin-top: 1.5rem;
   background: #fff;
@@ -72,6 +85,7 @@
   line-height: 5rem;
   height: 5rem;
   float: left;
+  z-index: -1;
 }
 .order_contents .block_bg .orderDistribute .deliveryRadio {
   width: 50%;
@@ -262,7 +276,7 @@
   background-color: #ff5300;
   color: #fff;
   text-align: center;
-  width: 16rem;
+  width: 10rem;
   height: 4.4rem;
   line-height: 4.4rem;
   font-size: 1.8rem;
@@ -271,8 +285,8 @@
   right: 0;
   bottom: 0;
 }
-.fixOrderFooter .confirmBtn.disabled{
-  background-color:#bbbbbb;
+.fixOrderFooter .confirmBtn.disabled {
+  background-color: #bbbbbb;
 }
 .order_contents .couponThumb {
   padding-left: 2.5rem;
@@ -360,7 +374,7 @@
   font-size: 1.4rem;
   color: #fff;
   position: relative;
-  border-radius:0 0 .5rem .5rem;
+  border-radius: 0 0 .5rem .5rem;
 }
 .couponlistContents .couponBox .couponCard .couponName:after {
   content: '............................';
@@ -380,8 +394,7 @@
   font-size: 3.5rem;
   color: #fff;
   position: relative;
-  border-radius:.5rem .5rem 0 0;
-
+  border-radius: .5rem .5rem 0 0;
 }
 .couponlistContents .couponBox .couponCard .couponAmount:after {
   width: 1.8rem;
@@ -461,15 +474,29 @@
   top: 0;
   line-height: 5rem;
   font-size: 1.8rem;
-  color: #999
+  color: #999;
+  height: 5rem;
+  background: #fff;
+  width: 5rem;
+  text-align: center;
+  z-index:1;
 }
-
-.fixOrderFooter.fixwechartpayFooter{
+.fixOrderFooter.fixwechartpayFooter {
   background-color: #Fe9402;
 }
-.fixwechartpayFooter .prepayprice{
+.fixwechartpayFooter .prepayprice {
   line-height: 4.4rem;
-  padding:0 1rem;
-  color:#fff;
-  font-size:1.4rem;
+  padding: 0 1rem;
+  color: #fff;
+  font-size: 1.4rem;
+}
+.orderDistribute-values .ldcUserRemark {
+  outline: none;
+  width: 100%;
+  border:#e0e0e0 solid 1px;
+  border-radius:0.2rem;
+  line-height: 3rem;
+  background:#f0f0f0;
+  float:right;
+  margin-top:1rem;
 }

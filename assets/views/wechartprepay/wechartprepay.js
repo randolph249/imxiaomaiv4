@@ -5,13 +5,15 @@ angular.module('xiaomaiApp').controller('wechartprepayCtrl', [
   'xiaomaiCacheManager',
   'xiaomaiMessageNotify',
   '$timeout',
-  function($scope, $state, xiaomaiService, xiaomaiCacheManager, $timeout, xiaomaiMessageNotify) {
+  'safeApply',
+  function($scope, $state, xiaomaiService, xiaomaiCacheManager, xiaomaiMessageNotify, $timeout, safeApply) {
     //支付按钮禁止点击
     $scope.lock = true;
     //5S之后默认支付失败
     var $t = $timeout(function() {
       $scope.lock = false;
     }, 5000);
+
 
     var userId = $state.params.userId;
     var orderId = $state.params.orderId;
@@ -27,23 +29,25 @@ angular.module('xiaomaiApp').controller('wechartprepayCtrl', [
     });
 
     //获取信息
-    var payInfo = {
-      appId: "wx35a8b3f8507f4ea6",
-      nonceStr: "0df78f24264710c58e81a19d14d3e291",
-      package: "prepay_id=wx20150728162842faa93b7e240385154146",
-      paySign: "40A8D9BE6C7F52A8909FA6D9562627B4",
-      signType: "MD5",
-      timeStamp: "1438072122",
-    };
-    // var payInfo = xiaomaiCacheManager.readCache('prepayData');
+    var payInfo = xiaomaiCacheManager.readCache('prepayData');
+    xiaomaiCacheManager.clean('prepayData');
 
     //发起支付信息
     var triggerPay = function() {
+      $scope.lock = true;
       WeixinJSBridge.invoke(
-        'getBrandWCPayRequest', payInfo,
+        'getBrandWCPayRequest', {
+          "appId": payInfo.appId,
+          "timeStamp": payInfo.timeStamp,
+          "signType": payInfo.signType,
+          "package": payInfo.packageStr,
+          "nonceStr": payInfo.nonceStr,
+          "paySign": payInfo.paySign
+        },
         function(res) {
           //删除默认支付失败
           $timeout.cancel($t);
+
           //微信支付成功
           if (res.err_msg == 'get_brand_wcpay_request:ok') {
             paySuccessedHandler();
@@ -75,7 +79,9 @@ angular.module('xiaomaiApp').controller('wechartprepayCtrl', [
     //微信支付失败处理
     var payFailedHandler = function() {
       alert('支付失败,再试一次!');
-      $scope.lock = false;
+      safeApply(function() {
+        $scope.lock = false;
+      })
     };
 
     //兼容浏览器的支付信息

@@ -7,7 +7,9 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
   'addrMananger',
   '$q',
   'orderManager',
-  function($scope, $state, xiaomaiService, schoolManager, xiaomaiCacheManager, addrMananger, $q, orderManager) {
+  'xiaomaiMessageNotify',
+  function($scope, $state, xiaomaiService, schoolManager, xiaomaiCacheManager, addrMananger, $q, orderManager,
+    xiaomaiMessageNotify) {
     //获取地址列表信息
     var collegeId,
       userId = $state.params.userId;
@@ -22,6 +24,8 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
     }).then(function(res) {
       $scope.addrList = res.addrList;
       $scope.defaultUserAddr = res.defaultUserAddr;
+    }).finally(function() {
+      xiaomaiMessageNotify.pub('addrHeightUpdate', 'up', 'ready', '', '');
     });
 
 
