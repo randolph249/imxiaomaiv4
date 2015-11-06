@@ -8,12 +8,30 @@ angular.module('xiaomaiApp').factory('schoolManager', [
   'env',
   'xiaomaiCacheManager',
   function($q, xiaomaiService, env, xiaomaiCacheManager) {
+
+    //如果collegeId=1跳转
+    //小流量测试切换
+    var handlerWhilteListSchool = function(newCollegeId) {
+      var urlSearch = window.location.search;
+      var reg = /[\?&]collegeId=([^\?&#]+)/;
+      var oldCollegeId = angular.isArray(urlSearch.match(reg)) ? Number(urlSearch.match(reg)[1]) : -9999;
+
+      if (oldCollegeId !== 1 && newCollegeId === 1) {
+        window.location.href = '/page/newv4/index.html?collegeId=1';
+      }
+
+      if (oldCollegeId === 1 && newCollegeId !== 1) {
+        window.location.href = '/page/newv4/index.html';
+      }
+    };
+
     var getSchool = function() {
       var deferred = $q.defer();
       //如果锁住 说明正在有一个请求发生
       //这个时候把请求放到请求队列里面
       xiaomaiService.fetchOne('getSchool').then(function(res) {
         deferred.resolve(res);
+        handlerWhilteListSchool(res.collegeId);
       });
       return deferred.promise;
     };
@@ -28,6 +46,7 @@ angular.module('xiaomaiApp').factory('schoolManager', [
       }).then(function(res) {
         if (res.hasOwnProperty('collegeId')) {
           xiaomaiCacheManager.writeCache('getSchool', res);
+          handlerWhilteListSchool(res.collegeId);
           deferred.resolve(schoolInfo);
         } else {
           deferred.reject(msg);
