@@ -124,6 +124,13 @@ angular.module('xiaomaiApp').factory('orderManager', [
         userId = getUserId(),
         orderId = getOrderId();
 
+      //如果订单不存在直接返回错误信息
+      if (!userId) {
+        deferred.reject();
+        return deferred.promise;
+
+      }
+
       schoolManager.get().then(function(res) {
         collegeId = res.collegeId;
         return xiaomaiService.fetchOne('queryReferOrder', {

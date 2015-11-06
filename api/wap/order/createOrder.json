@@ -61,8 +61,8 @@
       "wxPayMsg": "",
       "defaultUserAddr": {
         "userAddrId": 0,
-        "receiverName": "哈哈",
-        "receiverPhone": "18519843252",
+        "receiverName": "测试",
+        "receiverPhone": "18519843129",
         "receiverCollegeName": "晋城新学",
         "receiverAddr": "晋城新学校园晋城新学校园",
         "receiverCollegeId": 1241
@@ -86,11 +86,11 @@
       "couponList": [],
       "aliPayMsg": "",
       "order": {
-        "orderId": 426142,
-        "userId": 314,
+        "orderId": 426359,
+        "userId": 123457002,
         "collegeId": 1241,
-        "receiverName": "哈哈",
-        "receiverPhone": "18519843252",
+        "receiverName": "测试",
+        "receiverPhone": "18519843129",
         "totalPay": 4,
         "onlinePay": 0,
         "onlinePayId": null,
@@ -102,7 +102,7 @@
         "freight": 0,
         "freightSub": 0,
         "fillPay": 0,
-        "orderCode": "XM00100426142",
+        "orderCode": "XM00100426359",
         "remark": null,
         "status": 1,
         "device": 1,
@@ -110,18 +110,18 @@
         "updateTime": null,
         "payTime": null,
         "childOrderList": [{
-          "childOrderId": 426143,
-          "orderId": 426142,
-          "userId": 314,
+          "childOrderId": 426360,
+          "orderId": 426359,
+          "userId": 123457002,
           "collegeId": 1241,
           "collegeName": null,
-          "receiverName": "哈哈",
-          "receiverPhone": "18519843252",
+          "receiverName": "测试",
+          "receiverPhone": "18519843129",
           "totalPay": 4,
           "freight": 0,
           "freightSub": 0,
-          "orderCode": "XM00100426142",
-          "childOrderCode": "XM00300426143",
+          "orderCode": "XM00100426359",
+          "childOrderCode": "XM00300426360",
           "remark": null,
           "distributeType": 1,
           "status": 1,
@@ -136,10 +136,10 @@
           "createTime": null,
           "updateTime": null,
           "childOrderDetailList": [{
-            "childOrderDetailId": 82055,
-            "orderId": 426142,
-            "childOrderId": 426143,
-            "userId": 314,
+            "childOrderDetailId": 82201,
+            "orderId": 426359,
+            "childOrderId": 426360,
+            "userId": 123457002,
             "collegeId": 1241,
             "goodsId": 15308,
             "bgSkuId": 643,
@@ -204,5 +204,5 @@
       }]
     }]
   },
-  "serverTime": "2015-11-05 19:10:09"
+  "serverTime": "2015-11-06 12:21:03"
 }

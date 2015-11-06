@@ -298,25 +298,33 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
         return $q.defer();
       },
       fetchQueue = {},
-      handlerQueue = function(name) {
+      handlerQueue = function(name, errorObj) {
 
         if (fetchQueue[name]['queue'].length) {
           var queueItem = fetchQueue[name]['queue'].shift();
           fetchQueue[name]['lock'] = true;
-          fetchQuery(queueItem.deferred, queueItem.name, queueItem.params);
+          //如果第一个接口返回错误信息 其他接口也就不用在继续请求了
+          //直接返回错误信息
+          if (angular.isObject(errorObj)) {
+            queueItem.deferred.reject(errorObj);
+            handlerQueue(name, errorObj);
+          } else {
+            fetchQuery(queueItem.deferred, queueItem.name, queueItem.params);
+          }
         } else {
           delete fetchQueue[name];
         }
       },
       fetchQuery = function(deferred, name, params) {
         var urlModel = xiaomaimodelManage(name, 'GET'),
-          url, canstore, cacheResult;
+          url, canstore, cacheResult, errorObj;
         if (urlModel === false) {
-          deferred.reject({
+          errorObj = {
             code: '404',
             msg: '接口请求错误'
-          });
-          handlerQueue(name);
+          };
+          deferred.reject(errorObj);
+          handlerQueue(name, errorObj);
           return false;
         }
 
@@ -344,17 +352,24 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
         }).success(function(res) {
           //如果返回结果有异常 reject
           if (handlerResult(res) === false) {
+            errorObj = res;
             deferred.reject(res.msg);
           } else {
             //写入缓存
+            errorObj = false;
             canstore && xiaomaiCacheManager.writeCache(name, res.data, params);
             deferred.resolve(res.hasOwnProperty('data') ? res.data : res);
+
           }
         }).error(function(res) {
-          deferred.reject('接口请求错误');
+          errorObj = {
+            code: '503',
+            msg: '接口异常'
+          }
+          deferred.reject(errorObj);
         }).finally(function() {
           fetchQueue[name]['lock'] = false;
-          handlerQueue(name);
+          handlerQueue(name, errorObj);
         });
       },
       /**

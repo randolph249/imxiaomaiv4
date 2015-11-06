@@ -44,10 +44,12 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
           $scope.childOrderDetailList = item.childOrderDetailList;
           //是否正常营业
           $scope.ldcTimeIsOpen = item.deliveryTimeType == 0;
+          alert('是否正常营业：' + $scope.ldcTimeIsOpen);
           //判断LDC类型是否是商超
           $scope.ldcTypeIsSc = item.orderDeliveryTimeType == 2;
           $scope.ldcAddressTime = $scope.ldcTimeIsOpen ? item.deliveryTimeStr : (item.ldcFixBeginTime + '~' +
             item.ldcFixEndTime);
+          alert('当前信息:' + $scope.ldcAddressTime);
           xiaomaiMessageNotify.pub('updateLdcDeliveryTime', {
             ldcDeliveryBeginTime: item.ldcFixBeginTime,
             ldcDeliveryEndTime: item.ldcFixEndTime
