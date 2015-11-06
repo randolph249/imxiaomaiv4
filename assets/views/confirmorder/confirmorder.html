@@ -100,10 +100,10 @@
 
         <div class="orderDistribute" ng-if="ldcDeliveryType==1">
           <span class="orderDistribute-key">配送时间</span>
-          <p class="orderDistribute-values" ng-if="ldcTimeSwitch">
+          <p class="orderDistribute-values" ng-if="ldcTimeSwitch&&!ldcTypeIsSc">
             <select  mobiscroll-options="{onSelect:chooseTime,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressTime" style="display:none;">
-              <optgroup label="{{ldcAddressTime}}" ng-if="ldcTimeIsOpen">
-                  <option value="{{ldcAddressTime}}">{{ldcAddressTime}}</option>
+              <optgroup label="29分钟达" ng-if="ldcTimeIsOpen">
+                  <option value="29分钟达">29分钟达</option>
               </optgroup>
               <optgroup label="定时达">
                 <option ng-if="deliveryTime.startTime" ng-repeat="deliveryTime in deliveryTimes" value="{{deliveryTime.startTime+'~'+deliveryTime.endTime}}">{{deliveryTime.startTime|filterldctomorrow}}~{{deliveryTime.endTime|filterldctomorrow}}</option>
@@ -111,7 +111,7 @@
             </select>
             <i class="iconfont icon-unfold showLdcAddressList"></i>
           </p>
-          <p class="orderDistribute-values" ng-if="!ldcTimeSwitch">{{ldcAddressTime}}</p>
+          <p class="orderDistribute-values" ng-if="!ldcTimeSwitch||ldcTypeIsSc">{{ldcAddressTime}}</p>
         </div>
         <div class="orderDistribute" ng-if="ldcDeliveryType==1">
           <span class="orderDistribute-key">配送服务费</span>
@@ -177,7 +177,7 @@
     <div class="thumbInfo">
       <p ng-controller="orderAmountCtrl">
         合计:
-        <i class="totalPrice" ng-bind="'&yen;'+(totalAmount+totalFreight-totalCoupon|xiaomaiprice)">&yen;0.01</i>
+        <i class="totalPrice" ng-bind="'&yen;'+((totalAmount+totalFreight-totalCoupon)>0?(totalAmount+totalFreight-totalCoupon):1|xiaomaiprice)">&yen;0.01</i>
       </p>
       <p class="js_countdown_info" ng-controller="orderCountdownCtrl">请在{{realremaintime|xiaomaimoment}}内支付否则订单自动失效</p>
     </div>

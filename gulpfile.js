@@ -27,9 +27,6 @@ var htmlmin = require('gulp-htmlmin');
 
 gulp.task('html2string', function() {
   return gulp.src(['assets/**/*.html'])
-    .pipe(htmlmin({
-      collapseWhitespace: true
-    }))
     .pipe(templateCache({
       module: 'xiaomaiApp',
       transformUrl: function(url) {

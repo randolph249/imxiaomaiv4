@@ -159,7 +159,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       //删除某条用户收货地址信息
       "addrDel": {
         url: "/wap/useraddr/delete",
-        type: "POST" //?
+        type: "GET" //?
       },
       //查询某条用户收货地址信息
       "getAddr": {

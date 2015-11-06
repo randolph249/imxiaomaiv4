@@ -44,6 +44,8 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
           $scope.childOrderDetailList = item.childOrderDetailList;
           //是否正常营业
           $scope.ldcTimeIsOpen = item.deliveryTimeType == 0;
+          //判断LDC类型是否是商超
+          $scope.ldcTypeIsSc = item.orderDeliveryTimeType == 2;
           $scope.ldcAddressTime = $scope.ldcTimeIsOpen ? item.deliveryTimeStr : (item.ldcFixBeginTime + '~' +
             item.ldcFixEndTime);
           xiaomaiMessageNotify.pub('updateLdcDeliveryTime', {
@@ -55,8 +57,9 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
     };
 
     //获取定时达配送
+    //当定时达开关关闭或者当日送类型是商超的时候 不需要请求定时配送列表
     var getDeliveryTimes = function() {
-      if (!$scope.ldcTimeSwitch) {
+      if (!$scope.ldcTimeSwitch || $scope.ldcTypeIsSc) {
         return false;
       }
       xiaomaiService.fetchOne('ldcDeliveryTime', {

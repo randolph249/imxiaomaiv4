@@ -46,10 +46,8 @@ angular.module('xiaomaiApp').factory('orderManager', [
         return deferred.promise;
       }
 
-
       //创建订单
       xiaomaiService.save('createOrder').then(function(res) {
-
         orderInfo = angular.extend({}, res.orderInfo);
         deferred.resolve();
         //创建缓存
@@ -83,52 +81,6 @@ angular.module('xiaomaiApp').factory('orderManager', [
       orderInfo = {};
     };
 
-    //Cookie中订单信息仅仅缓存orderId和UserId
-    //如果重新大开页面 根据这两个ID去获取订单信息
-    var queue = [];
-    var queryLock = false;
-    //处理订单查询请求
-    var queryOrder = function(deferred) {
-      //上锁
-      queryLock = true;
-      if (!isEmptyObject(orderInfo)) {
-
-        deferred.resolve(orderInfo);
-        queryLock = false;
-        //处理队列中的其他请求
-        queue.length && queryOrder(queue.shift());
-        return false
-      };
-
-      var collegeId,
-        userId = getUserId(),
-        orderId = getOrderId();
-
-      //如果订单已经不存在
-      if (!userId || !getOrderId) {
-        deferred.reject();
-        //处理队列中的其他请求
-        queryLock = false;
-        queue.length && queryOrder(queue.shift());
-        return false;
-      }
-
-      schoolManager.get().then(function(res) {
-        collegeId = res.collegeId;
-        return xiaomaiService.fetchOne('queryReferOrder', {
-          userId: userId,
-          orderId: orderId,
-          collegeId: collegeId
-        });
-      }).then(function(res) {
-        orderInfo = res;
-        //解锁
-        queryLock = false;
-        deferred.resolve(res);
-        //处理队列中的其他请求
-        queue.length && queryOrder(queue.shift());
-      });
-    };
 
     //查询订单状态 查看订单是否失效
     var queryOrderStatus = function() {
@@ -139,20 +91,6 @@ angular.module('xiaomaiApp').factory('orderManager', [
       return true;
     };
 
-    //获取订单详情
-    var getOrder = function() {
-      var deferred = $q.defer();
-
-      if (queryLock) {
-
-        queue.push(deferred);
-      } else {
-
-        queryOrder(deferred);
-      }
-
-      return deferred.promise;
-    };
 
     //获取userId信息
     var getUserId = function() {
@@ -182,24 +120,34 @@ angular.module('xiaomaiApp').factory('orderManager', [
     //获取订单中的相关信息
     var getOrderInfo = function(querystring) {
       var deferred = $q.defer();
-      getOrder().then(function(res) {
+      var collegeId,
+        userId = getUserId(),
+        orderId = getOrderId();
 
+      schoolManager.get().then(function(res) {
+        collegeId = res.collegeId;
+        return xiaomaiService.fetchOne('queryReferOrder', {
+          userId: userId,
+          orderId: orderId,
+          collegeId: collegeId
+        });
+      }).then(function(res) {
         try {
           deferred.resolve(eval('res.' + querystring));
         } catch (e) {
           deferred.reject();
         }
       });
+
       return deferred.promise;
-    }
+    };
 
     return {
       createOrder: createOrder,
       getOrderInfo: getOrderInfo,
       getUserId: getUserId,
       getRemaintime: getRemaintime,
-      deleteOrder: deleteOrder,
-      queryOrderStatus: queryOrderStatus
+      deleteOrder: deleteOrder
     }
   }
 ]);

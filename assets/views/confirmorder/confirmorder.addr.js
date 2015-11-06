@@ -6,8 +6,8 @@ angular.module('xiaomaiApp').controller('addrCtrl', [
   'addrMananger',
   'xiaomaiLog',
   function($scope, $state, orderManager, addrMananger, xiaomaiLog) {
-
     //获取收货地址
+
     addrMananger.getAddr().then(function(addrInfo) {
       $scope.addrInfo = addrInfo;
     });

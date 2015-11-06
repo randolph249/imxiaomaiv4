@@ -64,8 +64,8 @@ angular.module('xiaomaiApp').controller('buy.cartThumbCtrl', [
     $scope.goSettlement = function($event) {
       $event.stopPropagation();
       $event.preventDefault();
-      window.location.href = '/order/create';
-      return false;
+      // window.location.href = '/order/create';
+      // return false;
 
       //防止重复点击
       if ($scope.lockSettle) {

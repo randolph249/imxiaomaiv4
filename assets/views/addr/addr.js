@@ -15,6 +15,7 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
       userId = $state.params.userId;
     $scope.addrId = $state.params.addrId;
     //获取地址列表
+    //先删除缓存避免调用缓存数据
     schoolManager.get().then(function(res) {
       collegeId = res.collegeId;
       return xiaomaiService.fetchOne('addrList', {
@@ -46,7 +47,7 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
         return false;
       }
       if (isChooseOtherCollege == false && collegeId != addrInfo.receiverCollegeId) {
-        alert('次日达订单和29分钟达订单只能送到本校，不能送到其他学校哦')
+        alert('您购买的商品中包含次日达或当日达商品，无法更改学校。\n如需配送到其他学校，请返回到首页，点击顶部学校名更改学校。')
         return false;
       }
 
@@ -70,7 +71,7 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
         return false;
       }
 
-      xiaomaiService.save('addrDel', {
+      xiaomaiService.fetchOne('addrDel', {
         userId: userId,
         userAddrId: userAddrId
       }).then(function(res) {

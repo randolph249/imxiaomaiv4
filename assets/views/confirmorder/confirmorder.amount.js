@@ -35,8 +35,6 @@ angular.module('xiaomaiApp').controller('orderAmountCtrl', [
       });
     });
 
-
-
     //查询第三方订单运费信息
     $q.all([
       orderManager.getOrderInfo('order.thirdFreight'),
@@ -46,7 +44,7 @@ angular.module('xiaomaiApp').controller('orderAmountCtrl', [
       $scope.totalFreight += thirdFreight;
     });
 
-    //获取当前优惠劵的使用情况
+    //获取当前优惠劵的使用情况add
     var subCouponupdateId = xiaomaiMessageNotify.sub('updateOrderCouponInfo', function(couponInfo) {
       switch (couponInfo.couponType) {
         case 'none':

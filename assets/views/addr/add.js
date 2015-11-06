@@ -92,6 +92,8 @@ angular.module('xiaomaiApp').controller('addrAddCtrl', [
         receiverPhone: $scope.receiverPhone,
         receiverCollegeId: $scope.receiverCollegeId
       }).then(function() {
+        //删除地址列表缓存数据
+        xiaomaiCacheManager.clean('addrList');
         $state.go('root.addr', {
           userId: userId
         });

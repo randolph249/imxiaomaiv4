@@ -27,8 +27,7 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
       return loadBanner(flag);
     }).finally(function() {
       $scope.isloading = false;
-      var isLastPage = $scope.paginationInfo.currentPage ==
-        $scope.paginationInfo.totalPage;
+      var isLastPage = $scope.paginationInfo.currentPage == $scope.paginationInfo.totalPage;
       var downtip = isLastPage ? '' : '请求下一页数据';
       xiaomaiMessageNotify.pub('navmainheightstatus', 'up', 'ready', '', downtip);
     });
@@ -44,19 +43,19 @@ angular.module('xiaomaiApp').controller('nav.categoryCtrl', [
       }).then(function(res) {
         $scope.goods = res.goods;
         $scope.paginationInfo = res.paginationInfo;
-        $scope.haserror = false;
+        $scope.haserror = $scope.goods.length ? false : true;
         //配置微信分享
         wxshareConfig();
         return true;
       }, function(tip) {
-
         //错误状态跳转到首页
         $scope.haserror = true;
-        $scope.errortip = '类目不存在,将跳转到首页';
-        setTimeout(function() {
+        return false;
+      }).finally(function() {
+        $scope.errortip = $scope.haserror ? '类目不存在,将跳转到首页' : '';
+        $scope.haserror && setTimeout(function() {
           $state.go('root.buy.nav.all');
         }, 500);
-        return false;
       });
     };
 

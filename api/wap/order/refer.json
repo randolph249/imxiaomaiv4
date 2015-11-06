@@ -3,43 +3,55 @@
   "code": 0,
   "data": {
     "college": {
-      "collegeId": 1,
-      "collegeName": "小麦总部",
-      "cityId": 2,
-      "areaId": 3,
-      "ldcStorageId": 794387644,
-      "rdcStorageId": 794387643,
+      "collegeId": 1241,
+      "collegeName": "晋城新学",
+      "cityId": 110,
+      "areaId": 112,
+      "ldcStorageId": 794387683,
+      "rdcStorageId": 0,
       "weight": 0,
       "isDel": 0,
       "isShow": 1,
       "isOpen": 1,
-      "longitude": 116.285854,
-      "latitude": 39.986342,
+      "longitude": 12.0,
+      "latitude": 32.0,
       "ldcDeliveryType": 2,
-      "ldcSelfPickUpAddress": "小麦总部营业厅",
-      "rdcDeliveryType": 0,
-      "rdcSelfPickUpAddress": "小麦总部营业厅",
-      "storeId": 1,
-      "collegeAddr": "小麦总部第三方商品营业厅",
+      "ldcSelfPickUpAddress": "晋城新学校园",
+      "rdcDeliveryType": 3,
+      "rdcSelfPickUpAddress": "",
+      "storeId": 226,
+      "collegeAddr": "晋城新学校园晋城新学校园",
       "notValid": false
     },
     "ldcAddressList": [{
-      "addressType": "学生公寓",
-      "addresses": ["学一", "学二", "学三", "学四", "学五", "学六", "学八", "学九", "学十", "学十一", "学十三", "学二十九", "留学生公寓", "青年公寓"]
+      "addressType": "理工女生宿舍",
+      "addresses": ["学生公寓1A", "学生公寓2B", "学生公寓2A", "学生公寓3B", "学生公寓3A", "学生公寓4B", "学生公寓4A", "学生公寓4C", "学生公寓21栋",
+        "学生公寓22栋"
+      ]
     }, {
-      "addressType": "教学楼",
-      "addresses": ["第一教学楼", "第二教学楼", "第三教学楼", "第四教学楼", "主教学楼"]
+      "addressType": "理工教学楼",
+      "addresses": ["教学楼1", "教学楼2", "教学楼3", "教学楼4", "教学楼5", "教学楼6", "教学楼7", "教学楼8", "教学楼9", "教学楼12"]
     }, {
-      "addressType": "科研大楼",
-      "addresses": ["科研大楼"]
-    }, {
-      "addressType": "图书馆",
-      "addresses": ["图书馆"]
-    }, {
-      "addressType": "new node",
+      "addressType": "理工图书馆",
       "addresses": []
+    }, {
+      "addressType": "理工行政楼",
+      "addresses": []
+    }, {
+      "addressType": "理工男生宿舍",
+      "addresses": ["男生宿舍5A", "男生宿舍5B", "男生宿舍5C", "男生宿舍6A", "男生宿舍6B", "男生宿舍6C", "男生宿舍7A", "男生宿舍7B", "男生宿舍8A",
+        "男生宿舍8B", "男生宿舍9A", "男生宿舍9B", "男生宿舍10A", "男生宿舍10B", "男生宿舍23栋", "男生宿舍24栋", "男生宿舍25栋", "男生宿舍26栋"
+      ]
+    }, {
+      "addressType": "博文教学楼",
+      "addresses": ["教学楼2", "教学楼3", "教学楼4"]
+    }, {
+      "addressType": "博文宿舍",
+      "addresses": ["宿舍楼6", "宿舍楼7", "宿舍楼8", "宿舍楼9", "宿舍楼10A", "宿舍楼10B", "宿舍楼11A", "宿舍楼11B", "宿舍楼12", "宿舍楼14男",
+        "宿舍楼14女"
+      ]
     }],
-    "firstCoupon": 0,
+    "firstCoupon": 1000,
     "ldcFreight": {
       "freight": 0,
       "total": 1000,
@@ -48,28 +60,21 @@
     "wxPayMsg": "",
     "defaultUserAddr": {
       "userAddrId": 0,
-      "receiverName": "郭超",
-      "receiverPhone": "18612244032",
-      "receiverCollegeName": "小麦总部",
-      "receiverAddr": "小麦总部第三方商品营业厅",
-      "receiverCollegeId": 1
+      "receiverName": "哈哈",
+      "receiverPhone": "18519843252",
+      "receiverCollegeName": "晋城新学",
+      "receiverAddr": "晋城新学校园晋城新学校园",
+      "receiverCollegeId": 1241
     },
     "ldcTimeSwitch": 0,
     "rdcAddressList": [{
       "addressType": "学生公寓",
-      "addresses": ["学一", "学二", "学三", "学四", "学五", "学六", "学八", "学九", "学十", "学十一", "学十三", "学二十九", "留学生公寓", "青年公寓"]
+      "addresses": ["2号宿舍", "3号宿舍", "4号宿舍", "5号宿舍", "6号宿舍", "7号宿舍", "8号宿舍", "开拓2号楼", "开拓3号楼", "开拓4号楼", "开拓5号楼",
+        "开拓6号楼"
+      ]
     }, {
-      "addressType": "教学楼",
-      "addresses": ["第一教学楼", "第二教学楼", "第三教学楼", "第四教学楼", "主教学楼"]
-    }, {
-      "addressType": "科研大楼",
-      "addresses": ["科研大楼"]
-    }, {
-      "addressType": "图书馆",
-      "addresses": ["图书馆"]
-    }, {
-      "addressType": "new node",
-      "addresses": []
+      "addressType": "职工区",
+      "addresses": ["开拓1号楼", "1号宿舍"]
     }],
     "rdcFreight": {
       "freight": 0,
@@ -79,42 +84,42 @@
     "couponList": [],
     "aliPayMsg": "",
     "order": {
-      "orderId": 425554,
-      "userId": 123456982,
-      "collegeId": 1,
-      "receiverName": "郭超",
-      "receiverPhone": "18612244032",
+      "orderId": 426140,
+      "userId": 314,
+      "collegeId": 1241,
+      "receiverName": "哈哈",
+      "receiverPhone": "18519843252",
       "totalPay": 2,
       "onlinePay": 0,
       "onlinePayId": "",
       "onlinePayType": 0,
       "couponId": 0,
       "couponPay": 0,
-      "firstSub": 0,
+      "firstSub": 1000,
       "fullSub": 0,
       "freight": 0,
       "freightSub": 0,
       "fillPay": 0,
-      "orderCode": "XM00100425554",
+      "orderCode": "XM00100426140",
       "remark": "",
       "status": 1,
       "device": 1,
-      "createTime": 1446631093000,
+      "createTime": 1446721699000,
       "updateTime": null,
       "payTime": null,
       "childOrderList": [{
-        "childOrderId": 425555,
-        "orderId": 425554,
-        "userId": 123456982,
-        "collegeId": 1,
+        "childOrderId": 426141,
+        "orderId": 426140,
+        "userId": 314,
+        "collegeId": 1241,
         "collegeName": null,
-        "receiverName": "郭超",
-        "receiverPhone": "18612244032",
+        "receiverName": "哈哈",
+        "receiverPhone": "18519843252",
         "totalPay": 2,
         "freight": 0,
         "freightSub": 0,
-        "orderCode": "XM00100425554",
-        "childOrderCode": "XM00300425555",
+        "orderCode": "XM00100426140",
+        "childOrderCode": "XM00300426141",
         "remark": "",
         "distributeType": 1,
         "status": 1,
@@ -126,30 +131,30 @@
         "deliveryAddress": "",
         "selfPickUpTime": null,
         "selfPickUpAddress": "",
-        "createTime": 1446631093000,
+        "createTime": 1446721699000,
         "updateTime": null,
         "childOrderDetailList": [{
-          "childOrderDetailId": 161,
-          "orderId": 425554,
-          "childOrderId": 425555,
-          "userId": 123456982,
-          "collegeId": 1,
-          "goodsId": 7359,
-          "bgSkuId": 463,
-          "skuId": 12224,
-          "skuName": "App-普通商品8",
+          "childOrderDetailId": 2256,
+          "orderId": 426140,
+          "childOrderId": 426141,
+          "userId": 314,
+          "collegeId": 1241,
+          "goodsId": 15308,
+          "bgSkuId": 643,
+          "skuId": 22654,
+          "skuName": "口香糖2",
           "skuSubName": "",
           "skuNum": 1,
           "skuOriginPrice": 100,
           "skuPrice": 2,
           "status": 1,
-          "createTime": 1446631093000,
+          "createTime": 1446721699000,
           "updateTime": null,
-          "storageId": 794387644,
+          "storageId": 794387683,
           "distributeType": 1,
           "sourceType": 1,
-          "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=157515",
-          "categoryId": 58,
+          "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=172027",
+          "categoryId": 69,
           "ratio": 0,
           "propertyIds": "null",
           "wmsGoodsIds": ""
@@ -159,151 +164,29 @@
         "deliverCompanyName": null,
         "deliveryInfo": null,
         "storageName": null,
-        "storageId": 794387644,
+        "storageId": 794387683,
         "h5DeliveryPageUrl": null,
         "deliveryTimeStr": "29分钟达",
-        "deliveryTimeType": 0
+        "deliveryTimeType": 0,
+        "orderDeliveryTimeType": 0
       }],
       "categoryIdList": [{
-        "58": 2
+        "69": 2
       }],
       "thirdFreight": 0,
       "thirdFreightSub": 0,
       "thirdChildOrderList": []
     },
     "rdcTimeList": [{
-      "begin": "09:00",
-      "end": "09:15"
-    }, {
-      "begin": "09:15",
-      "end": "09:30"
-    }, {
-      "begin": "09:30",
-      "end": "09:45"
-    }, {
-      "begin": "09:45",
-      "end": "10:00"
-    }, {
-      "begin": "10:45",
-      "end": "11:00"
-    }, {
-      "begin": "10:30",
-      "end": "10:45"
-    }, {
-      "begin": "10:15",
-      "end": "10:30"
-    }, {
-      "begin": "10:00",
-      "end": "10:15"
-    }, {
-      "begin": "11:45",
+      "begin": "11:00",
       "end": "12:00"
     }, {
-      "begin": "11:30",
-      "end": "11:45"
-    }, {
-      "begin": "11:15",
-      "end": "11:30"
-    }, {
-      "begin": "11:00",
-      "end": "11:15"
-    }, {
       "begin": "12:00",
-      "end": "12:15"
-    }, {
-      "begin": "12:15",
-      "end": "12:30"
-    }, {
-      "begin": "12:30",
-      "end": "12:45"
-    }, {
-      "begin": "12:45",
       "end": "13:00"
     }, {
-      "begin": "13:45",
-      "end": "14:00"
-    }, {
-      "begin": "13:30",
-      "end": "13:45"
-    }, {
-      "begin": "13:15",
-      "end": "13:30"
-    }, {
-      "begin": "13:00",
-      "end": "13:15"
-    }, {
-      "begin": "14:45",
-      "end": "15:00"
-    }, {
-      "begin": "14:30",
-      "end": "14:45"
-    }, {
-      "begin": "14:15",
-      "end": "14:30"
-    }, {
-      "begin": "14:00",
-      "end": "14:15"
-    }, {
-      "begin": "15:00",
-      "end": "15:15"
-    }, {
-      "begin": "15:15",
-      "end": "15:30"
-    }, {
-      "begin": "15:30",
-      "end": "15:45"
-    }, {
-      "begin": "15:45",
-      "end": "16:00"
-    }, {
-      "begin": "16:45",
-      "end": "17:00"
-    }, {
-      "begin": "16:30",
-      "end": "16:45"
-    }, {
-      "begin": "16:15",
-      "end": "16:30"
-    }, {
       "begin": "16:00",
-      "end": "16:15"
-    }, {
-      "begin": "17:45",
       "end": "18:00"
-    }, {
-      "begin": "17:30",
-      "end": "17:45"
-    }, {
-      "begin": "17:15",
-      "end": "17:30"
-    }, {
-      "begin": "17:00",
-      "end": "17:15"
-    }, {
-      "begin": "18:45",
-      "end": "19:00"
-    }, {
-      "begin": "18:30",
-      "end": "18:45"
-    }, {
-      "begin": "18:15",
-      "end": "18:30"
-    }, {
-      "begin": "18:00",
-      "end": "18:15"
-    }, {
-      "begin": "19:00",
-      "end": "19:15"
-    }, {
-      "begin": "19:15",
-      "end": "19:30"
-    }, {
-      "begin": "19:30",
-      "end": "19:45"
-    }, {
-      "begin": "19:45",
-      "end": "20:00"
     }]
   },
-  "serverTime": "2015-11-04 17:58:54"
+  "serverTime": "2015-11-05 19:09:30"
 }

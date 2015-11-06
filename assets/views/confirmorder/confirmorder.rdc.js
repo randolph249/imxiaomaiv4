@@ -3,7 +3,8 @@ angular.module('xiaomaiApp').controller('rdcOrderCtrl', [
   '$scope',
   'orderManager',
   'xiaomaiMessageNotify',
-  function($scope, orderManager, xiaomaiMessageNotify) {
+  'xiaomaiLog',
+  function($scope, orderManager, xiaomaiMessageNotify, xiaomaiLog) {
     $scope.showOrder = false;
 
     orderManager.getOrderInfo('order.childOrderList').then(function(res) {
