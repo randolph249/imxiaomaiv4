@@ -43,11 +43,14 @@ angular.module('xiaomaiApp').factory('schoolManager', [
       var oldCollegeId = angular.isArray(urlSearch.match(reg)) ? Number(urlSearch.match(reg)[1]) : -9999;
       if (oldCollegeId !== 1 && newCollegeId === 1) {
         window.location.href = '/page/newv4/index.html?collegeId=1';
+        return true;
       }
 
       if (oldCollegeId === 1 && newCollegeId !== 1) {
         window.location.href = '/page/newv4/index.html';
+        return true;
       }
+      return false;
     };
 
     //查询学校信息
@@ -57,8 +60,12 @@ angular.module('xiaomaiApp').factory('schoolManager', [
       var schoolInfo;
       xiaomaiService.fetchOne('getSchool').then(function(res) {
 
-        handlerWhilteListSchool(res.collegeId);
+        //做小流量测试
+        if (handlerWhilteListSchool(res.collegeId)) {
+          return false;
+        }
         //缓存到本地
+
 
         xiaomaiCacheManager.writeCache('getSchool', res)
           //吐给用户备份数据 防止原数据被修改
@@ -95,7 +102,10 @@ angular.module('xiaomaiApp').factory('schoolManager', [
         collegeId: info.collegeId
       }).then(function(res) {
         if (res.hasOwnProperty('collegeId')) {
-          handlerWhilteListSchool(res.collegeId);
+          //做小流量测试
+          if (handlerWhilteListSchool(res.collegeId)) {
+            return false;
+          }
           xiaomaiCacheManager.writeCache('getSchool', res);
           deferred.resolve(schoolInfo);
         } else {

@@ -7,16 +7,16 @@
  **/
 angular.module('xiaomaiApp').factory('env', ['$window', function($window) {
   var onlineReg = /h5\.imxiaomai\.com/,
-    testReg =
-    /(wap\.tmall\.imxiaomai\.com)|(qa\.wap\.test\.imxiaomai\.com)/,
+    localreg = /localhost|127\.0\.0\.1|172\.16\.110\.188/,
+    testReg = /(wap\.tmall\.imxiaomai\.com)|(qa\.wap\.test\.imxiaomai\.com)/,
     host = $window.location.host;
 
   if (onlineReg.test(host)) {
     return 'online';
-  } else if (testReg.test(host)) {
-    return 'test';
-  } else {
+  } else if (localreg.test(host)) {
     return 'develop';
+  } else {
+    return 'test';
   }
 }]);
 
