@@ -40,7 +40,7 @@ angular.module('xiaomaiApp').factory('schoolManager', [
     var handlerWhilteListSchool = function(newCollegeId) {
       var urlSearch = window.location.search;
       var reg = /[\?&]collegeId=([^\?&#]+)/;
-      var oldCollegeId = angular.isArray(urlSearch.match(reg)) ? urlSearch.match(reg)[1] : -9999;
+      var oldCollegeId = angular.isArray(urlSearch.match(reg)) ? Number(urlSearch.match(reg)[1]) : -9999;
       if (oldCollegeId !== 1 && newCollegeId === 1) {
         window.location.href = '/page/newv4/index.html?collegeId=1';
       }
