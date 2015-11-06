@@ -2,7 +2,7 @@
 	"msg": "success",
 	"code": 0,
 	"data": {
-		"collegeId": 1181,
+		"collegeId": 1,
 		"collegeName": "小麦学院(颐和园校区)",
 		"cityId": 1,
 		"areaId": 2,

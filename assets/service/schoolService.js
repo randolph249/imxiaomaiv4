@@ -35,6 +35,20 @@ angular.module('xiaomaiApp').factory('schoolManager', [
         return false;
       }
     };
+    //如果collegeId=1跳转
+    //小流量测试切换
+    var handlerWhilteListSchool = function(newCollegeId) {
+      var urlSearch = window.location.search;
+      var reg = /[\?&]collegeId=([^\?&#]+)/;
+      var oldCollegeId = angular.isArray(urlSearch.match(reg)) ? urlSearch.match(reg)[1] : -9999;
+      if (oldCollegeId !== 1 && newCollegeId === 1) {
+        window.location.href = '/page/newv4/index.html?collegeId=1';
+      }
+
+      if (oldCollegeId === 1 && newCollegeId !== 1) {
+        window.location.href = '/page/newv4/index.html';
+      }
+    };
 
     //查询学校信息
     //然后查询白名单 如果在白明白之呢i
@@ -42,6 +56,8 @@ angular.module('xiaomaiApp').factory('schoolManager', [
       lock = true; //请求功能中上锁
       var schoolInfo;
       xiaomaiService.fetchOne('getSchool').then(function(res) {
+
+        handlerWhilteListSchool(res.collegeId);
         //缓存到本地
 
         xiaomaiCacheManager.writeCache('getSchool', res)
@@ -53,7 +69,6 @@ angular.module('xiaomaiApp').factory('schoolManager', [
       }, function() {
         deferred.reject();
         hanlderQuerys();
-
       });
     }
     var getSchool = function() {
@@ -80,7 +95,7 @@ angular.module('xiaomaiApp').factory('schoolManager', [
         collegeId: info.collegeId
       }).then(function(res) {
         if (res.hasOwnProperty('collegeId')) {
-
+          handlerWhilteListSchool(res.collegeId);
           xiaomaiCacheManager.writeCache('getSchool', res);
           deferred.resolve(schoolInfo);
         } else {
