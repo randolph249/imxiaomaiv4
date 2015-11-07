@@ -592,6 +592,46 @@ angular.module('xiaomaiApp').config([
           }]
         }
       })
+      //多商品活动模板 @autor:zhangjing
+      .state('root.buy.complexGoods', {
+        url: 'complexGoods/?collegeId&activityId&refer',
+        controller: 'buy.activeCtrl',
+        templateUrl: '../assets/views/CMS/complexGoods.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl +
+                'views/CMS/complexGoods.js?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl +
+                'views/CMS/complexGoods.css'
+              ]
+            })
+          }]
+        }
+      })
+      //单商品活动模板 @autor:zhangjing
+      .state('root.buy.singleGood', {
+        url: 'singleGood/?collegeId&activityId&refer',
+        controller: 'buy.activeCtrl',
+        templateUrl: '../assets/views/CMS/singleGood.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl +
+                'views/CMS/singleGood.js?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl +
+                'views/CMS/goodItem.js?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl +
+                'views/CMS/singleGood.css'
+              ]
+            })
+          }]
+        }
+      })
       //订单地址编辑
       .state('root.notfound', {
         url: '404/',

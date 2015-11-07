@@ -1,0 +1,313 @@
+.label {
+    display: none !important;
+}
+
+.iconfont.active-share {
+    font-size: 2.4rem;
+}
+
+.cmsWrap {
+    position: absolute;
+    top: 0rem;
+    bottom: 4.5rem;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+
+.cmsContent:after {
+    content: "";
+    display: block;
+    height: 3rem;
+    width: 100%;
+}
+
+.activeGoodBanner {
+    min-height: 1px;
+}
+
+.evenActiveGoods {
+    position: relative;
+    overflow: hidden;
+    padding: 0 1.5rem 0;
+    margin-bottom: 3rem;
+}
+
+.evenShopName {
+    text-align: center;
+    color: #ff7300;
+    font-size: 1.4rem;
+    height: 6.5rem;
+    line-height: 10rem;
+    background-color: #fff;
+    border-radius: 3rem 3rem 0 0;
+}
+
+.evenShopName:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    content: "";
+    display: inline-block;
+    background-image: url(http://xiaomai-p2p.qiniudn.com/5f6b4b7eb78769f85ba60775fb5b0b76);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 3.8rem;
+}
+
+.evenActiveGoods li {
+    width: 50%;
+    /*padding-top: 0.5rem;*/
+    float: left;
+    background: #fff;
+    box-sizing: border-box;
+    border-top: 1px solid #d5d7db;
+}
+
+.evenActiveGoods li.errortip {
+    width: 100%;
+}
+
+.evenActiveGoods li:nth-child(odd) {
+    padding-right: 0.25rem;
+    border-left: 1px solid #d5d7db;
+}
+
+.evenActiveGoods li:nth-child(even) {
+    /*padding-left:0.25rem;*/
+}
+
+.evenActiveGoods li.loading {
+    position: fixed;
+    width: 100%;
+    margin-top: 50%;
+}
+
+.activeGoodsWrap {
+    overflow: hidden;
+    box-shadow: 0px 0.1rem 0.7rem rgba(93, 88, 90, 0.2);
+}
+
+.evenGoodItem .goodlistItem-column .details {
+    padding: 1rem;
+}
+
+.evenGoodItem .iconfont.buy-icon {
+    right: 0.5rem;
+}
+
+.evenGoodItem .goodlistItem-column .imgCont {
+    margin: 1rem 1rem 0;
+    height: 15.2rem;
+}
+
+.evenGoodItem .priceCont {
+    height: 2.5rem;
+    line-height: 2.5rem;
+}
+
+.evenGoodItem .priceCont .old-price {
+    line-height: 2rem;
+}
+
+
+/*banner*/
+
+.banner,
+.banner img {
+    height: auto;
+    width: 100%;
+    text-align: center;
+}
+
+
+/*actBtn*/
+
+.btnGroup {
+    margin: 1.5rem auto 2.5rem;
+    text-align: center;
+}
+
+.actBtn {
+    display: inline-block;
+    border: 0.2rem #ffffff solid;
+    width: 8.9rem;
+    height: 2.7rem;
+    line-height: 2.3rem;
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 0;
+}
+
+.evenActiveGoods .share {
+    background-color: #ef423e;
+    color: #fff;
+    border-radius: 1.5rem 0 0 1.5rem
+}
+.evenActiveGoods .shareOnly{
+    background-color: #ef423e;
+    color: #fff;
+    border-radius: 1.5rem;
+}
+.evenActiveGoods .rule {
+    margin-left: -0.4rem;
+    background-color: #ff9600;
+    color: #fff;
+    border-radius: 0 1.5rem 1.5rem 0;
+}
+
+.activityRule {
+    position: relative;
+    margin: 0 1.5rem;
+    border: 0.2rem solid #fff;
+    border-radius: 0.3rem;
+    padding: 2rem 1.5rem 0rem;
+}
+
+.activityRule li {
+    font-size: 1.4rem;
+    color: #000;
+    line-height: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.activityRuleTitleWrap {
+    position: absolute;
+    top: -1.5rem;
+    left: 0;
+    display: block;
+    width: 100%;
+    font-weight: 900;
+    font-size: 2rem;
+    color: #ffa000;
+    text-shadow: 0 0 4px #fff;
+    text-align: center;
+}
+
+.activityRuleTitle {
+    display: inline-block;
+    width: 11rem;
+    height: 2rem;
+}
+
+@media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
+    .evenActiveGoods li > .goodItem .details .sold-out {
+        line-height: 1.8rem;
+        width: 3.8rem;
+    }
+    .evenActiveGoods li > .goodItem .imgCont {
+        height: 130px;
+    }
+    .GoodsCont .imgCont {
+        width: 80px;
+        height: 80px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+    }
+    .GoodsCont .details {
+        position: absolute;
+        left: 90px;
+        right: 0;
+        bottom: 10px;
+        top: 10px;
+    }
+}
+
+
+/*odd*/
+
+.oddShopName {
+    display: block;
+    width: 33rem;
+    height: 3.6rem;
+    margin: 2.5rem auto 0;
+    text-align: center;
+    color: #fff;
+    font-size: 1.8rem;
+    line-height: 3.2rem;
+    background-image: url(http://xiaomai-p2p.qiniudn.com/bb00eb639e16eb17cc16b7b023f15f1c);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.oddActiveGoods .share {
+    background-color: #fedc18;
+}
+
+.oddActiveGoods .rule {
+    margin-left: -0.4rem;
+    background-color: #ff9600;
+}
+
+.oddGoodItem {
+    position: relative;
+    margin: 1rem 1rem 0;
+}
+
+.oddActiveGoods .goodlistItem-column .imgCont {
+    width: 14rem;
+    height: 14rem;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../../img/skuDefault.png');
+    position: relative;
+    box-sizing: border-box;
+}
+
+.oddActiveGoods .goodlistItem-column .details {
+    position: absolute;
+    left: 14rem;
+    right: 0;
+    top: 1.5rem;
+}
+
+.oddGoodItem p.goodname {
+    font-size: 1.5rem;
+    color: #3a404b;
+    line-height: 2rem;
+    margin-bottom: 2rem;
+}
+
+.oddGoodItem .priceCont .new-price {
+    color: #ff9600;
+}
+
+.oddGoodItem .priceCont .new-price i {
+    font-size: 2.3rem;
+    color: #ff9600;
+}
+
+.oddGoodItem .priceCont .old-price {
+    text-indent: 1rem;
+}
+
+.oddGoodItem .icon-tianjiagouwuche:before {
+    content: "立即购买";
+}
+
+.oddGoodItem .iconfont.buy-icon {
+    position: absolute;
+    left: 1rem;
+    bottom: -2rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    width: 13.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    background-color: #ff9600;
+    border-radius: 0.3rem;
+    color: #fff;
+}
+
+.oddGoodItem .iconfont {
+    -webkit-text-stroke-width: 0;
+}
+
+.activityRuleMargin {
+    margin-top: 4rem !important;
+}
