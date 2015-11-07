@@ -3,7 +3,13 @@ angular.module('xiaomaiApp').controller('addrEditCtrl', [
   '$state',
   'xiaomaiService',
   'xiaomaiCacheManager',
-  function($scope, $state, xiaomaiService, xiaomaiCacheManager) {
+  'xiaomaiLog',
+  function($scope, $state, xiaomaiService, xiaomaiCacheManager, xiaomaiLog) {
+
+    //editPV统计
+    xiaomaiLog('m_p_33editcontact')
+
+
     var userId = $state.params.userId,
       addrId = $state.params.addrId,
       userAddrId = $state.params.userAddrId;

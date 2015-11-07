@@ -4,10 +4,12 @@
  **/
 angular.module('xiaomaiApp').factory('schoolManager', [
   '$q',
+  '$window',
   'xiaomaiService',
   'env',
   'xiaomaiCacheManager',
-  function($q, xiaomaiService, env, xiaomaiCacheManager) {
+  '$timeout',
+  function($q, $window, xiaomaiService, env, xiaomaiCacheManager, $timeout) {
 
     //如果collegeId=1跳转
     //小流量测试切换
@@ -16,22 +18,30 @@ angular.module('xiaomaiApp').factory('schoolManager', [
       var reg = /[\?&]collegeId=([^\?&#]+)/;
       var oldCollegeId = angular.isArray(urlSearch.match(reg)) ? Number(urlSearch.match(reg)[1]) : -9999;
 
-      if (oldCollegeId !== 1 && newCollegeId === 1) {
-        window.location.href = '/page/newv4/index.html?collegeId=1';
+
+      if (oldCollegeId !== 3270 && newCollegeId === 3270) {
+        $window.location.href = '/page/newv4/index.html?collegeId=1';
+        return true;
       }
 
-      if (oldCollegeId === 1 && newCollegeId !== 1) {
-        window.location.href = '/page/newv4/index.html';
+      if (oldCollegeId === 3270 && newCollegeId !== 3270) {
+        $window.location.href = '/page/newv4/index.html';
+        return true;
       }
+      return false;
     };
-
+    var $t;
     var getSchool = function() {
       var deferred = $q.defer();
       //如果锁住 说明正在有一个请求发生
       //这个时候把请求放到请求队列里面
+
       xiaomaiService.fetchOne('getSchool').then(function(res) {
+        $t && $timeout.cancel($t);
+        $t = $timeout(function() {
+          handlerWhilteListSchool(res.collegeId);
+        }, 10);
         deferred.resolve(res);
-        handlerWhilteListSchool(res.collegeId);
       });
       return deferred.promise;
     };

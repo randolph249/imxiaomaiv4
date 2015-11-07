@@ -1,10 +1,3 @@
-//数据验证
-angular.module('xiaomaiApp').factory('dataFormatValidate', function() {
-  return function() {
-
-  }
-});
-
 angular.module('xiaomaiApp').controller('bindUserCtrl', [
   '$scope',
   '$state',
@@ -12,10 +5,19 @@ angular.module('xiaomaiApp').controller('bindUserCtrl', [
   'xiaomaiService',
   'schoolManager',
   'cookie_openid',
-  function($scope, $state, $interval, xiaomaiService, schoolManager, cookie_openid) {
+  'xiaomaiLog',
+  function($scope, $state, $interval, xiaomaiService, schoolManager, cookie_openid, xiaomaiLog) {
+
+    //banding页面PV统计
+    xiaomaiLog('m_p_33banding');
+
     var mobilereg = /^(\+86)?1[3|4|5|8][0-9]\d{4,8}$/;
+
     //发送验证码
     $scope.sendCode = function($event) {
+
+      //点击发送验证码统计
+      xiaomaiLog('m_b_33logingetcode');
 
       $event.preventDefault();
       $event.stopPropagation();
@@ -39,6 +41,12 @@ angular.module('xiaomaiApp').controller('bindUserCtrl', [
 
       }, function(error) {
         alert(error.msg || '获取验证码失败');
+
+        //提示当前手机号已绑定统计
+        if (error.code === 1) {
+          xiaomaiLog('m_b_33loginbinded');
+        }
+
       })
     };
 
@@ -46,6 +54,9 @@ angular.module('xiaomaiApp').controller('bindUserCtrl', [
     $scope.bindUser = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
+
+      //绑定用户统计
+      xiaomaiLog('m_b_33logingo');
 
       var collegeId;
       //统一用户协议
@@ -78,6 +89,7 @@ angular.module('xiaomaiApp').controller('bindUserCtrl', [
         alert('绑定成功');
         $state.go('root.buy.nav.all');
       }, function(err) {
+        debugger;
         alert(err.msg);
       });
     }

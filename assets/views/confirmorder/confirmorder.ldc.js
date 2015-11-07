@@ -1,3 +1,24 @@
+angular.module('xiaomaiApp').directive('triggerMobIscroll', [
+  function() {
+    var link = function($scope, iElm, iAttrs) {
+      iElm.on('click', function(e) {
+        var selector = iElm.find('select');
+
+        if (selector.length) {
+          selector.mobiscroll('getInst').show();
+        }
+        e.preventDefault();
+        e.stopPropagation();
+      });
+    }
+    return {
+      template: '<p  class="" ng-transclude></p>',
+      link: link,
+      transclude: true
+    }
+  }
+]);
+
 angular.module('xiaomaiApp').filter('filterldctomorrow', function() {
   return function(val) {
     var reg = /\d{4}[-\/]\d{2}[-\/]\d{2}/;
@@ -19,6 +40,13 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
     $scope.showOrder = false;
 
     var collegeId;
+
+    var todayOrTomorrow = function(val) {
+      var reg = /\d{4}[-\/]\d{2}[-\/]\d{2}/;
+      var date = new Date().getTime();
+      var targetDate = new Date(val.match(reg)[0]).getTime();
+      return val.replace(/\d{4}[-\/]\d{2}[-\/]\d{2}\s{0,}/, targetDate > date ? '明天' : '');
+    };
 
     $q.all([
       orderManager.getOrderInfo('order.childOrderList'),
@@ -44,12 +72,12 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
           $scope.childOrderDetailList = item.childOrderDetailList;
           //是否正常营业
           $scope.ldcTimeIsOpen = item.deliveryTimeType == 0;
-          alert('是否正常营业：' + $scope.ldcTimeIsOpen);
           //判断LDC类型是否是商超
           $scope.ldcTypeIsSc = item.orderDeliveryTimeType == 2;
-          $scope.ldcAddressTime = $scope.ldcTimeIsOpen ? item.deliveryTimeStr : (item.ldcFixBeginTime + '~' +
-            item.ldcFixEndTime);
-          alert('当前信息:' + $scope.ldcAddressTime);
+          $scope.initLldcAddressTime = $scope.ldcTimeIsOpen ? item.deliveryTimeStr : (todayOrTomorrow(item.ldcFixBeginTime) +
+            '~' + todayOrTomorrow(item.ldcFixEndTime));
+
+          $scope.ldcAddressTime = $scope.initLldcAddressTime;
           xiaomaiMessageNotify.pub('updateLdcDeliveryTime', {
             ldcDeliveryBeginTime: item.ldcFixBeginTime,
             ldcDeliveryEndTime: item.ldcFixEndTime
@@ -57,7 +85,7 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
         }
       });
     };
-
+    $scope.deliveryTimes = [];
     //获取定时达配送
     //当定时达开关关闭或者当日送类型是商超的时候 不需要请求定时配送列表
     var getDeliveryTimes = function() {
@@ -67,7 +95,7 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
       xiaomaiService.fetchOne('ldcDeliveryTime', {
         collegeId: collegeId
       }).then(function(res) {
-        $scope.deliveryTimes = res.ldcTimeList;
+        res.ldcTimeList.length && ($scope.deliveryTimes = res.ldcTimeList);
       });
     };
 
@@ -150,6 +178,7 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
 
     //选择送货时间
     $scope.chooseTime = function(val) {
+      $scope.ldcAddressTime = val;
       var reg = /\d{2}:\d{2}/;
       if (val.match(reg)) {
         var times = val.split('~');

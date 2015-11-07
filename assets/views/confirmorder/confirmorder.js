@@ -4,8 +4,14 @@ angular.module('xiaomaiApp').controller('orderCtrl', [
   'xiaomaiLog',
   'orderManager',
   'xiaomaiMessageNotify',
-  function($scope, $state, xiaomaiLog, orderManager, xiaomaiMessageNotify) {
-    $scope.goBack = function() {
+  'xiaomaiLog',
+  function($scope, $state, xiaomaiLog, orderManager, xiaomaiMessageNotify, xiaomaiLog) {
+    //确认订单页面PV统计
+    xiaomaiLog('m_p_33conforder');
+
+    $scope.goBack = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
       $state.go('root.buy.nav.all');
     };
 

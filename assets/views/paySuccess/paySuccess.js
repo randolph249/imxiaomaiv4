@@ -3,9 +3,13 @@ angular.module('xiaomaiApp').controller('paySuccessCtrl', [
   '$state',
   'xiaomaiService',
   'cartManager',
-  function($scope, $state, xiaomaiService, cartManager) {
+  'xiaomaiLog',
+  function($scope, $state, xiaomaiService, cartManager, xiaomaiLog) {
     var userId = $state.params.userId;
     var orderId = $state.params.orderId;
+
+    //支付成功PV统计
+    xiaomaiLog('m_p_33paymentsuccess');
 
     //默认显示红包界面
     $scope.showRedpacketDialog = true;
@@ -14,6 +18,8 @@ angular.module('xiaomaiApp').controller('paySuccessCtrl', [
     $scope.closeWindow = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
+      //关闭页面统计
+      xiaomaiLog('m_b_32paymentsuccessclose');
       WeixinJSBridge.invoke('closeWindow', {}, function(res) {});
 
     };
@@ -26,6 +32,8 @@ angular.module('xiaomaiApp').controller('paySuccessCtrl', [
     $scope.queryOrderDetail = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
+      //查询订单详情统计
+      xiaomaiLog('m_b_32paymentsuccessorderditail');
       window.location.href = "/order/orderDetail?orderId=" + orderId + "&userId=" + userId;
     };
 
@@ -33,7 +41,10 @@ angular.module('xiaomaiApp').controller('paySuccessCtrl', [
     $scope.gotoIndex = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
+      //返回首页点击统计
+      xiaomaiLog('m_b_32paymentsuccessreturnhome');
       $state.go('root.buy.nav.all');
+
     };
 
     //跳转到发送红包页面

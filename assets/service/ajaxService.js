@@ -204,8 +204,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       //支付状态校验
       "payStatusCheck": {
         url: "/wap/order/pay/check",
-        type: "GET",
-        canstore: false
+        type: "POST"
       },
       //送货时间表
       "ldcDeliveryTime": {
@@ -293,10 +292,6 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
         }
         return res.data;
       },
-      //生成Promise实例
-      createPromise = function() {
-        return $q.defer();
-      },
       fetchQueue = {},
       handlerQueue = function(name, errorObj) {
 
@@ -353,7 +348,7 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           //如果返回结果有异常 reject
           if (handlerResult(res) === false) {
             errorObj = res;
-            deferred.reject(res.msg);
+            deferred.reject(res);
           } else {
             //写入缓存
             errorObj = false;
@@ -392,7 +387,6 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           params = args[1];
         }
 
-
         //如果相同的请求同时发送过来 处理第一个请求 同时将其他请求打到待处理队列中
         if (fetchQueue.hasOwnProperty(name) && fetchQueue[name].lock == true) {
           fetchQueue[name].queue.push({
@@ -407,10 +401,6 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           };
           fetchQuery(deferred, name, params);
         }
-
-        return deferred.promise;
-
-
 
         return deferred.promise;
       },

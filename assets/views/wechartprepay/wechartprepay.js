@@ -6,13 +6,19 @@ angular.module('xiaomaiApp').controller('wechartprepayCtrl', [
   'xiaomaiMessageNotify',
   '$timeout',
   'safeApply',
-  function($scope, $state, xiaomaiService, xiaomaiCacheManager, xiaomaiMessageNotify, $timeout, safeApply) {
+  'xiaomaiLog',
+  function($scope, $state, xiaomaiService, xiaomaiCacheManager, xiaomaiMessageNotify, $timeout, safeApply,
+    xiaomaiLog) {
+
+    xiaomaiLog('m_p_33weixinprepay');
+
     //支付按钮禁止点击
     $scope.lock = true;
+
     //5S之后默认支付失败
     var $t = $timeout(function() {
       $scope.lock = false;
-    }, 5000);
+    }, 3000);
 
 
     var userId = $state.params.userId;
@@ -35,6 +41,8 @@ angular.module('xiaomaiApp').controller('wechartprepayCtrl', [
     //发起支付信息
     var triggerPay = function() {
       $scope.lock = true;
+      //微信弹框调起统计
+      xiaomaiLog('m_b_33weixinprepayalert');
       WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
           "appId": payInfo.appId,
@@ -59,7 +67,10 @@ angular.module('xiaomaiApp').controller('wechartprepayCtrl', [
 
     //微信支付成功之后处理
     var paySuccessedHandler = function() {
-      xiaomaiService.fetchOne('payStatusCheck').then(function(res) {
+      xiaomaiService.save('payStatusCheck', {
+        userId: userId,
+        orderId: orderId
+      }).then(function(res) {
         //跳转到支付成功页面
         $state.go('root.paySuccess', {
           userId: userId,
@@ -79,9 +90,11 @@ angular.module('xiaomaiApp').controller('wechartprepayCtrl', [
     //微信支付失败处理
     var payFailedHandler = function() {
       alert('支付失败,再试一次!');
+      //失败提示统计
+      xiaomaiLog('m_b_33weixinprepayfail');
       safeApply(function() {
         $scope.lock = false;
-      })
+      });
     };
 
     //兼容浏览器的支付信息
@@ -100,6 +113,9 @@ angular.module('xiaomaiApp').controller('wechartprepayCtrl', [
     $scope.toPay = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
+      //点击去支付统计
+      xiaomaiLog('m_b_33weixinprepaypay')
+
       if ($scope.lock) {
         return false;
       }

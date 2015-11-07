@@ -3,55 +3,43 @@
   "code": 0,
   "data": {
     "college": {
-      "collegeId": 1241,
-      "collegeName": "晋城新学",
-      "cityId": 110,
-      "areaId": 112,
-      "ldcStorageId": 794387683,
-      "rdcStorageId": 0,
+      "collegeId": 694,
+      "collegeName": "南京中医药大学",
+      "cityId": 18,
+      "areaId": 38,
+      "ldcStorageId": 1001,
+      "rdcStorageId": 1002,
       "weight": 0,
       "isDel": 0,
       "isShow": 1,
       "isOpen": 1,
-      "longitude": 12.0,
-      "latitude": 32.0,
+      "longitude": 109.0,
+      "latitude": 22.0,
       "ldcDeliveryType": 2,
-      "ldcSelfPickUpAddress": "晋城新学校园",
-      "rdcDeliveryType": 3,
-      "rdcSelfPickUpAddress": "",
-      "storeId": 226,
-      "collegeAddr": "晋城新学校园晋城新学校园",
+      "ldcSelfPickUpAddress": "南京中医药大学校园营业厅",
+      "rdcDeliveryType": 0,
+      "rdcSelfPickUpAddress": "南京中医药大学校园营业厅",
+      "storeId": 113,
+      "collegeAddr": "未签合同，暂不做商城",
       "notValid": false
     },
     "ldcAddressList": [{
-      "addressType": "理工女生宿舍",
-      "addresses": ["学生公寓1A", "学生公寓2B", "学生公寓2A", "学生公寓3B", "学生公寓3A", "学生公寓4B", "学生公寓4A", "学生公寓4C", "学生公寓21栋",
-        "学生公寓22栋"
-      ]
+      "addressType": "宿舍区",
+      "addresses": ["一管", "二管", "三管", "四管", "五管", "六管", "七管", "八管", "E1", "E2", "E3", "E4", "E5", "E6"]
     }, {
-      "addressType": "理工教学楼",
-      "addresses": ["教学楼1", "教学楼2", "教学楼3", "教学楼4", "教学楼5", "教学楼6", "教学楼7", "教学楼8", "教学楼9", "教学楼12"]
+      "addressType": "教学楼",
+      "addresses": ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12", "B13"]
     }, {
-      "addressType": "理工图书馆",
+      "addressType": "图书馆",
       "addresses": []
     }, {
-      "addressType": "理工行政楼",
+      "addressType": "行政楼",
       "addresses": []
     }, {
-      "addressType": "理工男生宿舍",
-      "addresses": ["男生宿舍5A", "男生宿舍5B", "男生宿舍5C", "男生宿舍6A", "男生宿舍6B", "男生宿舍6C", "男生宿舍7A", "男生宿舍7B", "男生宿舍8A",
-        "男生宿舍8B", "男生宿舍9A", "男生宿舍9B", "男生宿舍10A", "男生宿舍10B", "男生宿舍23栋", "男生宿舍24栋", "男生宿舍25栋", "男生宿舍26栋"
-      ]
-    }, {
-      "addressType": "博文教学楼",
-      "addresses": ["教学楼2", "教学楼3", "教学楼4"]
-    }, {
-      "addressType": "博文宿舍",
-      "addresses": ["宿舍楼6", "宿舍楼7", "宿舍楼8", "宿舍楼9", "宿舍楼10A", "宿舍楼10B", "宿舍楼11A", "宿舍楼11B", "宿舍楼12", "宿舍楼14男",
-        "宿舍楼14女"
-      ]
+      "addressType": "食堂",
+      "addresses": ["一食堂", "二食堂"]
     }],
-    "firstCoupon": 1000,
+    "firstCoupon": 0,
     "ldcFreight": {
       "freight": 0,
       "total": 1000,
@@ -60,21 +48,28 @@
     "wxPayMsg": "",
     "defaultUserAddr": {
       "userAddrId": 0,
-      "receiverName": "哈哈",
-      "receiverPhone": "18519843252",
-      "receiverCollegeName": "晋城新学",
-      "receiverAddr": "晋城新学校园晋城新学校园",
-      "receiverCollegeId": 1241
+      "receiverName": "郭超",
+      "receiverPhone": "18612244032",
+      "receiverCollegeName": "南京中医药大学",
+      "receiverAddr": "未签合同，暂不做商城",
+      "receiverCollegeId": 694
     },
     "ldcTimeSwitch": 0,
     "rdcAddressList": [{
-      "addressType": "学生公寓",
-      "addresses": ["2号宿舍", "3号宿舍", "4号宿舍", "5号宿舍", "6号宿舍", "7号宿舍", "8号宿舍", "开拓2号楼", "开拓3号楼", "开拓4号楼", "开拓5号楼",
-        "开拓6号楼"
-      ]
+      "addressType": "宿舍区",
+      "addresses": ["一管", "二管", "三管", "四管", "五管", "六管", "七管", "八管", "E1", "E2", "E3", "E4", "E5", "E6"]
     }, {
-      "addressType": "职工区",
-      "addresses": ["开拓1号楼", "1号宿舍"]
+      "addressType": "教学楼",
+      "addresses": ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12", "B13"]
+    }, {
+      "addressType": "图书馆",
+      "addresses": []
+    }, {
+      "addressType": "行政楼",
+      "addresses": []
+    }, {
+      "addressType": "食堂",
+      "addresses": ["一食堂", "二食堂"]
     }],
     "rdcFreight": {
       "freight": 0,
@@ -84,77 +79,77 @@
     "couponList": [],
     "aliPayMsg": "",
     "order": {
-      "orderId": 426140,
-      "userId": 314,
-      "collegeId": 1241,
-      "receiverName": "哈哈",
-      "receiverPhone": "18519843252",
-      "totalPay": 2,
+      "orderId": 426897,
+      "userId": 123456982,
+      "collegeId": 694,
+      "receiverName": "郭超",
+      "receiverPhone": "18612244032",
+      "totalPay": 6,
       "onlinePay": 0,
       "onlinePayId": "",
       "onlinePayType": 0,
       "couponId": 0,
       "couponPay": 0,
-      "firstSub": 1000,
+      "firstSub": 0,
       "fullSub": 0,
       "freight": 0,
       "freightSub": 0,
       "fillPay": 0,
-      "orderCode": "XM00100426140",
+      "orderCode": "XM00100426897",
       "remark": "",
       "status": 1,
       "device": 1,
-      "createTime": 1446721699000,
+      "createTime": 1446816666000,
       "updateTime": null,
       "payTime": null,
       "childOrderList": [{
-        "childOrderId": 426141,
-        "orderId": 426140,
-        "userId": 314,
-        "collegeId": 1241,
+        "childOrderId": 426898,
+        "orderId": 426897,
+        "userId": 123456982,
+        "collegeId": 694,
         "collegeName": null,
-        "receiverName": "哈哈",
-        "receiverPhone": "18519843252",
-        "totalPay": 2,
+        "receiverName": "郭超",
+        "receiverPhone": "18612244032",
+        "totalPay": 1,
         "freight": 0,
         "freightSub": 0,
-        "orderCode": "XM00100426140",
-        "childOrderCode": "XM00300426141",
+        "orderCode": "XM00100426897",
+        "childOrderCode": "XM00300426898",
         "remark": "",
         "distributeType": 1,
         "status": 1,
         "deliveryType": 0,
-        "ldcFixBeginTime": null,
-        "ldcFixEndTime": null,
+        "ldcFixBeginTime": "2015-11-07 20:50:00",
+        "ldcFixEndTime": "2015-11-07 21:00:00",
         "deliveryBeginTime": null,
         "deliveryEndTime": null,
         "deliveryAddress": "",
         "selfPickUpTime": null,
         "selfPickUpAddress": "",
-        "createTime": 1446721699000,
+        "createTime": 1446816666000,
         "updateTime": null,
         "childOrderDetailList": [{
-          "childOrderDetailId": 2256,
-          "orderId": 426140,
-          "childOrderId": 426141,
-          "userId": 314,
-          "collegeId": 1241,
-          "goodsId": 15308,
-          "bgSkuId": 643,
-          "skuId": 22654,
-          "skuName": "口香糖2",
+          "childOrderDetailId": 297,
+          "orderId": 426897,
+          "childOrderId": 426898,
+          "userId": 123456982,
+          "collegeId": 694,
+          "goodsId": 2413,
+          "bgSkuId": 317,
+          "skuId": 3653,
+          "skuName": "单一商品4",
           "skuSubName": "",
           "skuNum": 1,
-          "skuOriginPrice": 100,
-          "skuPrice": 2,
+          "skuOriginPrice": 1,
+          "skuPrice": 1,
           "status": 1,
-          "createTime": 1446721699000,
+          "createTime": 1446816666000,
           "updateTime": null,
-          "storageId": 794387683,
+          "storageId": 1001,
           "distributeType": 1,
           "sourceType": 1,
-          "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=172027",
-          "categoryId": 69,
+          "imageUrl": "",
+          "categoryId": 41,
           "ratio": 0,
           "propertyIds": "null",
           "wmsGoodsIds": ""
@@ -164,29 +159,142 @@
         "deliverCompanyName": null,
         "deliveryInfo": null,
         "storageName": null,
-        "storageId": 794387683,
+        "storageId": 1001,
         "h5DeliveryPageUrl": null,
-        "deliveryTimeStr": "29分钟达",
-        "deliveryTimeType": 0,
-        "orderDeliveryTimeType": 0
+        "deliveryTimeStr": "20:50~21:00",
+        "deliveryTimeType": 2,
+        "orderDeliveryTimeType": 1
       }],
       "categoryIdList": [{
-        "69": 2
+        "81": 5,
+        "41": 1
       }],
-      "thirdFreight": 0,
+      "thirdFreight": 200,
       "thirdFreightSub": 0,
-      "thirdChildOrderList": []
+      "thirdChildOrderList": [{
+        "childOrderId": 426899,
+        "orderId": 426897,
+        "userId": 123456982,
+        "collegeId": 694,
+        "collegeName": null,
+        "receiverName": "郭超",
+        "receiverPhone": "18612244032",
+        "totalPay": 5,
+        "freight": 200,
+        "freightSub": 0,
+        "orderCode": "XM00100426897",
+        "childOrderCode": "XM00500426899",
+        "remark": "",
+        "distributeType": 2,
+        "status": 1,
+        "deliveryType": 0,
+        "ldcFixBeginTime": null,
+        "ldcFixEndTime": null,
+        "deliveryBeginTime": null,
+        "deliveryEndTime": null,
+        "deliveryAddress": "",
+        "selfPickUpTime": null,
+        "selfPickUpAddress": "",
+        "createTime": 1446816666000,
+        "updateTime": null,
+        "childOrderDetailList": [{
+          "childOrderDetailId": 298,
+          "orderId": 426897,
+          "childOrderId": 426899,
+          "userId": 123456982,
+          "collegeId": 694,
+          "goodsId": 12714,
+          "bgSkuId": 589,
+          "skuId": 19759,
+          "skuName": "聚美商品2",
+          "skuSubName": "",
+          "skuNum": 1,
+          "skuOriginPrice": 19900,
+          "skuPrice": 2,
+          "status": 1,
+          "createTime": 1446816666000,
+          "updateTime": null,
+          "storageId": 794387660,
+          "distributeType": 2,
+          "sourceType": 1,
+          "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=167235",
+          "categoryId": 81,
+          "ratio": 0,
+          "propertyIds": "null",
+          "wmsGoodsIds": ""
+        }, {
+          "childOrderDetailId": 299,
+          "orderId": 426897,
+          "childOrderId": 426899,
+          "userId": 123456982,
+          "collegeId": 694,
+          "goodsId": 12831,
+          "bgSkuId": 590,
+          "skuId": 19876,
+          "skuName": "聚美商品3",
+          "skuSubName": "",
+          "skuNum": 1,
+          "skuOriginPrice": 29900,
+          "skuPrice": 2,
+          "status": 1,
+          "createTime": 1446816666000,
+          "updateTime": null,
+          "storageId": 794387660,
+          "distributeType": 2,
+          "sourceType": 1,
+          "imageUrl": "http://xiaomai-p2p.qiniudn.com/013d32565253177f9151278daf56b02f",
+          "categoryId": 81,
+          "ratio": 0,
+          "propertyIds": "null",
+          "wmsGoodsIds": ""
+        }, {
+          "childOrderDetailId": 300,
+          "orderId": 426897,
+          "childOrderId": 426899,
+          "userId": 123456982,
+          "collegeId": 694,
+          "goodsId": 14924,
+          "bgSkuId": 621,
+          "skuId": 22222,
+          "skuName": "聚美商品4",
+          "skuSubName": "",
+          "skuNum": 1,
+          "skuOriginPrice": 400,
+          "skuPrice": 1,
+          "status": 1,
+          "createTime": 1446816666000,
+          "updateTime": null,
+          "storageId": 794387660,
+          "distributeType": 2,
+          "sourceType": 1,
+          "imageUrl": "http://xiaomai-p2p.qiniudn.com/0536840f7c60d10d85d0b1c20c24c2cf",
+          "categoryId": 81,
+          "ratio": 0,
+          "propertyIds": "null",
+          "wmsGoodsIds": ""
+        }],
+        "deliverCompanyCode": null,
+        "deliverSheetCode": null,
+        "deliverCompanyName": null,
+        "deliveryInfo": null,
+        "storageName": "聚美优品总部仓",
+        "storageId": 794387660,
+        "h5DeliveryPageUrl": null,
+        "deliveryTimeStr": null,
+        "deliveryTimeType": 0,
+        "orderDeliveryTimeType": 0
+      }]
     },
     "rdcTimeList": [{
-      "begin": "11:00",
-      "end": "12:00"
+      "begin": "20:50",
+      "end": "21:00"
     }, {
-      "begin": "12:00",
-      "end": "13:00"
+      "begin": "21:00",
+      "end": "21:15"
     }, {
-      "begin": "16:00",
-      "end": "18:00"
+      "begin": "21:15",
+      "end": "21:30"
     }]
   },
-  "serverTime": "2015-11-05 19:09:30"
+  "serverTime": "2015-11-06 21:32:02"
 }

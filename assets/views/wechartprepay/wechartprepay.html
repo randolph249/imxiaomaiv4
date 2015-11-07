@@ -77,17 +77,17 @@
           <span class="orderDistribute-key">配送地址</span>
           <p class="orderDistribute-values">{{orderInfo.deliveryAddress}}</p>
         </div>
-        <div class="orderDistribute orderDistributeTime" ng-if="ldcDeliveryType==1">
+        <div class="orderDistribute orderDistributeTime" ng-if="orderInfo.deliveryType==1">
           <span class="orderDistribute-key">配送时间</span>
-          <p class="orderDistribute-values">{{orderInfo.ldcFixBeginTime?(orderInfo.ldcFixBeginTime+'-'+orderInfo.ldcFixEndTime):orderInfo.deliveryTimeStr}}</p>
+          <p class="orderDistribute-values">{{orderInfo.deliveryBeginTime|date:'yyyy-MM-dd HH:mm'}}~{{orderInfo.deliveryEndTime|date:'yyyy-MM-dd HH:mm'}}</p>
         </div>
-        <div class="orderDistribute orderDistributeFreight" ng-if="ldcDeliveryType==1">
+        <div class="orderDistribute orderDistributeFreight" ng-if="orderInfo.deliveryType==1">
           <span class="orderDistribute-key">配送服务费</span>
           <p class="orderDistribute-values">
-            <span class="ldcOrderFreight orderfreight">{{orderInfo.freight-orderInfo.freightSub|xiaomaiprice}}</span>
+            <span class="ldcOrderFreight orderfreight">&yen;{{orderInfo.freight-orderInfo.freightSub|xiaomaiprice}}</span>
           </p>
         </div>
-        <div class="orderDistribute orderDistributeFreight" ng-if="ldcDeliveryType==1">
+        <div class="orderDistribute orderDistributeFreight" ng-if="orderInfo.deliveryType==1">
           <span class="orderDistribute-key">备注</span>
           <p class="orderDistribute-values">{{orderInfo.remark}}</p>
         </div>

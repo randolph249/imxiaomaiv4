@@ -3,7 +3,12 @@ angular.module('xiaomaiApp').controller('addrAddCtrl', [
   '$state',
   'xiaomaiService',
   'xiaomaiCacheManager',
-  function($scope, $state, xiaomaiService, xiaomaiCacheManager) {
+  'xiaomaiLog',
+  function($scope, $state, xiaomaiService, xiaomaiCacheManager, xiaomaiLog) {
+
+    //添加收货人PV统计
+    xiaomaiLog('m_p_33newcontact');
+
     var userId = $state.params.userId,
       addrId = $state.params.addrId;
 

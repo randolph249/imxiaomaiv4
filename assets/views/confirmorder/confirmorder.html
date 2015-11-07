@@ -1,5 +1,5 @@
 <div class="pub-header">
-  <div class="lefticon iconfont icon-fanhui" ng-click="goBack();"></div>
+  <div class="lefticon iconfont icon-fanhui" ng-click="goBack($event);"></div>
   <div class="location-info icon-school middlearea">确认订单</div>
 </div>
 <div class="order_contents" subname="{{'confirmoderHeightUpdate'}}" xiaomai-iscroll>
@@ -88,8 +88,9 @@
         </div>
         <div class="orderDistribute" ng-if="ldcDeliveryType==1">
           <span class="orderDistribute-key">配送地址</span>
-          <p class="orderDistribute-values">
-            <select mobiscroll-options="{onSelect:chooseAddress,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressName" style="display:none;">
+          <p class="orderDistribute-values" trigger-mob-iscroll>
+            {{ldcAddressName}}
+            <select mobiscroll-options="{showInput:false,onSelect:chooseAddress,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressName" style="display:none;">
               <optgroup label="{{ldcAddress.addressType}}" ng-repeat="ldcAddress in ldcAddressList">
                 <option ng-repeat="address in ldcAddress.addresses" value="{{ldcAddress.addressType}}-{{address}}">{{ldcAddress.addressType}}-{{address}}</option>
               </optgroup>
@@ -100,13 +101,19 @@
 
         <div class="orderDistribute" ng-if="ldcDeliveryType==1">
           <span class="orderDistribute-key">配送时间</span>
-          <p class="orderDistribute-values" ng-if="ldcTimeSwitch&&!ldcTypeIsSc">
-            <select  mobiscroll-options="{onSelect:chooseTime,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressTime" style="display:none;">
+          <p class="orderDistribute-values" ng-if="ldcTimeSwitch&&!ldcTypeIsSc" trigger-mob-iscroll>
+            {{ldcAddressTime}}
+            <select ng-if="!deliveryTimes.length"  mobiscroll-options="{showInput:false,onSelect:chooseTime,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressTime" style="display:none;">
+              <optgroup label="29分钟达" ng-if="ldcTimeIsOpen">
+                  <option value="29分钟达">29分钟达</option>
+              </optgroup>
+            </select>
+            <select ng-if="deliveryTimes.length"  mobiscroll-options="{showInput:false,onSelect:chooseTime,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressTime" style="display:none;">
               <optgroup label="29分钟达" ng-if="ldcTimeIsOpen">
                   <option value="29分钟达">29分钟达</option>
               </optgroup>
               <optgroup label="定时达">
-                <option ng-if="deliveryTime.startTime" ng-repeat="deliveryTime in deliveryTimes" value="{{deliveryTime.startTime+'~'+deliveryTime.endTime}}">{{deliveryTime.startTime|filterldctomorrow}}~{{deliveryTime.endTime|filterldctomorrow}}</option>
+                <option ng-repeat="deliveryTime in deliveryTimes" value="{{deliveryTime.startTime+'~'+deliveryTime.endTime}}">{{deliveryTime.startTime|filterldctomorrow}}~{{deliveryTime.endTime|filterldctomorrow}}</option>
               </optgroup>
             </select>
             <i class="iconfont icon-unfold showLdcAddressList"></i>

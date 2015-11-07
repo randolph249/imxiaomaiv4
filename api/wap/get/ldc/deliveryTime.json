@@ -3,203 +3,95 @@
   "code": 0,
   "data": {
     "ldcTimeList": [{
-      "startHour": "00",
-      "startMin": "01",
-      "endHour": "00",
-      "endMin": "15",
-      "startTime": "2015-10-31 00:01:27",
-      "endTime": "2015-10-31 00:15:27"
-    }, {
-      "startHour": "00",
-      "startMin": "15",
-      "endHour": "00",
-      "endMin": "30",
-      "startTime": "2015-10-31 00:15:27",
-      "endTime": "2015-10-31 00:30:27"
-    }, {
-      "startHour": "00",
-      "startMin": "30",
-      "endHour": "00",
-      "endMin": "45",
-      "startTime": "2015-10-31 00:30:27",
-      "endTime": "2015-10-31 00:45:27"
-    }, {
-      "startHour": "11",
-      "startMin": "00",
-      "endHour": "11",
-      "endMin": "30",
-      "startTime": "2015-10-31 11:00:27",
-      "endTime": "2015-10-31 11:30:27"
-    }, {
-      "startHour": "11",
-      "startMin": "30",
-      "endHour": "12",
-      "endMin": "00",
-      "startTime": "2015-10-31 11:30:27",
-      "endTime": "2015-10-31 12:00:27"
-    }, {
-      "startHour": "12",
-      "startMin": "00",
-      "endHour": "15",
-      "endMin": "00",
-      "startTime": "2015-10-31 12:00:27",
-      "endTime": "2015-10-31 15:00:27"
-    }, {
-      "startHour": "15",
-      "startMin": "00",
-      "endHour": "16",
-      "endMin": "00",
-      "startTime": "2015-10-31 15:00:27",
-      "endTime": "2015-10-31 16:00:27"
-    }, {
-      "startHour": "16",
-      "startMin": "00",
-      "endHour": "17",
-      "endMin": "00",
-      "startTime": "2015-10-31 16:00:27",
-      "endTime": "2015-10-31 17:00:27"
-    }, {
-      "startHour": "16",
-      "startMin": "45",
-      "endHour": "17",
-      "endMin": "00",
-      "startTime": "2015-10-31 16:45:27",
-      "endTime": "2015-10-31 17:00:27"
-    }, {
-      "startHour": "17",
-      "startMin": "00",
-      "endHour": "17",
-      "endMin": "15",
-      "startTime": "2015-10-31 17:00:27",
-      "endTime": "2015-10-31 17:15:27"
-    }, {
-      "startHour": "17",
-      "startMin": "15",
-      "endHour": "17",
-      "endMin": "30",
-      "startTime": "2015-10-31 17:15:27",
-      "endTime": "2015-10-31 17:30:27"
-    }, {
-      "startHour": "17",
-      "startMin": "30",
-      "endHour": "17",
-      "endMin": "45",
-      "startTime": "2015-10-31 17:30:27",
-      "endTime": "2015-10-31 17:45:27"
-    }, {
-      "startHour": "17",
-      "startMin": "45",
-      "endHour": "18",
-      "endMin": "00",
-      "startTime": "2015-10-31 17:45:27",
-      "endTime": "2015-10-31 18:00:27"
-    }, {
       "startHour": "18",
       "startMin": "00",
       "endHour": "18",
       "endMin": "15",
-      "startTime": "2015-10-31 18:00:27",
-      "endTime": "2015-10-31 18:15:27"
+      "startTime": "2015-11-06 18:00:04",
+      "endTime": "2015-11-06 18:15:04",
+      "deliveryType": 0
     }, {
       "startHour": "18",
       "startMin": "15",
       "endHour": "18",
       "endMin": "30",
-      "startTime": "2015-10-31 18:15:27",
-      "endTime": "2015-10-31 18:30:27"
+      "startTime": "2015-11-06 18:15:04",
+      "endTime": "2015-11-06 18:30:04",
+      "deliveryType": 0
     }, {
       "startHour": "18",
       "startMin": "30",
       "endHour": "18",
       "endMin": "45",
-      "startTime": "2015-10-31 18:30:27",
-      "endTime": "2015-10-31 18:45:27"
+      "startTime": "2015-11-06 18:30:04",
+      "endTime": "2015-11-06 18:45:04",
+      "deliveryType": 0
     }, {
       "startHour": "18",
       "startMin": "45",
       "endHour": "19",
       "endMin": "00",
-      "startTime": "2015-10-31 18:45:27",
-      "endTime": "2015-10-31 19:00:27"
+      "startTime": "2015-11-06 18:45:04",
+      "endTime": "2015-11-06 19:00:04",
+      "deliveryType": 0
     }, {
       "startHour": "19",
       "startMin": "00",
+      "endHour": "19",
+      "endMin": "15",
+      "startTime": "2015-11-06 19:00:04",
+      "endTime": "2015-11-06 19:15:04",
+      "deliveryType": 0
+    }, {
+      "startHour": "19",
+      "startMin": "15",
+      "endHour": "19",
+      "endMin": "30",
+      "startTime": "2015-11-06 19:15:04",
+      "endTime": "2015-11-06 19:30:04",
+      "deliveryType": 0
+    }, {
+      "startHour": "19",
+      "startMin": "30",
+      "endHour": "19",
+      "endMin": "45",
+      "startTime": "2015-11-06 19:30:04",
+      "endTime": "2015-11-06 19:45:04",
+      "deliveryType": 0
+    }, {
+      "startHour": "19",
+      "startMin": "40",
       "endHour": "20",
       "endMin": "00",
-      "startTime": "2015-10-31 19:00:27",
-      "endTime": "2015-10-31 20:00:27"
+      "startTime": "2015-11-06 19:40:04",
+      "endTime": "2015-11-06 20:00:04",
+      "deliveryType": 0
     }, {
-      "startHour": "20",
-      "startMin": "00",
-      "endHour": "22",
-      "endMin": "00",
-      "startTime": "2015-10-31 20:00:27",
-      "endTime": "2015-10-31 22:00:27"
-    }, {
-      "startHour": "22",
-      "startMin": "00",
-      "endHour": "23",
-      "endMin": "59",
-      "startTime": "2015-10-31 22:00:27",
-      "endTime": "2015-10-31 23:59:27"
-    }, {
-      "startHour": "22",
-      "startMin": "00",
-      "endHour": "22",
-      "endMin": "15",
-      "startTime": "2015-10-31 22:00:27",
-      "endTime": "2015-10-31 22:15:27"
-    }, {
-      "startHour": "22",
-      "startMin": "15",
-      "endHour": "22",
-      "endMin": "30",
-      "startTime": "2015-10-31 22:15:27",
-      "endTime": "2015-10-31 22:30:27"
-    }, {
-      "startHour": "22",
-      "startMin": "30",
-      "endHour": "22",
-      "endMin": "45",
-      "startTime": "2015-10-31 22:30:27",
-      "endTime": "2015-10-31 22:45:27"
-    }, {
-      "startHour": "22",
+      "startHour": "19",
       "startMin": "45",
-      "endHour": "23",
+      "endHour": "20",
       "endMin": "00",
-      "startTime": "2015-10-31 22:45:27",
-      "endTime": "2015-10-31 23:00:27"
+      "startTime": "2015-11-06 19:45:04",
+      "endTime": "2015-11-06 20:00:04",
+      "deliveryType": 0
+    }, {
+      "startHour": "21",
+      "startMin": "00",
+      "endHour": "21",
+      "endMin": "15",
+      "startTime": "2015-11-06 21:00:04",
+      "endTime": "2015-11-06 21:15:04",
+      "deliveryType": 0
     }, {
       "startHour": "23",
       "startMin": "00",
       "endHour": "23",
       "endMin": "15",
-      "startTime": "2015-10-31 23:00:27",
-      "endTime": "2015-10-31 23:15:27"
-    }, {
-      "startHour": "23",
-      "startMin": "15",
-      "endHour": "23",
-      "endMin": "30",
-      "startTime": "2015-10-31 23:15:27",
-      "endTime": "2015-10-31 23:30:27"
-    }, {
-      "startHour": "23",
-      "startMin": "31",
-      "endHour": "23",
-      "endMin": "58",
-      "startTime": "2015-10-31 23:31:27",
-      "endTime": "2015-10-31 23:58:27"
-    }, {
-      "startHour": "23",
-      "startMin": "50",
-      "endHour": "23",
-      "endMin": "59",
-      "startTime": "2015-10-31 23:50:27",
-      "endTime": "2015-10-31 23:59:27"
+      "startTime": "2015-11-06 23:00:04",
+      "endTime": "2015-11-06 23:15:04",
+      "deliveryType": 0
     }],
-    "isOpen": 1
+    "isOpen": 0
   },
-  "serverTime": "2015-10-30 20:58:28"
+  "serverTime": "2015-11-06 17:24:04"
 }

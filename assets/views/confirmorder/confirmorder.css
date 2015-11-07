@@ -62,6 +62,7 @@
   color: #333;
   font-size: 1.4rem;
   box-sizing: border-box;
+
 }
 .order_contents .block_bg .orderDistribute .orderDistribute-values {
   display: inline-block;
@@ -70,6 +71,9 @@
   color: #333;
   font-size: 1.4rem;
   box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .order_contents .block_bg .orderDistribute .orderDistribute-values .ldcOrderFreight {
   color: #ff5300;
@@ -479,7 +483,7 @@
   background: #fff;
   width: 5rem;
   text-align: center;
-  z-index:1;
+  z-index: 1;
 }
 .fixOrderFooter.fixwechartpayFooter {
   background-color: #Fe9402;
@@ -493,10 +497,10 @@
 .orderDistribute-values .ldcUserRemark {
   outline: none;
   width: 100%;
-  border:#e0e0e0 solid 1px;
-  border-radius:0.2rem;
+  border: #e0e0e0 solid 1px;
+  border-radius: 0.2rem;
   line-height: 3rem;
-  background:#f0f0f0;
-  float:right;
-  margin-top:1rem;
+  background: #f0f0f0;
+  float: right;
+  margin-top: 1rem;
 }

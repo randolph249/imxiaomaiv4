@@ -6,7 +6,8 @@ angular.module('xiaomaiApp').controller('orderConfirmCtrl', [
   'xiaomaiMessageNotify',
   'orderManager',
   'xiaomaiCacheManager',
-  function($scope, $state, orderSubmitManager, xiaomaiMessageNotify, orderManager, xiaomaiCacheManager) {
+  'xiaomaiLog',
+  function($scope, $state, orderSubmitManager, xiaomaiMessageNotify, orderManager, xiaomaiCacheManager, xiaomaiLog) {
     //收集提交数据
     orderSubmitManager.initConfirm();
 
@@ -25,6 +26,10 @@ angular.module('xiaomaiApp').controller('orderConfirmCtrl', [
     $scope.confirm = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
+
+      //点击提交日志
+      xiaomaiLog('m_b_33conforderpay');
+
       if ($scope.lock) {
         return false;
       }

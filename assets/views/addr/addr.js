@@ -8,8 +8,13 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
   '$q',
   'orderManager',
   'xiaomaiMessageNotify',
+  'xiaomaiLog',
   function($scope, $state, xiaomaiService, schoolManager, xiaomaiCacheManager, addrMananger, $q, orderManager,
-    xiaomaiMessageNotify) {
+    xiaomaiMessageNotify, xiaomaiLog) {
+
+    //选择收货人PV统计
+    xiaomaiLog('m_p_33selectcontact');
+
     //获取地址列表信息
     var collegeId,
       userId = $state.params.userId;
@@ -71,6 +76,8 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
         return false;
       }
 
+
+      // userId="+userId+"&userAddrId="+delAddrId
       xiaomaiService.fetchOne('addrDel', {
         userId: userId,
         userAddrId: userAddrId
@@ -78,8 +85,14 @@ angular.module('xiaomaiApp').controller('addrListCtrl', [
         $scope.addrList.splice($index, 1);
         //删除缓存
         xiaomaiCacheManager.clean('addrList');
-      }, function(msg) {
-        alert('删除用户地址失败，请再试一次~');
+      }, function(error) {
+        if (error.code === 0) {
+          $scope.addrList.splice($index, 1);
+          //删除缓存
+          xiaomaiCacheManager.clean('addrList');
+        } else {
+          alert('删除用户地址失败，请再试一次~');
+        }
       })
     };
 
