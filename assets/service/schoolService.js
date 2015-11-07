@@ -20,7 +20,7 @@ angular.module('xiaomaiApp').factory('schoolManager', [
 
 
       if (oldCollegeId !== 3270 && newCollegeId === 3270) {
-        $window.location.href = '/page/newv4/index.html?collegeId=1';
+        $window.location.href = '/page/newv4/index.html?xiaomai_schollid=3270';
         return true;
       }
 
