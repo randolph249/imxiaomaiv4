@@ -1,0 +1,41 @@
+<div class="cmsWrap" down-tip-cls="{{'navmain-downtip'}}" xiaomai-iscroll style="background-color:">
+    <div class="cmsContent">
+        <div class="gooddetail-swiper">
+            <div class="gooddetail-swiper-nums">
+                <i class="gooddetail-swiper-num" ng-class="{active:swiperIndex==$index}" ng-repeat="headerImageUrl in headerImageUrls"></i>
+            </div>
+            <ks-swiper-container on-ready="onReadySwiper(swiper)" swiper="swiper" initial-slide="0">
+                <ks-swiper-slide class="swiper-slide" ng-repeat="headerImageUrl in headerImageUrls track by $index">
+                    <div class="gooddetail-swiper-item" style="background-image:url({{headerImageUrl}});"></div>
+                </ks-swiper-slide>
+            </ks-swiper-container>
+        </div>
+        <a class="rule actBtn" ng-if="hasRule" href="">活动规则</a>
+        <div class="goodItem" ng-if="status==1">
+            <div xiaomai-good-item goods="goods" detail-source-event="active+{{activityId}}" click-event="m_b_31singleactivityadd+{{activityId}}" source-event="m_r_31cartfromactive+{{activityId}}" column="{{true}}"></div>
+        </div>
+        <div class="goodItem" ng-if="status!=1">
+            <div class="details">
+                <p class="goodname ng-binding">{{goods.bgGoodsName}}</p>
+                <p class="priceCont">
+                    <span class="new-price ng-scope" ng-if="goods.goodsType!=3">¥<i class="ng-binding">{{goods.skuList[0].wapPrice | xiaomaiprice}}</i>
+                     </span>
+                    <span class="old-price ng-binding ng-scope" ng-if="goods.goodsType!=3">
+                        ¥{{goods.skuList[0].originPrice | xiaomaiprice}}
+                     </span>
+                </p>
+                <p class="buy-icon iconfont icon-tianjiagouwuche ng-scope" ng-class="{'unbegin':status==0,'isOver':status==2}"></p>
+            </div>
+        </div>
+        <!-- 图文详情-->
+        <div class="detail-graphics" ng-if="mainImageUrls && mainImageUrls.length">
+            <img ng-src="{{mainImageUrl}}" class="detail-graphic" ng-repeat="mainImageUrl in mainImageUrls track by $index" />
+        </div>
+        <ul class="activityRule" ng-if="hasRule" id="activityRule">
+            <div class="activityRuleTitleWrap">
+                <span class="activityRuleTitle">活动规则</span>
+            </div>
+            <li ng-repeat="rule in activityRule">{{rule}}</li>
+        </ul>
+    </div>
+</div>

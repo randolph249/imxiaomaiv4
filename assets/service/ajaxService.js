@@ -46,6 +46,16 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/wap/activity/banners',
         type: 'GET'
       },
+       //模板多商品活动
+      'complexGoods': {
+        url: '/wap/activity/popularGoods',
+        type: 'GET'
+      },
+      //模板单商品活动
+      'singleGoods': {
+        url: '/wap/activity/brandGoods',
+        type: 'GET'
+      },
       //热门榜产品
       'categoryGoods': {
         url: '/wap/index/categoryGoods',

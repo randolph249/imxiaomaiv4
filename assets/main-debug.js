@@ -54,6 +54,8 @@ angular.module('xiaomaiApp').config([
                 'service/logService.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/goodListItem/goodListItem.js?v=' + (+new Date),
+                 window.__SYS_CONF.resourceUrl +
+                'views/goodListItem/goodItem.js?v=' + (+new Date),
                 window.__SYS_CONF.resourceUrl +
                 'views/goodListItem/goodListItem.css?v=' + (+
                   new Date),
@@ -587,6 +589,44 @@ angular.module('xiaomaiApp').config([
               files: [
                 window.__SYS_CONF.resourceUrl + 'views/user/user.js',
                 window.__SYS_CONF.resourceUrl + 'views/user/user.css'
+              ]
+            })
+          }]
+        }
+      })
+//多商品活动模板
+      .state('root.buy.complexGoods', {
+        url: 'complexGoods/?collegeId&activityId&refer',
+        controller: 'buy.activeCtrl',
+        templateUrl: '../assets/views/CMS/complexGoods.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl +
+                'views/CMS/complexGoods.js?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl +
+                'views/CMS/complexGoods.css'
+              ]
+            })
+          }]
+        }
+      })
+      //单商品活动模板
+      .state('root.buy.singleGood', {
+        url: 'singleGood/?collegeId&activityId&refer',
+        controller: 'buy.activeCtrl',
+        templateUrl: '../assets/views/CMS/singleGood.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl +
+                'views/CMS/singleGood.js?v=' + (+new Date),
+                window.__SYS_CONF.resourceUrl +
+                'views/CMS/singleGood.css'
               ]
             })
           }]

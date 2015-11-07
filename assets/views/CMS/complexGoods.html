@@ -1,0 +1,29 @@
+<div class="cmsWrap" down-tip-cls="{{'navmain-downtip'}}" xiaomai-iscroll style="background-color:{{backgroundColor}}">
+    <div class="cmsContent">
+        <div class="banner">
+            <img src="{{headerImage}}" alt="">
+        </div>
+        <div class="btnGroup" ng-class="{'oddActiveGoods':templateType==1,'evenActiveGoods':templateType!=1}">
+            <div class="actBtn" ng-class="{'share':hasRule==true,'shareOnly':hasRule ==false}" ng-click="showShareModel();">分享给朋友</div>
+            <div class="rule actBtn" ng-if="hasRule">活动规则</div>
+        </div>
+        <div class="errortip" ng-if="haserror" class="">活动已经结束,去其他活动看看吧</div>
+        <div class="loading" ng-if="isloading">正在加载活动商品列表...</div>
+        <ul ng-class="{'oddActiveGoods':templateType==1,'evenActiveGoods':templateType!=1}" ng-repeat="subject in subjects">
+            <div ng-class="{'activeGoodsWrap':templateType!=1}">
+                <div ng-class="{'oddShopName':templateType==1,'evenShopName':templateType!=1}">{{subject.subjectName}}</div>
+                <li ng-repeat="good in subject.goods" ng-class="{'oddGoodItem':templateType==1,'evenGoodItem':templateType!=1}">
+                    <div class="goodItem">
+                        <div xiaomai-good-list-item goods="good" detail-source-event="active+{{activityId}}" click-event="m_b_31singleactivityadd+{{activityId}}" source-event="m_r_31cartfromactive+{{activityId}}" column="{{true}}"></div>
+                    </div>
+                </li>
+            </div>
+        </ul>
+        <ul class="activityRule" ng-if="hasRule" ng-class="{'activityRuleMargin':templateType==1}">
+            <div class="activityRuleTitleWrap">
+                <span class="activityRuleTitle" style="background-color:{{backgroundColor}}">活动规则</span>
+            </div>
+            <li ng-repeat="rule in activityRule">{{rule}}</li>
+        </ul>
+    </div>
+</div>

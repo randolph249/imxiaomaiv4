@@ -1,0 +1,111 @@
+{
+    "msg": "success",
+    "code": 0,
+    "data": {
+        "headerImageUrl": [
+            "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171575",
+            "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=157518&imageView2/0/w/150/h/150"
+        ],
+        "activityShowName": "fsaf",
+        "goods": {
+            "weight": 0,
+            "bgGoodsId": 516,
+            "collegeId": 2674,
+            "remark": "App-普通商品11",
+            "unit": "600g",
+            "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=157518&imageView2/0/w/300/h/300",
+            "detailImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=157518&imageView2/0/w/450/h/450",
+            "iconImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=157518&imageView2/0/w/150/h/150",
+            "maxNum": 1000,
+            "saleSpec": "只",
+            "originPlace": "China",
+            "goodsType": 1,
+            "goodsStatus": 2,
+            "goodsStatusDisplay": 2,
+            "isDel": 0,
+            "sourceType": 1,
+            "distributeTypeDisplay": ["29分钟达", ""],
+            "minWapPrice": 2,
+            "maxWapPrice": 2,
+            "minAppPrice": 1,
+            "maxAppPrice": 1,
+            "goodsPropertyList": [],
+            "skuGoodsPropertyList": [],
+            "goodsImageList": [{
+                "goodsImgId": 0,
+                "bgGoodsId": 516,
+                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=157518&imageView2/0/w/450/h/450",
+                "imageType": 0,
+                "imageOrder": 0
+            }, {
+                "goodsImgId": 49,
+                "bgGoodsId": 516,
+                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=166258&imageView2/0/w/450/h/450",
+                "imageType": 0,
+                "imageOrder": 1
+            }, {
+                "goodsImgId": 50,
+                "bgGoodsId": 516,
+                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=166259&imageView2/0/w/450/h/450",
+                "imageType": 0,
+                "imageOrder": 2
+            }],
+            "goodsDetailImageList": [{
+                "goodsImgId": 51,
+                "bgGoodsId": 516,
+                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=166260",
+                "imageType": 1,
+                "imageOrder": 1
+            }, {
+                "goodsImgId": 52,
+                "bgGoodsId": 516,
+                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=166261",
+                "imageType": 1,
+                "imageOrder": 2
+            }, {
+                "goodsImgId": 53,
+                "bgGoodsId": 516,
+                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=166262",
+                "imageType": 1,
+                "imageOrder": 3
+            }],
+            "storageId": 39,
+            "storageName": "天猫店",
+            "tagChange": 0,
+            "priceChange": 0,
+            "available": 0,
+            "goodsId": 7542,
+            "bgGoodsName": "App-普通商品11",
+            "bgGoodsSubname": null,
+            "goodsDesc": "App-普通商品11描述",
+            "categoryId": 58,
+            "skuList": [{
+                "weight": 0,
+                "bgSkuId": 466,
+                "collegeId": 2674,
+                "originPrice": 100,
+                "stock": 99999,
+                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=157518",
+                "skuType": 1,
+                "distributeType": 1,
+                "distributeTypeDesc": "29分钟达",
+                "isDel": 0,
+                "skuPropertyList": [],
+                "numInCart": 0,
+                "skuPropertyValueIdList": null,
+                "skuId": 12613,
+                "goodsId": 7542,
+                "appPrice": 1,
+                "wapPrice": 2,
+                "skuStatus": 2
+            }]
+        },
+        "mainImageUrl": [
+            "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171576",
+            "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171577"
+        ],
+        "activityRule": "1.规则1描述道具放大镜放大镜发动机扫房登记三分发大水发第三发生发生大平均每\r\n2.范德萨发的范德萨给偶个人工供热供热供热季各个软件\r\n3.日风热隔热管加热个人购软件狗而过trhmt\r\n4.rgtrgtrgtotritojr给他让我给他人天天",
+        "status": "1"
+    },
+    "serverTime": "2015-11-04 19:04:12"
+}
