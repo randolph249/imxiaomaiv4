@@ -41,12 +41,12 @@ angular.module('xiaomaiApp').factory('schoolManager', [
       var urlSearch = window.location.search;
       var reg = /[\?&]collegeId=([^\?&#]+)/;
       var oldCollegeId = angular.isArray(urlSearch.match(reg)) ? Number(urlSearch.match(reg)[1]) : -9999;
-      if (oldCollegeId !== 1 && newCollegeId === 1) {
+      if (oldCollegeId !== 3270 && newCollegeId === 3270) {
         window.location.href = '/page/newv4/index.html?collegeId=1';
         return true;
       }
 
-      if (oldCollegeId === 1 && newCollegeId !== 1) {
+      if (oldCollegeId === 3270 && newCollegeId !== 3270) {
         window.location.href = '/page/newv4/index.html';
         return true;
       }
