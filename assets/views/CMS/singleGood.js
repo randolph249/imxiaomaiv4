@@ -1,4 +1,4 @@
-angular.module('xiaomaiApp').controller('buy.activeCtrl', [
+angular.module('xiaomaiApp').controller('buy.singleGoodCtrl', [
   '$scope',
   '$state',
   'xiaomaiService',

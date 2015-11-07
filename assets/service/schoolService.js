@@ -15,12 +15,12 @@ angular.module('xiaomaiApp').factory('schoolManager', [
     //小流量测试切换
     var handlerWhilteListSchool = function(newCollegeId) {
       var urlSearch = window.location.search;
-      var reg = /[\?&]xiaomai_schollid=([^\?&#]+)/;
+      var reg = /[\?&]xiaomai_schoolid=([^\?&#]+)/;
       var oldCollegeId = angular.isArray(urlSearch.match(reg)) ? Number(urlSearch.match(reg)[1]) : -9999;
 
 
       if (oldCollegeId !== 3270 && newCollegeId === 3270) {
-        $window.location.href = '/page/newv4/index.html?xiaomai_schollid=3270';
+        $window.location.href = '/page/newv4/index.html?xiaomai_schoolid=3270';
         return true;
       }
 

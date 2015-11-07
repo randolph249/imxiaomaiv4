@@ -22,18 +22,18 @@
     width: 100%;
 }
 
-.activeGoodBanner {
+.cmsWrap .activeGoodBanner {
     min-height: 1px;
 }
 
-.evenActiveGoods {
+.cmsWrap .cmsWrap .evenActiveGoods {
     position: relative;
     overflow: hidden;
     padding: 0 1.5rem 0;
     margin-bottom: 3rem;
 }
 
-.evenShopName {
+.cmsWrap .evenShopName {
     text-align: center;
     color: #ff7300;
     font-size: 1.4rem;
@@ -43,7 +43,7 @@
     border-radius: 3rem 3rem 0 0;
 }
 
-.evenShopName:before {
+.cmsWrap .evenShopName:before {
     position: absolute;
     top: 0;
     left: 0;
@@ -57,7 +57,7 @@
     height: 3.8rem;
 }
 
-.evenActiveGoods li {
+.cmsWrap  .evenActiveGoods li {
     width: 50%;
     /*padding-top: 0.5rem;*/
     float: left;
@@ -66,57 +66,57 @@
     border-top: 1px solid #d5d7db;
 }
 
-.evenActiveGoods li.errortip {
+.cmsWrapm  .evenActiveGoods li.errortip {
     width: 100%;
 }
 
-.evenActiveGoods li:nth-child(odd) {
+.cmsWrap .evenActiveGoods li:nth-child(odd) {
     padding-right: 0.25rem;
     border-left: 1px solid #d5d7db;
 }
 
-.evenActiveGoods li:nth-child(even) {
+.cmsWrap .evenActiveGoods li:nth-child(even) {
     /*padding-left:0.25rem;*/
 }
 
-.evenActiveGoods li.loading {
+.cmsWrap .evenActiveGoods li.loading {
     position: fixed;
     width: 100%;
     margin-top: 50%;
 }
 
-.activeGoodsWrap {
+.cmsWrap .activeGoodsWrap {
     overflow: hidden;
     box-shadow: 0px 0.1rem 0.7rem rgba(93, 88, 90, 0.2);
 }
 
-.evenGoodItem .goodlistItem-column .details {
+.cmsWrap  .evenGoodItem .goodlistItem-column .details {
     padding: 1rem;
 }
 
-.evenGoodItem .iconfont.buy-icon {
+.cmsWrap  .evenGoodItem .iconfont.buy-icon {
     right: 0.5rem;
 }
 
-.evenGoodItem .goodlistItem-column .imgCont {
+.cmsWrap .evenGoodItem .goodlistItem-column .imgCont {
     margin: 1rem 1rem 0;
     height: 15.2rem;
 }
 
-.evenGoodItem .priceCont {
+.cmsWrap .evenGoodItem .priceCont {
     height: 2.5rem;
     line-height: 2.5rem;
 }
 
-.evenGoodItem .priceCont .old-price {
+.cmsWrap .evenGoodItem .priceCont .old-price {
     line-height: 2rem;
 }
 
 
 /*banner*/
 
-.banner,
-.banner img {
+.cmsWrap .banner,
+.cmsWrap .banner img {
     height: auto;
     width: 100%;
     text-align: center;
@@ -125,12 +125,12 @@
 
 /*actBtn*/
 
-.btnGroup {
+.cmsWrap .btnGroup {
     margin: 1.5rem auto 2.5rem;
     text-align: center;
 }
 
-.actBtn {
+.cmsWrap .actBtn {
     display: inline-block;
     border: 0.2rem #ffffff solid;
     width: 8.9rem;
@@ -141,24 +141,24 @@
     margin: 0;
 }
 
-.evenActiveGoods .share {
+.cmsWrap .evenActiveGoods .share {
     background-color: #ef423e;
     color: #fff;
     border-radius: 1.5rem 0 0 1.5rem
 }
-.evenActiveGoods .shareOnly{
+.cmsWrap .evenActiveGoods .shareOnly{
     background-color: #ef423e;
     color: #fff;
     border-radius: 1.5rem;
 }
-.evenActiveGoods .rule {
+.cmsWrap .evenActiveGoods .rule {
     margin-left: -0.4rem;
     background-color: #ff9600;
     color: #fff;
     border-radius: 0 1.5rem 1.5rem 0;
 }
 
-.activityRule {
+.cmsWrap .activityRule {
     position: relative;
     margin: 0 1.5rem;
     border: 0.2rem solid #fff;
@@ -166,14 +166,14 @@
     padding: 2rem 1.5rem 0rem;
 }
 
-.activityRule li {
+.cmsWrap .activityRule li {
     font-size: 1.4rem;
     color: #000;
     line-height: 2rem;
     margin-bottom: 2.5rem;
 }
 
-.activityRuleTitleWrap {
+.cmsWrap .activityRuleTitleWrap {
     position: absolute;
     top: -1.5rem;
     left: 0;
@@ -186,21 +186,21 @@
     text-align: center;
 }
 
-.activityRuleTitle {
+.cmsWrap .activityRuleTitle {
     display: inline-block;
     width: 11rem;
     height: 2rem;
 }
 
 @media only screen and (max-width: 320px) and (-webkit-min-device-pixel-ratio:2) {
-    .evenActiveGoods li > .goodItem .details .sold-out {
+    .cmsWrap .evenActiveGoods li > .goodItem .details .sold-out {
         line-height: 1.8rem;
         width: 3.8rem;
     }
-    .evenActiveGoods li > .goodItem .imgCont {
+    .cmsWrap .evenActiveGoods li > .goodItem .imgCont {
         height: 130px;
     }
-    .GoodsCont .imgCont {
+    .cmsWrap .GoodsCont .imgCont {
         width: 80px;
         height: 80px;
         background-size: contain;
@@ -208,7 +208,7 @@
         background-repeat: no-repeat;
         position: relative;
     }
-    .GoodsCont .details {
+    .cmsWrap .GoodsCont .details {
         position: absolute;
         left: 90px;
         right: 0;
@@ -308,6 +308,6 @@
     -webkit-text-stroke-width: 0;
 }
 
-.activityRuleMargin {
+.cmsWrap .activityRuleMargin {
     margin-top: 4rem !important;
 }

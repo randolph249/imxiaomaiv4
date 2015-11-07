@@ -595,7 +595,7 @@ angular.module('xiaomaiApp').config([
       //多商品活动模板 @autor:zhangjing
       .state('root.buy.complexGoods', {
         url: 'complexGoods/?collegeId&activityId&refer',
-        controller: 'buy.activeCtrl',
+        controller: 'buy.complexGoodsCtrl',
         templateUrl: '../assets/views/CMS/complexGoods.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -614,7 +614,7 @@ angular.module('xiaomaiApp').config([
       //单商品活动模板 @autor:zhangjing
       .state('root.buy.singleGood', {
         url: 'singleGood/?collegeId&activityId&refer',
-        controller: 'buy.activeCtrl',
+        controller: 'buy.singleGoodCtrl',
         templateUrl: '../assets/views/CMS/singleGood.html',
         resolve: {
           loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {

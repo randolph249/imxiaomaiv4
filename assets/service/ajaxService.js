@@ -216,16 +216,31 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: "/wap/usercenter/index",
         type: "GET"
       },
-      //模板多商品活动
+      //模板多商品活动 @autor:zhangjing
       'complexGoods': {
         url: '/wap/activity/popularGoods',
         type: 'GET'
       },
-      //模板单商品活动
+      //模板单商品活动 @autor:zhangjing
       'singleGoods': {
         url: '/wap/activity/brandGoods',
         type: 'GET'
       },
+      //淘精品导航 @autor:wangweihua
+      "taoBestNavMenu": {
+        url: "/wap/menu/navigationMenu",
+        type: "GET"
+      },
+      //淘精品获取某个菜单下商品列表接口 @autor:wangweihua
+      "taoBestGoods": {
+        url: "/wap/menu/navigationMenu/goods",
+        type: "GET"
+      },
+      //淘精品获取某个菜单下活动列表接口 @autor:wangweihua
+      "taoBestActivity": {
+        url: "/wap/menu/navigationMenu/activity",
+        type: "GET"
+      }
     },
     getModel = function() {
       var args = Array.prototype.slice.call(arguments, 0),
