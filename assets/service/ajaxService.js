@@ -215,7 +215,17 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       "usercenter": {
         url: "/wap/usercenter/index",
         type: "GET"
-      }
+      },
+      //模板多商品活动
+      'complexGoods': {
+        url: '/wap/activity/popularGoods',
+        type: 'GET'
+      },
+      //模板单商品活动
+      'singleGoods': {
+        url: '/wap/activity/brandGoods',
+        type: 'GET'
+      },
     },
     getModel = function() {
       var args = Array.prototype.slice.call(arguments, 0),

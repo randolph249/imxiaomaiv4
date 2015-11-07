@@ -13,6 +13,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     getRouterTypeFromUrl, xiaomaiLog) {
     var collegeId, activityId;
 
+
     //获取活动商品列表数据
     var loadSku = function() {
       return xiaomaiService.fetchOne('singleGoods', {
@@ -29,6 +30,7 @@ angular.module('xiaomaiApp').controller('buy.activeCtrl', [
     //初始化数据请求
     $scope.isloading = true;
     loadSku().then(function(res) {
+
       $scope.headerImageUrls = res.headerImageUrl;
       $scope.goods = res.goods;
       $scope.status = res.status;

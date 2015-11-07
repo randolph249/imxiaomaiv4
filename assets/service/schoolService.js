@@ -15,7 +15,7 @@ angular.module('xiaomaiApp').factory('schoolManager', [
     //小流量测试切换
     var handlerWhilteListSchool = function(newCollegeId) {
       var urlSearch = window.location.search;
-      var reg = /[\?&]collegeId=([^\?&#]+)/;
+      var reg = /[\?&]xiaomai_schollid=([^\?&#]+)/;
       var oldCollegeId = angular.isArray(urlSearch.match(reg)) ? Number(urlSearch.match(reg)[1]) : -9999;
 
 
