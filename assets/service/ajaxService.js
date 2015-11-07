@@ -238,11 +238,15 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
  *如果是当前环境是线下环境 拦截URL转成对应的JS文件
  **/
 angular.module('xiaomaiApp').factory('urlInterceptor', ['env', function(env) {
+  var xiaomai_schoolid = 99999999;
+  var searchParam = window.location.search;
+  var reg = /xiaomai_schoolid+=([^\?&#])/;
+  xiaomai_schoolid = angular.isArray(searchParam.match(reg)) ? searchParam.match(reg)[1] : xiaomai_schoolid;
   var interceptor = function(url) {
     if (env !== 'develop') {
-      return url;
+      return url + '?xiaomai_schoolid=' + xiaomai_schoolid;
     }
-    return '/api' + url + '.json';
+    return '/api' + url + '.json?xiaomai_schoolid=' + xiaomai_schoolid;
 
   };
   return interceptor;

@@ -12,7 +12,6 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
 
     //导航栏homepagePV统计
     xiaomaiLog('m_p_31tabhome');
-
     $scope.activities = [];
 
     //先获取当前学校信息
