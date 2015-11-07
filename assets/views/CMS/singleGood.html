@@ -18,11 +18,17 @@
             <div class="details">
                 <p class="goodname ng-binding">{{goods.bgGoodsName}}</p>
                 <p class="priceCont">
-                    <span class="new-price ng-scope" ng-if="goods.goodsType!=3">¥<i class="ng-binding">{{goods.skuList[0].wapPrice | xiaomaiprice}}</i>
-                     </span>
-                    <span class="old-price ng-binding ng-scope" ng-if="goods.goodsType!=3">
-                        ¥{{goods.skuList[0].originPrice | xiaomaiprice}}
-                     </span>
+                    <!-- 单品或者组合最高价-->
+                    <span class="new-price" ng-if="goods.goodsType!=3">
+                        &yen;<i>{{goods.sourceType==2?goods.skuList[0].activityPrice:goods.skuList[0].wapPrice|xiaomaiprice}}</i>
+                      </span>
+                    <span class="old-price" ng-if="goods.goodsType!=3">
+                        &yen;{{goods.skuList[0].originPrice|xiaomaiprice}}
+                      </span>
+                    <!-- 聚合 -->
+                    <span class="aggregate-price" ng-if="goods.goodsType==3">
+                        &yen;{{goods.minWapPrice|xiaomaiprice}} ~ &yen;{{goods.maxWapPrice|xiaomaiprice}}
+                      </span>
                 </p>
                 <p class="buy-icon iconfont icon-tianjiagouwuche ng-scope" ng-class="{'unbegin':status==0,'isOver':status==2}"></p>
             </div>

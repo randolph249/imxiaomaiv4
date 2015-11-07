@@ -2,7 +2,7 @@
     "msg": "success",
     "code": 0,
     "data": {
-        "templateType": 1,
+        "templateType": 2,
         "backgroundColor": "#ccc",
         "headerImage": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=170984",
         "subjects": [
@@ -25,7 +25,7 @@
       "goodsStatus": 2,
       "goodsStatusDisplay": 2,
       "isDel": 0,
-      "sourceType": 1,
+      "sourceType": 2,
       "distributeTypeDisplay": ["29分钟达", ""],
       "minWapPrice": 1290,
       "maxWapPrice": 1290,
