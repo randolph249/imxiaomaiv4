@@ -215,31 +215,6 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       "usercenter": {
         url: "/wap/usercenter/index",
         type: "GET"
-      },
-      //模板多商品活动 @autor:zhangjing
-      'complexGoods': {
-        url: '/wap/activity/popularGoods',
-        type: 'GET'
-      },
-      //模板单商品活动 @autor:zhangjing
-      'singleGoods': {
-        url: '/wap/activity/brandGoods',
-        type: 'GET'
-      },
-      //淘精品导航 @autor:wangweihua
-      "taoBestNavMenu": {
-        url: "/wap/menu/navigationMenu",
-        type: "GET"
-      },
-      //淘精品获取某个菜单下商品列表接口 @autor:wangweihua
-      "taoBestGoods": {
-        url: "/wap/menu/navigationMenu/goods",
-        type: "GET"
-      },
-      //淘精品获取某个菜单下活动列表接口 @autor:wangweihua
-      "taoBestActivity": {
-        url: "/wap/menu/navigationMenu/activity",
-        type: "GET"
       }
     },
     getModel = function() {
@@ -265,7 +240,7 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
 angular.module('xiaomaiApp').factory('urlInterceptor', ['env', function(env) {
   var xiaomai_schoolid = 99999999;
   var searchParam = window.location.search;
-  var reg = /xiaomai_schoolid+=([^\?&#])/;
+  var reg = /xiaomai_schoolid=([^\?&#]+)/;
   xiaomai_schoolid = angular.isArray(searchParam.match(reg)) ? searchParam.match(reg)[1] : xiaomai_schoolid;
   var interceptor = function(url) {
     if (env !== 'develop') {
