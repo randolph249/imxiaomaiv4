@@ -173,6 +173,23 @@ angular.module('xiaomaiApp').config([
         controller: 'userCtrl',
         templateUrl: '../assets/views/user/user.html'
       })
+      //多商品活动模板 @autor:zhangjing
+      .state('root.buy.complexGoods', {
+        url: 'complexGoods/?collegeId&activityId&refer',
+        controller: 'buy.activeCtrl',
+        templateUrl: '../assets/views/CMS/complexGoods.html'
+      })
+      //单商品活动模板 @autor:zhangjing
+      .state('root.buy.singleGood', {
+        url: 'singleGood/?collegeId&activityId&refer',
+        controller: 'buy.activeCtrl',
+        templateUrl: '../assets/views/CMS/singleGood.html'
+      })
+      //淘精品 @autor:wangweihua
+      .state('root.taoBest', {
+        url: 'taoBest',
+        templateUrl: '../assets/views/taoBest/taoBest.html'
+      })
       .state('root.notfound', {
         url: '404/',
         templateUrl: '../assets/views/notfound/notfound.html'
