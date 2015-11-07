@@ -9,7 +9,6 @@ angular.module('xiaomaiApp').controller('nav.allCtrl', [
   function($scope, $state, xiaomaiService, schoolManager,
     xiaomaiMessageNotify, xiaomaiCacheManager, xiaomaiLog) {
 
-
     //导航栏homepagePV统计
     xiaomaiLog('m_p_31tabhome');
 

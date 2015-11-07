@@ -225,6 +225,21 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       'singleGoods': {
         url: '/wap/activity/brandGoods',
         type: 'GET'
+      },
+      //淘精品导航
+      "taoBestNavMenu": {
+        url: "/wap/menu/navigationMenu",
+        type: "GET"
+      },
+      //淘精品获取某个菜单下商品列表接口
+      "taoBestGoods": {
+        url: "/wap/menu/navigationMenu/goods",
+        type: "GET"
+      },
+      //淘精品获取某个菜单下活动列表接口
+      "taoBestActivity": {
+        url: "/wap/menu/navigationMenu/activity",
+        type: "GET"
       }
     },
 

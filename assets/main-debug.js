@@ -632,6 +632,28 @@ angular.module('xiaomaiApp').config([
           }]
         }
       })
+      //淘精品 @autor:wangweihua
+      .state('root.taoBest', {
+        url: 'taoBest',
+        templateUrl: '../assets/views/taoBest/taoBest.html',
+        resolve: {
+          loadCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'xiaomaiApp',
+              files: [
+                window.__SYS_CONF.resourceUrl +
+                'views/taoBest/taoBest.js?v=' /* + (+new Date)*/ ,
+                window.__SYS_CONF.resourceUrl +
+                'views/taoBest/taoBest.css?v=' /* + (+new Date)*/ ,
+                window.__SYS_CONF.resourceUrl +
+                'views/nav/nav.css',
+                window.__SYS_CONF.resourceUrl +
+                'views/all/all.css'
+              ]
+            })
+          }]
+        }
+      })
       //订单地址编辑
       .state('root.notfound', {
         url: '404/',
