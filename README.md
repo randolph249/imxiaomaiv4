@@ -1,27 +1,27 @@
-小麦商城前端V4.0.1重构日志
---------------------------
+小麦商城前端V4
+==============
 
-### 依赖外部框架
+版本日志
+--------
 
--	MVVM框架：angular.js
--	异步加载框架 oclazyload.js(在debug版本使用 线上版本删除)
--	前端路由Router:angular.uirouter
--	点击事件改进:angular-touch.min.js(比原生的ngClick快速没有300ms的延时,但是需要注意e.preventDefault())
--	javascript滚动插件:iscroll-probe(iscroll5的增强版本 可监听滚动中的状态)
--	jweixin-1.0.0.js:微信jssdk
--	swiper.min.js&angualr-swiper.js。轮播图插件
--	Sass
--	构建工具 Gulp
+### xiaomaiv1.7
 
----
+-	上线日期：
+-	上线功能：
+	-	活动模板开发 （张晶 孔德厦）
 
-### 文件目录
+### xiaomaiv1.6
 
--	assets
-	-	javascript
-		-	components 通用组件
-		-	filter 过滤器
-		-	lib 依赖框架
-		-	views 业务逻辑
+-	上线日期：2015-11-07
+-	上线功能：
+	-	商城下单部分迁移到新版商城（李委 郭超）
+	-	LDC定时单功能（李金业 郭超）
+	-	LDC-商超（李金业 郭超）
+	-	LDC支持用户备注（李委 郭超）
+	-	第三方运费拆分（张帅 郭超）
+	-	个人中心（张晶 孔德厦）
+	-	类目、活动支持分享 独立入口访问（郭超）
+	-	小流量测试（梁云阁 孙娜 郭超）
+	-	安卓机器滑动优化（郭超）
 
----
+### xiaomaiv1.5
