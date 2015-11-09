@@ -65,10 +65,10 @@ angular.module('xiaomaiApp').factory('locationManager', [
     var getLocation = function() {
       var deferred = $q.defer();
 
-      //默认3S后自动失败
+      //默认2S后自动失败
       var $t = $timeout(function() {
         deferred.reject('网络超时')
-      }, 3000);
+      }, 2000);
 
 
       //调用微信定位服务

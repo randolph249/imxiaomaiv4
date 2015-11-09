@@ -117,7 +117,7 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
     orderManager.getOrderInfo('ldcAddressList').then(function(res) {
       $scope.ldcAddressList = res;
       //默认第一个配送地址
-      $scope.ldcAddressName = res[0]['addressType'] + '-' + res[0]['addresses'][0];
+      $scope.ldcAddressName = res[0]['addresses'][0];
 
       $scope.chooseAddress($scope.ldcAddressName);
     });
