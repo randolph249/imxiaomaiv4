@@ -89,10 +89,11 @@
         <div class="orderDistribute" ng-if="ldcDeliveryType==1">
           <span class="orderDistribute-key">配送地址</span>
           <p class="orderDistribute-values" trigger-mob-iscroll>
-            {{ldcAddressName}}
-            <select mobiscroll-options="{showInput:false,onSelect:chooseAddress,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressName" style="display:none;">
+            <span id="orderAddressSelected">{{ldcAddressName}}</span>
+            <input type="hidden" ng-model="ldcAddressName"/>
+            <select  mobiscroll-options="{showInput:false,onSelect:chooseAddress,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select="ldcAddressName" ng-model="ldcAddressName" style="display:none;">
               <optgroup label="{{ldcAddress.addressType}}" ng-repeat="ldcAddress in ldcAddressList">
-                <option ng-repeat="address in ldcAddress.addresses" value="{{address}}">{{address}}</option>
+                <option ng-repeat="address in ldcAddress.addresses" value="{{ldcAddress.addressType+'-'+address}}">{{address}}</option>
               </optgroup>
             </select>
             <i class="iconfont icon-unfold showLdcAddressList"></i>

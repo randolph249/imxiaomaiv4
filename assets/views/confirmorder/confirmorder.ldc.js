@@ -117,7 +117,7 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
     orderManager.getOrderInfo('ldcAddressList').then(function(res) {
       $scope.ldcAddressList = res;
       //默认第一个配送地址
-      $scope.ldcAddressName = res[0]['addresses'][0];
+      $scope.ldcAddressName = res[0]['addressType'] + '-' + res[0]['addresses'][0];
 
       $scope.chooseAddress($scope.ldcAddressName);
     });
@@ -150,9 +150,12 @@ angular.module('xiaomaiApp').controller('ldcOrderCtrl', [
       xiaomaiMessageNotify.pub('updateLdcDeliveryType', type);
     };
 
+
     //设置送货地址
     $scope.chooseAddress = function(val) {
-      xiaomaiMessageNotify.pub('updateLdcDeliveryAddress', val);
+      //临时解决方案
+      var addressValue = $('#orderAddressSelected').text() || val;
+      xiaomaiMessageNotify.pub('updateLdcDeliveryAddress', addressValue);
     };
 
     var getYearAndMonthAndDay = function(date) {
