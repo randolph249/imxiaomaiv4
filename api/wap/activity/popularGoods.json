@@ -2,7 +2,7 @@
     "msg": "success",
     "code": 0,
     "data": {
-        "templateType": 2,
+        "templateType": 1,
         "backgroundColor": "#ccc",
         "headerImage": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=170984",
         "subjects": [
