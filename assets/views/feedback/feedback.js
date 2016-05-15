@@ -6,7 +6,7 @@ angular.module('xiaomaiApp').controller('feedbackCtrl', [
   function($scope, $state, xiaomaiService, xiaomaiLog) {
 
     $scope.goBack = function() {
-      $state.go('root.buy.nav.all');
+      $state.go('root.user');
     };
 
     //feedback页面LOG统计

@@ -1,0 +1,29 @@
+<div class="pub-header">
+  <div class="lefticon iconfont icon-fanhui" ng-click="goback($event);"></div>
+  <div class="middlearea">选择优惠劵</div>
+  <div class="righticon closecouponlist" ng-click="goback($event)">关闭</div>
+</div>
+<div class="couponlistContents">
+  <div>
+      <p class="notUsed" ng-click="chooseCoupon($event,'none');">不使用任何优惠劵</p>
+      <!-- 首次减免优惠劵-->
+      <div ng-click="chooseCoupon($event,'firstsub');" class="couponBox firstCouponBox" ng-show="firstCoupon" ng-class="{'checked':checkedCouponId===0}">
+          <div class="couponCard">
+              <p class="couponAmount">{{firstCoupon/100}}</p>
+              <p class="couponName">首单减免</p>
+          </div>
+          <p class="couponDesc">新用户首单可用</p>
+          <p class="couponDate"></p>
+      </div>
+      <!-- 用户其他优惠劵-->
+      <div ng-click="chooseCoupon($event,'othercoupon',$index);" class="couponBox firstCouponBox" ng-class="{'checked':checkedCouponId===coupon.couponId}" ng-repeat="coupon in couponlist" ng-click="chooseCoupon(coupon);">
+          <div class="couponCard">
+              <p class="couponAmount">{{coupon.money/100}}</p>
+              <p class="couponName">{{coupon.couponName}}</p>
+          </div>
+          <p class="couponDesc">{{coupon.couponDesc}}</p>
+          <p class="couponDate">有效期{{coupon.startTime|date:'MM/dd'}}-{{coupon.endTime|date:'MM/dd'}}</p>
+          <p class="couponRemaintime">还有{{coupon.remainDays}}天过期</p>
+      </div>
+  </div>
+</div>

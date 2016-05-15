@@ -9,7 +9,7 @@
 
     <p class="totalPrice" ng-show="totalCount && totalCount!=0">共计<em>&yen;</em>
       <span>{{totalPrice|xiaomaiprice}}</span></p>
-    <div class="gotoPay" ng-click="goSettlement($event);" ng-show="totalCount && totalCount!=0">选好了</div>
+    <div class="gotoPay" ng-class="{disabled:lockSettle}" ng-click="goSettlement($event);" ng-show="totalCount && totalCount!=0">选好了</div>
     <p class="emptyTip" ng-show="!totalCount || totalCount==0">购物车是空的,快快选购吧~</p>
   </div>
   <div class="cartDetail" ng-class="{'cartDetail-show':showcart}" ng-controller="buy.cartDetailCtrl">
@@ -18,7 +18,7 @@
     <div class="cartDetailWrap" subname="{{'shopcartdetailheightupdate'}}" xiaomai-iscroll>
       <div>
         <div class="haserror" ng-if="isloading">正在购物车信息......</div>
-        <div class="haserror" ng-click="goHomepage();" ng-if="haserror">购物车空了 赶快去<span>购物吧</span></div>
+        <div class="haserror" ng-if="haserror">购物车空了 赶快去购物吧</div>
         <div class="good-info" ng-repeat="good in goods">
           <div class="goodWrap">
             <p class="good-title">{{good.sourceType==2?good.activityGoodsName:good.bgGoodsName}}</p>

@@ -5,21 +5,56 @@ angular.module('xiaomaiApp').controller('addrAddCtrl', [
   'xiaomaiCacheManager',
   function($scope, $state, xiaomaiService, xiaomaiCacheManager) {
     var userId = $state.params.userId,
-      chosenCollege = $state.params.chosenCollege === 'true';
+      addrId = $state.params.addrId;
 
-    //从缓存中读取数据
-    if (chosenCollege) {
-      var cache = xiaomaiCacheManager.readCache('addrCollegeInfo');
-      $scope.receiverCollegeId = cache.collegeId;
-      $scope.receiverCollegeName = cache.collegeName;
+    if (xiaomaiCacheManager.readCache('addrCollegeInfo')) {
+      var checkedCollegeCache = xiaomaiCacheManager.readCache('addrCollegeInfo');
+      $scope.receiverCollegeId = checkedCollegeCache.collegeId;
+      $scope.receiverCollegeName = checkedCollegeCache.collegeName;
     }
+
+    //查看是否有页面旧数据
+    if (xiaomaiCacheManager.readCache('addraddInfo')) {
+      var caches = xiaomaiCacheManager.readCache('addraddInfo');
+      $scope.receiverName = caches.receiverName;
+      $scope.receiverPhone = caches.receiverPhone;
+
+      //更新缓存学校时候候要判断使用页面旧数据还是选中的新学校数据
+      if (!xiaomaiCacheManager.readCache('addrCollegeInfo')) {
+        $scope.receiverCollegeId = caches.receiverCollegeId;
+        $scope.receiverCollegeName = caches.receiverCollegeName;
+      }
+
+    }
+
+
+    //判断用户路由跳转 如果是跳转到到选择学校列表页
+    //保存页面数据
+    //否则删除数据
+    $scope.$on('$destroy', function() {
+      if ($state.current.name == 'root.addrLocate') {
+        xiaomaiCacheManager.writeCache('addraddInfo', {
+          receiverName: $scope.receiverName,
+          receiverPhone: $scope.receiverPhone,
+          receiverCollegeId: $scope.receiverCollegeId,
+          receiverCollegeName: $scope.receiverCollegeName
+        });
+      } else {
+        xiaomaiCacheManager.clean('addraddInfo');
+      }
+
+      //删除选中的的学校缓存数据
+      var cache = xiaomaiCacheManager.clean('addrCollegeInfo');
+
+    });
 
     //返回
     $scope.goBack = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
       $state.go('root.addr', {
-        userId: userId
+        userId: userId,
+        addrId: addrId
       });
     };
 

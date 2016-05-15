@@ -2,48 +2,163 @@
   <div class="lefticon iconfont icon-fanhui" ng-click="goBack();"></div>
   <div class="location-info icon-school middlearea">确认订单</div>
 </div>
-<div class="order_contents">
-  <div>
+<div class="order_contents" subname="{{'confirmoderHeightUpdate'}}" xiaomai-iscroll>
+  <div style="overflow:auto;">
 <!--收货信息-->
     <div class="block_bg" ng-controller="addrCtrl">
       <p class="title addrTitle">收货信息</p>
-      <div class="addrInfo">
-        <span class="username">123</span>
-        <span class="telephone">456</span>
-        <p class="college">xuexiaoxinxi</p>
-        <i class="iconfont icon-yfmore" ng-click="gotoAddr($event);"></i>
+      <div class="addrInfo" ng-click="gotoAddr($event,addrInfo.userAddrId);">
+        <span class="username" ng-bind="addrInfo.receiverName"></span>
+        <span class="telephone" ng-bind="addrInfo.receiverPhone"></span>
+        <p class="college" ng-bind="addrInfo.receiverCollegeName||addrInfo.receiverAddr"></p>
+        <i class="iconfont icon-yfmore addrsLink"></i>
       </div>
     </div>
-    <!-- 次日达订单-->
-    <!-- <div class="block_bg">
-      <p class="title rdcTitle">次日达订单</p>
-    </div> -->
-    <!-- 次日达订单-->
-    <!-- <div class="block_bg">
-      <p class="title ldcTitle">当日达订单</p>
-    </div> -->
-    <!-- 次日达订单-->
-    <!-- <div class="block_bg">
+<!-- 第三方订单-->
+    <div class="block_bg" ng-controller="thirdOrderCtrl" ng-init="initGoodShowLength=3;" ng-show="showOrder">
       <p class="title thirdsellerTitle">第三方卖家商品订单</p>
-    </div> -->
+      <div class="contents">
+        <p class="orderDistribute">
+          <span class="orderDistribute-key">配送地址</span>
+          <span class="orderDistribute-values" ng-bind="collegeAddr"></span>
+        </p>
+        <div class="orderDistribute">
+          <span class="orderDistribute-key">配送服务费</span>
+          <p class="orderDistribute-values">
+            <span class="ldcOrderFreight orderfreight" ng-bind="'&yen;'+(thirdFreight|xiaomaiprice)"></span>
+            <span class="ldcOrderFreightSub orderfreightsub" ng-bind="'&yen;'+(thirdFreightSub|xiaomaiprice)"></span>
+          </p>
+        </div>
+        <div ng-repeat="thirdOrder in thirdChildOrderList">
+          <p class="subTitle rdcSubTitle">{{thirdOrder.storageName}}</p>
+          <p class="orderChildGoods" ng-repeat="orderItem in thirdOrder.childOrderDetailList" ng-show="initGoodShowStatus||$index<initGoodShowLength">
+            <span class="goodname" ng-bind="orderItem.skuName"></span>
+            <span class="price" ng-bind="'&yen;'+(orderItem.skuPrice|xiaomaiprice)"></span>
+            <span class="count" ng-bind="'*'+orderItem.skuNum"></span>
+          </p>
+          <p class="showMore" ng-click="triggerShowStatus($event);" ng-show="childOrderDetailList.length>initGoodShowLength">
+            <i class="iconfont icon-unfold"></i>
+            <span class="text">{{initGoodShowStatus?'点击收起':'点击查看全部'}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+<!-- 次日达订单-->
+    <div class="block_bg" ng-controller="rdcOrderCtrl" ng-init="initGoodShowLength=3;" ng-show="showOrder">
+      <p class="title rdcTitle">次日达订单</p>
+      <div class="contents">
+        <div class="orderDistribute">
+          <span class="orderDistribute-key">门店自提</span>
+          <p class="orderDistribute-values" ng-bind="rdcSelfPickUpAddress"></p>
+        </div>
+        <p class="subTitle rdcSubTitle">小麦特供</p>
+        <p class="orderChildGoods" ng-repeat="orderItem in childOrderDetailList" ng-show="initGoodShowStatus||$index<initGoodShowLength">
+          <span class="goodname" ng-bind="orderItem.skuName">{{}}</span>
+          <span class="price" ng-bind="'&yen;'+(orderItem.skuPrice|xiaomaiprice)"></span>
+          <span class="count" ng-bind="'*'+orderItem.skuNum"></span>
+        </p>
+        <p class="showMore" ng-click="triggerShowStatus($event);" ng-show="childOrderDetailList.length>initGoodShowLength">
+          <i class="iconfont icon-unfold"></i>
+          <span class="text">{{initGoodShowStatus?'点击收起':'点击查看全部'}}</span>
+        </p>
+      </div>
+    </div>
+<!-- 当日达订单-->
+    <div class="block_bg" ng-controller="ldcOrderCtrl" ng-init="initGoodShowLength=3;" ng-show="showOrder">
+      <p class="title ldcTitle">当日达订单</p>
+      <div class="contents">
+        <div class="orderDistribute">
+          <span class="orderDistribute-key">配送方式</span>
+          <p class="orderDistribute-values">
+            <span class="deliveryRadio" ng-if="initDeliveryType==0">
+              门店自提
+            </span>
+            <span class="deliveryRadio" ng-if="initDeliveryType==1">
+              送货上门
+            </span>
+            <span class="deliveryRadio" ng-click="chooseType(item.type);" ng-if="initDeliveryType==2" ng-repeat="item in [{type:0,text:'门店自提'},{type:1,text:'送货上门'}]">
+              <i class="deliveryRadioBtn" ng-class="{checked:ldcDeliveryType==item.type}"></i>
+              {{item.text}}
+            </span>
+          </p>
+        </div>
+        <div class="orderDistribute" ng-if="ldcDeliveryType==0">
+          <span class="orderDistribute-key">自提地址</span>
+          <p class="orderDistribute-values" ng-bind="ldcSelfPickUpAddress"></p>
+        </div>
+        <div class="orderDistribute" ng-if="ldcDeliveryType==1">
+          <span class="orderDistribute-key">配送地址</span>
+          <p class="orderDistribute-values">
+            <select mobiscroll-options="{onSelect:chooseAddress,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressName" style="display:none;">
+              <optgroup label="{{ldcAddress.addressType}}" ng-repeat="ldcAddress in ldcAddressList">
+                <option ng-repeat="address in ldcAddress.addresses" value="{{address}}">{{address}}</option>
+              </optgroup>
+            </select>
+            <i class="iconfont icon-unfold showLdcAddressList"></i>
+          </p>
+        </div>
+
+        <div class="orderDistribute" ng-if="ldcDeliveryType==1">
+          <span class="orderDistribute-key">配送时间</span>
+          <p class="orderDistribute-values">
+            <select mobiscroll-options="{onSelect:chooseTime,lang:'zh',group:true,display:'bottom',theme:'mobiscroll'}" mobiscroll-select ng-model="ldcAddressTime" style="display:none;">
+              <optgroup lable="29分钟达">
+                  <option value="29分钟达" ng-disabled="orderInfo.deliveryTimeType!==0">29分钟达</option>
+              </optgroup>
+              <optgroup label="定时达">
+                <option ng-repeat="deliveryTime in deliveryTimes" value="{{deliveryTime.startTime+'~'+deliveryTime.endTime}}">{{deliveryTime.isTomorrow?"明天":""}}{{deliveryTime.startHour}}:{{deliveryTime.isTomorrow?"明天":""}}{{deliveryTime.startMin}}~{{deliveryTime.endHour}}:{{deliveryTime.endMin}}</option>
+              </optgroup>
+            </select>
+            <i class="iconfont icon-unfold showLdcAddressList"></i>
+          </p>
+        </div>
+        <div class="orderDistribute" ng-if="ldcDeliveryType==1">
+          <span class="orderDistribute-key">配送服务费</span>
+          <p class="orderDistribute-values">
+            <span class="ldcOrderFreight orderfreight" ng-bind="'&yen;'+(freight|xiaomaiprice)"></span>
+            <span class="ldcOrderFreightSub orderfreightsub" ng-bind="'&yen;'+(freightSub|xiaomaiprice)"></span>
+          </p>
+        </div>
+        <p class="subTitle ldcSubTitle">小麦特供</p>
+        <p class="orderChildGoods" ng-repeat="orderItem in childOrderDetailList" ng-show="initGoodShowStatus||$index<initGoodShowLength">
+          <span class="goodname" ng-bind="orderItem.skuName"></span>
+          <span class="price" ng-bind="'&yen;'+(orderItem.skuPrice|xiaomaiprice)"></span>
+          <span class="count" ng-bind="'*'+orderItem.skuNum"></span>
+        </p>
+        <p class="showMore" ng-click="triggerShowStatus($event);" ng-show="childOrderDetailList.length>initGoodShowLength">
+          <i class="iconfont icon-unfold"></i>
+          <span class="text">{{initGoodShowStatus?'点击收起':'点击查看全部'}}</span>
+        </p>
+      </div>
+    </div>
 <!-- 优惠劵信息-->
-    <div class="block_bg">
+    <div class="block_bg" ng-controller="orderCouponCtrl" ng-show="showCoupon">
       <p class="title couponTitle">优惠信息</p>
+      <div class="contents">
+        <p class="couponThumb">
+          <span class="couponName">优惠劵</span>
+          <span class="couponNum" ng-bind="firstCoupon?(couponlist.length+1):couponlist.length+'张可用'"></span>
+          <span ng-if="checkedCouponInfo.couponType=='none'"></span>
+          <span ng-if="checkedCouponInfo.couponType=='firstsub'">-&yen;{{checkedCouponInfo.firstsub|xiaomaiprice}}</span>
+          <span ng-if="checkedCouponInfo.couponType=='othercoupon'">-&yen;{{checkedCouponInfo.coupon.money|xiaomaiprice}}</span>
+          <i class="iconfont icon-yfmore showMore" ng-click="gotoCoupon($event);">{{orderItem.skuNum}}</i>
+        </p>
+      </div>
     </div>
 <!-- 支付信息-->
-    <div class="block_bg">
+    <div class="block_bg" ng-controller="orderOnlinepayCtrl">
       <p class="title payTypeTitle">支付方式</p>
       <div class="contents">
-          <div class="content_column">
-            <i class="iconfont icon-weixin"></i>
-            <span class="payTypeNote">微信支付</span>
-            <i class="payCheckeBox"></i>
-          </div>
-          <div class="content_column">
-            <i class="iconfont icon-zhifubao"></i>
-            <span class="payTypeNote">支付宝支付</span>
-            <i class="payCheckeBox checked"></i>
-          </div>
+        <div class="content_column pay_column" ng-click="choosePaytype($event,1);">
+          <i class="iconfont icon-weixin"></i>
+          <span class="payTypeNote">微信支付</span>
+          <i class="payCheckeBox deliveryRadioBtn" ng-class="{checked:payType==1}"></i>
+        </div>
+        <div class="content_column pay_column" ng-click="choosePaytype($event,2);">
+          <i class="iconfont icon-zhifubao"></i>
+          <span class="payTypeNote">支付宝支付</span>
+          <i class="payCheckeBox deliveryRadioBtn" ng-class="{checked:payType==2}"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -52,12 +167,13 @@
 <footer class="fixOrderFooter clear">
   <div class="pos_a pos_tab info f12 moveL">
     <div class="thumbInfo">
-      <p>
+      <p ng-controller="orderAmountCtrl">
         合计:
-        <i class="f18" id="totalPrice"></i>
+        <i class="totalPrice" ng-bind="'&yen;'+(totalAmount+totalFreight-totalCoupon|xiaomaiprice)">&yen;0.01</i>
       </p>
-      <p class="js_countdown_info">请在15分00秒内支付否则订单自动失效</p>
+      <p class="js_countdown_info" ng-controller="orderCountdownCtrl">请在{{realremaintime|xiaomaimoment}}内支付否则订单自动失效</p>
     </div>
   </div>
-  <span class="confirmBtn disabled">去支付</span>
+  <span class="confirmBtn" ng-class="{disabled:lock}" ng-click="confirm($event);" ng-controller="orderConfirmCtrl">去支付</span>
 </footer>
+<div ui-view></div>

@@ -46,6 +46,16 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: '/wap/activity/banners',
         type: 'GET'
       },
+       //模板多商品活动
+      'complexGoods': {
+        url: '/wap/activity/popularGoods',
+        type: 'GET'
+      },
+      //模板单商品活动
+      'singleGoods': {
+        url: '/wap/activity/brandGoods',
+        type: 'GET'
+      },
       //热门榜产品
       'categoryGoods': {
         url: '/wap/index/categoryGoods',
@@ -69,6 +79,11 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
       //删除购物车
       'removeCart': {
         url: '/wap/cart/remove',
+        type: 'POST'
+      },
+      //清空购物车
+      'emptyCart': {
+        url: '/wap/cart/delete',
         type: 'POST'
       },
       //新版本学校白名单
@@ -167,12 +182,48 @@ angular.module('xiaomaiApp').factory('xiaomaimodelManage', function() {
         url: "/wap/useraddr/add",
         type: "POST"
       },
-      //微信预支付获取订单详情
+
+      //创建订单
+      "createOrder": {
+        url: "/wap/order/createOrder",
+        type: 'POST'
+      },
+      //获取订单
+      "queryReferOrder": {
+        url: "/wap/order/refer",
+        type: "GET"
+      },
+      //微信授权初始化
+      "userAuth": {
+        url: "/wap/userBind/auth",
+        type: "GET"
+      },
+      //订单确认提交
+      "confirmOrder": {
+        url: "/wap/order/confirm",
+        type: "POST"
+      },
+      //订单查询
       "queryOrder": {
         url: "/wap/order/query",
         type: "GET"
       },
+      //删除购物车
+      "delete":{
+        url: "/wap/cart/delete",
+        type: "GET"
+      },
 
+      //支付状态校验
+      "payStatusCheck": {
+        url: "/wap/order/pay/check",
+        type: "GET"
+      },
+      //送货时间表
+      "ldcDeliveryTime": {
+        url: "/wap/get/ldc/deliveryTime",
+        type: "GET"
+      }
     },
     getModel = function() {
       var args = Array.prototype.slice.call(arguments, 0),
@@ -296,9 +347,6 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           }, params)
         }).success(function(res) {
 
-          if (name == "addrDel") {
-            debugger;
-          }
           //如果返回结果有异常 reject
           if (handlerResult(res) === false) {
             deferred.reject(res.msg);
@@ -325,8 +373,9 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
        *@向后台提交操作
        *@param {String} name 接口名称 在modelManager中定义
        *@param {Object} name 响应操作
+       *@param isForm 因为后台POST接口不太一致 所以手动设置提交方式
        **/
-      save = function(name, params) {
+      save = function(name, params, isJSON) {
         var deferred = createPromise();
 
         //判断接口是否已经在modelManager中定义
@@ -338,13 +387,12 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
           return deferred.promise;
         }
 
-
         var defaulOptions = env == 'develop' ? {
           method: 'GET',
           params: params
         } : {
           method: 'POST',
-          data: httpRequstParam(params)
+          data: isJSON ? params : httpRequstParam(params)
         };
 
 
@@ -354,16 +402,15 @@ angular.module('xiaomaiApp').factory('xiaomaiService', [
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           }
         })).success(function(res) {
-
-
           if (res.code == 0) {
             deferred.resolve(res.data);
           } else {
-            deferred.reject(res.msg);
+            deferred.reject(res);
           }
         }).error(function() {
-
-          deferred.reject('接口异常');
+          deferred.reject({
+            msg: '接口异常'
+          });
         });
         return deferred.promise;
       };
@@ -423,8 +470,5 @@ angular.module('xiaomaiApp').factory('httpRequstParam', [function() {
     return query.length ? query.substr(0, query.length - 1) :
       query;
   };
-
   return param;
-
-
 }])

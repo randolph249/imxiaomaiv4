@@ -10,17 +10,17 @@ angular.module('xiaomaiApp').controller('addrCollegesCtrl', [
     xiaomaiCacheManager, xiaomaiMessageNotify, xiaomaiLog) {
     //根据cityid获取学校列表
     $scope.countrylist = [];
-
+    var cityId;
     $scope.$on('$stateChangeSuccess', function(e, toState, toParam) {
-      var cityid = toParam.cityid;
-      getSchoolListByCityId(cityid);
+      cityId = toParam.cityId;
+      getSchoolListByCityId(cityId);
     });
 
     $scope.isloading = true;
-    var getSchoolListByCityId = function(cityid) {
+    var getSchoolListByCityId = function(cityId) {
 
       xiaomaiService.fetchOne('collegelist', {
-        cityId: cityid
+        cityId: cityId
       }).then(function(res) {
         $scope.haserror = res.cities.length ? false : true;
         $scope.countrylist = res.cities;

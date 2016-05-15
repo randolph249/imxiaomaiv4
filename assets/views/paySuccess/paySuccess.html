@@ -1,53 +1,47 @@
-<div class="wrapper">
-    <div class="container" id="paySucPage">
-        <header class="fixHeader">
-            <div class="wrap_title">
-                <!-- <i class="i_back canBack"></i> -->
-                <i class="btn_close">关闭</i>
-                <h2 class="tx_pos">支付信息</h2>
-            </div>
-        </header>
-        <form class="orderForm" onsubmit="return false;">
-            <div id="list_order" class="pos_order">
-                <div id="orderScroller">
-                    <div class="wrapForm f14">
-                        <div class="block_bg" id="paySucBlock">
-                            <div class="wrapLeftInfo fl">
-                                <span>
-                                    <i class="fl i_succ"></i>
-                                    <a class="toBonus"></a>
-                                    <strong class="fl">支付成功</strong>
-                                </span>
-                                <span>我们将会很快送货到您手中，<br />请耐心等待！</span>
-                            </div>
-                            <div class="wrapRtImg fr">
-                                <i class="i_succImgBox"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                    <div class="rePayWrap">
-                        <span id="goIndex" class="btn_bg_pos btn_bg_on js_repay btn_cart" disabled="false" data-stag="pay_continue">返回首页</span>
-                    </div>
-                    <div class="showOrderWrap">
-                        <span class="btn_bg_pos btn_bg_normal checkDetail">
-                                            查看订单详情
-                                        </span>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <div id="toShare" style="display: none">
-            <div class="share_mask"></div>
-            <div class="share_box">
-                <img src="../img/redPacket/i_share2.png" class="share_pic">
-                <h2>
-						小麦助你做土豪<br>10个红包在这里，拿去随便发！
-					</h2>
-                <div>
-                    <a class="left_button">取消</a> <a class="right_button">去发红包</a>
-                </div>
-            </div>
+<div class="pub-header">
+  <div class="location-info icon-school middlearea">支付信息</div>
+  <div class="righticon closeWindow" ng-click="goback($event)">关闭</div>
+</div>
+<div class="container" id="paySucPage">
+  <div class="pos_order" id="list_order">
+    <div id="orderScroller">
+      <div class="wrapForm f14">
+        <div class="block_bg" id="paySucBlock">
+          <div class="wrapLeftInfo fl">
+            <span>
+              <i class="fl i_succ"></i>
+              <a class="toBonus"></a>
+              <strong class="fl">支付成功</strong>
+            </span>
+            <span>我们将会很快送货到您手中，<br/>请耐心等待！</span>
+          </div>
+          <div class="wrapRtImg fr">
+            <i class="i_succImgBox"></i>
+          </div>
+          <div class="clear"></div>
         </div>
+      </div>
+      <div class="rePayWrap">
+        <span class="btn_bg_pos btn_bg_on js_repay btn_cart" ng-click="gotoIndex($event);">返回首页</span>
+      </div>
+      <div class="showOrderWrap" ng-click="queryOrderDetail($event);">
+        <span class="btn_bg_pos btn_bg_normal checkDetail">
+          查看订单详情
+        </span>
+      </div>
     </div>
+  </div>
+  <div id="toShare">
+    <div class="share_mask" ng-show="showRedpacketDialog"></div>
+    <div class="share_box" ng-show="showRedpacketDialog">
+      <div class="share_pic"></div>
+      <h2>
+        小麦助你做土豪<br>10个红包在这里，拿去随便发！
+      </h2>
+      <div>
+        <a class="left_button" ng-click="cancelSendRedpacket($event);">取消</a>
+        <a class="right_button" ng-click="goRedpacket($event);">去发红包</a>
+      </div>
+    </div>
+  </div>
 </div>

@@ -13,24 +13,23 @@
                 <i class="iconfont icon-order"></i>我的订单<i class="iconfont icon-yfmore"></i>
             </li>
             <li style="display:none">
-                <i class="iconfont icon-credit"></i> 我的积分
+                <i class="iconfont icon-credit"></i>我的积分
                 <span class="user-list-detail"></span>
                 <i class="iconfont icon-yfmore"></i>
             </li>
             <li class="user-couponList" ng-click="gotoCoupon();" >
-                <i class="iconfont icon-coupon"></i> 我的优惠券
+                <i class="iconfont icon-coupon"></i>我的优惠券
                 <span class="user-list-detail" ng-if="coupons.length">{{coupons.length}}张</span>
                 <i class="iconfont icon-yfmore"></i>
             </li>
         </ul>
         <ul class="user-public">
-            <li class="user-feedback">
+            <li class="user-feedback" ng-click="gotofeedback()">
                 <i class="iconfont icon-feedback"></i>意见反馈<i class="iconfont icon-yfmore"></i>
             </li>
             <li class="user-contactUs">
-                <i class="iconfont icon-contactUs"></i> 联系客服
+                <i class="iconfont icon-contactUs"></i>联系客服
                 <span class="user-public-detail"> <a href="tel:400-1249876">400-1249876</a></span>
-                <i class="iconfont icon-yfmore"></i>
             </li>
         </ul>
     </div>

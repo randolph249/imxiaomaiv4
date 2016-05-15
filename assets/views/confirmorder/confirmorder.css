@@ -3,7 +3,7 @@
   left: 0;
   right: 0;
   top: 4.4em;
-  bottom: 0;
+  bottom: 4.3rem;
   overflow: hidden;
 }
 .order_contents .block_bg {
@@ -20,8 +20,110 @@
   border-bottom: 0.1rem solid #15acf3;
   border-left: 0.5rem solid #15acf3;
 }
-.order_contents .block_bg .contents {
+.order_contents .block_bg .contents {}
+.order_contents .block_bg .orderDistribute {
+  line-height: 5rem;
+  height: 5rem;
+  margin: 0 2.5rem;
+  position: relative;
+  font-size: 1.4rem;
+  color: #333;
+  border-bottom: #ccc solid 0.1rem;
+  position: relative;
+}
+.order_contents .block_bg .orderDistribute.orderDistributeTime {
+  line-height: 2.4rem;
+  height: 2.4rem;
+  padding-top: 1rem;
+  border-bottom-width: 0;
+}
+.order_contents .block_bg .orderDistribute.orderDistributeFreight {
+  line-height: 2.4rem;
+  height: 2.4rem;
+  padding-top: 1rem;
+}
+.order_contents .block_bg .orderDistribute .orderDistribute-key {
+  display: inline-block;
+  float: left;
+  width: 24%;
+  color: #333;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+}
+.order_contents .block_bg .orderDistribute .orderDistribute-values {
+  display: inline-block;
+  float: right;
+  width: 76%;
+  color: #333;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+}
+.order_contents .block_bg .orderDistribute .orderDistribute-values .ldcOrderFreight {
+  color: #ff5300;
+  padding-right: 2rem;
+}
+.order_contents .block_bg .orderDistribute .orderDistribute-values .ldcOrderFreightSub {
+  color: #999;
+  text-decoration: line-through;
+}
+.order_contents .block_bg .orderDistribute .orderDistribute-values [id^=mobiscroll] {
+  width: 100%;
+  border: 0 none;
+  line-height: 5rem;
+  height: 5rem;
+  float: left;
+}
+.order_contents .block_bg .orderDistribute .deliveryRadio {
+  width: 50%;
+  float: left;
+  display: table;
+}
+.order_contents .block_bg .orderDistribute .deliveryRadio>.deliveryRadioBtn {
+  vertical-align: middle;
+}
+.order_contents .block_bg .subTitle {
+  line-height: 4.5rem;
+  height: 4rem;
+  margin-left: 2.5rem;
+  position: relative;
+  font-size: 1.6rem;
+  color: #15acf3;
+  border-bottom: #15acf3 solid 0.1rem;
+}
+.order_contents .block_bg .orderChildGoods {
+  line-height: 3rem;
+  height: 3rem;
   padding: 0 2.5rem;
+  font-size: 1.4rem;
+  overflow: hidden;
+}
+.order_contents .block_bg .showMore {
+  text-align: center;
+  line-height: 4rem;
+  height: 4rem;
+  color: #ccc;
+}
+.order_contents .block_bg .showMore .iconfont {
+  font-size: 1.6rem;
+}
+.order_contents .block_bg .showMore .text {
+  font-size: 1.4rem;
+}
+.order_contents .block_bg .orderChildGoods .goodname {
+  width: 68%;
+  float: left;
+  color: #333;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.order_contents .block_bg .orderChildGoods .price {
+  float: left;
+  color: #ff5300;
+}
+.order_contents .block_bg .orderChildGoods .count {
+  float: right;
 }
 .order_contents .block_bg .content_column {
   height: 5rem;
@@ -29,12 +131,15 @@
   border-bottom: #ccc solid 1px;
   position: relative;
 }
+.order_contents .block_bg .content_column.pay_column {
+  padding: 0 2.5rem;
+}
 .order_contents .block_bg .content_column:last-child {
   border-bottom: 0 none;
 }
 .order_contents .block_bg .content_column .iconfont {
   position: absolute;
-  left: 0;
+  left: 2.5rem;
   top: 0;
   line-height: 5rem;
   font-size: 3.6rem;
@@ -44,31 +149,33 @@
 }
 .order_contents .block_bg .content_column .iconfont.icon-zhifubao {
   color: rgb(0, 170, 238);
-  font-size:4.2rem;
+  font-size: 4.2rem;
 }
-.order_contents .block_bg .content_column .payCheckeBox{
-    display: inline-block;
-    box-sizing: border-box;
-    width:2.5rem;
-    height:2.5rem;
-    border:#ccc solid 1px;
-    border-radius: 2.5rem;
-    background:#fff;
-    position: absolute;
-    right:0;
-    top:1.2rem;
+.deliveryRadioBtn {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: #ccc solid 1px;
+  border-radius: 2.5rem;
+  background: #fff;
+  position: relative;
 }
-.order_contents .block_bg .content_column .payCheckeBox.checked:after{
-  content:'';
-  width:1.2rem;
-  height:1.2rem;
-  background:#ff5300;
+.payCheckeBox {
+  position: absolute;
+  right: 1rem;
+  top: 1.2rem;
+}
+.deliveryRadioBtn.checked:after {
+  content: '';
+  width: 1.2rem;
+  height: 1.2rem;
+  background: #ff5300;
   border-radius: 1.2rem;
   position: absolute;
-  left:50%;
-  top:50%;
+  left: 50%;
+  top: 50%;
   margin-left: -0.6rem;
-  margin-top:-0.6rem;
+  margin-top: -0.6rem;
 }
 .order_contents .block_bg .content_column .payTypeNote {
   padding-left: 4.5rem;
@@ -81,10 +188,18 @@
   border-left-color: #00cb0d;
   color: #00cb0d;
 }
+.order_contents .block_bg .subTitle.rdcSubTitle {
+  color: #00cb0d;
+  border-bottom-color: #00cb0d;
+}
 .order_contents .block_bg .title.ldcTitle {
   border-bottom-color: #00abf6;
   border-left-color: #00abf6;
   color: #00abf6;
+}
+.order_contents .block_bg .subTitle.ldcSubTitle {
+  color: #00abf6;
+  border-bottom-color: #00abf6;
 }
 .order_contents .block_bg .title.thirdsellerTitle, .order_contents .block_bg .title.couponTitle {
   border-bottom-color: #ff5330;
@@ -94,16 +209,17 @@
 .order_contents .addrInfo {
   padding: 1rem 2.5rem;
   position: relative;
+  height: 4.8rem;
 }
 .order_contents .addrInfo span {
   line-height: 2.4rem;
   display: inline-block;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 .order_contents .addrInfo .telephone {
   padding-left: 1.8rem;
 }
-.order_contents .iconfont {
+.order_contents .addrsLink {
   position: absolute;
   font-size: 2rem;
   top: 0;
@@ -113,7 +229,7 @@
 }
 .order_contents .addrInfo p {
   line-height: 2.4rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #999;
 }
 .fixOrderFooter {
@@ -124,6 +240,12 @@
   right: 0;
   bottom: 0px;
   height: 4.4rem;
+  border-top: solid 1px #dadada;
+}
+.fixOrderFooter .totalPrice {
+  font-size: 1.8rem;
+  color: #ff5300;
+  font-style: normal;
 }
 .fixOrderFooter .thumbInfo {
   padding-top: 0.4rem;
@@ -148,4 +270,206 @@
   top: 0;
   right: 0;
   bottom: 0;
+}
+.fixOrderFooter .confirmBtn.disabled{
+  background-color:#bbbbbb;
+}
+.order_contents .couponThumb {
+  padding-left: 2.5rem;
+  height: 5rem;
+  line-height: 5rem;
+  font-size: 1.4rem;
+}
+.order_contents .couponThumb .couponName {
+  width: 24%;
+  display: inline-block;
+  color: #333;
+}
+.order_contents .couponThumb .couponNum {
+  width: 44%;
+  display: inline-block;
+  color: #999;
+}
+.order_contents .couponThumb .couponAmount {
+  color: #ff5300;
+}
+.order_contents .couponThumb .showMore {
+  font-size: 1.6rem;
+  float: right;
+  line-height: 5rem;
+  padding-right: 2rem;
+  color: #999;
+}
+
+/* .order_contents . */
+
+.couponlistContents {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4.4rem;
+  bottom: 0;
+  background: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.couponlistContents .notUsed {
+  margin: 1rem auto;
+  width: 72%;
+  height: 5rem;
+  line-height: 4.6rem;
+  text-align: center;
+  color: #333;
+  font-size: 1.6rem;
+  box-sizing: border-box;
+  border-radius: 0.6rem;
+  border: 0.2rem solid #ddd
+}
+.couponlistContents .couponBox {
+  position: relative;
+  float: left;
+  padding: 1.5rem 1rem 0;
+  box-sizing: border-box;
+  height: 10rem;
+  width: 100%;
+  border-bottom: solid .1rem #dadada;
+}
+.pub-header .righticon.closecouponlist {
+  color: #ff5300;
+  font-size: 1.4rem;
+  text-align: center;
+  display: inline-block;
+}
+.couponlistContents .couponBox.checked {
+  background: #dadada;
+}
+.couponlistContents .couponBox .couponCard {
+  width: 9rem;
+  height: 7.5rem;
+  position: relative;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.couponlistContents .couponBox .couponCard .couponName {
+  background: #ff9f49;
+  height: 2.5rem;
+  width: 100%;
+  line-height: 2.5rem;
+  text-align: center;
+  font-size: 1.4rem;
+  color: #fff;
+  position: relative;
+  border-radius:0 0 .5rem .5rem;
+}
+.couponlistContents .couponBox .couponCard .couponName:after {
+  content: '............................';
+  position: absolute;
+  top: -3.9rem;
+  left: 0;
+  font-size: 5rem;
+  color: #fff;
+  line-height: 5rem;
+}
+.couponlistContents .couponBox .couponCard .couponAmount {
+  width: 100%;
+  height: 5rem;
+  background: #ffbe4e;
+  line-height: 5rem;
+  text-align: center;
+  font-size: 3.5rem;
+  color: #fff;
+  position: relative;
+  border-radius:.5rem .5rem 0 0;
+
+}
+.couponlistContents .couponBox .couponCard .couponAmount:after {
+  width: 1.8rem;
+  height: 1.8rem;
+  background: #fff;
+  color: #ffbe4e;
+  line-height: 1.8rem;
+  text-align: center;
+  content: '';
+  top: 1.8rem;
+  left: 0.5rem;
+  position: absolute;
+  border-radius: 1.8rem;
+  content: '￥';
+  font-size: 1.6rem;
+}
+.couponlistContents .couponBox .couponDesc {
+  position: absolute;
+  top: 1.5rem;
+  left: 10rem;
+  padding-left: 1rem;
+  line-height: 1.8rem;
+  font-size: 1.4rem;
+  white-space: pre-wrap;
+  max-height: 5.4rem;
+  overflow: hidden
+}
+.couponlistContents .couponBox .couponDate {
+  position: absolute;
+  top: 6.9rem;
+  left: 10rem;
+  padding-left: 1rem;
+  line-height: 1.8rem;
+  font-size: 1.4rem;
+  color: #999;
+  float: left;
+}
+.couponlistContents .couponBox .couponRemaintime {
+  top: 6.9rem;
+  right: 1rem;
+  padding-right: 1rem;
+  line-height: 1.8rem;
+  font-size: 1.4rem;
+  color: #999;
+  float: right;
+  color: #ff9f49;
+  position: absolute;
+}
+.mbsc-mobiscroll .dwwr {
+  font-size: 1.6rem;
+}
+.mbsc-mobiscroll .dwbc {
+  text-align: center;
+  box-sizing: border-box;
+  padding: 0;
+  border-top: #dbdbdb solid .1rem;
+}
+.mbsc-mobiscroll .dwbw {
+  width: 50%;
+  box-sizing: border-box;
+}
+.mbsc-mobiscroll .dwbw:first-child {
+  border-left: #dbdbdb solid .1rem;
+}
+.mbsc-mobiscroll .dw-li {
+  font-size: 1.6rem;
+}
+.mbsc-mobiscroll .dwb-s .dwb {
+  color: #ff5300;
+}
+.mbsc-mobiscroll .dwb-c .dwb {
+  color: #999;
+}
+.orderDistribute-values .showLdcAddressList {
+  position: absolute;
+  right: 1rem;
+  top: 0;
+  line-height: 5rem;
+  font-size: 1.8rem;
+  color: #999
+}
+
+.fixOrderFooter.fixwechartpayFooter{
+  background-color: #Fe9402;
+}
+.fixwechartpayFooter .prepayprice{
+  line-height: 4.4rem;
+  padding:0 1rem;
+  color:#fff;
+  font-size:1.4rem;
 }

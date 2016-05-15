@@ -1,0 +1,437 @@
+{
+    "msg": "success",
+    "code": 0,
+    "data": {
+        "templateType": 1,
+        "backgroundColor": "#ccc",
+        "headerImage": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=170984",
+        "subjects": [
+            {
+                "subjectName": "栏目意义",
+                "goods": [
+                    {
+      "weight": 0,
+      "bgGoodsId": 1108,
+      "collegeId": 9,
+      "remark": "300g 袋装",
+      "unit": "袋",
+      "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=155525&imageView2/0/w/300/h/300",
+      "detailImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=155525&imageView2/0/w/450/h/450",
+      "iconImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=155525&imageView2/0/w/150/h/150",
+      "maxNum": 5,
+      "saleSpec": "300g",
+      "originPlace": "越南",
+      "goodsType": 1,
+      "goodsStatus": 2,
+      "goodsStatusDisplay": 2,
+      "isDel": 0,
+      "sourceType": 2,
+      "distributeTypeDisplay": ["29分钟达", ""],
+      "minWapPrice": 1290,
+      "maxWapPrice": 1290,
+      "minAppPrice": 1290,
+      "maxAppPrice": 1290,
+      "goodsPropertyList": [],
+      "skuGoodsPropertyList": [],
+      "tagChange": 0,
+      "priceChange": 0,
+      "available": 0,
+      "goodsId": 67423,
+      "bgGoodsName": "LIPO面包干300g",
+      "bgGoodsSubname": null,
+      "goodsDesc": "来自海外的奇幻组合：鸡蛋与白巧克力的碰撞，让你味蕾瞬间绽放",
+      "categoryId": 17,
+      "skuList": [{
+        "weight": 0,
+        "bgSkuId": 1108,
+        "collegeId": 9,
+        "originPrice": 1580,
+        "stock": 143,
+        "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=155525",
+        "skuType": 1,
+        "distributeType": 1,
+        "distributeTypeDesc": "29分钟达",
+        "isDel": 0,
+        "skuPropertyList": [],
+        "numInCart": 0,
+        "skuPropertyValueIdList": null,
+        "skuId": 106384,
+        "goodsId": 67423,
+        "appPrice": 1290,
+        "wapPrice": 1290,
+        "skuStatus": 2
+      }]
+    },
+                    {
+                        "weight": 0,
+                        "bgGoodsId": 702,
+                        "collegeId": 2891,
+                        "remark": "wzl超卖2",
+                        "unit": "wzl超卖2",
+                        "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171558&imageView2/0/w/300/h/300",
+                        "detailImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171558&imageView2/0/w/450/h/450",
+                        "iconImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171558&imageView2/0/w/150/h/150",
+                        "maxNum": 11,
+                        "saleSpec": "wzl超卖2",
+                        "originPlace": "wzl超卖2",
+                        "goodsType": 1,
+                        "goodsStatus": 2,
+                        "goodsStatusDisplay": 2,
+                        "isDel": 0,
+                        "sourceType": 2,
+                        "distributeTypeDisplay": [
+                            "29分钟达",
+                            "",
+                            ""
+                        ],
+                        "minWapPrice": 7400,
+                        "maxWapPrice": 7400,
+                        "minAppPrice": 7400,
+                        "maxAppPrice": 7400,
+                        "goodsPropertyList": [],
+                        "skuGoodsPropertyList": [],
+                        "goodsImageList": [
+                            {
+                                "goodsImgId": 0,
+                                "bgGoodsId": 702,
+                                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171558&imageView2/0/w/450/h/450",
+                                "imageType": 0,
+                                "imageOrder": 0
+                            }
+                        ],
+                        "goodsDetailImageList": [
+                            {
+                                "goodsImgId": 493,
+                                "bgGoodsId": 702,
+                                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171559",
+                                "imageType": 1,
+                                "imageOrder": 1
+                            }
+                        ],
+                        "appGoodsDetailPropertyList": [
+                            [
+                                "产品描述",
+                                "wzl超卖2"
+                            ],
+                            [
+                                "产品规格",
+                                "wzl超卖2/wzl超卖2"
+                            ],
+                            [
+                                "产品包装",
+                                "wzl超卖2"
+                            ],
+                            [
+                                "品牌",
+                                "wzl超卖2"
+                            ],
+                            [
+                                "保质期",
+                                "wzl超卖2"
+                            ],
+                            [
+                                "产地",
+                                "wzl超卖2"
+                            ]
+                        ],
+                        "appGoodsDetailImageHtml": "http://qa.wap.test.imxiaomai.com/page/native/goodsDetailImage.html?goodsId=8266&sourceType=2",
+                        "packageSpec": "wzl超卖2",
+                        "brand": "wzl超卖2",
+                        "shelfLife": "wzl超卖2",
+                        "storageId": 0,
+                        "storageName": null,
+                        "tagChange": 0,
+                        "priceChange": 0,
+                        "available": 0,
+                        "activityGoodsId": 8266,
+                        "activityBgGoodsId": 521,
+                        "activityGoodsName": "wzl超卖2",
+                        "activityGoodsSubname": "",
+                        "activityId": 21202,
+                        "activityGoodsDesc": "wzl超卖2",
+                        "isSeckill": 1,
+                        "beginTime": null,
+                        "endTime": null,
+                        "showTime": null,
+                        "skuList": [
+                            {
+                                "weight": 0,
+                                "bgSkuId": 630,
+                                "collegeId": 2891,
+                                "originPrice": 8100,
+                                "stock": 0,
+                                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=154678",
+                                "skuType": 1,
+                                "distributeType": 1,
+                                "distributeTypeDesc": "29分钟达",
+                                "isDel": 0,
+                                "skuPropertyList": [],
+                                "numInCart": 0,
+                                "skuPropertyValueIdList": null,
+                                "storageId": 0,
+                                "activitySkuId": 10357,
+                                "activityBgSkuId": 654,
+                                "activityGoodsId": 8266,
+                                "activityPrice": 7400
+                            }
+                        ],
+                        "buyLeftTime": 0,
+                        "buyLeftTimeShow": null,
+                        "timeBeforeStart": 0,
+                        "timeBeforeStartShow": null,
+                        "buyEndTimeShow": null,
+                        "killStarted": 0
+                    }
+                ]
+            },
+            {
+                "subjectName": "栏目二二",
+                "goods": [
+                    {
+                        "weight": 0,
+                        "bgGoodsId": 701,
+                        "collegeId": 2891,
+                        "remark": "wzl超买1",
+                        "unit": "wzl超买1",
+                        "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171556&imageView2/0/w/300/h/300",
+                        "detailImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171556&imageView2/0/w/450/h/450",
+                        "iconImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171556&imageView2/0/w/150/h/150",
+                        "maxNum": 11,
+                        "saleSpec": "wzl超买1",
+                        "originPlace": "wzl超买1",
+                        "goodsType": 1,
+                        "goodsStatus": 2,
+                        "goodsStatusDisplay": 2,
+                        "isDel": 0,
+                        "sourceType": 2,
+                        "distributeTypeDisplay": [
+                            "",
+                            "次日达",
+                            ""
+                        ],
+                        "minWapPrice": 102200,
+                        "maxWapPrice": 102200,
+                        "minAppPrice": 102200,
+                        "maxAppPrice": 102200,
+                        "goodsPropertyList": [],
+                        "skuGoodsPropertyList": [],
+                        "goodsImageList": [
+                            {
+                                "goodsImgId": 0,
+                                "bgGoodsId": 701,
+                                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171556&imageView2/0/w/450/h/450",
+                                "imageType": 0,
+                                "imageOrder": 0
+                            }
+                        ],
+                        "goodsDetailImageList": [
+                            {
+                                "goodsImgId": 492,
+                                "bgGoodsId": 701,
+                                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171557",
+                                "imageType": 1,
+                                "imageOrder": 1
+                            }
+                        ],
+                        "appGoodsDetailPropertyList": [
+                            [
+                                "产品描述",
+                                "wzl超买1"
+                            ],
+                            [
+                                "产品规格",
+                                "wzl超买1/wzl超买1"
+                            ],
+                            [
+                                "产品包装",
+                                "wzl超买1"
+                            ],
+                            [
+                                "品牌",
+                                "wzl超买1"
+                            ],
+                            [
+                                "保质期",
+                                "wzl超买1"
+                            ],
+                            [
+                                "产地",
+                                "wzl超买1"
+                            ]
+                        ],
+                        "appGoodsDetailImageHtml": "http://qa.wap.test.imxiaomai.com/page/native/goodsDetailImage.html?goodsId=8268&sourceType=2",
+                        "packageSpec": "wzl超买1",
+                        "brand": "wzl超买1",
+                        "shelfLife": "wzl超买1",
+                        "storageId": 0,
+                        "storageName": null,
+                        "tagChange": 0,
+                        "priceChange": 0,
+                        "available": 0,
+                        "activityGoodsId": 8268,
+                        "activityBgGoodsId": 522,
+                        "activityGoodsName": "wzl超买1",
+                        "activityGoodsSubname": "",
+                        "activityId": 21202,
+                        "activityGoodsDesc": "wzl超买1",
+                        "isSeckill": 1,
+                        "beginTime": null,
+                        "endTime": null,
+                        "showTime": null,
+                        "skuList": [
+                            {
+                                "weight": 0,
+                                "bgSkuId": 629,
+                                "collegeId": 2891,
+                                "originPrice": 210300,
+                                "stock": 0,
+                                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=156541",
+                                "skuType": 1,
+                                "distributeType": 0,
+                                "distributeTypeDesc": "次日达",
+                                "isDel": 0,
+                                "skuPropertyList": [],
+                                "numInCart": 0,
+                                "skuPropertyValueIdList": null,
+                                "storageId": 0,
+                                "activitySkuId": 10359,
+                                "activityBgSkuId": 655,
+                                "activityGoodsId": 8268,
+                                "activityPrice": 102200
+                            }
+                        ],
+                        "buyLeftTime": 0,
+                        "buyLeftTimeShow": null,
+                        "timeBeforeStart": 0,
+                        "timeBeforeStartShow": null,
+                        "buyEndTimeShow": null,
+                        "killStarted": 0
+                    },
+                    {
+                        "weight": 0,
+                        "bgGoodsId": 703,
+                        "collegeId": 2891,
+                        "remark": "wzl超买3",
+                        "unit": "wzl超买3",
+                        "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171560&imageView2/0/w/300/h/300",
+                        "detailImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171560&imageView2/0/w/450/h/450",
+                        "iconImageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171560&imageView2/0/w/150/h/150",
+                        "maxNum": 11,
+                        "saleSpec": "wzl超买3",
+                        "originPlace": "wzl超买3",
+                        "goodsType": 1,
+                        "goodsStatus": 2,
+                        "goodsStatusDisplay": 2,
+                        "isDel": 0,
+                        "sourceType": 2,
+                        "distributeTypeDisplay": [
+                            "",
+                            "次日达",
+                            ""
+                        ],
+                        "minWapPrice": 1200,
+                        "maxWapPrice": 1200,
+                        "minAppPrice": 1200,
+                        "maxAppPrice": 1200,
+                        "goodsPropertyList": [],
+                        "skuGoodsPropertyList": [],
+                        "goodsImageList": [
+                            {
+                                "goodsImgId": 0,
+                                "bgGoodsId": 703,
+                                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171560&imageView2/0/w/450/h/450",
+                                "imageType": 0,
+                                "imageOrder": 0
+                            }
+                        ],
+                        "goodsDetailImageList": [
+                            {
+                                "goodsImgId": 494,
+                                "bgGoodsId": 703,
+                                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=171561",
+                                "imageType": 1,
+                                "imageOrder": 1
+                            }
+                        ],
+                        "appGoodsDetailPropertyList": [
+                            [
+                                "产品描述",
+                                "wzl超买3"
+                            ],
+                            [
+                                "产品规格",
+                                "wzl超买3/wzl超买3"
+                            ],
+                            [
+                                "产品包装",
+                                "wzl超买3"
+                            ],
+                            [
+                                "品牌",
+                                "wzl超买3"
+                            ],
+                            [
+                                "保质期",
+                                "wzl超买3"
+                            ],
+                            [
+                                "产地",
+                                "wzl超买3"
+                            ]
+                        ],
+                        "appGoodsDetailImageHtml": "http://qa.wap.test.imxiaomai.com/page/native/goodsDetailImage.html?goodsId=8270&sourceType=2",
+                        "packageSpec": "wzl超买3",
+                        "brand": "wzl超买3",
+                        "shelfLife": "wzl超买3",
+                        "storageId": 0,
+                        "storageName": null,
+                        "tagChange": 0,
+                        "priceChange": 0,
+                        "available": 0,
+                        "activityGoodsId": 8270,
+                        "activityBgGoodsId": 523,
+                        "activityGoodsName": "wzl超买3",
+                        "activityGoodsSubname": "",
+                        "activityId": 21202,
+                        "activityGoodsDesc": "wzl超买3",
+                        "isSeckill": 1,
+                        "beginTime": null,
+                        "endTime": null,
+                        "showTime": null,
+                        "skuList": [
+                            {
+                                "weight": 0,
+                                "bgSkuId": 631,
+                                "collegeId": 2891,
+                                "originPrice": 1700,
+                                "stock": 0,
+                                "imageUrl": "http://upload.imxiaomai.com/upload2Qiniu/visit_img?id=154671",
+                                "skuType": 1,
+                                "distributeType": 0,
+                                "distributeTypeDesc": "次日达",
+                                "isDel": 0,
+                                "skuPropertyList": [],
+                                "numInCart": 0,
+                                "skuPropertyValueIdList": null,
+                                "storageId": 0,
+                                "activitySkuId": 10361,
+                                "activityBgSkuId": 656,
+                                "activityGoodsId": 8270,
+                                "activityPrice": 1200
+                            }
+                        ],
+                        "buyLeftTime": 0,
+                        "buyLeftTimeShow": null,
+                        "timeBeforeStart": 0,
+                        "timeBeforeStartShow": null,
+                        "buyEndTimeShow": null,
+                        "killStarted": 0
+                    }
+                ]
+            }
+        ],
+        "activityShowName": "测试1",
+        "activityRule": "1.规则1描述道具放大镜放大镜发动机扫房登记三分发大水发第三发生发生大平均每\r\n2.范德萨发的范德萨给偶个人工供热供热供热季各个软件\r\n3.日风热隔热管加热个人购软件狗而过trhmt\r\n4.rgtrgtrgtotritojr给他让我给他人天天"
+    },
+    "serverTime": "2015-11-04 18:37:22"
+}
